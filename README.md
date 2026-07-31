@@ -10,6 +10,7 @@ tools, and instruction schedulers for SM120.
 Artifacts:
 
 - [`sm120.json`](sm120.json) — canonical machine-readable ISA database
+- [`sm103a.json`](sm103a.json) — preliminary SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus; note the empirical CS2R pair-write behavior documented under "SM103a notes" below
 - [`SM120_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html) — generated, searchable HTML reference ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html))
 
 ## Artifact Scope
@@ -26,6 +27,14 @@ This is a **data release**, not a compiler or assembler. It contains:
 It does not contain the reverse-engineering pipeline, probe programs, proprietary cubin
 corpora, driver dumps, firmware notes, or private working material. Those are
 intentionally excluded from this public artifact.
+
+## SM103a notes
+
+SM103a (`sm103a.json`) targets the B300-class Blackwell parts (ELF `e_flags` SM field `0x67`,
+distinct from SM120 `0x78` and SM100 `0x64`). Empirical hardware finding: `CS2R Rd, SRZ`
+clears the even-aligned 64-bit register pair `Rd:Rd+1`, not only `Rd` (cuda-gdb-proven;
+binary patchers must not substitute 32-bit zero-idioms blindly — consumers of `Rd^1`
+observe the side effect).
 
 ## Dataset Summary
 
