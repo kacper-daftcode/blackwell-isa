@@ -31,10 +31,10 @@ intentionally excluded from this public artifact.
 
 | Item | Count |
 |------|------:|
-| Instruction forms (`instructions`) | 1,994 |
-| Opcode families | 767 |
-| Encoding variants (`mod_groups`) | 2,837 |
-| Instruction forms with scheduling metadata | 1,858 |
+| Instruction forms (`instructions`) | 2,001 |
+| Opcode families | 781 |
+| Encoding variants (`mod_groups`) | 2,872 |
+| Instruction forms with scheduling metadata | 1,865 |
 | Scheduling-only entries | 597 |
 | Pipeline classes | 37 |
 | Instruction width | 128 bits |
