@@ -1,17 +1,19 @@
 # blackwell-isa
 
-A public research artifact for the NVIDIA **SM120 (Blackwell)** SASS instruction set.
+Public research artifacts for the NVIDIA **Blackwell** SASS instruction set.
 
-This repository publishes a machine-readable ISA database for consumer Blackwell GPUs
-(RTX 50-series, including RTX 5090 / GB202). It is intended for researchers and
+This repository publishes machine-readable ISA databases for Blackwell GPUs:
+consumer SM120 (RTX 50-series, including RTX 5090 / GB202) and datacenter SM103a
+(B300 SXM6). It is intended for researchers and
 implementers building assemblers, disassemblers, compiler backends, binary analysis
-tools, and instruction schedulers for SM120.
+tools, and instruction schedulers for Blackwell-class targets.
 
 Artifacts:
 
 - [`sm120.json`](sm120.json) — canonical machine-readable ISA database
-- [`sm103a.json`](sm103a.json) — preliminary SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus; note the empirical CS2R pair-write behavior documented under "SM103a notes" below
+- [`sm103a.json`](sm103a.json) — canonical SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus (see "SM103a notes" below); refreshed from the production cubit table including the tcgen05 class set (`UTCHMMA`/`UTCQMMA`/`UTCIMMA`/`UTCOMMA`, `LDTM`/`STTM`, `UTCCP`, `UTCSHIFT`, `UTCBAR`, `UTCATOMSWS`, `UVIRTCOUNT`)
 - [`SM120_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html) — generated, searchable HTML reference ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html))
+- [`SM103A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM103a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html))
 
 ## Artifact Scope
 
@@ -36,7 +38,25 @@ clears the even-aligned 64-bit register pair `Rd:Rd+1`, not only `Rd` (cuda-gdb-
 binary patchers must not substitute 32-bit zero-idioms blindly — consumers of `Rd^1`
 observe the side effect).
 
+Measured tcgen05 facts encoded in this release:
+
+- For all 119 probe pairs shared with SM100a in the tcgen05 corpus, the 128-bit
+  instruction words are byte-identical between sm_100a and sm_103a; the encoding layer
+  transfers 1:1 to SM100a.
+- ptxas 13.3 accepts `tcgen05.mma` `kind::i8` on sm_100a but rejects it on sm_103a.
+- `tcgen05.ld.red` (`LDTM.STAT`) is accepted on sm_103a only.
+- `tcgen05.wait::alloc/dealloc` and `tcgen05.commit complete_tx::bytes` are rejected by
+  ptxas 13.3 on both targets; TMEM allocation runs through `UTCATOMSWS`/`UTCBAR`
+  arbitration and `UVIRTCOUNT.DEALLOC.SMPOOL` pool release as encoded here.
+
+Coverage note: SM103a encoding records stand on a 1.94M-sample nvdisasm-pair corpus plus
+the tcgen05 PTX probe corpus. Per-instruction scheduling metadata is thinner than in
+`sm120.json` (baseline defaults except where hardware-probed); consult `ctrl_classes`
+for control-word behavior, which is documented per class.
+
 ## Dataset Summary
+
+SM120 (`sm120.json`):
 
 | Item | Count |
 |------|------:|
@@ -48,6 +68,19 @@ observe the side effect).
 | Pipeline classes | 37 |
 | Instruction width | 128 bits |
 
+SM103a (`sm103a.json`):
+
+| Item | Count |
+|------|------:|
+| Instruction forms (`instructions`) | 397 |
+| Opcode families | 163 |
+| Encoding variants (`mod_groups`) | 1,291 |
+| Corpus samples behind encoding records | 1,941,564 |
+| Scheduling-only entries | 0 |
+| Pipeline classes | 37 |
+| Control-word classes | 29 |
+| Instruction width | 128 bits |
+
 Validation status for this release:
 
 - 47,244 real instructions decoded across 178 cubins with 100% decode coverage
@@ -57,6 +90,9 @@ Validation status for this release:
 - all 36 dense `QMMA.SF...E8` type pairs covered: 25 emitted by ptxas and all
   11 combinations containing undocumented `E3M4` executed on RTX PRO 6000
 - selected semantic bit fields validated by hardware patch tests on RTX 5090
+- SM103a: disassemble→assemble roundtrip byte-exact on 323/323 cubins of the publish
+  corpus (tcgen05 probe kernels, FA4 kernels, instruction samples) run under the exact
+  published table; per-cubin verdicts identical to the production cubit table
   and RTX PRO 6000
 
 ## Data Model
@@ -151,7 +187,7 @@ These are included to orient readers; the primary contribution is the data itsel
 
 ## Limitations
 
-- The database targets **SM120 / consumer Blackwell**. It is not a complete SM100/B200 ISA.
+- `sm120.json` targets SM120 / consumer Blackwell; `sm103a.json` targets SM103a (B300). The pair is not a complete SM100/B200 ISA, though the measured tcgen05 encoding layer is byte-identical between SM100a and SM103a.
 - Some entries are scheduling-only: they describe pipeline behavior without a complete
   encoding record.
 - Some instruction names use provisional labels (`INVALID*`, recovered modifier names,
@@ -161,7 +197,7 @@ These are included to orient readers; the primary contribution is the data itsel
 
 ## Related Work
 
-- [`cubit`](https://github.com/kacper-daftcode/cubit) — companion SM120 SASS
+- [`cubit`](https://github.com/kacper-daftcode/cubit) — companion SM120/SM103a SASS
   assembler/disassembler using this database.
 
 ## Citation
