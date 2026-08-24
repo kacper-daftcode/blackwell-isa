@@ -49,7 +49,7 @@ details.partials>summary::before{content:"▶";font-size:0.7em;transition:transf
 details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 
-@media (max-width:700px){table{display:block;overflow-x:auto;max-width:100%}}
+@media (max-width:700px){table{display:block;overflow-x:auto;max-width:100%}p,b,code,li,h1,h2,td{overflow-wrap:anywhere;word-break:break-word}}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
 <p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>163 opcodes &middot; 397 instruction forms &middot; 1291 encoding variants &middot; 397 with scheduling data<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span></p>
