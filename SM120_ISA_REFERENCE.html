@@ -48,6 +48,8 @@ details.partials>summary{cursor:pointer;font-size:0.84em;color:#888;
 details.partials>summary::before{content:"▶";font-size:0.7em;transition:transform 0.15s}
 details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
+
+@media (max-width:700px){table{display:block;overflow-x:auto;max-width:100%}}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
 <p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>781 opcodes &middot; 2001 instruction forms &middot; 2872 encoding variants &middot; 1865 with scheduling data<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span></p>
