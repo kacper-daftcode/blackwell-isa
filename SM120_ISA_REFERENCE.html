@@ -37,6 +37,7 @@ details summary:hover{color:#1a1a1a}
 .hidden{display:none!important}
 a{color:#1a5fb4}
 .foot{text-align:center;font-size:0.76em;color:#999;margin:48px 0 24px;line-height:1.7}
+@media (max-width:899px){table{display:block;overflow-x:auto;max-width:100%}p,b,code,li,h1,h2,td,th,a,strong,span{overflow-wrap:anywhere;word-break:break-word}.ib,.ib *{overflow-wrap:anywhere;word-break:break-word}}
 .note{font-size:0.85em;color:#555;background:#f9f9f5;border-left:3px solid #ddd;
   padding:6px 12px;margin:8px 0}
 .lat-hw{color:#1a7f37;font-weight:600}
@@ -48,11 +49,9 @@ details.partials>summary{cursor:pointer;font-size:0.84em;color:#888;
 details.partials>summary::before{content:"▶";font-size:0.7em;transition:transform 0.15s}
 details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
-
-@media (max-width:899px){table{display:block;overflow-x:auto;max-width:100%}p,b,code,li,h1,h2,td,th,a,strong,span{overflow-wrap:anywhere;word-break:break-word}.ib,.ib *{overflow-wrap:anywhere;word-break:break-word}}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>781 opcodes &middot; 2001 instruction forms &middot; 2872 encoding variants &middot; 1865 with scheduling data<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>782 opcodes &middot; 2001 instruction forms &middot; 2875 encoding variants &middot; 1865 with scheduling data<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -1079,9 +1078,10 @@ Collapsed by default — click to expand.
 <a href="#USHF.R.S64">USHF.R.S64</a><br>
 <a href="#USHF.R.U32.HI">USHF.R.U32.HI</a><br>
 <a href="#USHF.R.W.U32">USHF.R.W.U32</a><br>
-<a href="#UTCHMMA">UTCHMMA</a><br>
-<a href="#UTCIMMA">UTCIMMA</a><br>
-<a href="#UTCQMMA">UTCQMMA</a><br>
+<a href="#UTCHMMA.1CTA">UTCHMMA.1CTA</a><br>
+<a href="#UTCIMMA.1CTA">UTCIMMA.1CTA</a><br>
+<a href="#UTCIMMA.1CTA.KIND2">UTCIMMA.1CTA.KIND2</a><br>
+<a href="#UTCQMMA.1CTA">UTCQMMA.1CTA</a><br>
 <a href="#UTMACMDFLUSH">UTMACMDFLUSH</a><br>
 <a href="#UTMALDG.1D">UTMALDG.1D</a><br>
 <a href="#UTMALDG.2D">UTMALDG.2D</a><br>
@@ -2561,18 +2561,9 @@ Collapsed by default — click to expand.
 <h3>DEPBAR</h3>
 <p class="desc">Dependency barrier.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DEPBAR.LE_II_II</td><td class="m"></td><td class="m">LE</td><td>&mdash;</td><td>&mdash;</td></tr>
-<tr><td class="m">DEPBAR_II</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">DEPBAR_II</td><td class="m">II</td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">DEPBAR_L_II</td><td class="m">L_II</td><td class="m">LE</td><td>BARRIER</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
 </table>
-<details><summary>DEPBAR.LE_II_II.LE &mdash; 3 fields &middot; 26 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000080000000791a</code></div>
-<div class="ab">var_mask: <code>0x000000000000000000007fc00000f000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[46:44]</td><td>3</td><td>t1</td><td><code>imm</code></td></tr>
-<tr><td>[43:38]</td><td>6</td><td>t2</td><td><code>imm</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>DEPBAR_II &mdash; 3 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000000000000000000000073a9</code></div>
 <div class="ab">var_mask: <code>0x00000000ffffffffffffffffffff0000</code></div>
@@ -2593,9 +2584,18 @@ Collapsed by default — click to expand.
 <div class="ib" data-op="DEPBAR.LE" id="DEPBAR.LE">
 <h3>DEPBAR.LE</h3>
 <p class="desc">Dependency barrier.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DEPBAR.LE_P_II</td><td class="m">P_II</td><td>BARRIER</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
+<table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">DEPBAR.LE_II_II</td><td class="m">II_II</td><td class="m">LE</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">DEPBAR.LE_P_II</td><td class="m">P_II</td><td class="m">&amp;mdash;</td><td>BARRIER</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
 </table>
+<details><summary>DEPBAR.LE_II_II.LE &mdash; 3 fields &middot; 26 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000000000000080000000791a</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000007fc00000f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[46:44]</td><td>3</td><td>t1</td><td><code>imm</code></td></tr>
+<tr><td>[43:38]</td><td>6</td><td>t2</td><td><code>imm</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 <details><summary>DEPBAR.LE_P_II &mdash; 2 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000091a</code></div>
 <div class="ab">var_mask: <code>0x1c0000000000000000000fc00000f000</code></div>
@@ -5272,8 +5272,6 @@ Collapsed by default — click to expand.
 <h3>FADD</h3>
 <p class="desc">FP32 addition.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">FADD.FTZ_R_R_FI</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-<tr><td class="m">FADD.FTZ_R_R_II</td><td class="m">R_R_II</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FADD_R_L_R</td><td class="m">R_L_R</td><td class="m">FTZ, RZ, SAT</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FADD_R_R_FI</td><td class="m">R_R_FI</td><td class="m">FTZ, RZ, SAT</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FADD_R_R_II</td><td class="m">R_R_II</td><td class="m">FTZ, RZ, SAT</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
@@ -5307,30 +5305,6 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>FADD.FTZ_R_R_FI &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000100000000000000000421</code></div>
-<div class="ab">var_mask: <code>0x1c00000000000300fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>f32</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>FADD.FTZ_R_R_II &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000100000000000000000421</code></div>
-<div class="ab">var_mask: <code>0x1c00000000000300fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>f32</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>FADD_R_L_R &mdash; 4 fields &middot; 56 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000000007221</code></div>
 <div class="ab">var_mask: <code>0x1c00000000000300c00000ffffff0000</code></div>
@@ -5604,6 +5578,8 @@ Collapsed by default — click to expand.
 <p class="desc">FP32 addition.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FADD.FTZ_P_R_R_R</td><td class="m">P_R_R_R</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
+<tr><td class="m">FADD.FTZ_R_R_FI</td><td class="m">R_R_FI</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">FADD.FTZ_R_R_II</td><td class="m">R_R_II</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FADD.FTZ_R_R_R</td><td class="m">R_R_R</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
 <details><summary>FADD.FTZ_P_R_R_R &mdash; 7 fields</summary><div class="var">
@@ -5614,6 +5590,30 @@ Collapsed by default — click to expand.
 <tr><td>[73:72]</td><td>2</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>FADD.FTZ_R_R_FI &mdash; 7 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000100000000000000000421</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000300fffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>f32</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>FADD.FTZ_R_R_II &mdash; 7 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000100000000000000000421</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000300fffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>f32</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -5719,13 +5719,12 @@ Collapsed by default — click to expand.
 <h3>FFMA</h3>
 <p class="desc">FP32 fused multiply-add. Rd = Ra &times; Rb + Rc. Single rounding.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">FFMA.RM_R_R_R_II</td><td class="m">R_R_R_II</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA_P_R_R_FI_R</td><td class="m">P_R_R_FI_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
-<tr><td class="m">FFMA_P_R_R_II_II</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">FFMA_P_R_R_II_II</td><td class="m">P_R_R_II_II</td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">FFMA_P_R_R_R_II</td><td class="m">P_R_R_R_II</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA_R_R_FI_R</td><td class="m">R_R_FI_R</td><td class="m">FTZ, RM, RP</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
-<tr><td class="m">FFMA_R_R_R_FI</td><td class="m"></td><td class="m">SAT, RM, RP, RZ</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">FFMA_R_R_R_FI</td><td class="m">R_R_R_FI</td><td class="m">SAT, RM, RP, RZ</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">FFMA_R_R_R_II</td><td class="m">R_R_R_II</td><td class="m">FTZ, RM, RP, SAT</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">FTZ, RM, RP, RZ</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA_R_R_R_R_R</td><td class="m">R_R_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
@@ -6154,6 +6153,7 @@ Collapsed by default — click to expand.
 <h3>FFMA.RM</h3>
 <p class="desc">FP32 fused multiply-add. Rd = Ra &times; Rb + Rc. Single rounding.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">FFMA.RM_R_R_R_II</td><td class="m">R_R_R_II</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">FFMA.RM_R_R_R_R</td><td class="m">R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
 <details><summary>FFMA.RM_R_R_R_R &mdash; 14 fields</summary><div class="var">
@@ -14729,7 +14729,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">IADD3_R_P_P_R_UR_II</td><td class="m">R_P_P_R_UR_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_UR_II_II</td><td class="m">R_P_P_R_UR_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_UR_R</td><td class="m">R_P_P_R_UR_R</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
-<tr><td class="m">IADD3_R_P_P_R_UR_R_II_II_II_UR</td><td class="m"></td><td class="m">X</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IADD3_R_P_P_R_UR_R_II_II_II_UR</td><td class="m">R_P_P_R_UR_R_II_II_II_UR</td><td class="m">X</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">IADD3_R_P_P_R_UR_R_P_P</td><td class="m">R_P_P_R_UR_R_P_P</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_UR_UR</td><td class="m">R_P_P_R_UR_UR</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
@@ -17693,7 +17693,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">ISETP_P_P_R_II_P</td><td class="m">P_P_R_II_P</td><td class="m">AND,EQ, AND,EQ,U32, AND,GE, AND,GE,U32, AND,GT, AND,GT,U32, AND,LT,U32, AND,NE, AND,NE,U32, EQ,OR, GT,OR, LT,OR,U32, NE,OR, NE,OR,U32, AND,GE,U64, AND,GT,U64, AND,LE,U32, AND,LT, AND,NE,S64, GT,OR,U32, NE,OR,S64, AND,NE,U64, AND,EQ,S64, AND,EQ,U64, AND,GE,S64, AND,GT,S64, AND,LE, AND,LE,S64, AND,LE,U64, AND,LT,S64, AND,LT,U64, GE,OR, GE,OR,U32, GE,U32,XOR, GE,XOR, LT,OR, LT,U32,XOR, LT,XOR, NE,U32,XOR, NE,XOR</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">3 &#9733;</span></td></tr>
 <tr><td class="m">ISETP_P_P_R_R_P</td><td class="m">P_P_R_R_P</td><td class="m">AND,EQ,U32, AND,GE, AND,GE,U32, AND,GE,U64, AND,GT, AND,GT,U32, AND,GT,U64, AND,LE,U32, AND,LT, AND,NE, AND,NE,S64, AND,NE,U32, EQ,OR, GT,OR,U32, LT,OR,U32, NE,OR, NE,OR,S64, AND,EQ, AND,LT,U32, GT,OR, NE,OR,U32, AND,EQ,S64, AND,EQ,U64, AND,GE,S64, AND,GT,S64, AND,LE, AND,LE,S64, AND,LE,U64, AND,LT,S64, AND,LT,U64, AND,NE,U64, GE,OR, GE,OR,U32, GE,U32,XOR, GE,XOR, LT,OR, LT,U32,XOR, LT,XOR, NE,U32,XOR, NE,XOR</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">3 &#9733;</span></td></tr>
 <tr><td class="m">ISETP_P_P_R_UR_P</td><td class="m">P_P_R_UR_P</td><td class="m">AND,EQ,U32, AND,GE, AND,GE,U32, AND,GE,U64, AND,GT,U32, AND,GT,U64, AND,NE, AND,NE,U32, EQ,OR, NE,OR, AND,EQ, AND,GT, AND,LT,U32, GT,OR, LT,OR,U32, NE,OR,U32, AND,LE,U32, AND,LT, AND,NE,S64, GT,OR,U32, NE,OR,S64</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">3 &#9733;</span></td></tr>
-<tr><td class="m">ISETP_P_P_R_UR_UR</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">ISETP_P_P_R_UR_UR</td><td class="m">P_P_R_UR_UR</td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
 <details><summary>ISETP_P_P_R_II_P.AND,EQ &mdash; 8 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000002270000000000000080c</code></div>
@@ -21776,7 +21776,7 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LDG_R_ARI</td><td class="m">R_ARI</td><td class="m">E, 64,E, E,GPU,STRONG, 128,E,LTC128B, 128,E, CONSTANT,E, E,S8, E,U16, E,U8</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LDG_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E, 64,E, E,GPU,STRONG, 128,E,LTC128B, 128,E, CONSTANT,E, E,S8, E,U16, E,U8</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
-<tr><td class="m">LDG_R_dARI</td><td class="m">R_dARI</td><td class="m">128,E, 64,E, CONSTANT,E, E, E,S8, E,U16, E,U8, E,GPU,STRONG, 128,E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
+<tr><td class="m">LDG_R_dARI</td><td class="m">R_dARI</td><td class="m">128,E, 64,E, CONSTANT,E, E, E,S8, E,U16, E,U8, E,GPU,STRONG, 128,E,LTC128B, E,EF, 64,E,EF, 128,E,EF</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 </table>
 <details><summary>LDG_R_ARI.E &mdash; 8 fields &middot; 46 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000001e09000000000000000181</code></div>
@@ -22183,6 +22183,39 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDG_R_dARI.E,EF &mdash; 7 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c0e19000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000000fffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDG_R_dARI.64,E,EF &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c0e1b000000000000007981</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000000ffffffffffff0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>LDG_R_dARI.128,E,EF &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c0e1d000000000000007981</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000000ffffffffffff0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="LDG.E" id="LDG.E">
@@ -32546,7 +32579,7 @@ Collapsed by default — click to expand.
 <h3>REDUX</h3>
 <p class="desc">Warp-level reduction to a uniform register. Reduces a value across all active threads in a warp using an operation (AND, OR, XOR, ADD, MIN, MAX) and writes the result to a UR. Faster than a shared-memory reduction for small reductions.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">REDUX_UR_R</td><td class="m"></td><td class="m">SUM, MAX, MIN, OR, XOR, AND, MAX,S32, MIN,S32</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">REDUX_UR_R</td><td class="m">UR_R</td><td class="m">SUM, MAX, MIN, OR, XOR, AND, MAX,S32, MIN,S32</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
 <details><summary>REDUX_UR_R &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000000000000000000000003c4</code></div>
@@ -32636,18 +32669,10 @@ Collapsed by default — click to expand.
 <h3>RET</h3>
 <p class="desc">Return from subroutine.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">RET.REL.NODEC_R_II</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">RET_II</td><td class="m">II</td><td class="m">NODEC,REL</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">RET_L</td><td class="m">L</td><td class="m">ABS,NODEC, NODEC,REL</td><td>CTRL_FLOW</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
-<tr><td class="m">RET_R_II</td><td class="m"></td><td class="m">NODEC,REL, REL,NODEC</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">RET_R_II</td><td class="m">R_II</td><td class="m">NODEC,REL, REL,NODEC</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
-<details><summary>RET.REL.NODEC_R_II &mdash; 2 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000003c3ffff0000000000000950</code></div>
-<div class="ab">var_mask: <code>0x1c00000000000000fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>RET_II.NODEC,REL &mdash; 1 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000003c3ffffffffffff02007950</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000000007000</code></div>
@@ -32698,6 +32723,7 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">RET.REL.NODEC_II</td><td class="m">II</td><td>CTRL_FLOW</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
 <tr><td class="m">RET.REL.NODEC_R</td><td class="m">R</td><td>CTRL_FLOW</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">0 ~</span></td></tr>
+<tr><td class="m">RET.REL.NODEC_R_II</td><td class="m">R_II</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
 <details><summary>RET.REL.NODEC_II &mdash; 2 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000003c3fffffffffe0000007950</code></div>
@@ -32715,6 +32741,13 @@ Collapsed by default — click to expand.
 <tr><td>[81:34]</td><td>48</td><td>t0</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>imm</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>RET.REL.NODEC_R_II &mdash; 2 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000003c3ffff0000000000000950</code></div>
+<div class="ab">var_mask: <code>0x1c00000000000000fffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
@@ -36104,7 +36137,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">UIADD3_UR_P_P_UR_UR_UR_UP_UP</td><td class="m">UR_P_P_UR_UR_UR_UP_UP</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_II_II</td><td class="m">UR_UP_UP_UR_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR</td><td class="m">UR_UP_UP_UR_II_UR</td><td class="m">64, X</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR_P</td><td class="m"></td><td class="m">X</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR_P</td><td class="m">UR_UP_UP_UR_II_UR_P</td><td class="m">X</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR_UP_UP</td><td class="m">UR_UP_UP_UR_II_UR_UP_UP</td><td class="m">X, 64</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_UR_R_II_P</td><td class="m">UR_UP_UP_UR_UR_R_II_P</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_UR_UR</td><td class="m">UR_UP_UP_UR_UR_UR</td><td class="m">64, X</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
@@ -36436,10 +36469,10 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UIMAD_UR_UP_UR_UR_UR</td><td class="m">UR_UP_UR_UR_UR</td><td class="m">U32,WIDE, HI,U32</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIMAD_UR_UR_II_UR</td><td class="m">UR_UR_II_UR</td><td class="m">U32,WIDE, HI,U32</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">UIMAD_UR_UR_II_UR_UR</td><td class="m"></td><td class="m">U32,WIDE, HI,U32</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">UIMAD_UR_UR_II_UR_UR</td><td class="m">UR_UR_II_UR_UR</td><td class="m">U32,WIDE, HI,U32</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">UIMAD_UR_UR_UR_II</td><td class="m">UR_UR_UR_II</td><td class="m">U32,WIDE, HI,U32</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIMAD_UR_UR_UR_UR</td><td class="m">UR_UR_UR_UR</td><td class="m">U32,WIDE, HI,U32, v2</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">UIMAD_UR_UR_UR_UR_UR</td><td class="m"></td><td class="m">U32,WIDE, HI,U32</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">UIMAD_UR_UR_UR_UR_UR</td><td class="m">UR_UR_UR_UR_UR</td><td class="m">U32,WIDE, HI,U32</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
 <details><summary>UIMAD_UR_UP_UR_UR_UR.U32,WIDE &mdash; 5 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e00ff00000000000072a5</code></div>
@@ -36803,8 +36836,8 @@ Collapsed by default — click to expand.
 <p class="desc">Uniform integer set predicate.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UISETP_UP_UP_UR_II_UP</td><td class="m">UP_UP_UR_II_UP</td><td class="m">AND,GE, AND,GE,U32, AND,GT, AND,GT,U32, AND,NE, AND,NE,U32, GE,U32,AND</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">3 ~</span></td></tr>
-<tr><td class="m">UISETP_UP_UP_UR_II_UP_088c</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
-<tr><td class="m">UISETP_UP_UP_UR_R_UP</td><td class="m"></td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">UISETP_UP_UP_UR_II_UP_088c</td><td class="m">UP_UP_UR_II_UP_088c</td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">UISETP_UP_UP_UR_R_UP</td><td class="m">UP_UP_UR_R_UP</td><td class="m">&amp;mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
 <tr><td class="m">UISETP_UP_UP_UR_UR_UP</td><td class="m">UP_UP_UR_UR_UP</td><td class="m">AND,GE, AND,NE, AND,GE,U32, AND,GT, AND,GT,U32, AND,NE,U32</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">3 ~</span></td></tr>
 </table>
 <details><summary>UISETP_UP_UP_UR_II_UP.AND,GE &mdash; 6 fields &middot; 4 samples</summary><div class="var">
@@ -38475,10 +38508,10 @@ Collapsed by default — click to expand.
 <tr><td>[19:16]</td><td>4</td><td>t1</td><td><code>ureg</code></td></tr>
 </table></div></details>
 </div>
-<div class="ib" data-op="UTCHMMA" id="UTCHMMA">
-<h3>UTCHMMA</h3>
+<div class="ib" data-op="UTCHMMA.1CTA" id="UTCHMMA.1CTA">
+<h3>UTCHMMA.1CTA</h3>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTCHMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m"></td><td>FP_ARITH</td><td>&mdash;</td></tr>
+<tr><td class="m">UTCHMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m">UR_UR_UR_UR_UR_UP</td><td>FP_ARITH</td><td>&mdash;</td></tr>
 </table>
 <details><summary>UTCHMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
@@ -38491,22 +38524,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t0</td><td><code>ureg</code></td></tr>
 </table></div></details>
 </div>
-<div class="ib" data-op="UTCIMMA" id="UTCIMMA">
-<h3>UTCIMMA</h3>
+<div class="ib" data-op="UTCIMMA.1CTA" id="UTCIMMA.1CTA">
+<h3>UTCIMMA.1CTA</h3>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP</td><td class="m"></td><td>FP_ARITH</td><td>&mdash;</td></tr>
-<tr><td class="m">UTCIMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m"></td><td>FP_ARITH</td><td>&mdash;</td></tr>
+<tr><td class="m">UTCIMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m">UR_UR_UR_UR_UR_UP</td><td>FP_ARITH</td><td>&mdash;</td></tr>
 </table>
-<details><summary>UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
-<tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
-<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t0</td><td><code>ureg</code></td></tr>
-</table></div></details>
 <details><summary>UTCIMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
@@ -38518,10 +38540,26 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t0</td><td><code>ureg</code></td></tr>
 </table></div></details>
 </div>
-<div class="ib" data-op="UTCQMMA" id="UTCQMMA">
-<h3>UTCQMMA</h3>
+<div class="ib" data-op="UTCIMMA.1CTA.KIND2" id="UTCIMMA.1CTA.KIND2">
+<h3>UTCIMMA.1CTA.KIND2</h3>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTCQMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m"></td><td>FP_ARITH</td><td>&mdash;</td></tr>
+<tr><td class="m">UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP</td><td class="m">UR_UR_UR_UR_UR_UP</td><td>FP_ARITH</td><td>&mdash;</td></tr>
+</table>
+<details><summary>UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
+<tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t0</td><td><code>ureg</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="UTCQMMA.1CTA" id="UTCQMMA.1CTA">
+<h3>UTCQMMA.1CTA</h3>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">UTCQMMA.1CTA_UR_UR_UR_UR_UR_UP</td><td class="m">UR_UR_UR_UR_UR_UP</td><td>FP_ARITH</td><td>&mdash;</td></tr>
 </table>
 <details><summary>UTCQMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
@@ -38745,35 +38783,10 @@ Collapsed by default — click to expand.
 <h3>VIMNMX</h3>
 <p class="desc">Vector integer min/max. Operates on packed sub-word integers. <code>.S32</code>: two packed 16-bit signed comparisons, or one 32-bit. Used for packed integer processing without unpacking.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">VIMNMX.S32_R_R_II_P</td><td class="m">R_R_II_P</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
-<tr><td class="m">VIMNMX.U32_R_R_UR_P</td><td class="m">R_R_UR_P</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX_R_R_II_P</td><td class="m">R_R_II_P</td><td class="m">U32, S32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX_R_R_R_P</td><td class="m">R_R_R_P</td><td class="m">S32, U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX_R_R_UR_P</td><td class="m">R_R_UR_P</td><td class="m">S32, U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
-<details><summary>VIMNMX.S32_R_R_II_P &mdash; 7 fields &middot; 4 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000007e01000000000000000848</code></div>
-<div class="ab">var_mask: <code>0x0400000007800000fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[90]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>VIMNMX.U32_R_R_UR_P &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000087e00000000000000000c48</code></div>
-<div class="ab">var_mask: <code>0x1c00000007800000000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>VIMNMX_R_R_II_P.U32 &mdash; 7 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000007e00000000000000000848</code></div>
 <div class="ab">var_mask: <code>0x0400000007800000fffffffffffff000</code></div>
@@ -38852,6 +38865,7 @@ Collapsed by default — click to expand.
 <p class="desc">Vector integer min/max. Operates on packed sub-word integers. <code>.S32</code>: two packed 16-bit signed comparisons, or one 32-bit. Used for packed integer processing without unpacking.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">VIMNMX.S32_R_R_II_II</td><td class="m">R_R_II_II</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
+<tr><td class="m">VIMNMX.S32_R_R_II_P</td><td class="m">R_R_II_P</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX.S32_R_R_R_P</td><td class="m">R_R_R_P</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX.S32_R_R_R_R</td><td class="m">R_R_R_R</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">VIMNMX.S32_R_R_UR_P</td><td class="m">R_R_UR_P</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
@@ -38967,6 +38981,18 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>VIMNMX.S32_R_R_II_P &mdash; 7 fields &middot; 4 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000007e01000000000000000848</code></div>
+<div class="ab">var_mask: <code>0x0400000007800000fffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 <details><summary>VIMNMX.S32_R_R_R_P &mdash; 8 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000007e01000000000000000248</code></div>
 <div class="ab">var_mask: <code>0x0c00000007800000000000fffffff000</code></div>
@@ -39016,6 +39042,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">VIMNMX.U32_R_R_II_P</td><td class="m">R_R_II_P</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">VIMNMX.U32_R_R_II_P_P</td><td class="m">R_R_II_P_P</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">VIMNMX.U32_R_R_R_P</td><td class="m">R_R_R_P</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">VIMNMX.U32_R_R_UR_P</td><td class="m">R_R_UR_P</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
 <details><summary>VIMNMX.U32_R_R_II_II &mdash; 3 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000003fe00000000000f00007848</code></div>
@@ -39058,6 +39085,17 @@ Collapsed by default — click to expand.
 <tr><td>[90]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VIMNMX.U32_R_R_UR_P &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000087e00000000000000000c48</code></div>
+<div class="ab">var_mask: <code>0x1c00000007800000000000fffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -39349,7 +39387,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="foot">
 SM120 Instruction Set Architecture Reference &mdash; revision from sm120.json<br>
-2001 instruction forms &middot; 2872 encoding variants &middot; 37 pipeline classes<br>
+2001 instruction forms &middot; 2875 encoding variants &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
