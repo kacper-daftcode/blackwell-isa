@@ -40,11 +40,11 @@ observe the side effect).
 
 | Item | Count |
 |------|------:|
-| Instruction forms (`instructions`) | 1,994 |
-| Opcode families | 767 |
-| Encoding variants (`mod_groups`) | 2,837 |
-| Instruction forms with scheduling metadata | 1,858 |
-| Scheduling-only entries | 597 |
+| Instruction forms (`instructions`) | 2,001 |
+| Opcode families | 781 |
+| Encoding variants (`mod_groups`) | 2,872 |
+| Instruction forms with scheduling metadata | 1,865 |
+| Scheduling-only entries | 593 |
 | Pipeline classes | 37 |
 | Instruction width | 128 bits |
 
@@ -52,7 +52,12 @@ Validation status for this release:
 
 - 47,244 real instructions decoded across 178 cubins with 100% decode coverage
 - 5,014 / 5,014 roundtrip fuzz cases passing through the companion assembler
+- 936 / 936 targeted ground-truth instructions round-tripped, including the
+  25-type `QMMA.SF` ptxas corpus and `LDG.E.LTC128B.128`
+- all 36 dense `QMMA.SF...E8` type pairs covered: 25 emitted by ptxas and all
+  11 combinations containing undocumented `E3M4` executed on RTX PRO 6000
 - selected semantic bit fields validated by hardware patch tests on RTX 5090
+  and RTX PRO 6000
 
 ## Data Model
 
@@ -125,8 +130,9 @@ These are included to orient readers; the primary contribution is the data itsel
   as a small B200 gives wrong code-generation assumptions.
 
 - **Block-scaled MMA is encoded in SASS.** `QMMA.SF`, `QMMA.SF.SP`, and `OMMA.SF`
-  forms are present, including FP4/FP6-style type encodings not available through the
-  normal CUDA 12.8 `sm_120` path.
+  forms are present. Current `compute_120f` PTX exposes the documented
+  `mxf8f6f4` type pairs; the database additionally records undocumented `E3M4`
+  and hidden/sparse forms outside the normal compiler path.
 
 - **There is an undocumented FP8-like type code.** Type code 2 in the block-scaled
   MMA type field corresponds to `E3M4`; it appears in dense and sparse instruction
