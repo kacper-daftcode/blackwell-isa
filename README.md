@@ -3,8 +3,8 @@
 Public research artifacts for the NVIDIA **Blackwell** SASS instruction set.
 
 This repository publishes machine-readable ISA databases for Blackwell GPUs:
-consumer SM120 (RTX 50-series, including RTX 5090 / GB202) and datacenter SM103a
-(B300 SXM6). It is intended for researchers and
+consumer SM120 (RTX 50-series, including RTX 5090 / GB202), datacenter SM103a
+(B300 SXM6), and SM121a (DGX Spark / GB10, Grace-Blackwell unified). It is intended for researchers and
 implementers building assemblers, disassemblers, compiler backends, binary analysis
 tools, and instruction schedulers for Blackwell-class targets.
 
@@ -12,8 +12,10 @@ Artifacts:
 
 - [`sm120.json`](sm120.json) — canonical machine-readable ISA database
 - [`sm103a.json`](sm103a.json) — canonical SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus (see "SM103a notes" below); refreshed from the production cubit table including the tcgen05 class set (`UTCHMMA`/`UTCQMMA`/`UTCIMMA`/`UTCOMMA`, `LDTM`/`STTM`, `UTCCP`, `UTCSHIFT`, `UTCBAR`, `UTCATOMSWS`, `UVIRTCOUNT`)
+- [`sm121a.json`](sm121a.json) — canonical SM121a ("GB10", DGX Spark Grace-Blackwell) ISA database; same schema, delta-driven vs SM120 with EXACT gates per entry; 15,443 keys (md5 88142da9)
 - [`SM120_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html) — generated, searchable HTML reference ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html))
 - [`SM103A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM103a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html))
+- [`SM121A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM121A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM121a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM121A_ISA_REFERENCE.html))
 
 ## Artifact Scope
 
