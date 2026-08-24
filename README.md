@@ -56,54 +56,7 @@ the tcgen05 PTX probe corpus. Per-instruction scheduling metadata is thinner tha
 `sm120.json` (baseline defaults except where hardware-probed); consult `ctrl_classes`
 for control-word behavior, which is documented per class.
 
-## Dataset Summary
-
-SM120 (`sm120.json`):
-
-| Item | Count |
-|------|------:|
-| Instruction forms (`instructions`) | 2,001 |
-| Opcode families | 781 |
-| Encoding variants (`mod_groups`) | 2,875 |
-| Instruction forms with scheduling metadata | 1,865 |
-| Scheduling-only entries | 593 |
-| Pipeline classes | 37 |
-| Instruction width | 128 bits |
-
-SM103a (`sm103a.json`):
-
-| Item | Count |
-|------|------:|
-| Instruction forms (`instructions`) | 397 |
-| Opcode families | 163 |
-| Encoding variants (`mod_groups`) | 1,291 |
-| Corpus samples behind encoding records | 1,941,564 |
-| Scheduling-only entries | 0 |
-| Pipeline classes | 37 |
-| Control-word classes | 29 |
-| Instruction width | 128 bits |
-
-SM121a (`sm121a.json`):
-
-| Item | Count |
-|------|------:|
-| Encoding keys (`instructions`) | 15,443 |
-| Mnemonic families | 154 |
-| Encoding variant rows (`mod_groups`) | 17,576 |
-| Corpus samples behind encoding records | 777,036 |
-| Entries with scheduling metadata | 15,293 |
-| Instruction width | 128 bits |
-
-**How the row counts compare.** All three tables cover essentially the same mnemonic space —
-**152 (SM120) / 149 (SM103a) / 154 (SM121a) instruction families** — but they use different keying
-conventions. `sm103a.json` is the most compact model: one canonical *form* per instruction with its
-variants nested as `mod_groups` (397 forms, 1,291 variants, and the largest per-form evidence base,
-1.94M corpus samples). `sm120.json` enumerates many variant shapes as dotted keys (2,001 keys).
-`sm121a.json` enumerates nearly the full variant grid as top-level keys (15,443 keys / 17,576 variant
-rows). A larger key count therefore does **not** mean a larger ISA — pick the table whose granularity
-matches your decoder's resolution.
-
-Validation status for this release:
+## Validation Status
 
 - 47,244 real instructions decoded across 178 cubins with 100% decode coverage
 - 5,014 / 5,014 roundtrip fuzz cases passing through the companion assembler
@@ -111,12 +64,11 @@ Validation status for this release:
   25-type `QMMA.SF` ptxas corpus and `LDG.E.LTC128B.128`
 - all 36 dense `QMMA.SF...E8` type pairs covered: 25 emitted by ptxas and all
   11 combinations containing undocumented `E3M4` executed on RTX PRO 6000
-- selected semantic bit fields validated by hardware patch tests on RTX 5090
+- selected semantic bit fields validated by hardware patch tests on RTX 5090 and RTX PRO 6000
 - SM103a: disassemble→assemble roundtrip byte-exact on 323/323 cubins of the publish
-- SM121a: differential legality/bit-flip scan of 260,352 probes (1,017 canonical forms × 128 bits × 2 contexts) with 0 decode/legality differences vs SM120; `nvdisasm -b SM120` vs `-b SM121a` over 648,992 raw instructions with 0 decode differences; full-table census over the 92,098-word corpus with 0 failures; 27/27 canonical identity anchors round-trip perfectly
   corpus (tcgen05 probe kernels, FA4 kernels, instruction samples) run under the exact
   published table; per-cubin verdicts identical to the production cubit table
-  and RTX PRO 6000
+- SM121a: differential legality/bit-flip scan of 260,352 probes (1,017 canonical forms × 128 bits × 2 contexts) with 0 decode/legality differences vs SM120; `nvdisasm -b SM120` vs `-b SM121a` over 648,992 raw instructions with 0 decode differences; full-table census over the 92,098-word corpus with 0 failures; 27/27 canonical identity anchors round-trip perfectly
 
 ## Data Model
 
@@ -210,7 +162,17 @@ These are included to orient readers; the primary contribution is the data itsel
 
 ## Limitations
 
-- `sm120.json` targets SM120 / consumer Blackwell; `sm103a.json` targets SM103a (B300); `sm121a.json` targets SM121A (GB10, DGX Spark). Together they are not a complete SM100/B200 ISA, though the measured tcgen05 encoding layer is byte-identical between SM100a and SM103a.
+- `sm120.json` targets SM120 / consumer Blackwell; `sm103a.json` targets SM103a (B300);
+  `sm121a.json` targets SM121A (GB10, DGX Spark). Together they are not a complete
+  SM100/B200 ISA, though the measured tcgen05 encoding layer is byte-identical between
+  SM100a and SM103a.
+- The tables use different key-granularity conventions: canonical forms with nested
+  variants (`sm103a.json`) vs enumerated variant keys (`sm120.json`, `sm121a.json`).
+  Raw key counts are not comparable across tables; the mnemonic-family coverage is
+  essentially the same (~150 families each).
+- SM121A entries are validated on GB10 (Grace-Blackwell, unified memory) only.
+- Some keys are marked partial (`?`): the encoding is valid, but the full operand
+  syntax is not yet determined.
 - Some entries are scheduling-only: they describe pipeline behavior without a complete
   encoding record.
 - Some instruction names use provisional labels (`INVALID*`, recovered modifier names,
@@ -220,8 +182,9 @@ These are included to orient readers; the primary contribution is the data itsel
 
 ## Related Work
 
-- [`cubit`](https://github.com/kacper-daftcode/cubit) — companion SM120/SM103a SASS
-  assembler/disassembler using this database.
+- [`cubit`](https://github.com/kacper-daftcode/cubit) — companion SM120 / SM103a / SM121A SASS
+  assembler/disassembler using this database (per-arch tables: `sm120.json`, `sm103a.json`,
+  `sm121a.json`).
 
 ## Citation
 
