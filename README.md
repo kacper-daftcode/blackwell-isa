@@ -12,9 +12,11 @@ Artifacts:
 
 - [`sm120.json`](sm120.json) — canonical machine-readable ISA database
 - [`sm103a.json`](sm103a.json) — canonical SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus (see "SM103a notes" below); refreshed from the production cubit table including the tcgen05 class set (`UTCHMMA`/`UTCQMMA`/`UTCIMMA`/`UTCOMMA`, `LDTM`/`STTM`, `UTCCP`, `UTCSHIFT`, `UTCBAR`, `UTCATOMSWS`, `UVIRTCOUNT`)
+- [`sm100a.json`](sm100a.json) — SM100a ("B200", Blackwell datacenter) ISA database derived from the SM103a canonical revision (encoding layer byte-identical on all 119 shared tcgen05 probe pairs) plus the tcgen05 acceptance deltas; offline-validated by decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus (99.9219% EXACT-minus-sched on 1,134 cubins); scheduling/pipeline sections inherited from SM103a, unvalidated for B200 timing
 - [`sm121a.json`](sm121a.json) — canonical SM121a ("GB10", DGX Spark Grace-Blackwell) ISA database; same schema, delta-driven vs SM120 with EXACT gates per entry; 15,443 encoding keys (md5 88142da9). Counting note: the SM121a table keeps a **finer per-key granularity** — its `instructions` dict holds one key per encoding row, so raw key counts are not comparable with the canonical instruction-*form* counts of sm120.json/sm103a.json
 - [`SM120_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html) — generated, searchable HTML reference ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html))
 - [`SM103A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM103a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html))
+- [`SM100A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM100A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM100a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM100A_ISA_REFERENCE.html))
 - [`SM121A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM121A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM121a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM121A_ISA_REFERENCE.html))
 
 ## Artifact Scope
@@ -65,9 +67,11 @@ for control-word behavior, which is documented per class.
 - all 36 dense `QMMA.SF...E8` type pairs covered: 25 emitted by ptxas and all
   11 combinations containing undocumented `E3M4` executed on RTX PRO 6000
 - selected semantic bit fields validated by hardware patch tests on RTX 5090 and RTX PRO 6000
+- SM120 (O2 consolidation revision): roundtrip over the 240-file sm120 corpus (1,076,075 instructions) at 99.86% match (up from 94.0% under the previous canonical revision); the 108 dropped `_?` placeholder rows were census-proven never hit by the decoder on 1.64M natural instructions
 - SM103a: disassemble→assemble roundtrip byte-exact on 323/323 cubins of the publish
   corpus (tcgen05 probe kernels, FA4 kernels, instruction samples) run under the exact
   published table; per-cubin verdicts identical to the production cubit table
+- SM100a: decoder/encoder replay over the archived b4 sm_100 corpus (1,134 cubins, 20,024,512 instructions, cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probes): 99.9219% EXACT-minus-sched, 0 fatal files; residual gap classes enumerated in the O2 validation report
 - SM121a: differential legality/bit-flip scan of 260,352 probes (1,017 canonical forms × 128 bits × 2 contexts) with 0 decode/legality differences vs SM120; `nvdisasm -b SM120` vs `-b SM121a` over 648,992 raw instructions with 0 decode differences; full-table census over the 92,098-word corpus with 0 failures; 27/27 canonical identity anchors round-trip perfectly
 
 ## Data Model

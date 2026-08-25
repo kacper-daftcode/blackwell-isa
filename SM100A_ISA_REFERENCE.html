@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SM103a Instruction Set Architecture Reference</title>
+<title>SM100a Instruction Set Architecture Reference</title>
 <style>
 body{font:15px/1.7 Charter,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   max-width:960px;margin:50px auto;padding:0 24px;color:#1a1a1a;background:#fff}
@@ -50,8 +50,8 @@ details.partials>summary::before{content:"▶";font-size:0.7em;transition:transf
 details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
-<h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>163 opcodes &middot; 399 instruction forms &middot; 1448 encoding variants &middot; 399 with scheduling data<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span></p>
+<h1>SM100a Instruction Set Architecture</h1>
+<p class="sub">NVIDIA Blackwell datacenter (B200) &mdash; Unofficial Reference<br>163 opcodes &middot; 399 instruction forms &middot; 1448 encoding variants &middot; 399 with scheduling data<br><span style="font-size:0.88em">Sources: canonical SM103a encoding layer (byte-identical on all 119 shared tcgen05 probe pairs), offline decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus; no B200 re-validation &mdash; scheduling and pipeline sections are inherited from SM103a and unvalidated for B200 timing</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -63,39 +63,43 @@ details.partials>summary:hover{color:#555}
 <li><a href="#barrier-scoreboard-system">Barrier and Scoreboard System</a></li>
 <li><a href="#memory-hierarchy">Memory Hierarchy</a></li>
 <li><a href="#instruction-reference">Instruction Reference</a></li>
+<li><a href="#sm103a-derivation">Derivation and Validation (vs SM103a)</a></li>
 </ol>
 <h2 id="architecture-overview">1. Architecture Overview</h2>
-<p>SM103a is the streaming multiprocessor architecture used in NVIDIA's Blackwell
-datacenter GPUs (B300 SXM6), the refresh of SM100a (B200). Across all 119 probe pairs
-shared with SM100a in the tcgen05 corpus, the 128-bit instruction words are byte-identical
-between the two targets.</p>
+<p>SM100a is the streaming multiprocessor architecture of NVIDIA's Blackwell
+datacenter GPUs (B200, GB100). SM103a (B300) is its refresh: across all 119 probe pairs shared
+between the two targets in the tcgen05 corpus, the 128-bit instruction words are byte-identical,
+so the encoding layer documented here is the SM103a canonical table carried over 1:1, with the
+tcgen05 acceptance deltas listed below.</p>
 
 <table>
 <tr><th>Property</th><th>Value</th></tr>
-<tr><td>Architecture</td><td>SM103a (Blackwell datacenter)</td></tr>
-<tr><td>CUDA Capability</td><td>10.3 (<code>__CUDA_ARCH__</code> = 1030)</td></tr>
-<tr><td>ELF identification</td><td><code>e_flags</code> SM field <code>0x67</code> (SM120 = <code>0x78</code>, SM100 = <code>0x64</code>)</td></tr>
-<tr><td>Reference GPU</td><td>B300 SXM6</td></tr>
+<tr><td>Architecture</td><td>SM100a (Blackwell datacenter)</td></tr>
+<tr><td>CUDA Capability</td><td>10.0 (<code>__CUDA_ARCH__</code> = 1000)</td></tr>
+<tr><td>ELF identification</td><td><code>e_flags</code> SM field <code>0x64</code> (SM103a = <code>0x67</code>, SM120 = <code>0x78</code>)</td></tr>
+<tr><td>Reference GPU</td><td>B200 (GB100)</td></tr>
 <tr><td>Instruction Width</td><td>128 bits (64-bit instruction + 64-bit control word)</td></tr>
 <tr><td>Max Threads per Block</td><td>1024</td></tr>
 <tr><td>Warp Size</td><td>32 threads</td></tr>
-<tr><td>Tensor Core Model</td><td>tcgen05 (TMEM-resident): <code>UTCHMMA</code>/<code>UTCQMMA</code>/<code>UTCIMMA</code>/<code>UTCOMMA</code> MMA forms, <code>LDTM</code>/<code>STTM</code> tensor-memory load/store, <code>UTCCP</code> shared&rarr;TMEM copy, <code>UTCSHIFT</code>, <code>UTCBAR</code>/<code>UTCATOMSWS</code> allocation arbitration</td></tr>
+<tr><td>Tensor Core Model</td><td>tcgen05 (TMEM-resident): <code>UTCHMMA</code>/<code>UTCQMMA</code>/<code>UTCIMMA</code>/<code>UTCOMMA</code> MMA forms (incl. <code>kind::i8</code>, which SM103a rejects), <code>LDTM</code>/<code>STTM</code> tensor-memory load/store, <code>UTCCP</code> shared&rarr;TMEM copy, <code>UTCSHIFT</code>, <code>UTCBAR</code>/<code>UTCATOMSWS</code> allocation arbitration</td></tr>
 <tr><td>NVIDIA Internal Codename</td><td>&ldquo;Mercury&rdquo; (SASS code generator)</td></tr>
 </table>
 <h2 id="architecture-notes">1.1 Architecture Notes</h2>
-<div class="note"><strong>SM103a-specific findings</strong>
+<div class="note"><strong>SM100a-specific notes</strong>
 <ul style="font-size:0.9em;margin-left:18px">
-<li><strong>CS2R pair write.</strong> <code>CS2R Rd, SRZ</code> clears the even-aligned 64-bit register
-pair <code>Rd:Rd+1</code>, not only <code>Rd</code> (cuda-gdb-proven on B300). Binary patchers must not
-substitute 32-bit zero idioms blindly &mdash; consumers of <code>Rd^1</code> observe the side effect.</li>
-<li><strong>SM100a parity.</strong> For all 119 probe pairs shared with SM100a in the tcgen05 corpus,
-the 128-bit instruction words are byte-identical between sm_100a and sm_103a. The encoding layer
-documented here transfers 1:1 to SM100a.</li>
-<li><strong>tcgen05 deltas vs SM100a (ptxas 13.3 acceptance).</strong> <code>tcgen05.mma kind::i8</code>
-is rejected on sm_103a but accepted on sm_100a. <code>tcgen05.ld.red</code> (<code>LDTM.STAT</code>)
+<li><strong>Derivative table, stated provenance.</strong> This table is the canonical SM103a
+revision carried over byte-for-byte, plus the acceptance deltas listed below. Basis: all 119
+probe pairs shared with SM103a in the tcgen05 corpus encode byte-identically, and an offline
+replay over an archived sm_100 corpus (cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probe cubins)
+round-trips hold up (see &sect;10).</li>
+<li><strong>tcgen05 deltas vs SM103a (ptxas 13.3 acceptance).</strong> <code>tcgen05.mma kind::i8</code>
+is accepted on sm_100a but rejected on sm_103a. <code>tcgen05.ld.red</code> (<code>LDTM.STAT</code>)
 is accepted only on sm_103a. <code>tcgen05.wait::alloc/dealloc</code> and
-<code>tcgen05.commit complete_tx::bytes</code> are rejected on both (allocation runs through the
-<code>UTCATOMSWS</code>/<code>UTCBAR</code> paths documented in this table).</li>
+<code>tcgen05.commit complete_tx::bytes</code> are rejected on both; TMEM allocation runs through
+the <code>UTCATOMSWS</code>/<code>UTCBAR</code> paths documented in this table.</li>
+<li><strong>Scheduling data not re-measured.</strong> The pipeline/scheduling sections are inherited
+from SM103a (B300 measurements). B200 timings may differ; treat stall/credit numbers as
+unvalidated for this target.</li>
 </ul></div>
 <h2 id="execution-model">2. Execution Model</h2>
 <p>Each SM executes warps of 32 threads in lockstep (SIMT). The warp scheduler selects
@@ -132,7 +136,7 @@ first-class strategy (<code>RegAllocCudaSmemSpillEnable</code>).</p>
   <td>Convergence and dependency barriers. Allocated by the scheduler.</td></tr>
 </table>
 <h2 id="instruction-encoding">4. Instruction Encoding</h2>
-<p>Every SM103a instruction is exactly 128 bits (16 bytes), stored little-endian as two 64-bit words:</p>
+<p>Every SM100a instruction is exactly 128 bits (16 bytes), stored little-endian as two 64-bit words:</p>
 
 <table style="font-family:Menlo,Consolas,monospace;font-size:0.88em;text-align:center;margin:14px 0">
 <tr style="background:#f0f0ee"><td colspan="2" style="border:2px solid #1a1a1a;padding:6px">128-bit instruction (16 bytes, little-endian in memory)</td></tr>
@@ -198,7 +202,7 @@ by NVIDIA&rsquo;s compiler or by a custom barrier insertion pass.</p>
 <tr><td class="m">[127:96]</td><td>upper_sched</td><td>Additional scheduling hints. Observed default classes: <code>0x000fc000</code>/<code>0x000fe200</code> (per-instruction class map in <code>_meta.ctrl_classes</code>).</td></tr>
 </table>
 <h2 id="pipeline-units">6. Pipeline Units</h2>
-<p>SM103a has 37 distinct pipeline classes identified from scheduling records. Each instruction is dispatched to exactly one pipeline unit.</p>
+<p>SM100a has 37 distinct pipeline classes identified from scheduling records. Each instruction is dispatched to exactly one pipeline unit.</p>
 <table><tr><th>ID</th><th>Pipeline</th><th>Instructions</th><th>Examples</th></tr>
 <tr><td>0</td><td class="m"><strong>UNKNOWN_0</strong></td><td>0</td><td></td></tr>
 <tr><td>1</td><td class="m"><strong>CTRL_FLOW</strong></td><td>2</td><td>BRXU</td></tr>
@@ -239,7 +243,7 @@ by NVIDIA&rsquo;s compiler or by a custom barrier insertion pass.</p>
 <tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>3</td><td>IMAD, IMNMX</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
-<p>SM103a uses a scoreboard-based dependency tracking system with 6 barriers (B0&ndash;B5).
+<p>SM100a uses a scoreboard-based dependency tracking system with 6 barriers (B0&ndash;B5).
 The barrier insertion algorithm works as follows:</p>
 
 <ol style="font-size:0.9em;margin-left:20px">
@@ -277,7 +281,7 @@ Cross-block dependencies handled by <code>SbXBlock</code>, <code>CrossBlockDepba
 </table>
 
 <h4>Address Formats</h4>
-<p>Global/shared/local loads use descriptor-based addressing on SM103a:</p>
+<p>Global/shared/local loads use descriptor-based addressing on SM100a:</p>
 <pre>
 LDG.E Rd, desc[UR4][Ra + imm]    # Global: uniform descriptor + GPR offset + immediate
 LDS   Rd, [Ra + imm]              # Shared: GPR base + immediate offset
@@ -287,7 +291,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <h2 id="instruction-reference">9. Instruction Reference</h2>
 <div class="note">
 <strong>Latency legend:</strong>
-<span class="lat-hw">N ★</span> = measured on B300 hardware (0 instructions) &nbsp;&middot;&nbsp;
+<span class="lat-hw">N ★</span> = measured on B200 hardware (0 instructions) &nbsp;&middot;&nbsp;
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
@@ -10227,7 +10231,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="LDTM" id="LDTM">
 <h3>LDTM</h3>
-<p class="desc">TMEM load (tcgen05.ld). Moves values from Tensor Memory into GPRs. Shape encodes the lane/column geometry (16x64b/16x128b/16x256b/32x32b/16x32bx2) with .x1..x128 repetition; optional .pack16 packs two 16-bit TMEM values per register. The .STAT reduction form (tcgen05.ld.red) is accepted on sm_103a only.</p>
+<p class="desc">TMEM load (tcgen05.ld). Moves values from Tensor Memory into GPRs. Shape encodes the lane/column geometry (16x64b/16x128b/16x256b/32x32b/16x32bx2) with .x1..x128 repetition; optional .pack16 packs two 16-bit TMEM values per register. The .STAT reduction form (tcgen05.ld.red) is sm_103a-only and is not part of the SM100a surface.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LDTM_R_II</td><td class="m">R_II</td><td class="m">x16, x2, x4, x32, x64, 16dp128bit, 16dp128bit,x32, 16dp128bit,x8, 16dp256bit, 16dp256bit,PACK16BIT,x8, 16dp256bit,x32, 16dp256bit,x8, 16dp32bit_t0_t15,x2, 16dp32bit_t0_t15,x32, 16dp32bit_t0_t15,x8, 16dp32bit_t16_t31,x2, 16dp32bit_t16_t31,x32, 16dp32bit_t16_t31,x8, 16dp64bit, 16dp64bit,x32, 16dp64bit,x8, x128, x8, 16dp32bit_t0_t15,x16, 16dp32bit_t16_t31,x16, 16dp256bit,x4, 16dp256bit,x2, 16dp256bit,x16</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">LDTM_R_R_II</td><td class="m">R_R_II</td><td class="m">F32,MAX,STAT,x32, 16dp32bit_t0_t15,F32,MAX,STAT,x128, 16dp32bit_t0_t15,F32,MAX,STAT,x16, 16dp32bit_t0_t15,F32,MAX,STAT,x2, 16dp32bit_t0_t15,F32,MAX,STAT,x32, 16dp32bit_t0_t15,F32,MAX,STAT,x4, 16dp32bit_t0_t15,F32,MAX,STAT,x64, 16dp32bit_t0_t15,F32,MAX,STAT,x8, 16dp32bit_t0_t15,F32,MIN,STAT,x16, 16dp32bit_t0_t15,F32,MIN,STAT,x2, 16dp32bit_t0_t15,F32,MIN,STAT,x32, 16dp32bit_t0_t15,F32,MIN,STAT,x4, 16dp32bit_t0_t15,F32,MIN,STAT,x8, 16dp32bit_t16_t31,F32,MAX,STAT,x128, 16dp32bit_t16_t31,F32,MAX,STAT,x16, 16dp32bit_t16_t31,F32,MAX,STAT,x2, 16dp32bit_t16_t31,F32,MAX,STAT,x32, 16dp32bit_t16_t31,F32,MAX,STAT,x4, 16dp32bit_t16_t31,F32,MAX,STAT,x64, 16dp32bit_t16_t31,F32,MAX,STAT,x8, 16dp32bit_t16_t31,F32,MIN,STAT,x16, 16dp32bit_t16_t31,F32,MIN,STAT,x2, 16dp32bit_t16_t31,F32,MIN,STAT,x32, 16dp32bit_t16_t31,F32,MIN,STAT,x4, 16dp32bit_t16_t31,F32,MIN,STAT,x8, F32,MAX,STAT,x128, F32,MAX,STAT,x16, F32,MAX,STAT,x2, F32,MAX,STAT,x4, F32,MAX,STAT,x64, F32,MAX,STAT,x8, F32,MIN,STAT,x128, F32,MIN,STAT,x16, F32,MIN,STAT,x2, F32,MIN,STAT,x32, F32,MIN,STAT,x4, F32,MIN,STAT,x64, F32,MIN,STAT,x8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -15732,7 +15736,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCIMMA" id="UTCIMMA">
 <h3>UTCIMMA</h3>
-<p class="desc">tcgen05 integer MMA (kind::i8). Note: ptxas 13.3 rejects this kind on sm_103a targets; it is accepted on sm_100a.</p>
+<p class="desc">tcgen05 integer MMA (kind::i8). Accepted on sm_100a; ptxas 13.3 rejects this kind on sm_103a targets.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCIMMA_II_II_II_II_II_UP</td><td class="m">II_II_II_II_II_UP</td><td class="m">&amp;mdash;</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCIMMA_II_II_II_II_II_UR_UP</td><td class="m">_</td><td class="m">2CTA</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -16571,8 +16575,23 @@ Collapsed by default — click to expand.
 <tr><td class="m">YIELD</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 </div>
+<h2 id="sm103a-derivation">10. Derivation and Validation (vs SM103a)</h2>
+
+<p>SM100a has no separate live measurement campaign in this revision (no B200 on the bench).
+The table is derived, and validated offline, as follows:</p>
+<table>
+<tr><th>Check</th><th>Sample</th><th>Result</th></tr>
+<tr><td>Encoding parity, sm_100a vs sm_103a</td><td>119 tcgen05 corpus probe pairs shared by both targets</td><td class="verdict">119/119 byte-identical 128-bit instruction words</td></tr>
+<tr><td>Decoder/encoder replay on an archived sm_100 corpus (round-trip, EXACT minus scheduling fields)</td><td>1,134 vendor/probe cubins, 20,024,512 instructions</td><td class="verdict">99.9219% match (20,008,866/20,024,512); mismatch 1,247, error 14,399, 0 fatal</td></tr>
+<tr><td>Replay delta vs the 2026-08-20 production table (same corpus)</td><td>same</td><td class="verdict">+4,054 matches (99.9018% &rarr; 99.9219%), mismatch &minus;76.5%; largest resolved classes: WARPSYNC.COLLECTIVE.ALL 2,739&rarr;0, UISETP.GT.U32.AND.EX 1,483&rarr;0, FCHK/MUFU.RCP64H 15/15&rarr;0</td></tr>
+<tr><td>Scheduling/pipeline measurements on B200</td><td>&mdash;</td><td>not performed; inherited from SM103a (B300), unvalidated for B200 timing</td></tr>
+</table>
+<p>The dominant standing error class is <code>LDG.E.U16.STRONG.SM_R_dARI</code> (13,680 of the
+14,399 errors), a vendor-library form pending adjudication in the shared pipeline; residual
+per-class deltas against the 2026-08-20 baseline are enumerated in the O2 validation report.</p>
+
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; revision from sm103a.json<br>
+SM100a Instruction Set Architecture Reference &mdash; revision from sm100a.json<br>
 399 instruction forms &middot; 1448 encoding variants &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
