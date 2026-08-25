@@ -1,5 +1,18 @@
 # blackwell-isa Changelog
 
+## tcgen05 corpus wave-3 (August 2026): TMA-uniform tables
+sm103a.json: full UTMALDG/UTMASTG/UTMAREDG/UTMACCTL coverage from the
+fleet corpus (1.25M-word union, vendor-cluster method; 12 refreshed +
+14 new groups + the previously unseen 5D/IM2COL no-desc key; the stale
+pre-corpus 2D stub retired to encode_only — it shadowed every real
+desc-carrying 2D word). Decode of the 59-probe CUTLASS sm100 corpus is
+now 8550/8550 vendor-exact on the UTMA family (was 6,705; unknowns
+734 -> 0, mis-decodes 1,111 -> 0); the 412-cubin regression gate stays
+green (unknowns 7,060 -> 6,064; roundtrip 412/412) and the encode-side
+audit (521 cubins) only improves (Match +2,525 total, no per-file
+regressions). sm100a.json re-derived from the refreshed canonical;
+offline replay unchanged at 99.9219% EXACT-minus-sched (20.0M instr).
+
 ## O2 consolidation (August 2026)
 Canonical reconciliation with the cubit fleet (one wave, per R3):
 + 80 silicon-verified fleet instruction forms (cubit errata series evidence),
