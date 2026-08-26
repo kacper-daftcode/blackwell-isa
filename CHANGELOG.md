@@ -1,5 +1,24 @@
 # blackwell-isa Changelog
 
+## Fleet silicon wave (August 26, 2026): ATOMS/ARI coverage + decoder-junk cleanup
+Fold of 29 silicon-verified fleet bug fixes into the canonical tables
+(each carried a pinned corpus/silicon verdict upstream in the cubit fix
+pipeline; compose report in the internal O2 registry).
+sm120.json: +13 keys (ATOMS/ATOMG uniform-register ARI family, UTCATOMSWS
+UR forms, UTMAREDG_AURI_AURI), -24 keys (dead LDC/LDCU cAI/cARI/cAURI rows
+folded into their canonical carriers, REDG dARI P-pred junk, the duplicate
+UPLOP3 lattice row); 61 keys content-refreshed.
+sm103a.json: +2 keys (ATOMS_R_ARURI / ATOMS_R_AURI), -2 keys (SYNCS PHASECHK
+junk rows), 48 keys content-refreshed.
+sm100a.json: regenerated derivative of the new sm103a revision; offline
+b4-corpus replay on the archived sm_100 population: 20,009,403/20,024,512
+(99.9245%, gate 99.90 PASS; previous revision 99.9219%). Companion replays:
+sm_103 population 99.8639% (was 99.8385%), sm_120 population 99.8573%
+(unchanged). WARPSYNC.COLLECTIVE encode regression on the sm100a derivative
+found by this wave and fixed on the tooling side (family-wide fixup
+exemption; cubit BUG-182).
+sm121a.json: unchanged.
+
 ## tcgen05 corpus wave-3 (August 2026): TMA-uniform tables
 sm103a.json: full UTMALDG/UTMASTG/UTMAREDG/UTMACCTL coverage from the
 fleet corpus (1.25M-word union, vendor-cluster method; 12 refreshed +

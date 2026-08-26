@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM100a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B200) &mdash; Unofficial Reference<br>163 opcodes &middot; 399 instruction forms &middot; 1448 encoding variants &middot; 399 with scheduling data<br><span style="font-size:0.88em">Sources: canonical SM103a encoding layer (byte-identical on all 119 shared tcgen05 probe pairs), offline decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus; no B200 re-validation &mdash; scheduling and pipeline sections are inherited from SM103a and unvalidated for B200 timing</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B200) &mdash; Unofficial Reference<br>163 opcodes &middot; 400 instruction forms &middot; 1469 encoding variants &middot; 400 with scheduling data<br><span style="font-size:0.88em">Sources: canonical SM103a encoding layer (byte-identical on all 119 shared tcgen05 probe pairs), offline decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus; no B200 re-validation &mdash; scheduling and pipeline sections are inherited from SM103a and unvalidated for B200 timing</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -295,7 +295,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 0 of 399 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 0 of 400 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -484,7 +484,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x004040000000007f0000007f7e7f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
-<tr><td>[62:39]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -497,7 +497,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[10:7]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
@@ -508,13 +508,13 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[10:7]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
 <details><summary>ATOM_P_R_ARI_R_R.CAS,E,STRONG,SYS &mdash; 6 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x1f4100000000000000700b</code></div>
-<div class="ab">var_mask: <code>0xffffffffffffff0780</code></div>
+<div class="ab">and_base: <code>0x00000000001f4100000000000000700b</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffffff0780</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
@@ -576,7 +576,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[62:40]</td><td>23</td><td>t3</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOM_P_R_dARI_R.64,ADD,E,GPU,STRONG &mdash; 6 fields &middot; 54 samples</summary><div class="var">
@@ -587,7 +587,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[62:40]</td><td>23</td><td>t3</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOM_P_R_dARI_R.AND,E,SM,STRONG &mdash; 6 fields &middot; 29 samples</summary><div class="var">
@@ -660,7 +660,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[10:7]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
@@ -671,18 +671,18 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[59:36]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[10:7]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_ARI_R_R.CAS,E,STRONG,SYS &mdash; 6 fields &middot; 10 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x1f41000000000000007029</code></div>
-<div class="ab">var_mask: <code>0xffffffffffffff0780</code></div>
+<div class="ab">and_base: <code>0x00000000001f41000000000000007029</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffffff0780</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[10:7]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
@@ -715,7 +715,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t3</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[62:40]</td><td>23</td><td>t3</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -766,19 +766,19 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.E,GPU,INC,STRONG &mdash; 6 fields &middot; 6 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x99ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0xff7ffffffffffff000</code></div>
+<div class="ab">and_base: <code>0x00000000099ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff7ffffffffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[62:40]</td><td>23</td><td>t3</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.64,ADD,E,GPU,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x81ef50080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x00000000081ef50080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -789,8 +789,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.ADD,E,F64,GPU,RN,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xc1eff0080000000000009a3</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x000000000c1eff0080000000000009a3</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -801,8 +801,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.AND,E,GPU,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xa9ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x000000000a9ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -813,8 +813,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.DEC,E,GPU,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xa1ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x000000000a1ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -825,8 +825,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.E,GPU,MAX,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x91ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x00000000091ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -837,8 +837,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.E,GPU,OR,STRONG &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xb1ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x000000000b1ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -849,8 +849,8 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMG_P_R_dARI_R.E,GPU,STRONG,XOR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xb9ef10080000000000009a8</code></div>
-<div class="ab">var_mask: <code>0x3ffce000000003e7ffffcfffeff7000</code></div>
+<div class="ab">and_base: <code>0x000000000b9ef10080000000000009a8</code></div>
+<div class="ab">var_mask: <code>0x03ffce000000003e7ffffcfffeff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[80:77]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>sub_ur0</code></td></tr>
@@ -868,7 +868,9 @@ Collapsed by default — click to expand.
 <tr><td class="m">ATOMS_P_ARI_R_R</td><td class="m">P_ARI_R_R</td><td class="m">CAST,SPIN, 64,CAST,SPIN</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">ATOMS_R_ARI</td><td class="m">R_ARI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">ATOMS_R_ARI_R</td><td class="m">R_ARI_R</td><td class="m">ADD, AND, OR, XOR, MAX</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">ATOMS_R_ARI_R_R</td><td class="m">R_ARI_R_R</td><td class="m">CAS</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">ATOMS_R_ARI_R_R</td><td class="m">R_ARI_R_R</td><td class="m">CAS, 64,CAS</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">ATOMS_R_ARURI</td><td class="m">R_ARURI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">ATOMS_R_AURI</td><td class="m">R_AURI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">ATOMS_R_AURI_R</td><td class="m">R_AURI_R</td><td class="m">MAX,S32, MIN,S32, OR, AND, XOR, ADD, MAX</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>ATOMS_P_ARI_R_R.CAST,SPIN &mdash; 5 fields &middot; 1,208 samples</summary><div class="var">
@@ -879,7 +881,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_P_ARI_R_R.64,CAST,SPIN &mdash; 5 fields &middot; 182 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e240001800402000000000000758d</code></div>
@@ -889,14 +891,14 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_ARI.32,INC,POPC &mdash; 3 fields &middot; 118 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000d8000ff0000000000ff7f8c</code></div>
 <div class="ab">var_mask: <code>0x009e0e0000000000007ffc007f000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[14:7]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_ARI_R.ADD &mdash; 4 fields &middot; 100 samples</summary><div class="var">
@@ -946,8 +948,8 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_ARI_R_R.CAS &mdash; 6 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x38d</code></div>
-<div class="ab">var_mask: <code>0xfffffffffffffff000</code></div>
+<div class="ab">and_base: <code>0x0000000000000000000000000000038d</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
@@ -956,11 +958,39 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>ATOMS_R_ARI_R_R.64,CAS &mdash; 6 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000000400000000000000038d</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI.32,INC,POPC &mdash; 4 fields &middot; 127 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000d8000000000000000ff000c</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[14:7]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_AURI.32,INC,POPC &mdash; 3 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000d80000000000000ffff000c</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[14:7]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
 <details><summary>ATOMS_R_AURI_R.MAX,S32 &mdash; 5 fields &middot; 86 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000900020000000000ffff098c</code></div>
 <div class="ab">var_mask: <code>0x000606000000000f00790c7f00007000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -970,7 +1000,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0001e0000880020000000000ffff098c</code></div>
 <div class="ab">var_mask: <code>0x00060c000000000f0079083f00007000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -980,7 +1010,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0001e0000b00000000000000ffff098c</code></div>
 <div class="ab">var_mask: <code>0x00060e000000007f00001c0f00007000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -990,7 +1020,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0001e0000a80000000001000ffff098c</code></div>
 <div class="ab">var_mask: <code>0x000e0a000000000f00000c0300000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -999,7 +1029,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0005e4000b80000400001000ffff798c</code></div>
 <div class="ab">var_mask: <code>0x00020000000000330000000e00000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -1008,17 +1038,17 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x000000000800000000000000ff00098c</code></div>
 <div class="ab">var_mask: <code>0x022eaa00000001ffffffffff00fff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_AURI_R.MAX &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x900000000000000ff00098c</code></div>
-<div class="ab">var_mask: <code>0x22eaa00000001ffffffffff00fff000</code></div>
+<div class="ab">and_base: <code>0x000000000900000000000000ff00098c</code></div>
+<div class="ab">var_mask: <code>0x022eaa00000001ffffffffff00fff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -8203,7 +8233,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x00002000001009000000000000000980</code></div>
 <div class="ab">var_mask: <code>0x01afce000000000000000004fefff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[55:32]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -8212,7 +8242,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0000200000100b000000000000000980</code></div>
 <div class="ab">var_mask: <code>0x000fce000000000000000008fefef000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[55:32]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -8221,7 +8251,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0000200000100d000000000000000980</code></div>
 <div class="ab">var_mask: <code>0x000fce000000000000000000fefcf000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[55:32]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -8465,7 +8495,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8475,7 +8505,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8485,7 +8515,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8495,7 +8525,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8505,7 +8535,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8515,7 +8545,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8525,7 +8555,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8535,7 +8565,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LD_R_dARI.64,E,GPU,STRONG &mdash; 5 fields &middot; 146 samples</summary><div class="var">
@@ -8544,7 +8574,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8554,7 +8584,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LD_R_dARI.E,STRONG,SYS &mdash; 3 fields &middot; 24 samples</summary><div class="var">
@@ -8562,7 +8592,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x007fce0000000000000000001e1f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
@@ -8570,46 +8600,50 @@ Collapsed by default — click to expand.
 <h3>LDC</h3>
 <p class="desc">Load from constant memory. <code>c[bank][offset]</code> addressing. Bank 0 offset 0x160+ holds kernel launch arguments. ~5 cycle latency when data is in the constant cache (broadcast).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">LDC_R_cAI</td><td class="m">R_cAI</td><td class="m">64, U8, U16, S8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">LDC_R_cARI</td><td class="m">R_cARI</td><td class="m">64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDC_R_cAI</td><td class="m">R_cAI</td><td class="m">64, U8, U16, S8, S16</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDC_R_cARI</td><td class="m">R_cARI</td><td class="m">64, S16, U16, S8, U8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>LDC_R_cAI.64 &mdash; 4 fields &middot; 18,604 samples</summary><div class="var">
+<details><summary>LDC_R_cAI.64 &mdash; 3 fields &middot; 18,604 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e000000000a0000000000ff000b82</code></div>
 <div class="ab">var_mask: <code>0x03f1fe00000002000103fe0000fff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:54]</td><td>19</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDC_R_cAI &mdash; 4 fields &middot; 14,563 samples</summary><div class="var">
+<details><summary>LDC_R_cAI &mdash; 3 fields &middot; 14,563 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e00000000080000000000ff000b82</code></div>
 <div class="ab">var_mask: <code>0x03f1fe00000000000003ff0000fff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73:50]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDC_R_cAI.U8 &mdash; 3 fields &middot; 888 samples</summary><div class="var">
+<details><summary>LDC_R_cAI.U8 &mdash; 2 fields &middot; 888 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e20000000000000000000ff007b82</code></div>
 <div class="ab">var_mask: <code>0x03f1de00000000000003ffc000ff0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73:50]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>LDC_R_cAI.U16 &mdash; 4 fields &middot; 279 samples</summary><div class="var">
+<details><summary>LDC_R_cAI.U16 &mdash; 3 fields &middot; 279 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e20000000040000002000ff000b82</code></div>
 <div class="ab">var_mask: <code>0x03f1de00000000000001df80003ff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:49]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[48:38]</td><td>11</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDC_R_cAI.S8 &mdash; 4 fields &middot; 11 samples</summary><div class="var">
+<details><summary>LDC_R_cAI.S8 &mdash; 3 fields &middot; 11 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e20000000020000000880ff000b82</code></div>
+<div class="ab">var_mask: <code>0x00015200000000000001f700003f7000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDC_R_cAI.S16 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0xe20000000060000000880ff000b82</code></div>
 <div class="ab">var_mask: <code>0x00015200000000000001f700003f7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[72:49]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
@@ -8617,12 +8651,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDC_R_cARI.64 &mdash; 4 fields &middot; 46 samples</summary><div class="var">
+<details><summary>LDC_R_cARI.64 &mdash; 3 fields &middot; 46 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000200000000a000000000000007b82</code></div>
 <div class="ab">var_mask: <code>0x002fce000000000001c00000ff3e0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:54]</td><td>19</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[53:32]</td><td>22</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
@@ -8632,7 +8665,40 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[55:54]</td><td>2</td><td>t2</td><td><code>sub_imm0</code></td></tr>
 <tr><td>[55:38]</td><td>18</td><td>t2</td><td><code>cm16_off</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>LDC_R_cARI.S16 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x2000000006000000000000007b82</code></div>
+<div class="ab">var_mask: <code>0x002fce000000000001c00000ff3e0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[72:54]</td><td>19</td><td>t2</td><td><code>sub_imm0</code></td></tr>
+<tr><td>[53:32]</td><td>22</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>LDC_R_cARI.U16 &mdash; 3 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00002000000004000000000000007b82</code></div>
+<div class="ab">var_mask: <code>0x002fce000000000001c00000ff3e0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>LDC_R_cARI.S8 &mdash; 3 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00002000000002000000000000007b82</code></div>
+<div class="ab">var_mask: <code>0x002fce000000000001c00000ff3e0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>LDC_R_cARI.U8 &mdash; 3 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00002000000000000000000000007b82</code></div>
+<div class="ab">var_mask: <code>0x002fce000000000001c00000ff3e0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[58:38]</td><td>21</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
@@ -8640,7 +8706,7 @@ Collapsed by default — click to expand.
 <h3>LDCU</h3>
 <p class="desc">Uniform constant memory load — result written to a uniform register UR.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">LDCU_UR_cAI</td><td class="m">UR_cAI</td><td class="m">64, 128, U8, U16, S8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDCU_UR_cAI</td><td class="m">UR_cAI</td><td class="m">64, 128, U8, U16, S8, S16</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDCU_UR_cAI &mdash; 5 fields &middot; 8,108 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e00000800080000000000000007ac</code></div>
@@ -8648,46 +8714,49 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[72:49]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
 <tr><td>[48:37]</td><td>12</td><td>t2</td><td><code>cm16_off</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDCU_UR_cAI.64 &mdash; 4 fields &middot; 5,521 samples</summary><div class="var">
+<details><summary>LDCU_UR_cAI.64 &mdash; 3 fields &middot; 5,521 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e000008000a0000000000ff0007ac</code></div>
 <div class="ab">var_mask: <code>0x01f1fe00000000000101ff00007ef000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:54]</td><td>19</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[58:37]</td><td>22</td><td>t2</td><td><code>cm17_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDCU_UR_cAI.128 &mdash; 4 fields &middot; 814 samples</summary><div class="var">
+<details><summary>LDCU_UR_cAI.128 &mdash; 3 fields &middot; 814 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e000008000c0000000000ff0007ac</code></div>
 <div class="ab">var_mask: <code>0x0171fe00000000000001fe00003cf000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:49]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[48:37]</td><td>12</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:37]</td><td>22</td><td>t2</td><td><code>cm17_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>LDCU_UR_cAI.U8 &mdash; 3 fields &middot; 1,772 samples</summary><div class="var">
+<details><summary>LDCU_UR_cAI.U8 &mdash; 2 fields &middot; 1,772 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e00000800000000000000ff0077ac</code></div>
 <div class="ab">var_mask: <code>0x0081fe00000000000001ffe0003f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:49]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:37]</td><td>22</td><td>t2</td><td><code>cm17_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 </table></div></details>
-<details><summary>LDCU_UR_cAI.U16 &mdash; 3 fields &middot; 122 samples</summary><div class="var">
+<details><summary>LDCU_UR_cAI.U16 &mdash; 2 fields &middot; 122 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e00000800040000000000ff0077ac</code></div>
 <div class="ab">var_mask: <code>0x0001fe00000000000000ffc0003f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[71:48]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
-<tr><td>[47:37]</td><td>11</td><td>t2</td><td><code>cm16_off</code></td></tr>
+<tr><td>[58:37]</td><td>22</td><td>t2</td><td><code>cm17_off</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 </table></div></details>
-<details><summary>LDCU_UR_cAI.S8 &mdash; 3 fields &middot; 73 samples</summary><div class="var">
+<details><summary>LDCU_UR_cAI.S8 &mdash; 2 fields &middot; 73 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000e22000800020000000000ff0077ac</code></div>
+<div class="ab">var_mask: <code>0x0001c400000000000000ffe0001f0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[58:37]</td><td>22</td><td>t2</td><td><code>cm17_off</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+</table></div></details>
+<details><summary>LDCU_UR_cAI.S16 &mdash; 3 fields</summary><div class="var">
+<div class="ab">and_base: <code>0xe22000800060000000000ff0077ac</code></div>
 <div class="ab">var_mask: <code>0x0001c400000000000000ffe0001f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:48]</td><td>24</td><td>t2</td><td><code>sub_imm0</code></td></tr>
@@ -8700,7 +8769,7 @@ Collapsed by default — click to expand.
 <p class="desc">Load from global memory via descriptor. Long latency (~200+ cycles), dispatched to LSU pipe, requires write barrier for result.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LDG_R_ARI</td><td class="m">R_ARI</td><td class="m">64,E, E,LTC128B, 64,E,LTC128B, E, 128,E, 128,E,LTC128B, E,GPU,STRONG</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">LDG_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E,LTC128B, 64,E,LTC128B, E, 128,E,LTC128B, 64,E</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDG_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E,LTC128B, 64,E,LTC128B, E, 128,E,LTC128B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">LDG_R_R_dARI</td><td class="m">R_R_dARI</td><td class="m">256,E,ENL2, 256,CONSTANT,E,ENL2, 256,E,EL,ELL2,GPU,STRONG, 256,E,EL,ENL2,GPU,STRONG, 256,E,ENL2,GPU,STRONG, 256,E,ELL2,GPU,NA,STRONG, 256,E,ENL2,GPU,NA,STRONG, 256,E,EFL2,GPU,NA,STRONG, 256,E,EFL2,GPU,HINT,NA,STRONG, 256,E,EL,ENL2, 256,E,EF,ENL2, 256,E,ENL2,EU</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">LDG_R_R_dARI_II</td><td class="m">R_R_dARI_II</td><td class="m">256,E,EL,ENL2, 256,E,EF,ENL2, 256,E,ENL2,LTC256B, 256,CONSTANT,E,ENL2,LTC256B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">LDG_R_dARI</td><td class="m">R_dARI</td><td class="m">E, 64,E, 128,E, CONSTANT,E, 64,CONSTANT,E, E,U16, 128,CONSTANT,E, CONSTANT,E,U16, E,STRONG,SYS, 64,E,STRONG,SYS, 128,E,GPU,STRONG, CONSTANT,E,S8, E,GPU,STRONG, CONSTANT,E,U8, 64,E,EF, E,EF, E,U8, E,EF,U16, 128,E,EF, 64,E,SM,STRONG, E,EF,S8, 128,E,SM,STRONG, E,SM,STRONG, E,LTC128B, E,S8, 64,E,GPU,STRONG, 128,E,STRONG,SYS, E,SM,STRONG,U16, 64,E,LTC128B, E,LTC128B,U16, E,S8,SM,STRONG, E,STRONG,SYS,U16, E,GPU,STRONG,U16, E,LU, E,EL, E,NA, E,EU, 128,E,LU, 128,E,EL, 64,E,EL, E,LTC256B, E,LTC64B, CONSTANT,E,LTC128B, 64,CONSTANT,E,LTC64B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -8710,7 +8779,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x00cfce000000000000fc0800fefef000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8719,7 +8788,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x0001c0000000000000018000fe1f0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_ARI.64,E,LTC128B &mdash; 4 fields &middot; 106 samples</summary><div class="var">
@@ -8727,7 +8796,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fce000000000000030000fede7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8735,7 +8804,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x00002000001e09000000000000000381</code></div>
 <div class="ab">var_mask: <code>0x01afce000000000000000000feff7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[55:32]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -8745,7 +8814,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000bce0000000000073800007e7c0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_ARI.128,E,LTC128B &mdash; 4 fields &middot; 86 samples</summary><div class="var">
@@ -8753,7 +8822,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fce000000000000030000fefc7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8761,7 +8830,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x000e2800001ee9000000000000000381</code></div>
 <div class="ab">var_mask: <code>0x0001c0000000000000000000fec7f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[55:32]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -8772,7 +8841,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8782,7 +8851,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8802,17 +8871,9 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>LDG_R_ARURI.64,E &mdash; 3 fields &middot; 8 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000f2600081e0b0000000000ff007981</code></div>
-<div class="ab">var_mask: <code>0x00000000000000000000000c00be0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[40:32]</td><td>9</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI.256,E,ENL2 &mdash; 5 fields &middot; 8 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000200008121900fe0000140000097e</code></div>
@@ -8821,7 +8882,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI.256,CONSTANT,E,ENL2 &mdash; 6 fields &middot; 5 samples</summary><div class="var">
@@ -8831,7 +8892,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8842,7 +8903,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8853,7 +8914,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8864,7 +8925,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8875,7 +8936,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8886,7 +8947,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8897,7 +8958,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8908,7 +8969,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -8919,7 +8980,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI.256,E,EF,ENL2 &mdash; 5 fields &middot; 1 samples</summary><div class="var">
@@ -8929,7 +8990,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI.256,E,ENL2,EU &mdash; 5 fields &middot; 1 samples</summary><div class="var">
@@ -8939,7 +9000,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI_II.256,E,EL,ENL2 &mdash; 7 fields &middot; 2 samples</summary><div class="var">
@@ -8951,7 +9012,7 @@ Collapsed by default — click to expand.
 <tr><td>[62:57]</td><td>6</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI_II.256,E,EF,ENL2 &mdash; 7 fields &middot; 2 samples</summary><div class="var">
@@ -8963,7 +9024,7 @@ Collapsed by default — click to expand.
 <tr><td>[62:57]</td><td>6</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI_II.256,E,ENL2,LTC256B &mdash; 7 fields &middot; 1 samples</summary><div class="var">
@@ -8975,7 +9036,7 @@ Collapsed by default — click to expand.
 <tr><td>[62:57]</td><td>6</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_R_dARI_II.256,CONSTANT,E,ENL2,LTC256B &mdash; 7 fields &middot; 3 samples</summary><div class="var">
@@ -8987,7 +9048,7 @@ Collapsed by default — click to expand.
 <tr><td>[62:57]</td><td>6</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[56:37]</td><td>20</td><td>t3</td><td><code>sub_imm2_shr2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t3</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_dARI.E &mdash; 5 fields &middot; 20,242 samples</summary><div class="var">
@@ -8996,7 +9057,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9006,7 +9067,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9016,7 +9077,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9026,7 +9087,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9036,7 +9097,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9046,7 +9107,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9056,7 +9117,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9066,7 +9127,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9076,7 +9137,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9086,7 +9147,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9096,7 +9157,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9106,7 +9167,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9116,7 +9177,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9126,7 +9187,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9136,7 +9197,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9146,7 +9207,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9156,7 +9217,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9166,7 +9227,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9176,7 +9237,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9186,7 +9247,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9196,7 +9257,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9206,7 +9267,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9216,7 +9277,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9226,7 +9287,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9236,7 +9297,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9246,7 +9307,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9256,7 +9317,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_dARI.E,SM,STRONG,U16 &mdash; 4 fields &middot; 256 samples</summary><div class="var">
@@ -9264,7 +9325,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fce0000000000000000007e7f7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9274,7 +9335,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9284,7 +9345,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9294,7 +9355,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9304,7 +9365,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[59:36]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[35:32]</td><td>4</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_dARI.E,GPU,STRONG,U16 &mdash; 4 fields &middot; 12 samples</summary><div class="var">
@@ -9313,7 +9374,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[59:36]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[35:32]</td><td>4</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LDG_R_dARI.E,LU &mdash; 5 fields &middot; 1 samples</summary><div class="var">
@@ -9322,7 +9383,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9332,7 +9393,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9342,7 +9403,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9352,7 +9413,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9362,7 +9423,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9372,7 +9433,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9382,7 +9443,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9392,7 +9453,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9402,7 +9463,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9412,7 +9473,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9422,7 +9483,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9434,8 +9495,8 @@ Collapsed by default — click to expand.
 <tr><td class="m">LDG.E_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDG.E_R_ARURI.E &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x181e09000000000000000981</code></div>
-<div class="ab">var_mask: <code>0x0000000010000000ffffff3ffffff000</code></div>
+<div class="ab">and_base: <code>0x81e09000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x10000000ffffff3ffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>imm</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>ureg</code></td></tr>
@@ -9451,8 +9512,8 @@ Collapsed by default — click to expand.
 <tr><td class="m">LDG.E.128_R_ARURI</td><td class="m">R_ARURI</td><td class="m">128,E</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDG.E.128_R_ARURI.128,E &mdash; 5 fields &middot; 20 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x181e0d000000000000000981</code></div>
-<div class="ab">var_mask: <code>0xffffff3ffffff000</code></div>
+<div class="ab">and_base: <code>0x81e0d000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x10000000ffffff3ffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>imm</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>ureg</code></td></tr>
@@ -9468,8 +9529,8 @@ Collapsed by default — click to expand.
 <tr><td class="m">LDG.E.64_R_ARURI</td><td class="m">R_ARURI</td><td class="m">64,E</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDG.E.64_R_ARURI.64,E &mdash; 5 fields &middot; 20 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x181e0b000000000000000981</code></div>
-<div class="ab">var_mask: <code>0xffffff3ffffff000</code></div>
+<div class="ab">and_base: <code>0x81e0b000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x10000000ffffff3ffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>imm</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>ureg</code></td></tr>
@@ -9485,8 +9546,8 @@ Collapsed by default — click to expand.
 <tr><td class="m">LDG.E.EL.STRONG.GPU_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E,EL,GPU,STRONG</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDG.E.EL.STRONG.GPU_R_ARURI.E,EL,GPU,STRONG &mdash; 5 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x182ee9000000000000000981</code></div>
-<div class="ab">var_mask: <code>0xffffff3ffffff000</code></div>
+<div class="ab">and_base: <code>0x82ee9000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x10000000ffffff3ffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>imm</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>ureg</code></td></tr>
@@ -9519,8 +9580,8 @@ Collapsed by default — click to expand.
 <tr><td class="m">LDG.E.NA.STRONG.SM_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E,NA,SM,STRONG</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDG.E.NA.STRONG.SM_R_ARURI.E,NA,SM,STRONG &mdash; 5 fields &middot; 20 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x185ea9000000000000000981</code></div>
-<div class="ab">var_mask: <code>0xffffff3ffffff000</code></div>
+<div class="ab">and_base: <code>0x85ea9000000000000000981</code></div>
+<div class="ab">var_mask: <code>0x10000000ffffff3ffffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>imm</code></td></tr>
 <tr><td>[37:32]</td><td>6</td><td>t2</td><td><code>ureg</code></td></tr>
@@ -9924,7 +9985,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03fffe0000000000fffffc003ffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9933,7 +9994,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x01fffe0000000000fffff8007ffef000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -9958,7 +10019,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x01ffca0000000000fffff0003f3c7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10010,7 +10071,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03fffe0000000000fffffc00fffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10020,7 +10081,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[79:78]</td><td>2</td><td>t2</td><td><code>addr_scale</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10030,7 +10091,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[79:78]</td><td>2</td><td>t2</td><td><code>addr_scale</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10039,7 +10100,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03ffde0000000000fffffe007f7ff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10048,7 +10109,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03ffce000000000000ffff007f7ff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10056,8 +10117,8 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x00002000000002000000000000000984</code></div>
 <div class="ab">var_mask: <code>0x01ffce0000000000000000007f7ff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[54:31]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[30:24]</td><td>7</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10106,7 +10167,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[36:32]</td><td>5</td><td>t2</td><td><code>sub_ur1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10176,7 +10237,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fce000000000000f80000bffc0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10185,7 +10246,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fee0000000000000000007f5e0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -10194,7 +10255,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x000fce000000000000f80000bffc0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -11612,7 +11673,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>QSPC_P_R_ARI.D,E &mdash; 4 fields &middot; 141 samples</summary><div class="var">
@@ -11621,7 +11682,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[84:81]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t3</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t3</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
@@ -11726,17 +11787,17 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0001e0000010e300000000000000798e</code></div>
 <div class="ab">var_mask: <code>0x0006060000000000000000079e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[58:35]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.64,ADD,E,GPU,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000fe2000c12e506000008080600798e</code></div>
+<div class="ab">and_base: <code>0x000fe2000c12e500000000000000098e</code></div>
 <div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -11747,7 +11808,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[58:35]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.64,E,GPU,MIN,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
@@ -11757,7 +11818,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[58:35]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.ADD,E,F32,FTZ,GPU,RN,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
@@ -11777,14 +11838,15 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t2</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>REDG_P_dARI_R.ADD,E,GPU,S32,STRONG &mdash; 4 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0007e2000c12e33e000000860200098e</code></div>
+<details><summary>REDG_P_dARI_R.ADD,E,GPU,S32,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x0007e2000c12e300000000000000098e</code></div>
 <div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -11800,11 +11862,11 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.AND,E,GPU,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xde2000e92e100000000010000098e</code></div>
+<div class="ab">and_base: <code>0x000de2000e92e100000000010000098e</code></div>
 <div class="ab">var_mask: <code>0x006200000000000e0000001e1e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -11824,13 +11886,13 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03fe06000000000e0000003f1e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.E,GPU,MIN,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xc92e100000000000000798e</code></div>
+<div class="ab">and_base: <code>0x000000000c92e100000000000000798e</code></div>
 <div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
@@ -11844,13 +11906,13 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x006200000000000e0000001e1e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_P_dARI_R.E,GPU,MAX,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xd12e100000000000000098e</code></div>
+<div class="ab">and_base: <code>0x000000000d12e100000000000000098e</code></div>
 <div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
@@ -11859,13 +11921,13 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>REDG_dARI_R.64,ADD,E,GPU,STRONG &mdash; 4 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000fe2000c12e506000008080600798e</code></div>
+<details><summary>REDG_dARI_R.64,ADD,E,GPU,STRONG &mdash; 4 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000fe2000c12e500000000000000798e</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000000000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.64,E,GPU,MAX,STRONG &mdash; 4 fields &middot; 4 samples</summary><div class="var">
@@ -11875,7 +11937,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[58:35]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.64,E,GPU,MIN,STRONG &mdash; 4 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x002fe8000c92e502000000000000798e</code></div>
@@ -11884,7 +11946,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[58:35]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.ADD,E,F32,FTZ,GPU,RN,STRONG &mdash; 4 fields &middot; 1,742 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000c12f30000000000000079a6</code></div>
@@ -11902,13 +11964,14 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
-<details><summary>REDG_dARI_R.ADD,E,GPU,S32,STRONG &mdash; 3 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0007e2000c12e33e000000860200098e</code></div>
+<details><summary>REDG_dARI_R.ADD,E,GPU,S32,STRONG &mdash; 4 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x0007e2000c12e300000000000000098e</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000000000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
@@ -11923,11 +11986,11 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.AND,E,GPU,STRONG &mdash; 4 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xde2000e92e100000000010000098e</code></div>
+<div class="ab">and_base: <code>0x000de2000e92e100000000010000098e</code></div>
 <div class="ab">var_mask: <code>0x006200000000000e0000001e1e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
@@ -11946,14 +12009,14 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x03fe06000000000e0000003f1e007000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.E,GPU,MIN,STRONG &mdash; 4 fields &middot; 7 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xc92e100000000000000798e</code></div>
-<div class="ab">var_mask: <code>0xffffffffffff000000</code></div>
+<div class="ab">and_base: <code>0x000000000c92e100000000000000798e</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffff000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
@@ -11965,13 +12028,13 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x006200000000000e0000001e1e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[60:37]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>REDG_dARI_R.E,GPU,MAX,STRONG &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xd12e100000000000000098e</code></div>
-<div class="ab">var_mask: <code>0xffffffffffff00f000</code></div>
+<div class="ab">and_base: <code>0x000000000d12e100000000000000098e</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
@@ -12594,7 +12657,7 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x020e0e00000000fe00000300fe00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[55:32]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -12603,15 +12666,15 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x020e0e000000007f000000007e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[54:31]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[30:24]</td><td>7</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>ST_ARI_R.128,E &mdash; 3 fields &middot; 128 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e00000100d000000000080007385</code></div>
 <div class="ab">var_mask: <code>0x020e0a000000007c000000007e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[55:32]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>ST_ARURI_R.64,E &mdash; 5 fields &middot; 52 samples</summary><div class="var">
@@ -12621,7 +12684,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ST_dARI_R.64,E &mdash; 5 fields &middot; 6,358 samples</summary><div class="var">
@@ -12690,7 +12753,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ST_dARI_R.64,E,GPU,STRONG &mdash; 5 fields &middot; 122 samples</summary><div class="var">
@@ -12700,7 +12763,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ST_dARI_R.E,GPU,STRONG &mdash; 4 fields &middot; 44 samples</summary><div class="var">
@@ -12742,7 +12805,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_ARI_R.E &mdash; 4 fields &middot; 128 samples</summary><div class="var">
@@ -12760,13 +12823,13 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>STG_ARI_R.E,GPU,STRONG &mdash; 4 fields &middot; 9 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000010e9000000000100000386</code></div>
 <div class="ab">var_mask: <code>0x000a06000000000000000006fe00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[58:35]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -12788,7 +12851,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_ARURI_R.64,E &mdash; 5 fields &middot; 8 samples</summary><div class="var">
@@ -12798,7 +12861,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.E &mdash; 5 fields &middot; 13,748 samples</summary><div class="var">
@@ -12888,7 +12951,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.64,E,GPU,STRONG &mdash; 4 fields &middot; 256 samples</summary><div class="var">
@@ -12898,7 +12961,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.E,EF &mdash; 4 fields &middot; 256 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000c0019000000000000007986</code></div>
@@ -12926,7 +12989,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.E,EF,U16 &mdash; 4 fields &middot; 124 samples</summary><div class="var">
@@ -12945,7 +13008,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.128,E,STRONG,SYS &mdash; 5 fields &middot; 56 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000c115d000000000000000986</code></div>
@@ -12954,7 +13017,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[60:37]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.128,E,EF &mdash; 4 fields &middot; 39 samples</summary><div class="var">
@@ -12964,7 +13027,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.128,E,GPU,STRONG &mdash; 4 fields &middot; 35 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e0000c10fd000000000000007986</code></div>
@@ -12973,7 +13036,7 @@ Collapsed by default — click to expand.
 <tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 </table></div></details>
 <details><summary>STG_dARI_R.E,STRONG,SYS,U16 &mdash; 5 fields &middot; 14 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001e2000c1155000000000000002986</code></div>
@@ -12992,7 +13055,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13003,7 +13066,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13014,7 +13077,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13025,7 +13088,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13036,7 +13099,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13047,7 +13110,7 @@ Collapsed by default — click to expand.
 <tr><td>[72:64]</td><td>9</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[55:40]</td><td>16</td><td>t1</td><td><code>sub_imm2_shr5u</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r1</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -13397,7 +13460,7 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[32:24]</td><td>9</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
@@ -13572,35 +13635,13 @@ Collapsed by default — click to expand.
 <p class="desc">Shared-memory mbarrier operations (SM120). Implements PTX <code>mbarrier.*</code> for intra-block synchronization. Operations include ARRIVE (signal arrival), PHASECHK (check phase), EXCH (exchange), WAIT. Used to coordinate cp.async/TMA producer&ndash;consumer pipelines.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">SYNCS</td><td class="m"></td><td class="m">CCTL,IVALL</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">SYNCS_P_ARI_R</td><td class="m">P_ARI_R</td><td class="m">PHASECHK,TRANS64,TRYWAIT, PHASECHK,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">SYNCS_P_ARURI_R</td><td class="m">P_ARURI_R</td><td class="m">PHASECHK,TRANS64,TRYWAIT, PHASECHK,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">SYNCS_P_AURI_R</td><td class="m">P_AURI_R</td><td class="m">PHASECHK,TRANS64,TRYWAIT, PHASECHK,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">SYNCS_P_dARI_R</td><td class="m">P_dARI_R</td><td class="m">PHASECHK,TRANS64,TRYWAIT</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">SYNCS_R_ARI_R</td><td class="m">R_ARI_R</td><td class="m">A1T0,ARRIVE,TRANS64, A1T0,ARRIVE,RED,TRANS64, ARRIVE,TRANS64, ARRIVE,RED,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">SYNCS_R_ARURI_R</td><td class="m">R_ARURI_R</td><td class="m">A1T0,ARRIVE,TRANS64, ARRIVE,TRANS64, A1T0,ARRIVE,RED,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">SYNCS_R_ARURI_R</td><td class="m">R_ARURI_R</td><td class="m">A1T0,ARRIVE,TRANS64, ARRIVE,TRANS64, A1T0,ARRIVE,RED,TRANS64, ARRIVE,RED,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">SYNCS_R_AURI_R</td><td class="m">R_AURI_R</td><td class="m">ARRIVE,TRANS64, A1T0,ARRIVE,RED,TRANS64, A1T0,ARRIVE,TRANS64, A0TR,ARRIVE,RED,TRANS64, ARRIVE,RED,TRANS64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">SYNCS_UR_AURI_UR</td><td class="m">UR_AURI_UR</td><td class="m">64,EXCH</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>SYNCS_P_ARI_R.PHASECHK,TRANS64,TRYWAIT &mdash; 5 fields &middot; 384 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00002000080011ff00000000000005a7</code></div>
-<div class="ab">var_mask: <code>0x01ffde00000e00000383f8ffff007000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>SYNCS_P_ARI_R.PHASECHK,TRANS64 &mdash; 5 fields &middot; 320 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000e2400080010ff00000000000085a7</code></div>
-<div class="ab">var_mask: <code>0x0001c000000e00000383f8ffff007000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>SYNCS_P_ARURI_R.PHASECHK,TRANS64,TRYWAIT &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0020000800110000000000000005a7</code></div>
 <div class="ab">var_mask: <code>0x0fc600001e00ffffffffffff00f000</code></div>
@@ -13612,15 +13653,16 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>SYNCS_P_ARURI_R.PHASECHK,TRANS64 &mdash; 5 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000e64000800100400010000030085a7</code></div>
-<div class="ab">var_mask: <code>0x00000000000000000000000000000000</code></div>
+<details><summary>SYNCS_P_ARURI_R.PHASECHK,TRANS64 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x20000800100000000000000005a7</code></div>
+<div class="ab">var_mask: <code>0x0fc600001e00ffffffffffff00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[84:81]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[14:11]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>SYNCS_P_AURI_R.PHASECHK,TRANS64,TRYWAIT &mdash; 5 fields &middot; 342 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000020000800110000000000ff0005a7</code></div>
@@ -13637,20 +13679,9 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x0001c0000002003f0003f80f0000f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[84:81]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>SYNCS_P_dARI_R.PHASECHK,TRANS64,TRYWAIT &mdash; 6 fields &middot; 91 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000020000800110000000000000075a7</code></div>
-<div class="ab">var_mask: <code>0x01ffce00000600ffffffff00bf00f000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>desc_ur</code></td></tr>
-<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r1</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>SYNCS_R_ARI_R.A1T0,ARRIVE,TRANS64 &mdash; 5 fields &middot; 98 samples</summary><div class="var">
@@ -13686,7 +13717,7 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0001e000080004ff0000000002ff09a7</code></div>
 <div class="ab">var_mask: <code>0x00060600000000000000000b1d00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[59:36]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -13725,6 +13756,17 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>SYNCS_R_ARURI_R.ARRIVE,RED,TRANS64 &mdash; 6 fields &middot; 6 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x1e0000800040000000000000009a7</code></div>
+<div class="ab">var_mask: <code>0x60600000000000000000000000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 <details><summary>SYNCS_R_AURI_R.ARRIVE,TRANS64 &mdash; 5 fields &middot; 188 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001c0000800000000000000ffff09a7</code></div>
 <div class="ab">var_mask: <code>0x000e3e000000003f03e0780f0000f000</code></div>
@@ -13741,8 +13783,8 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>SYNCS_R_AURI_R.A1T0,ARRIVE,TRANS64 &mdash; 5 fields &middot; 49 samples</summary><div class="var">
@@ -13751,8 +13793,8 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[72:64]</td><td>9</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>SYNCS_R_AURI_R.A0TR,ARRIVE,RED,TRANS64 &mdash; 5 fields &middot; 32 samples</summary><div class="var">
@@ -15016,7 +15058,7 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UPLOP3_UP_UP_UP_UP_UP_II_II</td><td class="m">UP_UP_UP_UP_UP_II_II</td><td class="m">LUT</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>UPLOP3_UP_UP_UP_UP_UP_II_II.LUT &mdash; 10 fields &middot; 455 samples</summary><div class="var">
+<details><summary>UPLOP3_UP_UP_UP_UP_UP_II_II.LUT &mdash; 9 fields &middot; 455 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000fc00000700000000000000000089c</code></div>
 <div class="ab">var_mask: <code>0x00a03e00038eff720000000000aff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
@@ -15026,8 +15068,7 @@ Collapsed by default — click to expand.
 <tr><td>[76:71]</td><td>6</td><td>t6</td><td><code>imm_shr2</code></td></tr>
 <tr><td>[71:68]</td><td>4</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[66:65]</td><td>2</td><td>t6</td><td><code>imm_shr1</code></td></tr>
-<tr><td>[19:16]</td><td>4</td><td>t6</td><td><code>imm_shr4</code></td></tr>
-<tr><td>[47:16]</td><td>32</td><td>t7</td><td><code>imm</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t7</td><td><code>imm</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 <tr><td>[5:2]</td><td>4</td><td>t2</td><td><code>pred</code></td></tr>
 </table></div></details>
@@ -15944,14 +15985,20 @@ Collapsed by default — click to expand.
 <h3>UTMACCTL</h3>
 <p class="desc">TMA cache-control operation on the uniform datapath.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTMACCTL_AURI</td><td class="m">AURI</td><td class="m">PF</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMACCTL_AURI</td><td class="m">AURI</td><td class="m">PF, IV</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>UTMACCTL_AURI.PF &mdash; 3 fields &middot; 24 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000804000000000000000009b9</code></div>
-<div class="ab">var_mask: <code>0x000e0e0000000000000000000e00f000</code></div>
+<details><summary>UTMACCTL_AURI.PF &mdash; 2 fields &middot; 618 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000804000000000000000009b9</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000001e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[51:28]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[27:24]</td><td>4</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMACCTL_AURI.IV &mdash; 2 fields &middot; 104 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800000000000000000079b9</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000007e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
@@ -15967,8 +16014,9 @@ Collapsed by default — click to expand.
 <p class="desc">TMA (Tensor Memory Accelerator) load from global memory to shared memory. SM120 implementation of <code>cp.async.bulk.tensor</code>. <code>.1D</code>/<code>.2D</code> specifies tensor dimensionality. Asynchronous: result available after mbarrier completion.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTMALDG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">2D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">UTMALDG_AURI_AURI_II</td><td class="m">AURI_AURI_II</td><td class="m">4D, 2CTA,3D, 3D, 5D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">UTMALDG_AURI_AURI_UR_II</td><td class="m">AURI_AURI_UR_II</td><td class="m">2CTA,3D,MULTICAST, 4D,MULTICAST</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMALDG_AURI_AURI_II</td><td class="m">AURI_AURI_II</td><td class="m">4D, 2CTA,3D, 3D, 5D, 2CTA,2D, 2CTA,4D, 2D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMALDG_AURI_AURI_UR</td><td class="m">AURI_AURI_UR</td><td class="m">5D,IM2COL</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMALDG_AURI_AURI_UR_II</td><td class="m">AURI_AURI_UR_II</td><td class="m">2CTA,3D,MULTICAST, 4D,MULTICAST, 2CTA,2D,MULTICAST, 2CTA,4D,MULTICAST, 2D,MULTICAST, 3D,MULTICAST</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>UTMALDG_AURI_AURI.2D &mdash; 4 fields &middot; 16 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0001c0000800800000000000000075b4</code></div>
@@ -15979,81 +16027,158 @@ Collapsed by default — click to expand.
 <tr><td>[36:32]</td><td>5</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 </table></div></details>
-<details><summary>UTMALDG_AURI_AURI_II.4D &mdash; 5 fields &middot; 75 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001c0000801900000000800000075b4</code></div>
-<div class="ab">var_mask: <code>0x000e3e00000000000000ff783e000000</code></div>
+<details><summary>UTMALDG_AURI_AURI_II.4D &mdash; 4 fields &middot; 1,936 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801900000000000000075b4</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000ff787e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90:81]</td><td>10</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[71:48]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMALDG_AURI_AURI_II.2CTA,3D &mdash; 5 fields &middot; 66 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000821100000000000000075b4</code></div>
-<div class="ab">var_mask: <code>0x006e0e000000000000003e787e000000</code></div>
+<details><summary>UTMALDG_AURI_AURI_II.2CTA,3D &mdash; 4 fields &middot; 328 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000821100000000000000075b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000003e787e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[69:46]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[45:40]</td><td>6</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[23:15]</td><td>9</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMALDG_AURI_AURI_II.3D &mdash; 4 fields &middot; 20 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e2000801100000000000040085b4</code></div>
-<div class="ab">var_mask: <code>0x000e00000000000000000e7800000000</code></div>
+<details><summary>UTMALDG_AURI_AURI_II.3D &mdash; 4 fields &middot; 648 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801100000000000000005b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000003e787e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[67:44]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[43:40]</td><td>4</td><td>t3</td><td><code>desc_ur</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[20:13]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-</table></div></details>
-<details><summary>UTMALDG_AURI_AURI_II.5D &mdash; 5 fields &middot; 15 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000802100000000008000075b4</code></div>
-<div class="ab">var_mask: <code>0x000606000000000000001e203e000000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[68:45]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[44:40]</td><td>5</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[23:15]</td><td>9</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMALDG_AURI_AURI_UR_II.2CTA,3D,MULTICAST &mdash; 6 fields &middot; 8 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000821180400000000000073b4</code></div>
-<div class="ab">var_mask: <code>0x000e06000000003b00003c183e000000</code></div>
+<details><summary>UTMALDG_AURI_AURI_II.5D &mdash; 4 fields &middot; 340 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000802100000000000000005b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000007e383e00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_II.2CTA,2D &mdash; 4 fields &middot; 4 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000820900000000008100075b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000003c040e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_II.2CTA,4D &mdash; 4 fields &middot; 14 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000821900000000000000075b4</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000036183e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_II.2D &mdash; 4 fields &middot; 106 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800900000000000000005b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000000000007e3c7e007000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR.5D,IM2COL &mdash; 4 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000806000400000000000003b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000007b000000187e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
-<tr><td>[63:46]</td><td>18</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[45:40]</td><td>6</td><td>t4</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[23:15]</td><td>9</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMALDG_AURI_AURI_UR_II.4D,MULTICAST &mdash; 6 fields &middot; 8 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0005d0000801980000000000000073b4</code></div>
-<div class="ab">var_mask: <code>0x000228000000003f00002e183e000000</code></div>
+<details><summary>UTMALDG_AURI_AURI_UR_II.2CTA,3D,MULTICAST &mdash; 5 fields &middot; 80 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000821180000000000000073b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000003f00003e787e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90:81]</td><td>10</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
-<tr><td>[63:46]</td><td>18</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[45:40]</td><td>6</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR_II.4D,MULTICAST &mdash; 5 fields &middot; 68 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801980000000000000073b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000007f00003e387e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR_II.2CTA,2D,MULTICAST &mdash; 5 fields &middot; 36 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000820980000000000000073b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000003f00003e3c7e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR_II.2CTA,4D,MULTICAST &mdash; 5 fields &middot; 76 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000821980000000000000073b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000007f00003e387e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR_II.2D,MULTICAST &mdash; 5 fields &middot; 26 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800980000000000000003b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000003f00003e3c3e007000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMALDG_AURI_AURI_UR_II.3D,MULTICAST &mdash; 5 fields &middot; 70 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801180000000000000073b4</code></div>
+<div class="ab">var_mask: <code>0x000000000000003f00003e387e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="UTMAPF" id="UTMAPF">
 <h3>UTMAPF</h3>
 <p class="desc">TMA prefetch issued on the uniform datapath.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTMAPF_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,L2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMAPF_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,L2, 4D,L2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>UTMAPF_AURI_AURI.3D,L2 &mdash; 5 fields &middot; 15 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e2000801000000000000040005b8</code></div>
-<div class="ab">var_mask: <code>0x000e0000000000000000003c3a00f000</code></div>
+<details><summary>UTMAPF_AURI_AURI.3D,L2 &mdash; 3 fields &middot; 84 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801000000000000000005b8</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000001c7e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[79:62]</td><td>18</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[37:32]</td><td>6</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMAPF_AURI_AURI.4D,L2 &mdash; 3 fields &middot; 744 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801800000000000000005b8</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000003c7e007000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -16062,45 +16187,82 @@ Collapsed by default — click to expand.
 <h3>UTMAREDG</h3>
 <p class="desc">TMA atomic reduction to global memory (add/min/max family) under a tensor-map descriptor.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTMAREDG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,ADD</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMAREDG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,ADD, 4D,ADD, 5D,ADD</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>UTMAREDG_AURI_AURI.3D,ADD &mdash; 2 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0003f0000801000000000008040073b6</code></div>
+<details><summary>UTMAREDG_AURI_AURI.3D,ADD &mdash; 2 fields &middot; 4 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801000000000008040073b6</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000000000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[40:33]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[30:23]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+</table></div></details>
+<details><summary>UTMAREDG_AURI_AURI.4D,ADD &mdash; 3 fields &middot; 36 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801800000000000040073b6</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000383a000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMAREDG_AURI_AURI.5D,ADD &mdash; 3 fields &middot; 36 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000802000000000000040073b6</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000381a000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="UTMASTG" id="UTMASTG">
 <h3>UTMASTG</h3>
 <p class="desc">TMA store to global memory issued on the uniform datapath (cp.async.bulk.tensor store); tile modes 1D..5D under a tensor-map descriptor in UR space.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UTMASTG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D, 5D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UTMASTG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D, 5D, 2D, 4D, 5D,IM2COL</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTMASTG_AURI_AURI_II</td><td class="m">AURI_AURI_II</td><td class="m">4D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>UTMASTG_AURI_AURI.3D &mdash; 5 fields &middot; 33 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000801000000000000000003b5</code></div>
-<div class="ab">var_mask: <code>0x000e0e00000000000000003c7e00f000</code></div>
+<details><summary>UTMASTG_AURI_AURI.3D &mdash; 3 fields &middot; 622 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801000000000000000003b5</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000007c7e00f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[79:62]</td><td>18</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[61:38]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[37:32]</td><td>6</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMASTG_AURI_AURI.5D &mdash; 4 fields &middot; 31 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0001e0000802000000000000000073b5</code></div>
-<div class="ab">var_mask: <code>0x000e060000000000000000781e000000</code></div>
+<details><summary>UTMASTG_AURI_AURI.5D &mdash; 3 fields &middot; 2,600 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000802000000000000000073b5</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000781e000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[80:63]</td><td>18</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[62:39]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[38:32]</td><td>7</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UTMASTG_AURI_AURI_II.4D &mdash; 3 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0003e00008019000000014080e0073b5</code></div>
-<div class="ab">var_mask: <code>0x00040a00000000000000eb0000000000</code></div>
+<details><summary>UTMASTG_AURI_AURI.2D &mdash; 3 fields &middot; 84 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800800000000000000073b5</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000003c3e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMASTG_AURI_AURI.4D &mdash; 3 fields &middot; 8 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801800000000000200073b5</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000380e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMASTG_AURI_AURI.5D,IM2COL &mdash; 3 fields &middot; 16 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000806000000000008300073b5</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000000e000000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UTMASTG_AURI_AURI_II.4D &mdash; 3 fields &middot; 34 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008019000000014080e0073b5</code></div>
+<div class="ab">var_mask: <code>0x00000000000000000000eb0000000000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[47:40]</td><td>8</td><td>t3</td><td><code>desc_ur</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
@@ -16592,7 +16754,7 @@ per-class deltas against the 2026-08-20 baseline are enumerated in the O2 valida
 
 <div class="foot">
 SM100a Instruction Set Architecture Reference &mdash; revision from sm100a.json<br>
-399 instruction forms &middot; 1448 encoding variants &middot; 37 pipeline classes<br>
+400 instruction forms &middot; 1469 encoding variants &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
