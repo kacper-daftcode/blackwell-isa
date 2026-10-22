@@ -8825,6 +8825,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x00000000000e4000000000000000031c",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -8842,7 +8843,6 @@
       }
      ],
      "variable_mask": "0x00000000000000000000000000fff000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "B2R.RESULT implicitPTpredicatecase; predicate7elidesintheNVIDIAsurface."
     }
@@ -12025,6 +12025,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x000000000200000000000000ff00098f",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -12035,7 +12036,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA 13.1: CCTL.IVALL has opcode0x98f, cache operationbit89=1, no operands. The old 0x98e row decoded to REDG.DEC."
     }
@@ -30618,6 +30618,7 @@
    "mod_groups": {
     "BF16,F32,PACK_AB": {
      "and_base": "0x00000000000010ff000000000000023e",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -30663,58 +30664,6 @@
       }
      ],
      "variable_mask": "0x0c00000000000000000000fffffff000",
-     "count": null,
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 BF16/F16.F32.PACK_ABhasthreefullregisteroperands16/24/32; SATFINITEbit77, RELUbit75, typeBF16bit76/F16clear."
-    },
-    "F16,F32,PACK_AB": {
-     "and_base": "0x00000000000000ff000000000000023e",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0c00000000000000000000fffffff000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 BF16/F16.F32.PACK_ABhasthreefullregisteroperands16/24/32; SATFINITEbit77, RELUbit75, typeBF16bit76/F16clear."
     },
@@ -30822,6 +30771,57 @@
     },
     "BF16,F32,PACK_AB,RELU,SATFINITE": {
      "and_base": "0x00000000000038ff000000000000023e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x0c00000000000000000000fffffff000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BF16/F16.F32.PACK_ABhasthreefullregisteroperands16/24/32; SATFINITEbit77, RELUbit75, typeBF16bit76/F16clear."
+    },
+    "F16,F32,PACK_AB": {
+     "and_base": "0x00000000000000ff000000000000023e",
      "count": null,
      "fields": [
       {
@@ -217085,18 +217085,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -217106,32 +217106,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217150,18 +217150,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -217171,32 +217171,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217222,53 +217222,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217287,53 +217287,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217373,32 +217373,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217410,53 +217410,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217482,53 +217482,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217568,32 +217568,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217605,53 +217605,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217670,53 +217670,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217735,53 +217735,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -217807,53 +217807,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217872,53 +217872,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -217972,18 +217972,18 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -218002,53 +218002,53 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -218060,18 +218060,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -218081,32 +218081,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218125,53 +218125,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218190,18 +218190,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -218211,32 +218211,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218255,53 +218255,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218320,53 +218320,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218385,53 +218385,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218450,53 +218450,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218515,53 +218515,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218580,53 +218580,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218645,53 +218645,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218710,53 +218710,53 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218775,18 +218775,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -218796,32 +218796,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -218875,25 +218875,25 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
      "variable_mask": "0x0400000007fe0000000000ffff00f000",
@@ -218905,18 +218905,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -218926,32 +218926,32 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -223385,18 +223385,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223406,39 +223406,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223464,46 +223464,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -223513,11 +223513,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223550,60 +223550,60 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 68,
-       "token_idx": 6
+       "token_idx": 6,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -223622,60 +223622,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223701,60 +223701,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223780,60 +223780,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223859,18 +223859,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223880,39 +223880,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223938,18 +223938,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -223959,39 +223959,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224024,60 +224024,60 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 68,
-       "token_idx": 6
+       "token_idx": 6,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224096,46 +224096,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224145,11 +224145,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224175,46 +224175,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224224,11 +224224,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224254,60 +224254,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224333,46 +224333,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224382,11 +224382,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224412,46 +224412,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224461,11 +224461,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224491,60 +224491,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224570,60 +224570,60 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224649,46 +224649,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224698,11 +224698,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224728,46 +224728,46 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 84,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
@@ -224777,11 +224777,11 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224807,18 +224807,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224828,39 +224828,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224886,18 +224886,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224907,39 +224907,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224965,18 +224965,18 @@
      "count": null,
      "fields": [
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -224986,39 +224986,39 @@
        "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "dsv41-sm120-2026-10-22",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
@@ -252978,17 +252978,20 @@
    "mercury": [],
    "mod_groups": {
     "GPU,SC": {
-     "and_base": "0x20000000000000007992",
-     "count": 150,
+     "and_base": "0x00000000000020000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
-     "variable_mask": "0x1c00000000000000000000000000f000"
+     "variable_mask": "0x0000000000000000000000000000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     },
     "ALL,CTA": {
      "and_base": "0x00000000000080000000000000000992",
@@ -253054,22 +253057,6 @@
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     },
-    "SC,CTA": {
-     "and_base": "0x00000000000000000000000000000992",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0000000000000000000000000000f000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
-    },
     "SC,SM": {
      "and_base": "0x00000000000010000000000000000992",
      "count": null,
@@ -253086,8 +253073,8 @@
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     },
-    "SC,GPU": {
-     "and_base": "0x00000000000020000000000000000992",
+    "SC,SYS": {
+     "and_base": "0x00000000000030000000000000000992",
      "count": null,
      "fields": [
       {
@@ -253102,8 +253089,8 @@
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     },
-    "SC,SYS": {
-     "and_base": "0x00000000000030000000000000000992",
+    "CTA,SC": {
+     "and_base": "0x00000000000000000000000000000992",
      "count": null,
      "fields": [
       {
@@ -253158,6 +253145,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x00000000000080000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -253168,7 +253156,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     }
@@ -253212,6 +253199,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x000000000000a0000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -253222,7 +253210,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     }
@@ -253311,6 +253298,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x00000000000000000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -253321,7 +253309,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     }
@@ -253365,6 +253352,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x00000000000020000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -253375,7 +253363,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     }
@@ -253463,6 +253450,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x00000000000030000000000000000992",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -253473,7 +253461,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000000000000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 MEMBAR opcode0x992, scope[78:76]=CTA0/SM1/GPU2/SYS3; ALLbit79/SCclear; nooperands, guard4@12."
     }
@@ -256304,6 +256291,7 @@
    "mod_groups": {
     "": {
      "and_base": "0x0000000003800000000000000000095d",
+     "count": null,
      "fields": [
       {
        "bits": 4,
@@ -256321,7 +256309,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000ffffffff0000f000",
-     "count": null,
      "_src": "dsv41-sm120-2026-10-22",
      "_note": "NVIDIA13.1 NANOSLEEP delayimmediate32@32 with fixedPTpredicate87; old dummy token0 field erasedPTbits."
     },
