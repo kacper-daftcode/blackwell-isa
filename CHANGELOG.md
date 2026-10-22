@@ -1,5 +1,22 @@
 # blackwell-isa Changelog
 
+## SM120 byte matrix transpose loads (October 22, 2026)
+
+Add `LDSM.8.MT1616` and `.2` for the existing register, register-plus-uniform,
+and uniform shared-address forms. CUDA 13.1 emits these instructions for
+`ldmatrix.sync.aligned.m16n16.x1/x2.trans.shared.b8`; the previous table could
+not decode an actual compiler word, `000e62000801390000000005000c783b`.
+
+The six groups retain the corresponding `.16.MT1616` field geometry and masks,
+with the measured datatype selector at bits 75–77 set to 7. Evidence includes
+142 bounded NVIDIA operand/guard/address probes and literal full-word
+reassembly, plus strict reconstruction of two complete three-kernel ELFs
+(656 words) and 329 literal NVIDIA compiler/canary words. Existing groups and
+other architectures are unchanged. No masks were widened and no raw-word or
+completion fields were added. The `.4` count, `INVALID3`, and unsupported
+datatype combinations remain unclaimed. This is encoding evidence; GPU
+semantics, latency, throughput, and kernel performance require separate tests.
+
 ## Scheduling provenance correction (October 22, 2026)
 
 Qualify the single SM120 `IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR` entry as an
