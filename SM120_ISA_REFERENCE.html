@@ -52,6 +52,7 @@ details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
 <p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>625 opcodes &middot; 1535 instruction forms &middot; 2664 encoding variants &middot; 1425 with scheduling data<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span></p>
+<p class="note" id="scheduling-provenance-20261022">Scheduling provenance update, 2026-10-22: only the <a href="#IMMA.SF.16832.U8.U8">IMMA.SF.16832.U8.U8</a> record was regenerated from <code>sm120.json</code> (SHA-256 <code>2580cfe2057acb315e2b8ad85a85cb61c3b74a62eb0037829161c7790fc0af3a</code>). Its identity, pipeline and latency are unverified. Other reference records retain their previous generation.</p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -16348,9 +16349,10 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="IMMA.SF.16832.U8.U8" id="IMMA.SF.16832.U8.U8">
 <h3>IMMA.SF.16832.U8.U8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
+<p class="desc">Historical opcode 0x47e hypothesis; IMMA.SF identity and operand semantics unproven</p>
+<p class="note">Historical opcode sweep classified nonzero output as OK without a numerical oracle; the mnemonic was assigned by analogy. UNVERIFIED: no validated native form or IMMA.SF versus QMMA/HMMA overlap measurement is retained.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR</td><td class="m">R_R_R_R_R_R_UR</td><td>INT_ARITH</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR</td><td class="m">R_R_R_R_R_R_UR</td><td>unverified</td><td>unmeasured</td></tr>
 </table>
 <details><summary>IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x600000000000747e</code></div>

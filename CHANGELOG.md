@@ -1,5 +1,19 @@
 # blackwell-isa Changelog
 
+## Scheduling provenance correction (October 22, 2026)
+
+Qualify the single SM120 `IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR` entry as an
+unvalidated historical opcode hypothesis. The retained sweep accepted nonzero
+output without checking an expected matrix result, and supplied no overlap timing.
+Remove active hardware-validation, physical-pipeline and inferred-latency claims;
+preserve them explicitly as historical, unvalidated provenance. The encoding-group
+source annotation carries the same qualification. No encoding base, variable mask,
+operand field, sample count or other instruction entry changes.
+
+The HTML reference and README distinguish provisional instruction identity from
+validated encoding and measured scheduling behavior. No new unsupported opcode was
+executed to justify this correction.
+
 ## Fleet silicon wave (August 26, 2026): ATOMS/ARI coverage + decoder-junk cleanup
 Fold of 29 silicon-verified fleet bug fixes into the canonical tables
 (each carried a pinned corpus/silicon verdict upstream in the cubit fix

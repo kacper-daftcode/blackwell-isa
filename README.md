@@ -155,7 +155,9 @@ These are included to orient readers; the primary contribution is the data itsel
 
 - **Scheduling metadata matters.** Several instruction families are not assigned to
   the pipeline one would infer from the mnemonic alone. Schedulers should consume the
-  `scheduling` and `ctrl_class` fields rather than deriving hazards from opcode names.
+  `scheduling` and `ctrl_class` fields together with their provenance and confidence.
+  Compiler pipeline IDs do not by themselves establish separate physical execution
+  resources or concurrent instruction throughput.
 
 - **Control-word handling is instruction-class dependent.** The upper control bits are
   not a uniform free field. `ctrl_class` and `ctrl_epochs` describe which bits are fixed
@@ -183,6 +185,15 @@ These are included to orient readers; the primary contribution is the data itsel
   or internal pattern names) where NVIDIA has no public terminology.
 - Metadata under `_discovery` records provenance and confidence for unusual entries; users
   should inspect it before relying on those forms in production code.
+- The `IMMA.SF.16832.U8.U8` entry is an **unvalidated historical hypothesis**.
+  Its former hardware-validation, pipeline, latency and dual-issue claims were not
+  supported by a numerical oracle or retained overlap measurement. The historical
+  opcode sweep classified nonzero output as success and assigned the mnemonic by
+  analogy. NVIDIA `nvdisasm` 13.1 does not identify the canonical candidate or the
+  tested QMMA-derived candidates. That does not prove the opcode is unimplemented;
+  its identity and operands still require independent reverse engineering. Encoding
+  fields remain available as a historical record, but must not be used to infer
+  scheduling safety or a performance advantage.
 
 ## Related Work
 
