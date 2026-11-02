@@ -1,5 +1,86 @@
 # blackwell-isa Changelog
 
+## SM120: the last five census forms, provenance metadata, regenerated references (November 2, 2026)
+
+`sm120.json` gains the five instruction forms that kept the production census of the
+vLLM-Moet SM120 kernels below 100 % strict re-encode (1 797 483 / 1 811 600 before, all
+169 cubins / 1 811 600 words after). Each form was measured with nvdisasm 13.1 one word per
+call (cubit `tools/probes/re_sm120_*.py`, fixtures `tests/fixtures/sm120_*_nvdisasm.jsonl`,
+tests `tests/sm120_*.rs`); every row carries exactly its measured fields, the lattice
+around it stays unclaimed (fail-closed):
+
+- `HMUL2_R_R_FI_FI` (opcode 0x832, new key, 12 groups): the packed-immediate multiply
+  `HMUL2[.BF16_V2][.FMZ][.SAT][.FTZ] Rd, Ra, imm_hi, imm_lo` with `-Ra`, `|Ra|`, `.H0_H0` /
+  `.H1_H1`; 12 664 words of FlashInfer's CAKE DSV4.1 mixed-cache kernels (`3f80 3f80` = 1.0
+  bf16, `7780 7780`). Bit 85 selects bf16, bits 76/77/80 FMZ/SAT/FTZ; bit 78 (INVALID3), bit
+  91 (illegal) and the text-inert bits 64-71, 79, 81-84, 86-90, 92-95 are outside the rows.
+- `LDSM_R_ARI` (0x83b, +30 groups): `LDSM.U4x16P64TO8` / `LDSM.U6x16P32TO8` (FP4 / FP6
+  matrix loads with unpack to 8-bit lanes, PTX `ldmatrix .b8x16.b4x16_p64` / `.b6x16_p32`)
+  for all five shapes and the x1/x2/x4 counts in the `[R+imm]` form; 576 words of DeepGEMM's
+  grouped FP8xFP4 MoE GEMMs. Datatype [77:75] = 5 / 6 next to 0 (`16`) and 7 (`8`); codes 1-4
+  are unnamed by nvdisasm.
+- `PRMT_R_R_UR_R` (0xc16, new key, 7 groups): the byte permute with a uniform-register
+  selector, modes [74:72] 0..6 (7 = INVALID7); 544 CAKE words.
+- `ARRIVES_ARURI` (0x9b0, new key, 2 groups): `ARRIVES.LDGSTSBAR.64[.ARVCNT] [R+UR+imm]`
+  (PTX `cp.async.mbarrier.arrive[.noinc].shared.b64`); 297 CAKE words. First ARRIVES row of
+  the table; kind bit 72, size [75:73] = 5 (.64), ARVCNT bit 76 measured, `???n` codes outside.
+- `UTMASTG_AURI_AURI` (0x3b5, +4 groups): the 1D, 2D, 4D and 5D dimension codes next to the
+  harvest-era 3D row (dimension [81:79], 5-7 INVALIDn; bit 76 desc, 82 IM2COL, 83 SCATTER4
+  outside); 36 DeepGEMM words.
+
+Table metadata, all four tables: the loose per-wave notes that lived as `_meta.bug203` …
+`_meta.bug416`, `fix_*`, `sigfix`, `pruned_junk` keys and (sm121a) 34 top-level `_errata_*`
+records now live verbatim under `_meta.provenance.history` / `.errata`;
+`_meta.provenance.sources` documents every `_src` tag a row carries (kind, date, cubit tool
+and test), and `_meta.provenance.legend` says how `_src` / `_note` are to be read (rows
+without `_src` = the 2026-06..08 harvest). cubit's `tools/sync_table.py` validates the
+convention (every row tag documented, no loose keys, no undocumented top-level records).
+Row data is unchanged by this step. Tool: `blackwell-isa-internal/tools/provenance_meta.py`.
+
+The four HTML references are regenerated from these tables (they were last generated
+2026-10-23 for SM120 and 2026-09-19 for the others). The generator is now driven by
+`_meta.architecture`, states only table metadata and public facts in the overview, shows
+the measured control-code layout (bits [108:105] stall, 109 yield, [112:110] write barrier,
+[115:113] read barrier, [121:116] wait mask, [124:122] reuse) instead of the pre-measurement
+table, prints each variant's `_src` / `_note`, and stamps the generation date and table
+SHA-256. `index.html` lists the four pages with their table revisions.
+
+## SM120 ATOMS [R+UR+imm], STSM.8.MT168 and UBLKPF.L2 (October 29, 2026)
+
+The last three forms of FlashInfer 0.7.2's sparse-MLA prefill cubin (108 words of 217 200):
+`ATOMS_R_ARURI_R / MAX,S32` replaced — the harvest row read the address UR byte [71:64] as a
+fourth register, declared no offset and no guard; now the measured geometry of the ADD group
+(guard, Rd, base R with RZ printed `[UR+imm]`, Rb, signed 24-bit offset, UR), opcode 0x98c with
+bit 91. `STSM_ARI_R` gains `8,MT168` / `2,8,MT168` / `4,8,MT168` (8-bit transposed matrix store,
+PTX `stmatrix ... .trans.b8`, bit 75). `UBLKPF_AURI_UR / L2` and `UBLKPF_AURI_UR_II / L2`
+(bulk L2 prefetch, PTX `cp.async.bulk.prefetch.L2`, with and without `desc[UR]`) replace the
+unusable `AUR` harvest spelling. nvdisasm 13.1 sweeps: 65+54, 118+34 and 70+36 words. With
+this revision both sparse-MLA cubins of the census round-trip completely (cubit `accd984`).
+
+## SM120 F2FP.BF16.E8.UNPACK_B (October 28, 2026)
+
+`F2FP.BF16.E8.UNPACK_B_R_R` — the UE8M0 → BF16x2 unpack (PTX `cvt.rn.bf16x2.ue8m0x2`),
+48 words of FlashInfer's DeepSeek-V4.1 full-BF16 sparse-MLA prefill kernel. nvdisasm 13.1 sweep
+of 36 words: guard, destination [23:16], source [39:32], `.H1` = bit 88, `.reuse` = bit 123;
+the source-format lattice ([87:80] groups, bit 76 BF16 destination legal only with E8) stays
+outside the row.
+
+## SM120 CCTL register-address forms (October 25, 2026)
+
+`CCTL_ARI` (opcode 0x98f) gains the seven `.E` operations PF1, WB, IV, RS, PML2, DML2, RML2
+next to the harvested `E,PF2` (operation [90:87]; the other eight codes are illegal) with the
+measured guard / address register / signed 32-bit offset fields. Found by cubit's image gate on
+vLLM-Moet's `moe_l2_discard` kernel (`CCTL.E.RML2 [R2]`); with it every extension cubin of
+image r21 (11 cubins, 504 128 instructions) round-trips.
+
+## SM120 CS2UR (October 23, 2026)
+
+`CS2UR` (opcode 0x8cb) reads any system register into any uniform register: both groups now
+carry the measured uniform guard [15:12], URd [23:16] (255 = URZ) and system-register id
+[79:72] (all 256 ids accepted; bit 80 selects the 64-bit/plain form vs `.32`, as on CS2R). The
+harvested word had the guard, UR7 and SR_CLOCKLO baked into `and_base`; the junk `CS2UR_UR_II`
+row that re-read the register number as two immediates is removed (reported in PR #1).
+
 ## SM120 byte matrix transpose loads (October 22, 2026)
 
 Add `LDSM.8.MT1616` and `.2` for the existing register, register-plus-uniform,

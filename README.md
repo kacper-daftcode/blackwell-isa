@@ -13,7 +13,7 @@ Artifacts:
 - [`sm120.json`](sm120.json) — canonical machine-readable ISA database
 - [`sm103a.json`](sm103a.json) — canonical SM103a ("B300", Blackwell datacenter) ISA database; same schema, validated bit-exact against an SM103a corpus (see "SM103a notes" below); refreshed from the production cubit table including the tcgen05 class set (`UTCHMMA`/`UTCQMMA`/`UTCIMMA`/`UTCOMMA`, `LDTM`/`STTM`, `UTCCP`, `UTCSHIFT`, `UTCBAR`, `UTCATOMSWS`, `UVIRTCOUNT`)
 - [`sm100a.json`](sm100a.json) — SM100a ("B200", Blackwell datacenter) ISA database derived from the SM103a canonical revision (encoding layer byte-identical on all 119 shared tcgen05 probe pairs) plus the tcgen05 acceptance deltas; offline-validated by decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus (99.9219% EXACT-minus-sched on 1,134 cubins); scheduling/pipeline sections inherited from SM103a, unvalidated for B200 timing
-- [`sm121a.json`](sm121a.json) — canonical SM121a ("GB10", DGX Spark Grace-Blackwell) ISA database; same schema, delta-driven vs SM120 with EXACT gates per entry; 15,443 encoding keys (md5 88142da9). Counting note: the SM121a table keeps a **finer per-key granularity** — its `instructions` dict holds one key per encoding row, so raw key counts are not comparable with the canonical instruction-*form* counts of sm120.json/sm103a.json
+- [`sm121a.json`](sm121a.json) — canonical SM121a ("GB10", DGX Spark Grace-Blackwell) ISA database; same schema, delta-driven vs SM120 with EXACT gates per entry; 23 833 encoding keys at this revision. Counting note: the SM121a table keeps a **finer per-key granularity** — its `instructions` dict holds one key per encoding row, so raw key counts are not comparable with the canonical instruction-*form* counts of sm120.json/sm103a.json
 - [`SM120_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html) — generated, searchable HTML reference ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM120_ISA_REFERENCE.html))
 - [`SM103A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM103a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM103A_ISA_REFERENCE.html))
 - [`SM100A_ISA_REFERENCE.html`](https://kacper-daftcode.github.io/blackwell-isa/SM100A_ISA_REFERENCE.html) — generated, searchable HTML reference for SM100a ([browse online](https://kacper-daftcode.github.io/blackwell-isa/SM100A_ISA_REFERENCE.html))
@@ -60,19 +60,43 @@ for control-word behavior, which is documented per class.
 
 ## Validation Status
 
-- 47,244 real instructions decoded across 178 cubins with 100% decode coverage
-- 5,014 / 5,014 roundtrip fuzz cases passing through the companion assembler
-- 936 / 936 targeted ground-truth instructions round-tripped, including the
-  25-type `QMMA.SF` ptxas corpus and `LDG.E.LTC128B.128`
-- all 36 dense `QMMA.SF...E8` type pairs covered: 25 emitted by ptxas and all
-  11 combinations containing undocumented `E3M4` executed on RTX PRO 6000
-- selected semantic bit fields validated by hardware patch tests on RTX 5090 and RTX PRO 6000
-- SM120 (O2 consolidation revision): roundtrip over the 240-file sm120 corpus (1,076,075 instructions) at 99.86% match (up from 94.0% under the previous canonical revision); the 108 dropped `_?` placeholder rows were census-proven never hit by the decoder on 1.64M natural instructions
-- SM103a: disassemble→assemble roundtrip byte-exact on 323/323 cubins of the publish
-  corpus (tcgen05 probe kernels, FA4 kernels, instruction samples) run under the exact
-  published table; per-cubin verdicts identical to the production cubit table
-- SM100a: decoder/encoder replay over the archived b4 sm_100 corpus (1,134 cubins, 20,024,512 instructions, cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probes): 99.9219% EXACT-minus-sched, 0 fatal files; residual gap classes enumerated in the O2 validation report
-- SM121a: differential legality/bit-flip scan of 260,352 probes (1,017 canonical forms × 128 bits × 2 contexts) with 0 decode/legality differences vs SM120; `nvdisasm -b SM120` vs `-b SM121a` over 648,992 raw instructions with 0 decode differences; full-table census over the 92,098-word corpus with 0 failures; 27/27 canonical identity anchors round-trip perfectly
+What can be reproduced today, with the command that produces the number (all on the host that
+builds [`cubit`](https://github.com/kacper-daftcode/cubit); nvdisasm 13.1 is the decode oracle):
+
+- **SM120 strict re-encode census, 2026-11-02 (`sm120.json` at this revision, cubit `main`):
+  1 811 600 / 1 811 600 instructions over 169 cubins** — every word decodes, prints, re-parses and
+  re-encodes to the identical 128 bits (`cubit roundtrip-strict`). The corpus is the production
+  kernel set of the vLLM-Moet DeepSeek-V4.1 / GLM-5.3 SM120 deployment: FlashInfer 0.7.2
+  sparse-MLA AOT + JIT caches (544 064 + 544 200 words), FlashInfer MXFP8 GEMMs (16 016),
+  FlashInfer CAKE DSV4.1 mixed-cache kernels (599 048), b12x MoE kernels (52 024), DeepGEMM
+  SM120 FP4/FP8 kernels (56 248). Before this revision the same census stood at
+  1 797 483 / 1 811 600 (99.2 %) with five forms missing (see CHANGELOG 2026-11-02).
+- **Whole-cubin reassembly, 2026-11-02:** `cubit disassemble --frozen` → `cubit asm -T` reproduces
+  all 157 census cubins that contain code byte for byte (`cubit tools/asm_roundtrip.py`).
+- **Per-form measurements:** every row with a `_src` tag of the form `<form>-sm120-<date>` has an
+  nvdisasm fixture and a cubit test that replays it (`_meta.provenance.sources` names them).
+
+Historical figures (kept as history; the corpora and hosts behind them are not available for a
+re-run from the build host — they are **not** re-verified at this revision):
+
+- 2026-02/03: 47 244 instructions decoded across 178 cubins with 100 % decode coverage; 5 014 / 5 014
+  roundtrip fuzz cases; 936 / 936 targeted ground-truth instructions round-tripped including the
+  25-type `QMMA.SF` ptxas corpus and `LDG.E.LTC128B.128`; all 36 dense `QMMA.SF...E8` type pairs
+  (25 emitted by ptxas, 11 with the undocumented `E3M4` executed on RTX PRO 6000); selected semantic
+  bit fields validated by hardware patch tests on RTX 5090 and RTX PRO 6000.
+- 2026-08-25 (O2 consolidation): SM120 roundtrip over a 240-file corpus (1 076 075 instructions) at
+  99.86 %.
+- SM103a (as of 2026-09-18): disassemble→assemble byte-exact on 323 / 323 cubins of the publish
+  corpus (tcgen05 probe kernels, FA4 kernels, instruction samples). Needs a B300 corpus to re-run.
+- SM100a (as of 2026-08-26): decoder/encoder replay over an archived sm_100 corpus (1 134 cubins,
+  20 024 512 instructions, cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probes): 99.92 % EXACT-minus-sched.
+  Needs the archived corpus to re-run.
+- SM121a (as of 2026-09-18): differential legality scan of 260 352 probes vs SM120 with 0 differences;
+  `nvdisasm -b SM120` vs `-b SM121a` over 648 992 raw instructions with 0 decode differences; census
+  over a 92 098-word GB10 corpus with 0 failures. Needs the GB10 corpus to re-run.
+
+Encoding evidence is not semantic evidence: a row that round-trips tells you how nvdisasm names a
+word, not what the hardware does with it or how long it takes.
 
 ## Data Model
 
@@ -110,13 +134,37 @@ A typical encoding entry:
   "fields": [
     { "shift": 12, "bits": 4, "token_idx": 0, "extraction": "guard" },
     { "shift": 16, "bits": 8, "token_idx": 1, "extraction": "reg" }
-  ]
+  ],
+  "count": null,
+  "_src": "prmt-ur-sm120-2026-11-02",
+  "_note": "nvdisasm 13.1 sweeps: guard[15:12], Rd[23:16], ... (what was measured, what stays outside the row)"
 }
 ```
 
 `and_base` is the constant part of the 128-bit instruction word. `variable_mask`
 identifies operand-dependent bits. `fields` tells an assembler/disassembler where to
-read or write each operand field.
+read or write each operand field (`token_idx` is the operand position, 0 = the guard).
+
+### Provenance
+
+- `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
+  lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
+  date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
+  measurement in prose. Rows **without** `_src` (19 340 of 20 905 SM120 variants at this revision) are
+  the 2026-06..08 *harvest*: fields learned from compiler output and validated by the round-trip
+  census, not by per-field probes. Their known defect classes and the audit of them are tracked in
+  cubit's `docs/KNOWN_ISSUES.md`.
+- `_meta.provenance.history` keeps the fix-wave notes (formerly loose `_meta.bugNNN` keys) verbatim;
+  `_meta.provenance.errata` the former top-level `_errata_*` notes of `sm121a.json`.
+- `count` is the number of harvest samples a row was learned from; `null` on measured rows.
+- **Baked control bits.** 880 of the 1 145 SM120 variants that carry non-zero `and_base` bits in
+  [127:105] (the control code: stall, yield, barriers, wait mask, reuse) inherited them from the
+  compiler sample they were learned from. Decoders strip the control code before matching and
+  assemblers overwrite it with the authored or scheduled control, so these bits are a provenance
+  artefact, not part of the encoding identity; cubit's `tools/sync_table.py` keeps a ratchet on
+  their number so that no new row bakes a control template unnoticed.
+- The schema is validated by `cubit/tools/sync_table.py --validate-only` (structure, extraction
+  vocabulary, provenance convention, control-bit ratchet) and `blackwell-isa-internal/tools/validate.py`.
 
 ## Minimal Usage Example
 
@@ -165,6 +213,22 @@ These are included to orient readers; the primary contribution is the data itsel
 
 - **The public memory hierarchy numbers are easy to misread.** The database records
   RTX 5090 L2 as 96 MB; 128 MB is the access-policy window, not the cache size.
+
+## Known issues
+
+Everything below is known and listed rather than hidden; the detailed list with evidence and what
+each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
+
+- 19 340 of 20 905 SM120 encoding variants are harvest rows without a per-field measurement. A static
+  audit (cubit `tools/audit_table.py`, 2026-11-02) flags 1 223 fields that address an operand the key
+  does not have, 994 register fields off the standard slots, 257 immediate-bearing keys without an
+  immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
+  tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
+  every field; the dynamic nvdisasm cross-check is ongoing (results in the cubit CHANGELOG).
+- 43 SM120 entries (17 SM103a, 17 SM100a, 52 SM121a) carry no `base_op` / `operand_sig`; the key
+  encodes both. Some `base_op` values include modifiers (`LDG.E.EL.ELL2.256.STRONG.GPU`).
+- Keys with `?` are partial: the encoding is valid, the full operand syntax is not determined.
+- Scheduling metadata outside the `hw_measured` rows is synthetic or ptxas-weight derived.
 
 ## Limitations
 
