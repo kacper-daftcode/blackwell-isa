@@ -71,8 +71,9 @@ builds [`cubit`](https://github.com/kacper-daftcode/cubit); nvdisasm 13.1 is the
   FlashInfer CAKE DSV4.1 mixed-cache kernels (599 048), b12x MoE kernels (52 024), DeepGEMM
   SM120 FP4/FP8 kernels (56 248). Before this revision the same census stood at
   1 797 483 / 1 811 600 (99.2 %) with five forms missing (see CHANGELOG 2026-11-02).
-- **Whole-cubin reassembly, 2026-11-02:** `cubit disassemble --frozen` → `cubit asm -T` reproduces
-  all 157 census cubins that contain code byte for byte (`cubit tools/asm_roundtrip.py`).
+- **Whole-cubin reassembly, 2026-11-02 (re-run 2026-11-03 at this revision):** `cubit disassemble
+  --frozen` → `cubit asm -T` reproduces all 157 census cubins that contain code byte for byte
+  (`cubit tools/asm_roundtrip.py`); the census above is identical per cubin at this revision.
 - **Per-form measurements:** every row with a `_src` tag of the form `<form>-sm120-<date>` has an
   nvdisasm fixture and a cubit test that replays it (`_meta.provenance.sources` names them).
 
@@ -87,10 +88,17 @@ re-run from the build host — they are **not** re-verified at this revision):
 - 2026-08-25 (O2 consolidation): SM120 roundtrip over a 240-file corpus (1 076 075 instructions) at
   99.86 %.
 - SM103a (as of 2026-09-18): disassemble→assemble byte-exact on 323 / 323 cubins of the publish
-  corpus (tcgen05 probe kernels, FA4 kernels, instruction samples). Needs a B300 corpus to re-run.
+  corpus (tcgen05 probe kernels, FA4 kernels, instruction samples). **Re-run 2026-11-03 on the B300
+  host `cold-face-bounces-fin-02`** (cubit 0fdd91a, `sm103a.json` / `sm100a.json` at 77a3dfa): the
+  publish corpus holds 328 cubins today — 177 / 177 SM103a and 151 / 151 SM100a cubins byte-identical
+  through `cubit disassemble --frozen` → `asm -T` (104 + 28 words carried as `__raw__`); the strict
+  semantic round trip (no raw words) stands at 85 646 / 85 792 words, the refused words being
+  fail-closed refusals of silicon-unsafe forms (BUG-080 guarded ATOMS, BUG-004) plus 13 re-encode
+  mismatches (cubit `docs/KNOWN_ISSUES.md` V1).
 - SM100a (as of 2026-08-26): decoder/encoder replay over an archived sm_100 corpus (1 134 cubins,
   20 024 512 instructions, cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probes): 99.92 % EXACT-minus-sched.
-  Needs the archived corpus to re-run.
+  **Re-run 2026-11-03 on `cold-face-bounces-fin-02` with the archive's own tool: 99.924 %**
+  (20 009 329 / 20 024 512, gate 99.90 PASS).
 - SM121a (as of 2026-09-18): differential legality scan of 260 352 probes vs SM120 with 0 differences;
   `nvdisasm -b SM120` vs `-b SM121a` over 648 992 raw instructions with 0 decode differences; census
   over a 92 098-word GB10 corpus with 0 failures. Needs the GB10 corpus to re-run.
@@ -219,14 +227,17 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 19 340 of 20 905 SM120 encoding variants are harvest rows without a per-field measurement. A static
+- 19 340 of 20 883 SM120 encoding variants are harvest rows without a per-field measurement. A static
   audit (cubit `tools/audit_table.py`, 2026-11-02) flags 1 223 fields that address an operand the key
   does not have, 994 register fields off the standard slots, 257 immediate-bearing keys without an
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
-  every field; the dynamic nvdisasm cross-check is ongoing (results in the cubit CHANGELOG).
-- 43 SM120 entries (17 SM103a, 17 SM100a, 52 SM121a) carry no `base_op` / `operand_sig`; the key
-  encodes both. Some `base_op` values include modifiers (`LDG.E.EL.ELL2.256.STRONG.GPU`).
+  every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
+  stands at 483 rows with at least one defect after the 2026-11-03 batch (from 1 977); the families
+  are listed in cubit `docs/KNOWN_ISSUES.md` T1.
+- `base_op` values include modifiers (`LDG.E.EL.ELL2.256.STRONG.GPU`): `base_op` is the dotted
+  mnemonic in front of the first `_` of the key, `operand_sig` the rest (every entry carries both
+  since 2026-11-03).
 - Keys with `?` are partial: the encoding is valid, the full operand syntax is not determined.
 - Scheduling metadata outside the `hw_measured` rows is synthetic or ptxas-weight derived.
 
