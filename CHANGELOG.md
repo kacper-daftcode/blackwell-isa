@@ -1,5 +1,22 @@
 # blackwell-isa Changelog
 
+## Hygiene pass: control-code bits out of the templates, base_op / operand_sig everywhere (November 3, 2026)
+
+No encoding or decoding changes. Every encoding variant of the four tables carried, in
+`and_base` bits [127:105], the control word (stall count, yield, barriers, wait mask, reuse) of
+the compiler sample it was learned from - 880 variants in `sm120.json`, 1 670 in `sm103a.json`,
+1 674 in `sm100a.json`, 546 in `sm121a.json`. Decoders strip [127:96] of both the word and the
+template before matching and assemblers compose the whole upper 32 bits from the control code,
+so these bits were never part of an encoding identity; they only made the templates look as if
+a stall count belonged to an instruction form. They are cleared now (`tools/hygiene_pass.py` in
+blackwell-isa-internal). Bits [104:96] are untouched. The 43 + 17 + 17 + 52 entries without
+`base_op` / `operand_sig` carry them now in the convention of the rest of the table (`base_op` =
+the dotted mnemonic in front of the first `_` of the key, `operand_sig` = the rest). Proof of
+neutrality with cubit at 0fdd91a: the production census strict round trip is identical per cubin
+(166 cubins, 1 811 600 / 1 811 600 words before and after), 157 / 157 cubins byte-identical through
+`disassemble --frozen -> asm -T`, cubit's suite green. Recorded in
+`_meta.provenance.history["hygiene-2026-11-03"]`.
+
 ## SM120: the last five census forms, provenance metadata, regenerated references (November 2, 2026)
 
 `sm120.json` gains the five instruction forms that kept the production census of the
