@@ -1,5 +1,36 @@
 # blackwell-isa Changelog
 
+## SM120 dynamic-audit batch 1: LDGSTS base field, LDC reuse, 22 foreign-opcode rows (November 3, 2026)
+
+cubit's dynamic audit (`tools/audit_dynamic.py`: the canonical word of every row the static audit
+flagged plus one-field-at-a-time variants, each rendered by nvdisasm 13.1 one word per call and
+decoded / re-encoded by cubit; 88 388 words over 5 962 rows) named three defects of `sm120.json`
+that are fixed here (`tools/audit_fix_20261103.py` in blackwell-isa-internal; evidence in cubit
+`tests/fixtures/sm120_audit_20261103_nvdisasm.jsonl`, test `tests/sm120_audit_20261103.rs`):
+
+- `LDGSTS_*` (70 rows): the shared-address base register field was 9 bits wide at shift 16 and
+  swallowed bit 24, the low bit of the global base register. `[R5+0x10]` decoded as `[R261+0x10]`
+  (906 probe words). The field is 8 bits wide now.
+- `LDC_*` / `LDCU_*` (13 rows): a `reuse` field at bit 122. nvdisasm prints the same text with
+  the bit set or clear (a constant-bank load has no reusable operand), so the bit is text-inert
+  and leaves the rows.
+- 22 harvest rows removed whose probe words nvdisasm names as a different instruction or rejects:
+  `FSETP_P_P_L_FI_P` and `FSETP_P_P_L_L_P` (10 groups; their words are `P2R.B3`),
+  `F2FP.F16.F32.PACK_AB_P_R_R_R` (`HMMA.1688.F16`), `HMMA.1688.F32_P0_R_R_R_R` and the three
+  `HMMA.SP.*_P0_*` rows plus `HMMA.1684/1688/INVALID3.F16_P0_R_R_R_R` and
+  `HMMA.SP.1688.F16/F32_P0_*` (`F2FP.F16.F32.PACK_AB`, the plain `HMMA.1688.F16`, or illegal),
+  `LOP3.LUT_P_R_R_R_R_II_P` (`SEL`), `QMMA.16816.F16.E4M3.E4M3_P_R_R_R_R` (`MOVM.16.MT88`).
+  16 138 -> 16 126 forms, 20 905 -> 20 883 variants.
+
+The production census of the vLLM-Moet SM120 kernels decodes identically per cubin before and
+after (166 cubins, 1 811 600 / 1 811 600 words): no corpus word was routed through a removed row.
+Not changed, for the owner to decide (cubit `T/NEEDS_OWNER.md`): the 19 keys whose mnemonic
+carries a glued predicate token (`DMMA.8x8x4_P0_...`, `F2FP.F16.F32.PACK_AB_P2_...`,
+`F2IP.U8.F32_P0/P2/P5_...`, `QMMA.16816.F16.E4M3.E4M3_P0/P2/P5_...`, `S2R_P0_R_L`, ...): nvdisasm
+names their words with the plain mnemonic, but two of the families are pinned by cubit tests as
+"era keys". Remaining audit findings after this batch: 483 rows (from 1 977), listed by family in
+cubit `docs/KNOWN_ISSUES.md` T1.
+
 ## Hygiene pass: control-code bits out of the templates, base_op / operand_sig everywhere (November 3, 2026)
 
 No encoding or decoding changes. Every encoding variant of the four tables carried, in
