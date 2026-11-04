@@ -5,9 +5,9 @@
   "gpu": "NVIDIA GB10 (DGX Spark)",
   "instruction_width": 128,
   "provenance": {
-   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 26391,
-   "rows_without_src": 25783,
+   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
+   "rows_total": 26381,
+   "rows_without_src": 25745,
    "sources": {
     "ERR-194 port fleet b4fill4 (f2i38-ldef); silicon-verify nvdisasm SM121a 25/25 iter143": {
      "rows": 25,
@@ -337,6 +337,29 @@
     "vendor-word harvest harv_ur_O3.cubin:ku_neu + iter172: krzem truth-fit 0/512 (edge battery incl NaN/inf/denorm), sweep legalnosci nvdisasm 16/16": {
      "rows": 1,
      "kind": "fix wave (undated tag)"
+    },
+    "undocumented-e3m4-2026-03": {
+     "rows": 22,
+     "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
+     "date": "2026-03-26 (discovery), 2026-08-09 (hardware re-validation)",
+     "nvdisasm_sm120": "no text",
+     "silicon": "RTX 5090 (discovery) and RTX PRO 6000 Blackwell 2026-08-09: all 11 dense QMMA.SF ... E8 combinations containing E3M4 executed through a cubit-patched ptxas E4M3 kernel, 11/11 legal, 3/3 numerical anchors exact against an independent E3M4 oracle (E3M4xE3M4 98.0, E3M4xE4M3 84.0, E4M3xE3M4 84.0; UE8M0 scale 1, input byte 0x3c). The 11 sparse (.SP.16864) rows share the type field (type code 2 at the same positions); their execution is not separately on record. Per-row `_discovery` records hold the detail.",
+     "note": "Type code 2 of the block-scaled MMA type field is an FP8-like format with 3 exponent and 4 mantissa bits that neither PTX nor nvdisasm (13.1, 13.3) names. Kept on purpose (owner 2026-11-03): cubit's dynamic audit classifies these words as vendor_unknown, not as defects. Rows inherited into sm121a from the SM120 table; the measurements are the SM120 ones."
+    },
+    "undocumented-utc-sm120-2026-03": {
+     "rows": 4,
+     "kind": "undocumented on SM120 (tcgen05 class); measured on silicon; nvdisasm -b SM120 has no text for it",
+     "date": "2026-03-28 (UTC*MMA.1CTA on RTX 5090), 2026-08-27 (UTCATOMSWS field bit-walk, bug198)",
+     "nvdisasm_sm120": "no text",
+     "silicon": "UTCHMMA.1CTA / UTCIMMA.1CTA / UTCIMMA.1CTA.KIND2 / UTCQMMA.1CTA: binary-patched IMMA cubins executed on RTX 5090 (GB202, SM120), driver 590.48.01, 2026-03-28 - ptxas refuses `tcgen05.mma` on sm_120, the silicon accepts the four kind codes (output [32,32,32,32] with null descriptors; kind 10 undocumented, possibly INT16). UTCATOMSWS: dest-UP window [83:81] bit-walked with nvdisasm 13.3.73 on the SM100a/SM103a donor tables (cubit tests/bug198*), harvest counts 3 / 16 / 4 on SM120 material. Per-row `_discovery` / `_evidence` records hold the detail.",
+     "note": "Kept on purpose (owner 2026-11-03): the SM120 silicon runs tensor-memory instructions the vendor tool chain does not expose for it. cubit's dynamic audit classifies their words as vendor_unknown. Rows inherited into sm121a from the SM120 table; the measurements are the SM120 ones."
+    },
+    "t3-2026-11-04": {
+     "rows": 2,
+     "kind": "nvdisasm 13.1 field probe (guard window, text-inert [71:64])",
+     "date": "2026-11-04",
+     "tool": "blackwell-isa-internal/tools/t3_20261104.py",
+     "test": "tests/sm120_era_keys_20261104.rs"
     }
    },
    "history": {
@@ -378,7 +401,8 @@
     "pruned_junk": [
      "iter109: ISETP_P_P_R_UR_UR (0 mod_groups, harvest-junk placeholder; 5th operand cannot be UR on sm_121a silicon: exhaustive tok5 field grid 16/16 = P-class only, 128 single-bit flips + 256-combo family grid zero UR-last renders; upstream post-BUG-086 canon has no such key either. Errata 119 follow-up, resolution in results/errata/119."
     ],
-    "hygiene-2026-11-03": "and_base bits [127:105] (the compiler sample's control word: stall/yield/barriers/wait mask/reuse) cleared on 546 encoding variants - decoder and encoder never used them (decode strips [127:96] of word and template, the encoder composes the whole upper32 from the control code); base_op / operand_sig derived from the key on 52 entries that lacked them. Row data otherwise unchanged; proof: cubit census strict round trip identical per cubin (1 811 600 / 1 811 600), 157/157 cubins byte-identical through disassemble --frozen -> asm -T."
+    "hygiene-2026-11-03": "and_base bits [127:105] (the compiler sample's control word: stall/yield/barriers/wait mask/reuse) cleared on 546 encoding variants - decoder and encoder never used them (decode strips [127:96] of word and template, the encoder composes the whole upper32 from the control code); base_op / operand_sig derived from the key on 52 entries that lacked them. Row data otherwise unchanged; proof: cubit census strict round trip identical per cubin (1 811 600 / 1 811 600), 157/157 cubins byte-identical through disassemble --frozen -> asm -T.",
+    "t3-2026-11-04": "session T-3: 10 era keys with a glued predicate token in the mnemonic retired into _meta.key_aliases (10 rows; nvdisasm 13.1 names their words with the plain mnemonic; sm121a: DMMA.8x8x4_R_R_R_R guard field; sm121a: F2FP.F16.F32.PACK_AB_R_R_R guard + [71:64] relax); undocumented-form provenance tags {'undocumented-e3m4-2026-03': 22, 'undocumented-utc-sm120-2026-03': 4} (nvdisasm has no text for these words, the silicon executes them - they stay by the owner's decision of 2026-11-03)."
    },
    "errata": {
     "_errata_2026_08_23_149": "149 (port fleet BUG-089, F2Q): junk mg X usunieta z IADD3_R_P_P_R_R_R (sig tok5 'R' mapowany na imm@[63:32], and_base bit64=1 -> hijack slow IADD3.X imm z Rc-odd); IADD3_R_P_P_R_II_R/X: +tok7 neg@90, +tok8 inv@80 (per-slot negacja tail-pred), variable_mask 0x1ffffe00038fe8... -> 0x...78fe8... . Krzemowy dowod 121a: nvdisasm 13.0.85 na patch-cubinie sm_121a, 18/18 EXACT vs goldeny floty (work/q2/bug089_port_iter82). Klucze pre-fix byly BYTE-ident z fleet sm120-pre. Patrz results/errata/149_bug089_port_121a.md.",
@@ -848,6 +872,18 @@
    "inskeys_without_ctrl_class": 0,
    "sched_only_entries": 597,
    "total_sched_opcodes": 565
+  },
+  "key_aliases": {
+   "DMMA.8x8x4_P0_R_R_R_R": "DMMA.8x8x4_R_R_R_R",
+   "DMMA.8x8x4_P2_R_R_R_R": "DMMA.8x8x4_R_R_R_R",
+   "DMMA.8x8x4_P5_R_R_R_R": "DMMA.8x8x4_R_R_R_R",
+   "F2FP.F16.F32.PACK_AB_P2_R_R_R": "F2FP.F16.F32.PACK_AB_R_R_R",
+   "F2FP.F16.F32.PACK_AB_P5_R_R_R": "F2FP.F16.F32.PACK_AB_R_R_R",
+   "HMMA.1688.F16_P2_R_R_R_R": "HMMA.1688.F16_R_R_R_R",
+   "HMMA.1688.F16_P5_R_R_R_R": "HMMA.1688.F16_R_R_R_R",
+   "QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
+   "QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
+   "QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R"
   }
  },
  "instructions": {
@@ -586655,390 +586691,6 @@
     "write_latency": 32
    }
   },
-  "DMMA.8x8x4_P0_R_R_R_R": {
-   "base_op": "DMMA.8x8x4",
-   "ctrl_class": "dmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023f",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 73,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 62,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 74,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0xfffc00000fffffff000"
-    }
-   },
-   "operand_sig": "P0_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "DMMA.16816",
-      "opcode_id": 30,
-      "pipe_name": "MEMORY",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "DMMA.1684",
-      "opcode_id": 31,
-      "pipe_name": "MEMORY",
-      "read_latency": 1,
-      "write_latency": 1
-     },
-     {
-      "name": "DMMA.1688",
-      "opcode_id": 32,
-      "pipe_name": "MEMORY",
-      "read_latency": 2,
-      "write_latency": 12
-     },
-     {
-      "name": "DMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "MEMORY",
-      "read_latency": 32,
-      "write_latency": 32
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 32,
-    "is_variable_latency": true,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 3,
-    "pipe_name": "MEMORY",
-    "ptxas_raw": null,
-    "read_latency": 32,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 32
-   }
-  },
-  "DMMA.8x8x4_P2_R_R_R_R": {
-   "base_op": "DMMA.8x8x4",
-   "ctrl_class": "dmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023f",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 73,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 62,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 74,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0xfffc00000fffffff000"
-    }
-   },
-   "operand_sig": "P2_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "DMMA.16816",
-      "opcode_id": 30,
-      "pipe_name": "MEMORY",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "DMMA.1684",
-      "opcode_id": 31,
-      "pipe_name": "MEMORY",
-      "read_latency": 1,
-      "write_latency": 1
-     },
-     {
-      "name": "DMMA.1688",
-      "opcode_id": 32,
-      "pipe_name": "MEMORY",
-      "read_latency": 2,
-      "write_latency": 12
-     },
-     {
-      "name": "DMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "MEMORY",
-      "read_latency": 32,
-      "write_latency": 32
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 32,
-    "is_variable_latency": true,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 3,
-    "pipe_name": "MEMORY",
-    "ptxas_raw": null,
-    "read_latency": 32,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 32
-   }
-  },
-  "DMMA.8x8x4_P5_R_R_R_R": {
-   "base_op": "DMMA.8x8x4",
-   "ctrl_class": "dmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023f",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 73,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 62,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 74,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
-       "token_idx": 4,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0xfffc00000fffffff000"
-    }
-   },
-   "operand_sig": "P5_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "DMMA.16816",
-      "opcode_id": 30,
-      "pipe_name": "MEMORY",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "DMMA.1684",
-      "opcode_id": 31,
-      "pipe_name": "MEMORY",
-      "read_latency": 1,
-      "write_latency": 1
-     },
-     {
-      "name": "DMMA.1688",
-      "opcode_id": 32,
-      "pipe_name": "MEMORY",
-      "read_latency": 2,
-      "write_latency": 12
-     },
-     {
-      "name": "DMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "MEMORY",
-      "read_latency": 32,
-      "write_latency": 32
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 32,
-    "is_variable_latency": true,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 3,
-    "pipe_name": "MEMORY",
-    "ptxas_raw": null,
-    "read_latency": 32,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 32
-   }
-  },
   "DMMA.8x8x4_P_R_R_R_?": {
    "base_op": "DMMA.8x8x4",
    "ctrl_class": "dmma",
@@ -587272,6 +586924,12 @@
      "count": 32,
      "fields": [
       {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
@@ -587336,7 +586994,9 @@
        "token_idx": 4
       }
      ],
-     "variable_mask": "0x0000000000000fffc00000ffffff0000"
+     "variable_mask": "0x0000000000000fffc00000fffffff000",
+     "_src": "t3-2026-11-04",
+     "_note": "guard field [15:12] added 2026-11-04 (nvdisasm 13.1: guard 0/3/8/15 print @P0/@P3/@!P0/@!PT DMMA.8x8x4); and_base keeps PT. Replaces the DMMA.8x8x4_P0/P2/P5 era rows (aliases)."
     }
    },
    "operand_sig": "R_R_R_R",
@@ -594253,110 +593913,6 @@
     "write_latency": 0
    }
   },
-  "F2FP.F16.F32.PACK_AB_P2_R_R_R": {
-   "base_op": "F2FP.F16.F32.PACK",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023e",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0xc00000000000000000000fffffff000"
-    }
-   },
-   "operand_sig": "AB_P2_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "F2FP.F16.F32.PACK_AB_P5_R_R_R": {
-   "base_op": "F2FP.F16.F32.PACK",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023e",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0xc00000000000000000000fffffff000"
-    }
-   },
-   "operand_sig": "AB_P5_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "F2FP.F16.F32.PACK_AB_P_R_R_R": {
    "base_op": "F2FP.F16.F32.PACK",
    "ctrl_class": "alu_simple",
@@ -594414,6 +593970,12 @@
      "count": 32,
      "fields": [
       {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
@@ -594432,7 +593994,9 @@
        "token_idx": 3
       }
      ],
-     "variable_mask": "0x0000000000000000000000ffffff0000"
+     "variable_mask": "0x00000000000000ff000000fffffff000",
+     "_src": "t3-2026-11-04",
+     "_note": "guard field [15:12] and the text-inert window [71:64] (nvdisasm 13.1 prints `F2FP.F16.F32.PACK_AB R4, R6, R8` for 0x00/0x01/0x7f/0x80/0xfe/0xff there; the encoder keeps 0xff = nvcc) added 2026-11-04. The lattice around it (same sweep): bits 62/63/72/84/88 text-inert and left unclaimed, 73/74/82/83 rejected by nvdisasm, 79-81 printed as ???n, 75 = RELU, 76 = BF16, 77 = SATFINITE, 78 = MERGE_C (their own rows); cubit's decoder fails closed on F2FP sign-window neighbours instead of absorbing them here. Replaces the F2FP.F16.F32.PACK_AB_P2/P5 era rows (aliases), whose words had [71:64] = 0."
     },
     "_AB": {
      "and_base": "0xff000000000000023e",
@@ -655788,146 +655352,6 @@
     }
    },
    "operand_sig": "P0_R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "HMMA.1688.F16_P2_R_R_R_R": {
-   "base_op": "HMMA.1688.F16",
-   "ctrl_class": "hmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023c",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x8000000000001ff800000fffffff000"
-    }
-   },
-   "operand_sig": "P2_R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "HMMA.1688.F16_P5_R_R_R_R": {
-   "base_op": "HMMA.1688.F16",
-   "ctrl_class": "hmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000023c",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x8000000000001ff800000fffffff000"
-    }
-   },
-   "operand_sig": "P5_R_R_R_R",
    "scheduling": {
     "confidence": "synthetic",
     "def_latency": 16,
@@ -766470,372 +765894,6 @@
     "write_latency": 16
    }
   },
-  "QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R": {
-   "base_op": "QMMA.16816.F16.E4M3.E4M3",
-   "ctrl_class": "qmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x400000000000000027a",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x8000000000005ff800000fffffff000",
-     "_bug280": "b74 vendor text-inert reclaim (280; arb280 x4; ab bake kept=canonical mint; b75..b91 discriminants+b91 kill stay care)"
-    }
-   },
-   "operand_sig": "P0_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "QMMA.16816",
-      "opcode_id": 131,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.16832",
-      "opcode_id": 132,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF",
-      "opcode_id": 133,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF.SP",
-      "opcode_id": 134,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16832",
-      "opcode_id": 135,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16864",
-      "opcode_id": 136,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "HMMA",
-      "read_latency": 16,
-      "write_latency": 16
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R": {
-   "base_op": "QMMA.16816.F16.E4M3.E4M3",
-   "ctrl_class": "qmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x400000000000000027a",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x8000000000005ff800000fffffff000",
-     "_bug280": "b74 vendor text-inert reclaim (280; arb280 x4; ab bake kept=canonical mint; b75..b91 discriminants+b91 kill stay care)"
-    }
-   },
-   "operand_sig": "P2_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "QMMA.16816",
-      "opcode_id": 131,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.16832",
-      "opcode_id": 132,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF",
-      "opcode_id": 133,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF.SP",
-      "opcode_id": 134,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16832",
-      "opcode_id": 135,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16864",
-      "opcode_id": 136,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "HMMA",
-      "read_latency": 16,
-      "write_latency": 16
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R": {
-   "base_op": "QMMA.16816.F16.E4M3.E4M3",
-   "ctrl_class": "qmma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x400000000000000027a",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x8000000000005ff800000fffffff000",
-     "_bug280": "b74 vendor text-inert reclaim (280; arb280 x4; ab bake kept=canonical mint; b75..b91 discriminants+b91 kill stay care)"
-    }
-   },
-   "operand_sig": "P5_R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "QMMA.16816",
-      "opcode_id": 131,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.16832",
-      "opcode_id": 132,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF",
-      "opcode_id": 133,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SF.SP",
-      "opcode_id": 134,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16832",
-      "opcode_id": 135,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA.SP.16864",
-      "opcode_id": 136,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "QMMA (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "HMMA",
-      "read_latency": 16,
-      "write_latency": 16
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
   "QMMA.16816.F16.E4M3.E4M3_P_R_R_R_R": {
    "base_op": "QMMA.16816.F16.E4M3.E4M3",
    "ctrl_class": "qmma",
@@ -779122,7 +778180,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -779621,7 +778680,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780120,7 +779180,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780369,7 +779430,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780452,7 +779514,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780535,7 +779598,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780618,7 +779682,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780701,7 +779766,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -780784,7 +779850,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -781116,7 +780183,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -781615,7 +780683,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x3fff00fffffffffff000"
+     "variable_mask": "0x3fff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR",
@@ -782093,7 +781162,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -782562,7 +781632,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783030,7 +782101,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783264,7 +782336,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783342,7 +782415,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783420,7 +782494,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783498,7 +782573,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783576,7 +782652,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783654,7 +782731,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -783966,7 +783044,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -784434,7 +783513,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0xff00fffffffffff000"
+     "variable_mask": "0xff00fffffffffff000",
+     "_src": "undocumented-e3m4-2026-03"
     }
    },
    "operand_sig": "R_R_R_R_R_R_UR_II",
@@ -1353821,7 +1352901,8 @@
        "shift": 56,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "undocumented-utc-sm120-2026-03"
     }
    },
    "scheduling": {
@@ -1353881,7 +1352962,8 @@
        "shift": 56,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "undocumented-utc-sm120-2026-03"
     }
    },
    "scheduling": {
@@ -1353942,7 +1353024,8 @@
        "shift": 56,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "undocumented-utc-sm120-2026-03"
     }
    },
    "scheduling": {
@@ -1354004,7 +1353087,8 @@
        "shift": 56,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "undocumented-utc-sm120-2026-03"
     }
    },
    "scheduling": {

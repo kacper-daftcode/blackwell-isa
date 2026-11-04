@@ -101,7 +101,13 @@ re-run from the build host — they are **not** re-verified at this revision):
   (20 009 329 / 20 024 512, gate 99.90 PASS).
 - SM121a (as of 2026-09-18): differential legality scan of 260 352 probes vs SM120 with 0 differences;
   `nvdisasm -b SM120` vs `-b SM121a` over 648 992 raw instructions with 0 decode differences; census
-  over a 92 098-word GB10 corpus with 0 failures. Needs the GB10 corpus to re-run.
+  over a 92 098-word GB10 corpus with 0 failures. **Re-run 2026-11-04 on the GB10 host `gx4`**
+  (NVIDIA GB10, the 2026-09 census script over the same corpus, cubit 6392786 / `sm121a.json` at
+  6619782): 91 927 / 91 927 unique words decode (0 failures), text parity against the recorded
+  nvdisasm texts 91 554 / 91 927 = 99.59 % — 373 differences in 17 keys (`F2F` type order 217,
+  `LDL.64 [R+UR+imm]` printed as the descriptor form 95, `R2P` `PR`, `BAR`, `IMNMX`, `SEL -0x1`,
+  IMMA `.ROW/.COL`, …; cubit `docs/KNOWN_ISSUES.md` V3). The 2026-09 "0 failures" holds for decode
+  coverage; text parity at this revision is 99.59 %.
 
 Encoding evidence is not semantic evidence: a row that round-trips tells you how nvdisasm names a
 word, not what the hardware does with it or how long it takes.
@@ -117,6 +123,8 @@ sm120.json
 │   ├── stats
 │   ├── pipe_classes
 │   ├── ctrl_classes / ctrl_epochs
+│   ├── provenance       # legend, sources (every _src tag), history, errata
+│   ├── key_aliases      # retired key name -> current key (2026-11-04)
 │   └── hardware_config
 │
 ├── instructions
@@ -130,7 +138,10 @@ sm120.json
 │       └── _discovery       # provenance for recently added or unusual entries
 │
 ├── sched_only               # scheduling entries without full encoding records
-└── pipeline_config          # resource defaults, latency tables, per-opcode records
+├── pipeline_config          # resource defaults, latency tables, per-opcode records
+├── operand_roles            # operand read/write roles per base_op (liveness passes)
+└── stallfix                 # measured stall floors for cubit's `stallfix` pass
+                             #   sm103a.json: v2 (B300, 2026-08-22); sm120.json: v3 (RTX PRO 6000, 2026-11-03)
 ```
 
 A typical encoding entry:
@@ -158,13 +169,27 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (19 340 of 20 905 SM120 variants at this revision) are
+  measurement in prose. Rows **without** `_src` (19 270 of 20 863 SM120 variants at this revision) are
   the 2026-06..08 *harvest*: fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. Their known defect classes and the audit of them are tracked in
   cubit's `docs/KNOWN_ISSUES.md`.
 - `_meta.provenance.history` keeps the fix-wave notes (formerly loose `_meta.bugNNN` keys) verbatim;
   `_meta.provenance.errata` the former top-level `_errata_*` notes of `sm121a.json`.
 - `count` is the number of harvest samples a row was learned from; `null` on measured rows.
+- `_meta.key_aliases` (2026-11-04) maps retired key names to the key that carries the rows today —
+  the 20 SM120 keys (10 in SM121a) whose mnemonic carried a glued predicate token
+  (`QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R` → `QMMA.16816.F16.E4M3.E4M3_R_R_R_R`, `F2IP.U8.F32_P2_…`,
+  `DMMA.8x8x4_P5_…`, `S2R_P0_R_L`, `MOV_P0_R_II`, …). nvdisasm names their words with the plain
+  mnemonic; cubit resolves an alias for lookups and old text, never prints it. Validated by
+  `sync_table.py` (every alias names an existing key, none shadows one).
+- **Undocumented forms.** Rows whose words nvdisasm (13.1, 13.3) cannot name on SM120 but the silicon
+  executes carry a `_src` whose `sources` entry says `nvdisasm_sm120: "no text"` and cites the
+  measurement: `undocumented-e3m4-2026-03` (22 `QMMA.SF[.SP]` rows with type code 2 = E3M4; the
+  11 dense combinations executed on RTX PRO 6000 Blackwell 2026-08-09, 11/11 legal, 3/3 numerical
+  anchors exact), `undocumented-utc-sm120-2026-03` (`UTCHMMA/UTCIMMA/UTCIMMA.KIND2/UTCQMMA.1CTA`
+  executed on an RTX 5090 2026-03-28 although ptxas refuses `tcgen05.mma` for sm_120; `UTCATOMSWS`),
+  `bug234-2026-08-28` (FFMA2). They stay on purpose: cubit's dynamic audit classifies their words
+  as `vendor_unknown`, not as defects.
 - **Baked control bits.** 880 of the 1 145 SM120 variants that carry non-zero `and_base` bits in
   [127:105] (the control code: stall, yield, barriers, wait mask, reuse) inherited them from the
   compiler sample they were learned from. Decoders strip the control code before matching and
@@ -227,14 +252,20 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 19 340 of 20 883 SM120 encoding variants are harvest rows without a per-field measurement. A static
+- 19 270 of 20 863 SM120 encoding variants are harvest rows without a per-field measurement. A static
   audit (cubit `tools/audit_table.py`, 2026-11-02) flags 1 223 fields that address an operand the key
   does not have, 994 register fields off the standard slots, 257 immediate-bearing keys without an
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  stands at 483 rows with at least one defect after the 2026-11-03 batch (from 1 977); the families
-  are listed in cubit `docs/KNOWN_ISSUES.md` T1.
+  stands at 463 rows with at least one defect after the 2026-11-04 batch (from 1 977; 118 words of
+  the undocumented forms above are `vendor_unknown`, not defects); the families are listed in cubit
+  `docs/KNOWN_ISSUES.md` T1. New from the GB10 host census (2026-11-04): `LDL.64 Rd, [Rn+URm+imm]`
+  has no SM120 row (97 holes in cuBLASLt sm_120 code), the `MUFU` UR-form function field is wrong,
+  and the SM121a text-parity families above.
+- `sm121a.json` still carries 15 keys with a glued predicate token whose plain rows do not provably
+  cover them (`HMMA.1688.F16_P0_…`, `HMMA.SP.16816.*_P0_…`, `LEA_P0_R_R_R_II`, `MOV_P0_R_II`,
+  `PLOP3.LUT_P1_…`, `STS.64_P0_AR_R`, …); they need a GB10-side probe batch.
 - `base_op` values include modifiers (`LDG.E.EL.ELL2.256.STRONG.GPU`): `base_op` is the dotted
   mnemonic in front of the first `_` of the key, `operand_sig` the rest (every entry carries both
   since 2026-11-03).

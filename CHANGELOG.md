@@ -1,5 +1,41 @@
 # blackwell-isa Changelog
 
+## SM120: era-key aliases, undocumented-form provenance, measured `stallfix` section (November 4, 2026)
+
+Session T-3 of the cubit quality work (`blackwell-isa-internal/tools/t3_20261104.py`; evidence in cubit
+`tests/fixtures/sm120_era_keys_20261104_nvdisasm.jsonl`, `tests/sm120_era_keys_20261104.rs`,
+`tests/stallfix_sm120.rs`, `tools/stallfloor/`):
+
+- **Era keys retired into `_meta.key_aliases`.** The 20 `sm120.json` keys whose mnemonic carried a
+  glued predicate token (`DMMA.8x8x4_P0/P2/P5_…`, `ELECT_P0_P_UR_P`, `F2FP.F16.F32.PACK_AB_P2/P5_…`,
+  `F2IP.U8.F32[.RELU]_P0/P2/P5_…`, `HMMA.1688.F16_P2/P5_…`, `IADD_P0_R_R_II`, `MOV_P0_R_II`,
+  `PLOP3.LUT_P1_…`, `QMMA.16816.F16.E4M3.E4M3_P0/P2/P5_…`, `S2R_P0_R_L`, `SHF.L.U32_P0_…`) and the 10 of
+  them in `sm121a.json` whose plain rows provably cover them. nvdisasm 13.1 names every one of their
+  canonical words with the plain mnemonic (probed one word per call). Where the era row covered words
+  the plain row did not, the plain row was widened by probe: `DMMA.8x8x4_R_R_R_R` gained its guard
+  field, `F2FP.F16.F32.PACK_AB_R_R_R` the guard field and the text-inert window [71:64] (the lattice
+  around it is recorded in the row's `_note`: 73/74/82/83 rejected, 79–81 `???n`, 75–78 RELU/BF16/
+  SATFINITE/MERGE_C). `MOV_P0_R_II` and `PLOP3.LUT_P1_…` carried a 1-bit "guard" at bit 7 — they had
+  claimed UMOV / UPLOP3 words. 16 126 → 16 106 forms, 20 883 → 20 863 variants (SM120); 23 833 → 23 823
+  / 26 391 → 26 381 (SM121a). cubit's loader resolves an alias as an encoder-visible, decoder-invisible
+  copy of the plain entry (lookups and old text keep working, the decoder never prints a glued name).
+- **Undocumented forms stay and say so** (owner's decision, 2026-11-03). New `_meta.provenance.sources`
+  entries with `nvdisasm_sm120: "no text"`: `undocumented-e3m4-2026-03` (22 `QMMA.SF[.SP]` rows with
+  the E3M4 type code; 11 dense combinations executed on RTX PRO 6000 Blackwell 2026-08-09),
+  `undocumented-utc-sm120-2026-03` (`UTCHMMA/UTCIMMA/UTCIMMA.KIND2/UTCQMMA.1CTA` executed on an
+  RTX 5090 2026-03-28, `UTCATOMSWS`), and the note on `bug234-2026-08-28` (FFMA2). cubit's dynamic
+  audit classifies their words as `vendor_unknown`, never as defects.
+- **`stallfix` section for SM120** (rules v3): 23 stall floors measured 2026-11-03 on 4x NVIDIA RTX PRO
+  6000 Server Edition (cubit harness `tools/stallfloor/`, 370 cubit-assembled kernels, 32 CTAs ×
+  1 024 threads × 20 repetitions; raw-result SHA-256s in the section's `provenance`): `floor_global`
+  4, `dmix` 5, `pcarry` 5/4 (new keys), guard d0 impossible up to the cap (`guard_d0_forbid`), guard
+  d1 11 / d2 9, `xread` 6/4/2, `urpath` d1 3, `uguard` 10/8/6; `r2ur` unmeasured (the harness model
+  was wrong; the section carries the cap for it until the corrected kernel runs); MUFU needs the
+  scoreboard at every distance; S00 is a hardware interlock on sm_120, never a floor.
+- README: Data Model (`key_aliases`, `provenance`, `operand_roles`, `stallfix`), the SM121a validation
+  status re-run on the GB10 host `gx4` (decode 100 %, text parity 99.59 %, 17 keys named), known
+  issues (463 audited rows, the GB10-census findings, the 15 remaining SM121a era keys).
+
 ## SM120 dynamic-audit batch 1: LDGSTS base field, LDC reuse, 22 foreign-opcode rows (November 3, 2026)
 
 cubit's dynamic audit (`tools/audit_dynamic.py`: the canonical word of every row the static audit
