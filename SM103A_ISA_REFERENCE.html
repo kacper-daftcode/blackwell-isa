@@ -37,6 +37,7 @@ details summary:hover{color:#1a1a1a}
 .hidden{display:none!important}
 a{color:#1a5fb4}
 .foot{text-align:center;font-size:0.76em;color:#999;margin:48px 0 24px;line-height:1.7}
+@media (max-width:899px){table{display:block;overflow-x:auto;max-width:100%}p,b,code,li,h1,h2,td,th,a,strong,span{overflow-wrap:anywhere;word-break:break-word}.ib,.ib *{overflow-wrap:anywhere;word-break:break-word}}
 .note{font-size:0.85em;color:#555;background:#f9f9f5;border-left:3px solid #ddd;
   padding:6px 12px;margin:8px 0}
 .lat-hw{color:#1a7f37;font-weight:600}
@@ -50,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell Ultra (datacenter) (B300 SXM6) &mdash; Unofficial Reference<br>4387 base-op families &middot; 14879 instruction forms &middot; 16451 encoding variants &middot; 14821 with scheduling data &middot; 499 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-03 from <code>sm103a.json</code> (64eaa21 2026-11-03), SHA-256 4eddd702431b0346&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>4387 opcodes &middot; 14879 instruction forms &middot; 16451 encoding variants &middot; 14821 with scheduling data &middot; 499 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-04 from <code>sm103a.json</code> (64eaa21 2026-11-03), SHA-256 4eddd702431b0346&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -64,27 +65,57 @@ details.partials>summary:hover{color:#555}
 <li><a href="#instruction-reference">Instruction Reference</a></li>
 </ol>
 <h2 id="architecture-overview">1. Architecture Overview</h2>
-<p>SM103a is the streaming-multiprocessor architecture of NVIDIA&rsquo;s Blackwell Ultra (datacenter) GPUs (reference part: B300 SXM6). This page is generated from the machine-readable table <code>sm103a.json</code>; the facts below are the table&rsquo;s own metadata and public NVIDIA documentation (compute capability). Microarchitectural numbers this project has not measured are not listed.</p>
-<table><tr><th>Property</th><th>Value</th></tr>
-<tr><td>Architecture</td><td>SM103a (Blackwell Ultra (datacenter))</td></tr>
-<tr><td>CUDA compute capability</td><td>10.3 (__CUDA_ARCH__ = 1030)</td></tr>
-<tr><td>PTX target</td><td>sm_103a</td></tr>
+<p>SM103a is the streaming multiprocessor architecture used in NVIDIA's Blackwell
+datacenter GPUs (B300 SXM6), the refresh of SM100a (B200). Across all 119 probe pairs
+shared with SM100a in the tcgen05 corpus, the 128-bit instruction words are byte-identical
+between the two targets.</p>
+
+<table>
+<tr><th>Property</th><th>Value</th></tr>
+<tr><td>Architecture</td><td>SM103a (Blackwell datacenter)</td></tr>
+<tr><td>CUDA Capability</td><td>10.3 (<code>__CUDA_ARCH__</code> = 1030)</td></tr>
+<tr><td>ELF identification</td><td><code>e_flags</code> SM field <code>0x67</code> (SM120 = <code>0x78</code>, SM100 = <code>0x64</code>)</td></tr>
 <tr><td>Reference GPU</td><td>B300 SXM6</td></tr>
-<tr><td>Instruction width</td><td>128 bits (one 16-byte word: instruction bits + control code)</td></tr>
-<tr><td>Warp size</td><td>32 threads</td></tr>
-<tr><td>Convergence barriers</td><td>B0&ndash;B5 (6 barrier registers)</td></tr>
+<tr><td>Instruction Width</td><td>128 bits (64-bit instruction + 64-bit control word)</td></tr>
+<tr><td>Max Threads per Block</td><td>1024</td></tr>
+<tr><td>Warp Size</td><td>32 threads</td></tr>
+<tr><td>Tensor Core Model</td><td>tcgen05 (TMEM-resident): <code>UTCHMMA</code>/<code>UTCQMMA</code>/<code>UTCIMMA</code>/<code>UTCOMMA</code> MMA forms, <code>LDTM</code>/<code>STTM</code> tensor-memory load/store, <code>UTCCP</code> shared&rarr;TMEM copy, <code>UTCSHIFT</code>, <code>UTCBAR</code>/<code>UTCATOMSWS</code> allocation arbitration</td></tr>
+<tr><td>NVIDIA Internal Codename</td><td>&ldquo;Mercury&rdquo; (SASS code generator)</td></tr>
 </table>
+<h2 id="architecture-notes">1.1 Architecture Notes</h2>
+<div class="note"><strong>SM103a-specific findings</strong>
+<ul style="font-size:0.9em;margin-left:18px">
+<li><strong>CS2R pair write.</strong> <code>CS2R Rd, SRZ</code> clears the even-aligned 64-bit register
+pair <code>Rd:Rd+1</code>, not only <code>Rd</code> (cuda-gdb-proven on B300). Binary patchers must not
+substitute 32-bit zero idioms blindly &mdash; consumers of <code>Rd^1</code> observe the side effect.</li>
+<li><strong>SM100a parity.</strong> For all 119 probe pairs shared with SM100a in the tcgen05 corpus,
+the 128-bit instruction words are byte-identical between sm_100a and sm_103a. The encoding layer
+documented here transfers 1:1 to SM100a.</li>
+<li><strong>tcgen05 deltas vs SM100a (ptxas 13.3 acceptance).</strong> <code>tcgen05.mma kind::i8</code>
+is rejected on sm_103a but accepted on sm_100a. <code>tcgen05.ld.red</code> (<code>LDTM.STAT</code>)
+is accepted only on sm_103a. <code>tcgen05.wait::alloc/dealloc</code> and
+<code>tcgen05.commit complete_tx::bytes</code> are rejected on both (allocation runs through the
+<code>UTCATOMSWS</code>/<code>UTCBAR</code> paths documented in this table).</li>
+</ul></div>
 <h2 id="execution-model">2. Execution Model</h2>
-<p>Each SM executes warps of 32 threads in lockstep (SIMT). Structured divergence uses
-convergence barriers: <code>BSSY</code> sets a reconvergence point, <code>BSYNC</code> waits for all threads
-in the region (SM103a has 6 barrier registers, B0&ndash;B5); <code>WARPSYNC</code> forces reconvergence for
-unstructured control flow.</p>
+<p>Each SM executes warps of 32 threads in lockstep (SIMT). The warp scheduler selects
+a ready warp each cycle and dispatches one instruction.</p>
+
+<h4>Divergence Handling</h4>
+<p>Structured divergence uses convergence barriers: <code>BSSY</code> sets a reconvergence point,
+<code>BSYNC</code> waits for all threads in the region. SM120 has 6 barrier slots (B0&ndash;B5).
+For unstructured control flow, <code>WARPSYNC</code> forces reconvergence.</p>
 
 <h4>Occupancy</h4>
-<p>Register usage determines how many warps co-reside on an SM: registers are allocated per warp in
-units of 256 (8 per thread), the per-thread count is at most 255, and the count the compiler records
-(<code>EIATTR_REGCOUNT</code>) is the highest register touched plus 3. Issue-rate claims (dual issue,
-per-pipe throughput) are not part of this table and are not stated here.</p>
+<p>Register usage determines how many warps can co-reside on an SM. With 65,536 registers and
+a maximum of 255 per thread, the register pressure is the primary occupancy limiter.
+NVIDIA&rsquo;s compiler uses a sophisticated register target selection algorithm (947 decoded configuration knobs)
+that balances register count against warp occupancy, including shared memory spilling as a
+first-class strategy (<code>RegAllocCudaSmemSpillEnable</code>). Measured on the cubins this project
+assembles and disassembles: registers are allocated per warp in units of 256 (8 per thread), and the
+count the compiler records (<code>EIATTR_REGCOUNT</code>) is the highest register touched plus 3; a
+kernel that touches R(N&minus;2) or R(N&minus;1) under a declared count N faults with
+<code>CUDA_ERROR_ILLEGAL_INSTRUCTION</code> (SM120 silicon, 2026-11-02/03).</p>
 <h2 id="register-files">3. Register Files</h2>
 <table>
 <tr><th>File</th><th>Range</th><th>Width</th><th>Encoding</th><th>Description</th></tr>
@@ -159,7 +190,9 @@ compiler (or an assembler&rsquo;s scheduling pass) sets: issue stall, yield, the
 instruction writes, the one it reads, and the barriers it waits for. The layout below was measured on
 SM120 words (nvdisasm decode of all 32 stall/yield combinations on six anchors and exact reassembly of
 11.9 M native instructions; cubit <code>docs/SM120_CONTROL_OPEX.md</code>) and is shared by the other
-Blackwell tables; the SASS text form is <code>[B&lt;wait&gt;:R&lt;rd&gt;:W&lt;wr&gt;:&lt;Y|-&gt;:S&lt;stall&gt;]</code>.</p>
+Blackwell tables; the SASS text form is <code>[B&lt;wait&gt;:R&lt;rd&gt;:W&lt;wr&gt;:&lt;Y|-&gt;:S&lt;stall&gt;]</code>.
+Bits [95:64] below the control code are operand bits of the instruction word (e.g. the fourth
+register or the uniform-register operand), not scheduling state.</p>
 
 <table>
 <tr><th>Bits</th><th>Field</th><th>Description</th></tr>
@@ -169,15 +202,14 @@ Blackwell tables; the SASS text form is <code>[B&lt;wait&gt;:R&lt;rd&gt;:W&lt;wr
 <tr><td class="m">[115:113]</td><td>read barrier</td><td>Scoreboard barrier released when the operands have been read (variable-latency sources); 7 = none.</td></tr>
 <tr><td class="m">[121:116]</td><td>wait mask</td><td>Bit N = wait for barrier BN before issue.</td></tr>
 <tr><td class="m">[124:122]</td><td>reuse</td><td>Operand reuse-cache hints (printed as <code>.reuse</code>).</td></tr>
-<tr><td class="m">[104:96], [127:125]</td><td>class-dependent</td><td>Fixed per control-word class &mdash; see <code>_meta.ctrl_classes</code> / <code>ctrl_epochs</code> (which bits are discriminators and which a scheduler may change).</td></tr>
+<tr><td class="m">[104:96], [127:125]</td><td>class-dependent</td><td>Fixed per control-word class &mdash; see <code>_meta.ctrl_classes</code> / <code>ctrl_epochs</code> (which bits are discriminators and which a scheduler may change). Observed default classes: <code>0x000fc000</code>/<code>0x000fe200</code> (per-instruction class map in <code>_meta.ctrl_classes</code>).</td></tr>
 </table>
-<p class="note">Rows whose <code>and_base</code> has bits set in [127:105] bake the control word of the
-compiler sample they were learned from (the &ldquo;baked-ctrl&rdquo; templates counted by cubit&rsquo;s
-<code>tools/sync_table.py</code> ratchet). Decoders strip the control code before matching and encoders
-overwrite it with the authored or scheduled control, so these bits are a provenance artefact of the
-harvest era, not part of the encoding identity.</p>
+<p class="note">No encoding variant of this table bakes control-code bits [127:105] into its
+<code>and_base</code> (the harvest-era templates that did were cleared on 2026-11-03; cubit&rsquo;s
+<code>tools/sync_table.py</code> ratchet keeps the count at zero). Decoders strip the control code before
+matching and encoders overwrite it with the authored or scheduled control.</p>
 <h2 id="pipeline-units">6. Pipeline Units</h2>
-<p>The SM103a table lists 37 pipeline classes identified from scheduling records. Each instruction form is assigned to one of them; the assignment is a scheduling-model label, not a proof of separate physical execution units.</p>
+<p>SM103a has 37 distinct pipeline classes identified from scheduling records. Each instruction is dispatched to exactly one pipeline unit.</p>
 <table><tr><th>ID</th><th>Pipeline</th><th>Instructions</th><th>Examples</th></tr>
 <tr><td>0</td><td class="m"><strong>UNKNOWN_0</strong></td><td>0</td><td></td></tr>
 <tr><td>1</td><td class="m"><strong>CTRL_FLOW</strong></td><td>2</td><td>BRXU</td></tr>
@@ -218,14 +250,14 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>3</td><td>IMAD, IMNMX</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
-<p>Dependencies are tracked with 6 scoreboard barriers (B0&ndash;B5). A barrier-insertion pass
-works as follows:</p>
+<p>SM103a uses a scoreboard-based dependency tracking system with 6 barriers (B0&ndash;B5).
+The barrier insertion algorithm works as follows:</p>
 
 <ol style="font-size:0.9em;margin-left:20px">
 <li><strong>Build dependency graph</strong> from register definitions and uses within each basic block.</li>
 <li><strong>Classify dependencies</strong> as short-latency (&le; threshold) or long-latency (&gt; threshold):
   <ul>
-  <li>Short: handled by stall count in control word bits [67:64], range 0&ndash;15 cycles.</li>
+  <li>Short: handled by the stall count in control-word bits [108:105], range 0&ndash;15 cycles.</li>
   <li>Long: requires write barrier assignment (e.g., LDG, TEX, S2R).</li>
   </ul></li>
 <li><strong>Assign write barriers</strong>. The producer instruction sets <code>write_barrier = Bn</code> in its control word.
@@ -250,13 +282,13 @@ Cross-block dependencies handled by <code>SbXBlock</code>, <code>CrossBlockDepba
 <tr><td><strong>Local</strong></td><td class="m">LDL, STL</td><td>~100 cycles</td><td>Thread</td>
   <td>Thread-private stack. Backed by global memory but cached in L1.</td></tr>
 <tr><td><strong>Constant</strong></td><td class="m">LDC, LDCU</td><td>~5 cycles</td><td>Grid</td>
-  <td>Banked constant memory c[bank][offset]. Kernel parameters start at c[0x0][0x380] on SM120 (<code>EIATTR_PARAM_CBANK</code>). Uniform variant LDCU loads to UR.</td></tr>
+  <td>Banked constant memory c[bank][offset]. Kernel parameters start at the offset the cubin&rsquo;s <code>EIATTR_PARAM_CBANK</code> record gives (c[0x0][0x380] in the SM120 kernels this project measured). Uniform variant LDCU loads to UR.</td></tr>
 <tr><td><strong>Texture</strong></td><td class="m">TEX, TLD, TLD4</td><td>~200+ cycles</td><td>Device</td>
   <td>Filtered texture access through TEX pipe.</td></tr>
 </table>
 
 <h4>Address Formats</h4>
-<p>Global loads use descriptor-based addressing; shared and constant loads take a register base with an immediate offset:</p>
+<p>Global loads use descriptor-based addressing on SM103a; shared, local and constant loads take a register base with an immediate offset:</p>
 <pre>
 LDG.E Rd, desc[UR4][Ra + imm]    # Global: uniform descriptor + GPR offset + immediate
 LDS   Rd, [Ra + imm]              # Shared: GPR base + immediate offset
@@ -266,7 +298,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <h2 id="instruction-reference">9. Instruction Reference</h2>
 <div class="note">
 <strong>Latency legend:</strong>
-<span class="lat-hw">N ★</span> = measured on hardware (0 instructions; the SM120 measurements are from an RTX 5090) &nbsp;&middot;&nbsp;
+<span class="lat-hw">N ★</span> = measured on B300 hardware (0 instructions) &nbsp;&middot;&nbsp;
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
@@ -4667,6 +4699,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="ACQBULK" id="ACQBULK">
 <h3>ACQBULK</h3>
+<p class="desc">Bulk async-group acquire; pairs with commit/wait tracking of bulk async transactions.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">ACQBULK</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -6247,6 +6280,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="BMOV" id="BMOV">
 <h3>BMOV</h3>
+<p class="desc">Block move between shared-memory windows (cluster/DSMEM path).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">BMOV_B_R</td><td class="m">B_R</td><td class="m">32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">BMOV_R_B</td><td class="m">R_B</td><td class="m">32,CLEAR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -6268,6 +6302,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="BPT" id="BPT">
 <h3>BPT</h3>
+<p class="desc">Breakpoint trap; used by debugging/instrumentation paths.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">BPT_II</td><td class="m">II</td><td class="m">TRAP</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -6543,6 +6578,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="CGAERRBAR" id="CGAERRBAR">
 <h3>CGAERRBAR</h3>
+<p class="desc">Cluster (CGA) error barrier; arbitrates cluster-scope error reporting.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">CGAERRBAR</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -6555,6 +6591,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="CREDUX" id="CREDUX">
 <h3>CREDUX</h3>
+<p class="desc">Cluster-scope reduction producing a uniform-register result.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">CREDUX_UR_R</td><td class="m">UR_R</td><td class="m">F32,MAX, F32,MAXABS, F32,MIN, F32,MINABS, MAX, MAX,S32, MAXABS, MAXABS,S32, MIN, MIN,S32, MINABS, MINABS,S32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -7665,6 +7702,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="ELECT" id="ELECT">
 <h3>ELECT</h3>
+<p class="desc">Elects a single leader lane in the warp (PTX elect.sync): returns a predicate set in exactly the first active lane.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">ELECT_P_UR_P</td><td class="m">P_UR_P</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -7680,12 +7718,14 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="ENDCOLLECTIVE" id="ENDCOLLECTIVE">
 <h3>ENDCOLLECTIVE</h3>
+<p class="desc">Ends a cluster-collective operation scope.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">ENDCOLLECTIVE</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 </div>
 <div class="ib" data-op="ERRBAR" id="ERRBAR">
 <h3>ERRBAR</h3>
+<p class="desc">Error barrier; orders error reporting against execution.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">ERRBAR</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -11915,6 +11955,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FADD2" id="FADD2">
 <h3>FADD2</h3>
+<p class="desc">Packed dual-FP32 addition (two FP32 lanes per instruction).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FADD2_R_R_R</td><td class="m">R_R_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -11931,6 +11972,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FCHK" id="FCHK">
 <h3>FCHK</h3>
+<p class="desc">FP operand classification/check against a range; sets predicates for exception paths.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FCHK_P_R_FI</td><td class="m">P_R_FI</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">FCHK_P_R_II</td><td class="m">P_R_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -12174,6 +12216,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FFMA2" id="FFMA2">
 <h3>FFMA2</h3>
+<p class="desc">Packed dual-FP32 fused multiply-add.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FFMA2_R_R_R_R</td><td class="m">R_R_R_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">FFMA2_R_R_UR_R</td><td class="m">R_R_UR_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -12322,6 +12365,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FMNMX3" id="FMNMX3">
 <h3>FMNMX3</h3>
+<p class="desc">Three-input floating-point min/max.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FMNMX3_R_R_FI_R_P</td><td class="m">R_R_FI_R_P</td><td class="m">FTZ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">FMNMX3_R_R_II_R_P</td><td class="m">R_R_II_R_P</td><td class="m">&amp;mdash;</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -12506,6 +12550,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FMUL2" id="FMUL2">
 <h3>FMUL2</h3>
+<p class="desc">Packed dual-FP32 multiplication.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FMUL2_R_R_R</td><td class="m">R_R_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -12525,6 +12570,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="FRND" id="FRND">
 <h3>FRND</h3>
+<p class="desc">Floating-point round to integral value with explicit rounding mode.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">FRND_R_R</td><td class="m">R_R</td><td class="m">F64, F64,FLOOR, F64,TRUNC, FLOOR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -17251,6 +17297,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="HSET2" id="HSET2">
 <h3>HSET2</h3>
+<p class="desc">Packed FP16x2 compare (predicated sibling of HSETP2).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">HSET2_R_R_FI_FI_P</td><td class="m">R_R_FI_FI_P</td><td class="m">AND,BF,BF16_V2,EQ, AND,EQ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">HSET2_R_R_R_P</td><td class="m">R_R_R_P</td><td class="m">AND,BF,BF16_V2,EQ, AND,EQ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -128017,6 +128064,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="LDTM" id="LDTM">
 <h3>LDTM</h3>
+<p class="desc">TMEM load (tcgen05.ld). Moves values from Tensor Memory into GPRs. Shape encodes the lane/column geometry (16x64b/16x128b/16x256b/32x32b/16x32bx2) with .x1..x128 repetition; optional .pack16 packs two 16-bit TMEM values per register. The .STAT reduction form (tcgen05.ld.red) is accepted on sm_103a only.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LDTM_R_II</td><td class="m">R_II</td><td class="m">16dp128bit, 16dp128bit,x32, 16dp128bit,x8, 16dp256bit, 16dp256bit,PACK16BIT,x8, 16dp256bit,x16, 16dp256bit,x2, 16dp256bit,x32, 16dp256bit,x4, 16dp256bit,x8, 16dp32bit_t0_t15,x16, 16dp32bit_t0_t15,x2, 16dp32bit_t0_t15,x32, 16dp32bit_t0_t15,x8, 16dp32bit_t16_t31,x16, 16dp32bit_t16_t31,x2, 16dp32bit_t16_t31,x32, 16dp32bit_t16_t31,x8, 16dp64bit, 16dp64bit,x32, 16dp64bit,x8, x128, x16, x2, x32, x4, x64, x8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">LDTM_R_R_II</td><td class="m">R_R_II</td><td class="m">16dp32bit_t0_t15,F32,MAX,STAT,x128, 16dp32bit_t0_t15,F32,MAX,STAT,x16, 16dp32bit_t0_t15,F32,MAX,STAT,x2, 16dp32bit_t0_t15,F32,MAX,STAT,x32, 16dp32bit_t0_t15,F32,MAX,STAT,x4, 16dp32bit_t0_t15,F32,MAX,STAT,x64, 16dp32bit_t0_t15,F32,MAX,STAT,x8, 16dp32bit_t0_t15,F32,MIN,STAT,x16, 16dp32bit_t0_t15,F32,MIN,STAT,x2, 16dp32bit_t0_t15,F32,MIN,STAT,x32, 16dp32bit_t0_t15,F32,MIN,STAT,x4, 16dp32bit_t0_t15,F32,MIN,STAT,x8, 16dp32bit_t16_t31,F32,MAX,STAT,x128, 16dp32bit_t16_t31,F32,MAX,STAT,x16, 16dp32bit_t16_t31,F32,MAX,STAT,x2, 16dp32bit_t16_t31,F32,MAX,STAT,x32, 16dp32bit_t16_t31,F32,MAX,STAT,x4, 16dp32bit_t16_t31,F32,MAX,STAT,x64, 16dp32bit_t16_t31,F32,MAX,STAT,x8, 16dp32bit_t16_t31,F32,MIN,STAT,x16, 16dp32bit_t16_t31,F32,MIN,STAT,x2, 16dp32bit_t16_t31,F32,MIN,STAT,x32, 16dp32bit_t16_t31,F32,MIN,STAT,x4, 16dp32bit_t16_t31,F32,MIN,STAT,x8, F32,MAX,STAT,x128, F32,MAX,STAT,x16, F32,MAX,STAT,x2, F32,MAX,STAT,x32, F32,MAX,STAT,x4, F32,MAX,STAT,x64, F32,MAX,STAT,x8, F32,MIN,STAT,x128, F32,MIN,STAT,x16, F32,MIN,STAT,x2, F32,MIN,STAT,x32, F32,MIN,STAT,x4, F32,MIN,STAT,x64, F32,MIN,STAT,x8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -128842,6 +128890,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="LEPC" id="LEPC">
 <h3>LEPC</h3>
+<p class="desc">Load the current program counter (call return address) into a register.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LEPC_R_II</td><td class="m">R_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -129372,6 +129421,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="PREEXIT" id="PREEXIT">
 <h3>PREEXIT</h3>
+<p class="desc">Pre-exit marker; orders outstanding state before the terminating EXIT.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">PREEXIT</td><td class="m"></td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -129431,6 +129481,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="QSPC" id="QSPC">
 <h3>QSPC</h3>
+<p class="desc">Queue/spin-class primitive appearing in vendor CAS-emulation sequences on Blackwell.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">QSPC_P_R_ARI</td><td class="m">P_R_ARI</td><td class="m">D,E, E,S</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -216557,6 +216608,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="RPCMOV" id="RPCMOV">
 <h3>RPCMOV</h3>
+<p class="desc">Conditional move of a PC-relative branch target, used in computed control transfer.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">RPCMOV_II_R</td><td class="m">II_R</td><td class="m">32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">RPCMOV_R_II</td><td class="m">R_II</td><td class="m">32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -217273,6 +217325,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="STAS" id="STAS">
 <h3>STAS</h3>
+<p class="desc">Shared-memory store to a structured/atomic target (descriptor-addressed form).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">STAS_ARI_R</td><td class="m">ARI_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -237258,6 +237311,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="STSM" id="STSM">
 <h3>STSM</h3>
+<p class="desc">Store to matrix-shared targets (structured shared-memory store family).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">STSM_ARI_R</td><td class="m">ARI_R</td><td class="m">16,4,M88, 16,M88, 16,2,M88, 16,MT88, 16,MT168, 16,2,MT88, 16,2,MT168, 16,4,MT88, 16,4,MT168</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -237361,6 +237415,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="STTM" id="STTM">
 <h3>STTM</h3>
+<p class="desc">TMEM store (tcgen05.st). Moves GPR values into Tensor Memory. Same shape grammar as LDTM; optional .unpack16 splits register pairs into 16-bit TMEM slots.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">STTM_II_R</td><td class="m">II_R</td><td class="m">16dp128bit, 16dp128bit,x16, 16dp128bit,x32, 16dp128bit,x8, 16dp256bit, 16dp256bit,EXPAND16BIT,x8, 16dp256bit,x32, 16dp256bit,x8, 16dp32bit_t0_t15,x2, 16dp32bit_t0_t15,x32, 16dp32bit_t0_t15,x8, 16dp32bit_t16_t31,x2, 16dp32bit_t16_t31,x32, 16dp32bit_t16_t31,x8, 16dp64bit, 16dp64bit,x32, 16dp64bit,x8, x16, x2, x32, x8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -237763,6 +237818,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UGETNEXTWORKID" id="UGETNEXTWORKID">
 <h3>UGETNEXTWORKID</h3>
+<p class="desc">Fetches the next cluster work identifier in the launch window (broadcast form).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UGETNEXTWORKID_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">BROADCAST</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -238934,6 +238990,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UP2UR" id="UP2UR">
 <h3>UP2UR</h3>
+<p class="desc">Move a uniform predicate into a uniform register (0/1 materialization).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UP2UR_UR_II_UR_II</td><td class="m">UR_II_UR_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -239400,6 +239457,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCATOMSWS" id="UTCATOMSWS">
 <h3>UTCATOMSWS</h3>
+<p class="desc">tcgen05 TMEM allocation atomics (FIND_AND_SET.ALIGN / AND forms). The hardware arbitration behind tcgen05.alloc/relinquish; ptxas 13.3 has no wait::alloc form — allocation spins on these primitives.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCATOMSWS_UP_UR_UR</td><td class="m">UP_UR_UR</td><td class="m">2CTA,ALIGN,FIND_AND_SET, ALIGN,FIND_AND_SET, FIND_AND_SET</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCATOMSWS_UR_UR</td><td class="m">UR_UR</td><td class="m">AND</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -239440,6 +239498,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCBAR" id="UTCBAR">
 <h3>UTCBAR</h3>
+<p class="desc">tcgen05 allocation barrier arbitrate. Drives the CTA-pool (SMPOOL) allocator handshake for TMEM acquisition.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCBAR_AURI_UR</td><td class="m">AURI_UR</td><td class="m">2CTA</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCBAR_AURI_UR_UR</td><td class="m">AURI_UR_UR</td><td class="m">2CTA,MULTICAST, MULTICAST</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -239481,6 +239540,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCCP" id="UTCCP">
 <h3>UTCCP</h3>
+<p class="desc">tcgen05.cp — copy from shared memory into TMEM under a TMA-style descriptor. Geometry qualifiers select 32x128b/64x128b/128x128b/128x256b tiles with warpx2/warpx4 multicast groupings (cta_group::1/2).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCCP_II_II</td><td class="m">_</td><td class="m">128dp128bit,2CTA,S,T, 128dp128bit,S,T, 2CTA,2x64dp128bit_lw01_lw23,S,T, 2CTA,2x64dp128bit_lw02_lw13,S,T, 2CTA,4dp256bit,S,T, 2CTA,4x32dp128bit,S,T, 2CTA,S,T, 2x64dp128bit_lw01_lw23,S,T, 2x64dp128bit_lw02_lw13,S,T, 4dp256bit,S,T, 4x32dp128bit,S,T, S,T</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -239595,6 +239655,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCHMMA" id="UTCHMMA">
 <h3>UTCHMMA</h3>
+<p class="desc">5th-generation tensor core MMA (tcgen05.mma kind::f16/tf32). Operands A/B come from shared memory or TMEM; the accumulator lives in Tensor Memory (TMEM), addressed by a TMEM descriptor. cta_group::1/2 forms operate on one CTA or a CTA pair.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCHMMA_II_II_II_II_II_UP</td><td class="m">II_II_II_II_II_UP</td><td class="m">2CTA, WS</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCHMMA_II_II_II_II_II_UR_UP</td><td class="m">_</td><td class="m">2CTA</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -239684,6 +239745,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCIMMA" id="UTCIMMA">
 <h3>UTCIMMA</h3>
+<p class="desc">tcgen05 integer MMA (kind::i8). Note: ptxas 13.3 rejects this kind on sm_103a targets; it is accepted on sm_100a.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCIMMA_II_II_II_II_II_UP</td><td class="m">II_II_II_II_II_UP</td><td class="m">&amp;mdash;</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCIMMA_II_II_II_II_II_UR_UP</td><td class="m">_</td><td class="m">2CTA</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -239729,6 +239791,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCOMMA" id="UTCOMMA">
 <h3>UTCOMMA</h3>
+<p class="desc">tcgen05 mxFP4 MMA (kind::mxf4 / mxf4nvf4). Narrow 4-bit operands with block-scaled layouts (4X, BLOCK16 variants); TMEM accumulator.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCOMMA_II_II_II_II_II_II_UP</td><td class="m">_</td><td class="m">4X, BLOCK16</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -239772,6 +239835,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCQMMA" id="UTCQMMA">
 <h3>UTCQMMA</h3>
+<p class="desc">tcgen05 quantized MMA (kind::mxf8f6f4, incl. .block_scale and kind::mxf4/mxf4nvf4 paths). FP8/FP6/FP4 operands with optional per-block scale factors; TMEM accumulator.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCQMMA_II_II_II_II_II_II_UP</td><td class="m">_</td><td class="m">2CTA</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTCQMMA_II_II_II_II_II_UP</td><td class="m">II_II_II_II_II_UP</td><td class="m">2CTA, WS</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -239873,6 +239937,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTCSHIFT" id="UTCSHIFT">
 <h3>UTCSHIFT</h3>
+<p class="desc">tcgen05.shift.down — shifts TMEM contents down across lanes within the operand window (cta_group::1 form).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTCSHIFT_II</td><td class="m">_</td><td class="m">DOWN</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -239886,6 +239951,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTMACCTL" id="UTMACCTL">
 <h3>UTMACCTL</h3>
+<p class="desc">TMA cache-control operation on the uniform datapath.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTMACCTL_AURI</td><td class="m">AURI</td><td class="m">IV, PF</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -240081,6 +240147,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTMAPF" id="UTMAPF">
 <h3>UTMAPF</h3>
+<p class="desc">TMA prefetch issued on the uniform datapath.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTMAPF_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,L2, 4D,L2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -240105,6 +240172,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTMAREDG" id="UTMAREDG">
 <h3>UTMAREDG</h3>
+<p class="desc">TMA atomic reduction to global memory (add/min/max family) under a tensor-map descriptor.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTMAREDG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">3D,ADD, 4D,ADD, 5D,ADD</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -240137,6 +240205,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UTMASTG" id="UTMASTG">
 <h3>UTMASTG</h3>
+<p class="desc">TMA store to global memory issued on the uniform datapath (cp.async.bulk.tensor store); tile modes 1D..5D under a tensor-map descriptor in UR space.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UTMASTG_AURI_AURI</td><td class="m">AURI_AURI</td><td class="m">2D, 3D, 4D, 5D, 5D,IM2COL</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UTMASTG_AURI_AURI_II</td><td class="m">AURI_AURI_II</td><td class="m">4D</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -240198,6 +240267,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="UVIRTCOUNT" id="UVIRTCOUNT">
 <h3>UVIRTCOUNT</h3>
+<p class="desc">tcgen05 virtual-count bookkeeping for the TMEM pool; DEALLOC.SMPOOL releases the CTA's TMEM allocation back to the pool.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">UVIRTCOUNT_II</td><td class="m">II</td><td class="m">DEALLOC,SMPOOL</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -240210,6 +240280,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="VABSDIFF" id="VABSDIFF">
 <h3>VABSDIFF</h3>
+<p class="desc">Integer absolute-difference accumulate (video/vision vector op).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">VABSDIFF_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">U32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -240226,6 +240297,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="VIADD" id="VIADD">
 <h3>VIADD</h3>
+<p class="desc">Video/vector integer add (sub-word packed integer arithmetic).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">VIADD_R_R_II</td><td class="m">R_R_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">VIADD_R_R_UR</td><td class="m">R_R_UR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -240254,6 +240326,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="VIADDMNMX" id="VIADDMNMX">
 <h3>VIADDMNMX</h3>
+<p class="desc">Fused vector integer add + min/max.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">VIADDMNMX_R_R_II_R_P</td><td class="m">R_R_II_R_P</td><td class="m">U32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">VIADDMNMX_R_R_R_II_P</td><td class="m">R_R_R_II_P</td><td class="m">U32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -240512,6 +240585,7 @@ Collapsed by default — click to expand.
 </div>
 <div class="ib" data-op="VIMNMX3" id="VIMNMX3">
 <h3>VIMNMX3</h3>
+<p class="desc">Three-input vector integer min/max.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">VIMNMX3_R_R_R_R_P</td><td class="m">R_R_R_R_P</td><td class="m">RELU</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">VIMNMX3_R_R_UR_R_P</td><td class="m">R_R_UR_R_P</td><td class="m">&amp;mdash;</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
@@ -240660,7 +240734,7 @@ Collapsed by default — click to expand.
 </table>
 </div>
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-03 from sm103a.json (64eaa21 2026-11-03), SHA-256 4eddd702431b0346866a7e8dbbf8126cf65349f1fcd0d4a0441a9a55d57714ea<br>
+SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-04 from sm103a.json (64eaa21 2026-11-03), SHA-256 4eddd702431b0346866a7e8dbbf8126cf65349f1fcd0d4a0441a9a55d57714ea<br>
 14879 instruction forms &middot; 16451 encoding variants &middot; 499 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>

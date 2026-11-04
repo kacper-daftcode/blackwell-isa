@@ -1,5 +1,31 @@
 # blackwell-isa Changelog
 
+## SM121a text parity to 100 %; SM120 `stallfix` r2ur floor measured (November 4, 2026, session T-4)
+
+The GB10 census of 2026-11-04 left 60 SM121a text differences in shared families whose SM120 rows
+already print the vendor text plus two SM121a-only harvest rows. `blackwell-isa-internal/tools/t4_sm121a_parity.py`
+adopts the measured SM120 rows for the shared keys (`sm121a.json` is delta-driven vs SM120, and
+SM121a ≡ SM120 for these opcodes — 0 decode differences over 91 927 words):
+
+- `R2P`, `IMNMX_P_P_R_R_UR_P_P`, `SEL_R_R_II_P` (the 33-bit `.64` immediate → `-0x1` glyph), `REDUX_UR_R`
+  (the duplicate `.AND` op=0 group gone): the SM120 rows adopted verbatim.
+- `BAR`: the era rows `BAR_II_II` / `BAR_II_P` / `BAR_R_R` (which baked a spurious 26-bit second
+  immediate → `BAR.SYNC.DEFER_BLOCKING 0x0, 0x0`) dropped; SM120's clean per-form `BAR.*` keys adopted.
+- `DEPBAR`: the harvest rows that dropped the `SBn` scoreboard token replaced by SM120's `DEPBAR_II_II`.
+- `UIMNMX.U64_UP_UP_UR_UR_II_UP_UP`: the scrambled harvest row rebuilt from the SM120 U64 register-form
+  layout (op5 = 32-bit immediate, trailing uniform-predicate negation at bits 80/90).
+
+The rest are cubit printer facts shared by SM120 (`ATOMS`/`ARRIVES` `[Rm+URn]` glyph now fires for the
+whole sm_120 encoding family incl. sm_121a; the `F2IP` modifier order `.U8.F32.TRUNC.NTZ`; the `IMMA`
+`.ROW`/`.COL` matrix-layout print). Parity on the 373 recorded census-mismatch words: **372 / 373** —
+the one residue is `LEPC` (a PC-relative address the isolated-word census renders at address 0; it is
+byte-identical to the vendor in a full disassembly). Re-run of the full GB10 census: see cubit V3.
+
+`sm120.json` `stallfix`: `floor_r2ur_d0` 11 → **4** (== `floor_global`), measured 2026-11-04 on the test
+host (4× RTX PRO 6000 Server Edition, harness v3 r2ur kernels with warp-uniform inputs: `model_r2ur`
+PASS, 26 floors PASS on every path). R2UR broadcasts one lane; the v2 model that summed per-thread
+values was wrong, now corrected. cubit KNOWN_ISSUES A3 closed in full.
+
 ## SM120/SM121a batch 2: the GB10-host census follow-up (November 4, 2026, `15caf70`)
 
 The 2026-09 SM121a census script re-run on `gx4` (NVIDIA GB10) exposed four defects, fixed with

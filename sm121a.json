@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26380,
-   "rows_without_src": 25742,
+   "rows_total": 26381,
+   "rows_without_src": 25733,
    "sources": {
     "ERR-194 port fleet b4fill4 (f2i38-ldef); silicon-verify nvdisasm SM121a 25/25 iter143": {
      "rows": 25,
@@ -367,6 +367,14 @@
      "date": "2026-11-04",
      "tool": "blackwell-isa-internal/tools/t3_batch2_20261104.py",
      "test": "tests/sm120_f2f_pair_20261104.rs"
+    },
+    "dsv41-sm120-2026-10-22": {
+     "rows": 11,
+     "kind": "SM120 row adopted into SM121a (T-4 text-parity pass; delta-driven, SM121a == SM120 for the opcode)"
+    },
+    "uimnmx-u64-ii-sm121a-2026-11-04": {
+     "rows": 1,
+     "kind": "GB10 census: UIMNMX.U64 immediate form rebuilt from the SM120 U64 register-form layout"
     }
    },
    "history": {
@@ -580080,7 +580088,8 @@
     "stall_base": 5,
     "throughput": 1,
     "write_latency": 0
-   }
+   },
+   "encode_only": true
   },
   "BAR.RED.POPC.DEFER_BLOCKING_II_II_P": {
    "base_op": "BAR.RED.POPC.DEFER",
@@ -580251,49 +580260,36 @@
    }
   },
   "BAR.SYNC.DEFER_BLOCKING_II": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
    "base_op": "BAR.SYNC.DEFER_BLOCKING",
    "ctrl_class": "barrier",
    "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0x100000000000000000b1d",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 12,
-       "extraction": "imm",
-       "shift": 42,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x3ffc000000f000"
-    },
-    "_BLOCKING": {
-     "and_base": "0x0000000000000000000000000000031d",
+     "and_base": "0x00000000000100000000000000000b1d",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 11,
-       "token_idx": 1
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 4,
        "extraction": "imm",
        "shift": 54,
-       "token_idx": 0
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
-     "variable_mask": "0x1c0000000000000003c000000000f800"
+     "variable_mask": "0x000000000000000003c000000000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.SYNC.DEFER_BLOCKING: barrierID4@[57:54], immediatecount12@[53:42], registercount8@[39:32]. R,R operands alias onephysicalregisterfield; encoder must require equality."
     }
    },
-   "operand_sig": "BLOCKING_II",
+   "operand_sig": "II",
    "scheduling": {
     "confidence": "synthetic",
     "def_latency": 0,
@@ -580353,138 +580349,8 @@
     "stall_base": 5,
     "throughput": 1,
     "write_latency": 0
-   }
-  },
-  "BAR_II_II": {
-   "_source103a": true,
-   "base_op": "BAR",
-   "mod_groups": {
-    "ARV": {
-     "and_base": "0x00000000000020000000000000000b1d",
-     "count": 9,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 13,
-       "extraction": "imm",
-       "shift": 42,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 23,
-       "extraction": "imm",
-       "shift": 54,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00001c000000000003c680000000f000"
-    },
-    "DEFER_BLOCKING,SYNC": {
-     "and_base": "0x00000000000100000000000000000b1d",
-     "count": 20,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 26,
-       "extraction": "imm",
-       "shift": 54,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 12,
-       "extraction": "imm",
-       "shift": 42,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x00e00e000000000003c680000000f000"
-    }
    },
-   "operand_sig": "II_II",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "BAR_II_P": {
-   "_source103a": true,
-   "base_op": "BAR",
-   "mod_groups": {
-    "AND,DEFER_BLOCKING,RED": {
-     "and_base": "0x00000000000144000000000000007b1d",
-     "count": 16,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 2
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 15,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000038000000000000000000000"
-    },
-    "DEFER_BLOCKING,OR,RED": {
-     "and_base": "0x00000000000148000000000000007b1d",
-     "count": 16,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 2
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 15,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000048000000000000000000000"
-    }
-   },
-   "operand_sig": "II_P",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
+   "encode_only": true
   },
   "BMOV.32_R_II": {
    "base_op": "BMOV.32",
@@ -584506,174 +584372,6 @@
     "read_latency": 18,
     "stall_base": 4,
     "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "DEPBAR.LE_II_II": {
-   "ctrl_class": "barrier",
-   "mod_groups": {
-    "LE": {
-     "and_base": "0x0000000000000000000080000000791a",
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 38,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x00000000000000000000004000000000"
-    }
-   },
-   "base_op": "DEPBAR.LE",
-   "operand_sig": "II_II"
-  },
-  "DEPBAR.LE_P_II": {
-   "base_op": "DEPBAR.LE",
-   "ctrl_class": "barrier",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000091a",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 38,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000fc00000f000"
-    }
-   },
-   "operand_sig": "P_II",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "DEPBAR",
-      "opcode_id": 29,
-      "pipe_name": "MEMORY",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "DEPBAR (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": true,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 12,
-    "pipe_name": "BARRIER",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 1,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "DEPBAR_II": {
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000000073a9",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x00000000ffffffffffffffffffff0000"
-    }
-   },
-   "base_op": "DEPBAR",
-   "operand_sig": "II"
-  },
-  "DEPBAR_L_II": {
-   "base_op": "DEPBAR",
-   "ctrl_class": "barrier",
-   "mercury": [],
-   "mod_groups": {
-    "LE": {
-     "and_base": "0x0000000000000000000080000000791a",
-     "count": 150,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 38,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "",
-       "shift": 44,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "",
-       "shift": 46,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000000000000053c000000000"
-    }
-   },
-   "operand_sig": "L_II",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "DEPBAR",
-      "opcode_id": 29,
-      "pipe_name": "MEMORY",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "DEPBAR (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": true,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 12,
-    "pipe_name": "BARRIER",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 1,
-    "throughput": 1,
     "write_latency": 0
    }
   },
@@ -679884,55 +679582,152 @@
    "mercury": [],
    "mod_groups": {
     "S64": {
-     "and_base": "0xbffe6000000000000007c17",
-     "count": 150,
+     "and_base": "0x00000000080006000000000000000c17",
+     "count": 1,
      "fields": [
-      {
-       "bits": 5,
-       "extraction": "",
-       "shift": 17,
-       "token_idx": 0
-      },
-      {
-       "bits": 5,
-       "extraction": "",
-       "shift": 25,
-       "token_idx": 0
-      },
       {
        "bits": 4,
-       "extraction": "",
-       "shift": 33,
+       "extraction": "guard",
+       "shift": 12,
        "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c000000000000000000001e3e3e0000"
-    },
-    "U64": {
-     "_derived": "iter7-fit2",
-     "and_base": "0x000000000bffe4000000000000007c17",
-     "count": 17,
-     "fields": [
+      },
       {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 84,
+       "token_idx": 2
+      },
+      {
+       "shift": 16,
        "bits": 8,
        "extraction": "reg",
-       "shift": 16,
        "token_idx": 3
       },
       {
+       "shift": 24,
        "bits": 8,
        "extraction": "reg",
-       "shift": 24,
        "token_idx": 4
       },
       {
+       "shift": 32,
        "bits": 8,
        "extraction": "ureg",
-       "shift": 32,
        "token_idx": 5
+      },
+      {
+       "shift": 87,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 6
+      },
+      {
+       "shift": 90,
+       "bits": 1,
+       "extraction": "inv",
+       "token_idx": 6
+      },
+      {
+       "shift": 77,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 7
+      },
+      {
+       "shift": 80,
+       "bits": 1,
+       "extraction": "inv",
+       "token_idx": 7
+      },
+      {
+       "shift": 122,
+       "bits": 1,
+       "extraction": "reuse",
+       "token_idx": 4
       }
      ],
-     "variable_mask": "0x0"
+     "variable_mask": "0x0400000007ffe000000000fffffff000",
+     "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22"
+    },
+    "U64": {
+     "and_base": "0x00000000080004000000000000000c17",
+     "variable_mask": "0x0400000007ffe000000000fffffff000",
+     "fields": [
+      {
+       "shift": 12,
+       "bits": 4,
+       "extraction": "guard",
+       "token_idx": 0
+      },
+      {
+       "shift": 81,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 1
+      },
+      {
+       "shift": 84,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 2
+      },
+      {
+       "shift": 16,
+       "bits": 8,
+       "extraction": "reg",
+       "token_idx": 3
+      },
+      {
+       "shift": 24,
+       "bits": 8,
+       "extraction": "reg",
+       "token_idx": 4
+      },
+      {
+       "shift": 32,
+       "bits": 8,
+       "extraction": "ureg",
+       "token_idx": 5
+      },
+      {
+       "shift": 87,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 6
+      },
+      {
+       "shift": 90,
+       "bits": 1,
+       "extraction": "inv",
+       "token_idx": 6
+      },
+      {
+       "shift": 77,
+       "bits": 3,
+       "extraction": "pred",
+       "token_idx": 7
+      },
+      {
+       "shift": 80,
+       "bits": 1,
+       "extraction": "inv",
+       "token_idx": 7
+      },
+      {
+       "shift": 122,
+       "bits": 1,
+       "extraction": "reuse",
+       "token_idx": 4
+      }
+     ],
+     "count": 1,
+     "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22"
     }
    },
    "operand_sig": "P_P_R_R_UR_P_P",
@@ -679986,7 +679781,8 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "_semantic_re": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22"
   },
   "ISETP.EQ.AND_P_P_R_II_P": {
    "base_op": "ISETP.EQ.AND",
@@ -798083,52 +797879,69 @@
    }
   },
   "R2P_II_R_II": {
-   "_source103a": true,
    "base_op": "R2P",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0x00000000000000000000000000007804",
-     "count": 643,
+     "and_base": "0x00000000000000000000000000000804",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "byte_sel",
-       "shift": 76,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
        "bits": 32,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 2,
+       "extraction": "byte_sel",
+       "shift": 76,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
-     "variable_mask": "0x07f03e00000030000000007fff000000"
+     "variable_mask": "0x0400000000003000ffffffffff00f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 R2PfirstoperandisliteralPR; sourceR8@24/mask32@32/sourcebyte_selector2@76."
     }
    },
    "operand_sig": "II_R_II",
    "scheduling": {
-    "def_latency": 1,
+    "confidence": "synthetic",
+    "def_latency": 4,
     "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
    }
   },
   "R2P_L_R_II": {
@@ -798182,7 +797995,8 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "encode_only": true
   },
   "R2UR_UR_R": {
    "base_op": "R2UR",
@@ -1295011,6 +1294825,7 @@
   "REDUX_UR_R": {
    "mod_groups": {
     "": {
+     "_evidence": "bug193: canonical bare-AND row (op[78:81)=0, b73=0 via and_base). opaque_mod tok0 fields removed: printer appended '.?AND.?U32' suffix junk; vendor glyph is plain REDUX (arb193 op0.b73_0).",
      "and_base": "0x000000000000000000000000000003c4",
      "fields": [
       {
@@ -1295036,26 +1294851,16 @@
        "extraction": "reuse",
        "shift": 122,
        "token_idx": 2
-      },
-      {
-       "bits": 3,
-       "extraction": "opaque_mod",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "opaque_mod",
-       "shift": 73,
-       "token_idx": 0
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "AND": {
+     "_evidence": "bug193: vendor elides AND on sm_120a (op=0 prints bare REDUX; ptxas/nvdisasm 13.3.73 16-state sweep arb193.json + 3 hexdb anchors red1_120/ptx1_120/ptx2_120). Retention encode_only so legacy text REDUX.AND still encodes byte-exact; decode-invisible.",
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
      "and_base": "0x000000000000000000000000000003c4",
      "count": 1,
+     "encode_only": true,
      "fields": [
       {
        "bits": 4,
@@ -1295082,7 +1294887,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "MAX": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295114,7 +1294919,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "MAX,S32": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295146,7 +1294951,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "MIN": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295178,7 +1294983,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "MIN,S32": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295210,7 +1295015,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "OR": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295242,29 +1295047,151 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
-    "S32,SUM": {
-     "_derived": "iter7-fit1-port",
-     "and_base": "0x000000000000c20000000000000073c4",
-     "count": 1,
+    "OR,S32": {
+     "_evidence": "bug194: op[78:81)=1 b73=1 => vendor `REDUX.OR.S32` (arb193 16-state ptxas/nvdisasm 13.3.73 sm_120a sweep; zero corpus anchors for the state, see 193.md sec.1/sec.8).",
+     "and_base": "0x420000000000000003c4",
+     "count": 0,
      "fields": [
       {
-       "_src": "2aE",
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
        "bits": 8,
        "extraction": "ureg",
        "shift": 16,
        "token_idx": 1
       },
       {
-       "_src": "2aE",
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
        "token_idx": 2
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
       }
      ],
-     "variable_mask": "0x022fd60000000000000000003f5f0000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
+    },
+    "S32": {
+     "_evidence": "bug194: op[78:81)=0 b73=1 => vendor `REDUX.S32` (arb193 16-state ptxas/nvdisasm 13.3.73 sm_120a sweep; zero corpus anchors for the state, see 193.md sec.1/sec.8).",
+     "and_base": "0x20000000000000003c4",
+     "count": 0,
+     "fields": [
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
+    },
+    "S32,SUM": {
+     "_evidence": "bug194: op[78:81)=3 b73=1 => vendor `REDUX.SUM.S32` (arb193 16-state ptxas/nvdisasm 13.3.73 sm_120a sweep; zero corpus anchors for the state, see 193.md sec.1/sec.8).",
+     "and_base": "0xc20000000000000003c4",
+     "count": 0,
+     "fields": [
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
+    },
+    "S32,XOR": {
+     "_evidence": "bug194: op[78:81)=2 b73=1 => vendor `REDUX.XOR.S32` (arb193 16-state ptxas/nvdisasm 13.3.73 sm_120a sweep; zero corpus anchors for the state, see 193.md sec.1/sec.8).",
+     "and_base": "0x820000000000000003c4",
+     "count": 0,
+     "fields": [
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i92-194-2026-08-26 (S32-sibling law; arb193.json 16-state ptxas/nvdisasm 13.3.73 sm_120a)",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "SUM": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295296,7 +1295223,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     },
     "XOR": {
      "_source": "cracked from ptxas sm_120a redux.sync (modes [80:78], S32 bit73)",
@@ -1295328,7 +1295255,7 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x1c0000000001c2ff00000000fffff000"
+     "variable_mask": "0x1c000000000005ff00000000fffff000"
     }
    },
    "base_op": "REDUX",
@@ -1296415,54 +1296342,55 @@
      "variable_mask": "0x1c00000007800000fffffffffffff000"
     },
     "64": {
-     "_derived": "iter7-fit1-patch",
-     "and_base": "0x00000000000000000000000000007407",
-     "count": 61,
+     "and_base": "0x00000000000000000000000000000407",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
-       "bits": 32,
+       "bits": 33,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "imm_shr3",
-       "shift": 64,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "inv",
+       "extraction": "neg",
        "shift": 90,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "dsv41-sm120-2026-10-22"
       }
      ],
-     "variable_mask": "0x1c00000003800001ffffffffffff0000"
+     "variable_mask": "0x0000000007800001fffffffffffff000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1: SEL.64 opcode0x407 has signed33-bit immediate[64:32], not a uniform source; bit64 is sign/bit32, not imm>>3."
     }
    },
    "operand_sig": "R_R_II_P",
@@ -1313981,21 +1313909,25 @@
    "mercury": [],
    "mod_groups": {
     "": {
-     "_derived": "sparklab q2 corpus-regression",
-     "_instances": 2,
-     "_unexplained_mask": "0x00000000000000000000000000000000",
-     "and_base": "0x000000000fffe4000000000110000805",
+     "and_base": "0x00000000080004000000000000000885",
+     "count": null,
      "fields": [
       {
        "bits": 4,
-       "extraction": "pred",
+       "extraction": "guard",
        "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 81,
        "token_idx": 1
       },
       {
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 12,
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 84,
        "token_idx": 2
       },
       {
@@ -1314007,17 +1313939,43 @@
       {
        "bits": 8,
        "extraction": "ureg",
-       "shift": 3,
+       "shift": 24,
        "token_idx": 4
       },
       {
-       "bits": 8,
+       "bits": 32,
        "extraction": "imm",
-       "shift": 19,
+       "shift": 32,
        "token_idx": 5
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 77,
+       "token_idx": 6
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 80,
+       "token_idx": 6
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 87,
+       "token_idx": 7
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 90,
+       "token_idx": 7
       }
      ],
-     "variable_mask": "0x00000000000000000000000007fff7f8"
+     "variable_mask": "0x0000000007ffe000fffffffffffff000",
+     "_src": "uimnmx-u64-ii-sm121a-2026-11-04",
+     "_note": "GB10 census: II form of UIMNMX.U64; rebuilt from the SM120 U64 reg-form layout, op5 = 32-bit immediate, trailing uniform-predicate negation at bits 80/90."
     }
    },
    "operand_sig": "UP_UP_UR_UR_II_UP_UP",
@@ -1366488,74 +1366446,6 @@
     "stall_base": 1,
     "throughput": 4,
     "write_latency": 0
-   }
-  },
-  "BAR_R_R": {
-   "base_op": "BAR",
-   "operand_sig": "R_R",
-   "mod_groups": {
-    "ARV": {
-     "and_base": "0x0000000000002000000000000000031d",
-     "variable_mask": "0x0000200000000000000000ff0000f000",
-     "count": 15,
-     "_src": "iter144-2026-08-23",
-     "_note": "NEW ROW (BAR_R_R brak w tabeli mimo zywego silicon-string). Silicon word-probe nvdisasm -b SM121a, wlasne slowa syntetyczne: per-bit base-walk (req bits {0,2,3,4,8,9}+hi{77;106,110,111,112}, bit109 free), guard fwd@[12,16) (g7=none), OBA operandy czytaja TO SAMO pole reg 8b@[32,40) (vendor drukuje 'BAR.ARV Rn, Rn'). fleet sm103a row (e8dffdd) ab=0x0001e40000002000-lo0x731d z duplikatem pola (32,8)x2 \u2014 u nas exact-fit z 15 unikalnych renderow.",
-     "fields": [
-      {
-       "shift": 12,
-       "bits": 4,
-       "token_idx": 0,
-       "extraction": "guard"
-      },
-      {
-       "shift": 32,
-       "bits": 8,
-       "token_idx": 1,
-       "extraction": "reg"
-      },
-      {
-       "shift": 32,
-       "bits": 8,
-       "token_idx": 2,
-       "extraction": "reg"
-      }
-     ]
-    },
-    "DEFER_BLOCKING,SYNC": {
-     "and_base": "0x0000000000010000000000000000031d",
-     "variable_mask": "0x0000200000000000000000ff0000f000",
-     "count": 4,
-     "_src": "iter144-2026-08-23",
-     "_note": "mg-discriminator: bit80 (vs ARV bit77). Render 'BAR.SYNC.DEFER_BLOCKING Rn, Rn'.",
-     "fields": [
-      {
-       "shift": 12,
-       "bits": 4,
-       "token_idx": 0,
-       "extraction": "guard"
-      },
-      {
-       "shift": 32,
-       "bits": 8,
-       "token_idx": 1,
-       "extraction": "reg"
-      },
-      {
-       "shift": 32,
-       "bits": 8,
-       "token_idx": 2,
-       "extraction": "reg"
-      }
-     ]
-    }
-   },
-   "scheduling": {
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "def_latency": 1,
-    "throughput": 1,
-    "is_variable_latency": false,
-    "confidence": "synthetic"
    }
   },
   "PLOP3.LUT_P_P_R_R_R_II_II": {
@@ -2059239,6 +2059129,540 @@
    },
    "_note": "476 plain ELL2.256 NA-side graft (klon donora EL): lysine side-bits b75 .64 / LTC sel [74:73] / b80 sem-swap; delta EL->NA = 0x7@[86:84] zmierzona verbatim z par 466; vm/fields verbatim, count zdjety. vendor law arb476(72)+arb476b(4) nvdisasm 13.3.73 raw -b x4 AGREE EVERY (div=tylko b81-LDG era-split standing-463brat). NIE graftowane: LTC256B.b75 combo / _II / _P / b81-b85 standing-loud; STG-side 121a = 121a-parity [NT]; fantom _II Sel.b73-class = 476b claim_forbid (osobny pod-ruch).",
    "_src476": "bug476-2026-09-17"
+  },
+  "BAR.SYNC.DEFER_BLOCKING_II_II": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.SYNC.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000100000000000000000b1d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 4,
+       "extraction": "imm",
+       "shift": 54,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 12,
+       "extraction": "imm",
+       "shift": 42,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x000000000000000003fffc000000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.SYNC.DEFER_BLOCKING: barrierID4@[57:54], immediatecount12@[53:42], registercount8@[39:32]. R,R operands alias onephysicalregisterfield; encoder must require equality.",
+     "claim_forbid": [
+      {
+       "shift": 42,
+       "bits": 12,
+       "values": [
+        0
+       ]
+      }
+     ]
+    }
+   },
+   "operand_sig": "II_II",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.SYNC.DEFER_BLOCKING_II_R": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.SYNC.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000010000000000000000091d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 4,
+       "extraction": "imm",
+       "shift": 54,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x000000000000000003c000ff0000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.SYNC.DEFER_BLOCKING: barrierID4@[57:54], immediatecount12@[53:42], registercount8@[39:32]. R,R operands alias onephysicalregisterfield; encoder must require equality."
+    }
+   },
+   "operand_sig": "II_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.SYNC.DEFER_BLOCKING_R_R": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.SYNC.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000010000000000000000031d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ff0000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.SYNC.DEFER_BLOCKING: barrierID4@[57:54], immediatecount12@[53:42], registercount8@[39:32]. R,R operands alias onephysicalregisterfield; encoder must require equality."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.RED.OR.DEFER_BLOCKING_II_R_P": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.RED.OR.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000014800000000000000091d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 4,
+       "extraction": "imm",
+       "shift": 54,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x000000000780000003c000ff0000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.RED.OR.DEFER_BLOCKING uses sameID/countfieldselectionasSYNC pluspredicate[89:87]/neg90; R,Rcountoperandsaliasonephysicalfield."
+    }
+   },
+   "operand_sig": "II_R_P",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.RED.OR.DEFER_BLOCKING_R_R_P": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.RED.OR.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000014800000000000000031d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x0000000007800000000000ff0000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.RED.OR.DEFER_BLOCKING uses sameID/countfieldselectionasSYNC pluspredicate[89:87]/neg90; R,Rcountoperandsaliasonephysicalfield."
+    }
+   },
+   "operand_sig": "R_R_P",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.RED.OR.DEFER_BLOCKING_II_II_P": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.RED.OR.DEFER_BLOCKING",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000148000000000000000b1d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 4,
+       "extraction": "imm",
+       "shift": 54,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 12,
+       "extraction": "imm",
+       "shift": 42,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x000000000780000003fffc000000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.RED.OR.DEFER_BLOCKING uses sameID/countfieldselectionasSYNC pluspredicate[89:87]/neg90; R,Rcountoperandsaliasonephysicalfield."
+    }
+   },
+   "operand_sig": "II_II_P",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.ARV_II_II": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.ARV",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000020000000000000000b1d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 4,
+       "extraction": "imm",
+       "shift": 54,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 12,
+       "extraction": "imm",
+       "shift": 42,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x000000000000000003fffc000000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.ARV usesID4@54,count12@42oraliasedR8@32; bit77selectsARV, bit80clear(nodeferredblocking)."
+    }
+   },
+   "operand_sig": "II_II",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "BAR.ARV_R_R": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "BAR.ARV",
+   "ctrl_class": "barrier",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000002000000000000000031d",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "dsv41-sm120-2026-10-22"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "dsv41-sm120-2026-10-22"
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ff0000f000",
+     "_src": "dsv41-sm120-2026-10-22",
+     "_note": "NVIDIA13.1 BAR.ARV usesID4@54,count12@42oraliasedR8@32; bit77selectsARV, bit80clear(nodeferredblocking)."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 5,
+    "throughput": 1,
+    "write_latency": 0
+   }
+  },
+  "DEPBAR_II_II": {
+   "_o2_fleet": "fleet-add per O2 2026-08-25 (cubit errata series)",
+   "base_op": "DEPBAR",
+   "ctrl_class": "barrier",
+   "mod_groups": {
+    "LE": {
+     "and_base": "0x0000000000000000000080000000791a",
+     "count": 393,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 3,
+       "extraction": "imm",
+       "shift": 44,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 6,
+       "extraction": "imm",
+       "shift": 38,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x14003e000000000000007fc000000000"
+    }
+   },
+   "operand_sig": "II_II",
+   "scheduling": {
+    "_all_entries": [
+     {
+      "name": "DEPBAR",
+      "opcode_id": 29,
+      "pipe_name": "MEMORY",
+      "read_latency": 0,
+      "write_latency": 0
+     },
+     {
+      "name": "DEPBAR (synthetic)",
+      "opcode_id": null,
+      "pipe_name": "BARRIER",
+      "read_latency": 0,
+      "write_latency": 0
+     }
+    ],
+    "confidence": "synthetic",
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 12,
+    "pipe_name": "BARRIER",
+    "ptxas_raw": null,
+    "read_latency": 0,
+    "stall_base": 1,
+    "throughput": 1,
+    "write_latency": 0
+   }
   }
  },
  "pipeline_config": {

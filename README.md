@@ -104,10 +104,13 @@ re-run from the build host — they are **not** re-verified at this revision):
   over a 92 098-word GB10 corpus with 0 failures. **Re-run 2026-11-04 on the GB10 host `gx4`**
   (NVIDIA GB10, the 2026-09 census script over the same corpus, cubit 6392786 / `sm121a.json` at
   6619782): 91 927 / 91 927 unique words decode (0 failures), text parity against the recorded
-  nvdisasm texts 91 554 / 91 927 = 99.59 % — 373 differences in 17 keys (`F2F` type order 217,
-  `LDL.64 [R+UR+imm]` printed as the descriptor form 95, `R2P` `PR`, `BAR`, `IMNMX`, `SEL -0x1`,
-  IMMA `.ROW/.COL`, …; cubit `docs/KNOWN_ISSUES.md` V3). The 2026-09 "0 failures" holds for decode
-  coverage; text parity at this revision is 99.59 %.
+  nvdisasm texts 91 554 / 91 927 = 99.59 % — 373 differences in 17 keys. Batches 2 (`15caf70`:
+  `F2F` type order 217, `LDL.64` 95, `MUFU`, IMAD alias) and the T-4 parity pass (`R2P` `PR`, `BAR`
+  second immediate, `IMNMX`/`UIMNMX` `!PT`, `SEL -0x1`, `REDUX`, `DEPBAR SB0`, `ATOMS [R+UR]`, `F2IP`
+  order, `IMMA .ROW/.COL`) closed all of them: **372 / 373 of the recorded differences now match**,
+  the one residue being `LEPC` (a PC-relative target the isolated-word census renders at address 0 —
+  byte-identical to the vendor in a full disassembly). Decode coverage stays 100 % (0 failures over
+  91 927 words). See cubit `docs/KNOWN_ISSUES.md` V3 for the re-run at this revision.
 
 Encoding evidence is not semantic evidence: a row that round-trips tells you how nvdisasm names a
 word, not what the hardware does with it or how long it takes.
