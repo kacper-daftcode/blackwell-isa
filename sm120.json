@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 20863,
-   "rows_without_src": 19270,
+   "rows_total": 20894,
+   "rows_without_src": 19259,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -504,6 +504,34 @@
      "date": "2026-11-04",
      "tool": "blackwell-isa-internal/tools/t3_20261104.py",
      "test": "tests/sm120_era_keys_20261104.rs"
+    },
+    "imad-alias-sm120-2026-11-04": {
+     "rows": 0,
+     "kind": "nvdisasm 13.1 alias-law probe",
+     "date": "2026-11-04",
+     "tool": "tools/probes/re_sm120_imad_alias.py",
+     "test": "tests/sm120_imad_alias.rs"
+    },
+    "f2f-pair-2026-11-04": {
+     "rows": 2,
+     "kind": "nvdisasm 13.1 probe (-b SM120 and -b SM121) + GB10-host census",
+     "date": "2026-11-04",
+     "tool": "blackwell-isa-internal/tools/t3_batch2_20261104.py",
+     "test": "tests/sm120_f2f_pair_20261104.rs"
+    },
+    "ldl-aruri-sm120-2026-11-04": {
+     "rows": 14,
+     "kind": "nvdisasm 13.1 field probe",
+     "date": "2026-11-04",
+     "tool": "tools/probes/re_sm120_ldl_aruri.py",
+     "test": "tests/sm120_ldl_aruri.rs"
+    },
+    "mufu-ur-sm120-2026-11-04": {
+     "rows": 26,
+     "kind": "nvdisasm 13.1 field probe",
+     "date": "2026-11-04",
+     "tool": "tools/probes/re_sm120_mufu_ur.py",
+     "test": "tests/sm120_mufu_ur.rs"
     }
    },
    "history": {
@@ -550,7 +578,9 @@
     "bug403": "2026-09-06 BUG-403: F2I F64-src WIDE (b76=1) TRUNC.NTZ axis donor closure x4 legs: +4 rows/leg (era mgs 'F64,NTZ,TRUNC[,U32/U64]' + 'F64,NTZ,S64,TRUNC'; keyed F2I[.U32/.U64/.S64].F64.TRUNC.NTZ_R_R); donor-clone per dst-class from the wide TRUNC donors, byte9 cell-swap 0xd0|nib -> 0xf0|nib (set b77 NTZ), claim envelopes verbatim, b73/b74 alias relax (3<<73) inherited. Law: arb403 34 + arb403b 3 = 37 probes x4 models AGREE EVERY: all 16 nibble cells legal (dst {b75,b72}+S32 default, b73/b74 inert); abs/neg tok2 everywhere (9 probes); guard generic; reuse [124:122] ILLEGAL rc=1 x4 (4 probes; engine decoder-arm ext = cubit-side). Pre-fix 64/64 cells HOLE x4 legs + 16/16 encode loud-FAIL (measure_pre403; t390_7 posture flipped).",
     "hygiene-2026-11-03": "and_base bits [127:105] (the compiler sample's control word: stall/yield/barriers/wait mask/reuse) cleared on 880 encoding variants - decoder and encoder never used them (decode strips [127:96] of word and template, the encoder composes the whole upper32 from the control code); base_op / operand_sig derived from the key on 43 entries that lacked them. Row data otherwise unchanged; proof: cubit census strict round trip identical per cubin (1 811 600 / 1 811 600), 157/157 cubins byte-identical through disassemble --frozen -> asm -T.",
     "audit-fix-2026-11-03": "dynamic audit batch 1 (nvdisasm 13.1 one word per call, cubit tools/audit_dynamic.py): LDGSTS shared base field 9 -> 8 bits on 70 rows (bit 24 belongs to the global base); text-inert reuse field at bit 122 removed from 13 LDC/LDCU rows; 22 harvest rows whose every probe word nvdisasm names as another instruction (FSETP->P2R.B3, F2FP<->HMMA, LOP3.LUT->SEL, QMMA->MOVM) removed; 0 rows of 0 keys with a glued predicate token in the mnemonic (DMMA.8x8x4_P0_..., F2FP.F16.F32.PACK_AB_P2_..., S2R_P0_R_L, ...) removed - nvdisasm names their words with the plain mnemonic, whose rows exist. Census strict round trip unchanged (1 811 600 / 1 811 600 identical per cubin).",
-    "t3-2026-11-04": "session T-3: 20 era keys with a glued predicate token in the mnemonic retired into _meta.key_aliases (20 rows; nvdisasm 13.1 names their words with the plain mnemonic; sm120: DMMA.8x8x4_R_R_R_R guard field; sm120: F2FP.F16.F32.PACK_AB_R_R_R guard + [71:64] relax); undocumented-form provenance tags {'undocumented-e3m4-2026-03': 22, 'undocumented-utc-sm120-2026-03': 8} (nvdisasm has no text for these words, the silicon executes them - they stay by the owner's decision of 2026-11-03); stallfix section for sm_120 from the 2026-11-03 stall-floor measurement (23 floors, RTX PRO 6000 Server Edition)."
+    "t3-2026-11-04": "session T-3: 20 era keys with a glued predicate token in the mnemonic retired into _meta.key_aliases (20 rows; nvdisasm 13.1 names their words with the plain mnemonic; sm120: DMMA.8x8x4_R_R_R_R guard field; sm120: F2FP.F16.F32.PACK_AB_R_R_R guard + [71:64] relax); undocumented-form provenance tags {'undocumented-e3m4-2026-03': 22, 'undocumented-utc-sm120-2026-03': 8} (nvdisasm has no text for these words, the silicon executes them - they stay by the owner's decision of 2026-11-03); stallfix section for sm_120 from the 2026-11-03 stall-floor measurement (23 floors, RTX PRO 6000 Server Edition).",
+    "imad-alias-2026-11-04": "IMAD alias-named harvest groups removed (); U32 twins added (); the MOV/IADD/SHL display law lives in cubit's printer.",
+    "t3-batch2-2026-11-04": "GB10-host census follow-up: F2F.F64.F32_R_R / F2F.F32.F64_R_R rebuilt (Rd[23:16], Ra[39:32], abs/neg, guard); F2F_R_R 'F32,F64' harvest group removed (the keyed rows own its words); LDL_R_ARURI added (14 groups), MUFU_R_UR rebuilt (26 groups), IMAD alias-named groups removed and U32 twins added from nvdisasm 13.1 sweeps."
    },
    "errata": {}
   },
@@ -28984,9 +29014,15 @@
    "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0x00000000003010000000000000007310",
-     "count": 32,
+     "and_base": "0x00000000003010000000000000000310",
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
       {
        "bits": 8,
        "extraction": "reg",
@@ -28999,9 +29035,23 @@
        "shift": 32,
        "token_idx": 2,
        "_src": "bug240-2026-08-28"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2
       }
      ],
-     "variable_mask": "0xff00ff0000"
+     "count": 32,
+     "_src": "f2f-pair-2026-11-04",
+     "_note": "type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17)."
     }
    },
    "operand_sig": "R_R",
@@ -29042,9 +29092,15 @@
    "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0x00000000002018000000000000007310",
-     "count": 32,
+     "and_base": "0x00000000002018000000000000000310",
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
       {
        "bits": 8,
        "extraction": "reg",
@@ -29073,7 +29129,9 @@
        "_src": "bug226e-2026-08-28"
       }
      ],
-     "variable_mask": "0xc00000ff00ff0000"
+     "count": 32,
+     "_src": "f2f-pair-2026-11-04",
+     "_note": "type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17)."
     },
     "F32,F64": {
      "and_base": "0x00000000002018000000000000007310",
@@ -32762,33 +32820,7 @@
    "base_op": "F2F",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "F32,F64": {
-     "and_base": "0x00000000003010000000000800087310",
-     "count": 3,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c00000000000000000000ff00ff0000"
-    }
-   },
+   "mod_groups": {},
    "operand_sig": "R_R",
    "scheduling": {
     "_all_entries": [
@@ -240400,172 +240432,6 @@
      "variable_mask": "0x14000000000008fffffffffffffff000",
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22"
     },
-    "IADD": {
-     "and_base": "0x00000000078e02000000000100000824",
-     "count": 13605,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x17f03e00000008ff00000000fffff000"
-    },
-    "IADD,U32": {
-     "and_base": "0x00000000078e00000000000100000824",
-     "count": 282,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x14003e000000007f000000007f7f7000"
-    },
-    "SHL,U32": {
-     "_errata": "BUG-083: vm imm-window extended by bits 57/58 (vendor-proven SHL.U32 imm=2^25/2^26; keeps U32 0x10000/0x80000000 on fad-tiebreak)",
-     "and_base": "0x00000000078e00ff0000000000000824",
-     "count": 16025,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x07f03e000000000007b0fffefffff000"
-    },
     "U32": {
      "and_base": "0x00000000078e00000000000000000824",
      "count": 3833,
@@ -241202,57 +241068,10 @@
      ],
      "variable_mask": "0x0ff03e000000007fffffffff3f7f0000"
     },
-    "MOV": {
-     "and_base": "0x00000000078e02ff00000001ff000424",
-     "count": 26,
+    "U32": {
+     "and_base": "0x00000000078e00000000000000007424",
+     "count": null,
      "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 2
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x000026000000000000000000003ff000"
-    },
-    "MOV,U32": {
-     "and_base": "0x00000000078e00ff00000000ff000424",
-     "count": 7661,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
       {
        "_src": "2aE",
        "bits": 8,
@@ -241262,27 +241081,43 @@
       },
       {
        "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "_src": "2e",
        "bits": 8,
        "extraction": "reg",
-       "shift": 64,
+       "shift": 24,
        "token_idx": 2
       },
       {
-       "_src": "2e",
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
        "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4
       }
      ],
-     "variable_mask": "0x03f03e0000000000ffffffff00fff000"
+     "variable_mask": "0x0ff03e000000007fffffffff3f7f0000",
+     "_src": "imad-alias-sm120-2026-11-04",
+     "_note": "U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm's print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding."
     }
    },
    "operand_sig": "R_R_R_II",
@@ -241616,109 +241451,6 @@
      ],
      "variable_mask": "0x0ff03e00000000ff000000fffffff000"
     },
-    "MOV": {
-     "and_base": "0x00000000078e0200000000ffff000224",
-     "count": 5598,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x13f03e00000008ff0000000000fff000"
-    },
-    "MOV,U32": {
-     "and_base": "0x00000000078e0000000000ffff000224",
-     "count": 12744,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x13f03e00000000ff0000000000fff000"
-    },
     "U32,WIDE": {
      "and_base": "0x00000000078e00000000000000000225",
      "count": 13077,
@@ -241842,6 +241574,77 @@
       }
      ],
      "variable_mask": "0x1ff03e00000000ff000000ffff7ef000"
+    },
+    "U32": {
+     "and_base": "0x00000000078e00000000000000000224",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 75,
+       "token_idx": 4
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4
+      }
+     ],
+     "variable_mask": "0x1ff03e00000008ff000000fffffff000",
+     "_src": "imad-alias-sm120-2026-11-04",
+     "_note": "U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm's print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding."
     }
    },
    "operand_sig": "R_R_R_R",
@@ -242255,7 +242058,7 @@
      "variable_mask": "0x00002e000000007f0000001e7e7f0000"
     },
     "U32": {
-     "and_base": "0x000000000f8e00ff00000000ff000e24",
+     "and_base": "0x000000000f8e00000000000000000e24",
      "count": 9881,
      "fields": [
       {
@@ -242274,26 +242077,49 @@
       {
        "_src": "2aE",
        "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
        "extraction": "ureg",
        "shift": 32,
        "token_idx": 4
       },
       {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 2
-      },
-      {
-       "_src": "2e",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 3
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4
       }
      ],
-     "variable_mask": "0x03f03e00000000000000007f00fff000"
+     "variable_mask": "0x0ff03e00000000ff8000003ffffff000",
+     "_src": "imad-alias-sm120-2026-11-04",
+     "_note": "U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm's print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding."
     },
     "U32,WIDE": {
      "and_base": "0x000000000f8e00000000000000000e25",
@@ -242845,6 +242671,70 @@
       }
      ],
      "variable_mask": "0x17f03e00000000ff0000003ffffef000"
+    },
+    "U32": {
+     "and_base": "0x000000000f8e00000000000000000c24",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 75,
+       "token_idx": 4
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4
+      }
+     ],
+     "variable_mask": "0x17f03e00000008ff0000003ffffff000",
+     "_src": "imad-alias-sm120-2026-11-04",
+     "_note": "U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm's print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding."
     }
    },
    "operand_sig": "R_R_UR_R",
@@ -310334,97 +310224,1149 @@
    "ctrl_class": "mufu",
    "mercury": [],
    "mod_groups": {
-    "LG2": {
-     "_evidence": "pop226d full-pop census 2,406-file battery true-ctrl (word96,ctrl) pairing, nvdisasm 13.3.73: donor-table decode == vendor on all 104,376 DIFF words of the 7 scope families (ana226d2: DFMA 79,173 incl 630 RP neg@72 witnesses; UIMAD 11,595; FCHK 5,228; MUFU 608; VOTE 1,591; IDP 3,554+27 print-order; HMUL2 2,593+7 hsel); zero regressions among 391,459 MATCH words after grafts D/E; VIMNMX/I2F/F2F/FENCE/USETMAXREG parked (238/226e).",
-     "_src": "bug226d-2026-08-28",
-     "and_base": "0x0000000008000c000000000700007d08",
-     "count": 2,
+    "COS": {
+     "and_base": "0x00000000080000000000000000000d08",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
       },
       {
-       "_src": "2c",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
       }
      ],
-     "variable_mask": "0x00000000000000000000000000020000"
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "COS,F16": {
+     "and_base": "0x00000000080001000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,COS": {
+     "and_base": "0x00000000080002000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "SIN": {
+     "and_base": "0x00000000080004000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,SIN": {
+     "and_base": "0x00000000080005000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,SIN": {
+     "and_base": "0x00000000080006000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "EX2": {
+     "and_base": "0x00000000080008000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "EX2,F16": {
+     "and_base": "0x00000000080009000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,EX2": {
+     "and_base": "0x0000000008000a000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "LG2": {
+     "and_base": "0x0000000008000c000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,LG2": {
+     "and_base": "0x0000000008000d000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,LG2": {
+     "and_base": "0x0000000008000e000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
     },
     "RCP": {
-     "_evidence": "pop226d full-pop census 2,406-file battery true-ctrl (word96,ctrl) pairing, nvdisasm 13.3.73: donor-table decode == vendor on all 104,376 DIFF words of the 7 scope families (ana226d2: DFMA 79,173 incl 630 RP neg@72 witnesses; UIMAD 11,595; FCHK 5,228; MUFU 608; VOTE 1,591; IDP 3,554+27 print-order; HMUL2 2,593+7 hsel); zero regressions among 391,459 MATCH words after grafts D/E; VIMNMX/I2F/F2F/FENCE/USETMAXREG parked (238/226e).",
-     "_src": "bug226d-2026-08-28",
-     "and_base": "0x00000000080010000000000000007d08",
-     "count": 6,
+     "and_base": "0x00000000080010000000000000000d08",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
       }
      ],
-     "variable_mask": "0x0001fc00000000000000000e003b0000"
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,RCP": {
+     "and_base": "0x00000000080011000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,RCP": {
+     "and_base": "0x00000000080012000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "RSQ": {
+     "and_base": "0x00000000080014000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,RSQ": {
+     "and_base": "0x00000000080015000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,RSQ": {
+     "and_base": "0x00000000080016000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
     },
     "RCP64H": {
-     "_evidence": "pop226d full-pop census 2,406-file battery true-ctrl (word96,ctrl) pairing, nvdisasm 13.3.73: donor-table decode == vendor on all 104,376 DIFF words of the 7 scope families (ana226d2: DFMA 79,173 incl 630 RP neg@72 witnesses; UIMAD 11,595; FCHK 5,228; MUFU 608; VOTE 1,591; IDP 3,554+27 print-order; HMUL2 2,593+7 hsel); zero regressions among 391,459 MATCH words after grafts D/E; VIMNMX/I2F/F2F/FENCE/USETMAXREG parked (238/226e).",
-     "_src": "bug226d-2026-08-28",
-     "and_base": "0x00000000080018000000000000017d08",
-     "count": 18,
+     "and_base": "0x00000000080018000000000000000d08",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
       }
      ],
-     "variable_mask": "0x0030ce00000000000000000f000e0000"
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 6 (RCP64H; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
     },
     "RSQ64H": {
-     "_evidence": "pop226d full-pop census 2,406-file battery true-ctrl (word96,ctrl) pairing, nvdisasm 13.3.73: donor-table decode == vendor on all 104,376 DIFF words of the 7 scope families (ana226d2: DFMA 79,173 incl 630 RP neg@72 witnesses; UIMAD 11,595; FCHK 5,228; MUFU 608; VOTE 1,591; IDP 3,554+27 print-order; HMUL2 2,593+7 hsel); zero regressions among 391,459 MATCH words after grafts D/E; VIMNMX/I2F/F2F/FENCE/USETMAXREG parked (238/226e).",
-     "_src": "bug226d-2026-08-28",
-     "and_base": "0x0000000008001c000000000400017d08",
-     "count": 45,
+     "and_base": "0x0000000008001c000000000000000d08",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
       }
      ],
-     "variable_mask": "0x01f1c0000000000000000003003e0000"
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 7 (RSQ64H; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "SQRT": {
+     "and_base": "0x00000000080020000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,SQRT": {
+     "and_base": "0x00000000080021000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,SQRT": {
+     "and_base": "0x00000000080022000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "TANH": {
+     "and_base": "0x00000000080024000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "F16,TANH": {
+     "and_base": "0x00000000080025000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
+    },
+    "BF16,TANH": {
+     "and_base": "0x00000000080026000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-ur-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-ur-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample's UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H)."
     }
    },
    "operand_sig": "R_UR",
@@ -310450,7 +311392,8 @@
     "stall_base": 0,
     "throughput": 4,
     "write_latency": 0
-   }
+   },
+   "_src": "mufu-ur-sm120-2026-11-04"
   },
   "NANOSLEEP_II": {
    "base_op": "NANOSLEEP",
@@ -1628191,6 +1629134,645 @@
     }
    },
    "_src": "hmul2-imm-sm120-2026-11-02"
+  },
+  "LDL_R_ARURI": {
+   "_o2_fleet": "fleet-add per O2 2026-08-25 (cubit errata series)",
+   "base_op": "LDL",
+   "ctrl_class": "ldl",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 100,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 7,
+    "pipe_name": "MEMORY_LOCAL",
+    "ptxas_raw": null,
+    "read_latency": 100,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "operand_sig": "R_ARURI",
+   "mod_groups": {
+    "U8": {
+     "and_base": "0x00000000081000000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 0 (U8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "LU,U8": {
+     "and_base": "0x00000000083000000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 0 (U8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "S8": {
+     "and_base": "0x00000000081002000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 1 (S8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "LU,S8": {
+     "and_base": "0x00000000083002000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 1 (S8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "U16": {
+     "and_base": "0x00000000081004000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 2 (U16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "LU,U16": {
+     "and_base": "0x00000000083004000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 2 (U16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "S16": {
+     "and_base": "0x00000000081006000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 3 (S16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "LU,S16": {
+     "and_base": "0x00000000083006000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 3 (S16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "": {
+     "and_base": "0x00000000081008000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 4 (plain; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "LU": {
+     "and_base": "0x00000000083008000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 4 (plain; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "64": {
+     "and_base": "0x0000000008100a000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 5 (64; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "64,LU": {
+     "and_base": "0x0000000008300a000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 5 (64; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "128": {
+     "and_base": "0x0000000008100c000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 6 (128; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    },
+    "128,LU": {
+     "and_base": "0x0000000008300c000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "ldl-aruri-sm120-2026-11-04"
+      }
+     ],
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_src": "ldl-aruri-sm120-2026-11-04",
+     "_note": "nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 6 (128; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row."
+    }
+   },
+   "_src": "ldl-aruri-sm120-2026-11-04"
   }
  },
  "operand_roles": {
