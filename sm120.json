@@ -580,7 +580,7 @@
     "audit-fix-2026-11-03": "dynamic audit batch 1 (nvdisasm 13.1 one word per call, cubit tools/audit_dynamic.py): LDGSTS shared base field 9 -> 8 bits on 70 rows (bit 24 belongs to the global base); text-inert reuse field at bit 122 removed from 13 LDC/LDCU rows; 22 harvest rows whose every probe word nvdisasm names as another instruction (FSETP->P2R.B3, F2FP<->HMMA, LOP3.LUT->SEL, QMMA->MOVM) removed; 0 rows of 0 keys with a glued predicate token in the mnemonic (DMMA.8x8x4_P0_..., F2FP.F16.F32.PACK_AB_P2_..., S2R_P0_R_L, ...) removed - nvdisasm names their words with the plain mnemonic, whose rows exist. Census strict round trip unchanged (1 811 600 / 1 811 600 identical per cubin).",
     "t3-2026-11-04": "session T-3: 20 era keys with a glued predicate token in the mnemonic retired into _meta.key_aliases (20 rows; nvdisasm 13.1 names their words with the plain mnemonic; sm120: DMMA.8x8x4_R_R_R_R guard field; sm120: F2FP.F16.F32.PACK_AB_R_R_R guard + [71:64] relax); undocumented-form provenance tags {'undocumented-e3m4-2026-03': 22, 'undocumented-utc-sm120-2026-03': 8} (nvdisasm has no text for these words, the silicon executes them - they stay by the owner's decision of 2026-11-03); stallfix section for sm_120 from the 2026-11-03 stall-floor measurement (23 floors, RTX PRO 6000 Server Edition).",
     "imad-alias-2026-11-04": "IMAD alias-named harvest groups removed (); U32 twins added (); the MOV/IADD/SHL display law lives in cubit's printer.",
-    "t3-batch2-2026-11-04": "GB10-host census follow-up: F2F.F64.F32_R_R / F2F.F32.F64_R_R rebuilt (Rd[23:16], Ra[39:32], abs/neg, guard); F2F_R_R 'F32,F64' harvest group removed (the keyed rows own its words); LDL_R_ARURI added (14 groups), MUFU_R_UR rebuilt (26 groups), IMAD alias-named groups removed and U32 twins added from nvdisasm 13.1 sweeps."
+    "t3-batch2-2026-11-04": "GB10-host census follow-up: F2F.F64.F32_R_R / F2F.F32.F64_R_R rebuilt (Rd[23:16], Ra[39:32], abs/neg, guard); LDL_R_ARURI added (14 groups), MUFU_R_UR rebuilt (26 groups), IMAD alias-named groups removed and U32 twins added from nvdisasm 13.1 sweeps."
    },
    "errata": {}
   },
@@ -29134,9 +29134,15 @@
      "_note": "type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17)."
     },
     "F32,F64": {
-     "and_base": "0x00000000002018000000000000007310",
-     "count": 32,
+     "and_base": "0x00000000002018000000000000000310",
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
       {
        "bits": 8,
        "extraction": "reg",
@@ -29165,9 +29171,9 @@
        "_src": "bug226e-2026-08-28"
       }
      ],
-     "variable_mask": "0xc00000ff00ff0000",
-     "_src": "bug240-2026-08-28",
-     "_evidence": "probe240.py nvdisasm-13.3.73 transplant arbiter (arrive220_120a @0x50) on pre-fix 1b27199: spelled typed text routed via sorted-mg bucket to the wrong cell; probe240.{120a,121a} vendor cubins for F2F cell law (F64-dst 0x201800 / F32-dst 0x301000; src 8b@32 both directions); `cubit roundtrip` pre-fix 4/96 mismatch == F2F.F64.F32 words."
+     "count": 32,
+     "_src": "f2f-pair-2026-11-04",
+     "_note": "BUG-240 candidate-route alias of the '' row (field-identical by contract); type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17)."
     }
    },
    "operand_sig": "R_R",

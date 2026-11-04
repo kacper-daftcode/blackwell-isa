@@ -260,9 +260,10 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
   stands at 463 rows with at least one defect after the 2026-11-04 batch (from 1 977; 118 words of
   the undocumented forms above are `vendor_unknown`, not defects); the families are listed in cubit
-  `docs/KNOWN_ISSUES.md` T1. New from the GB10 host census (2026-11-04): `LDL.64 Rd, [Rn+URm+imm]`
-  has no SM120 row (97 holes in cuBLASLt sm_120 code), the `MUFU` UR-form function field is wrong,
-  and the SM121a text-parity families above.
+  `docs/KNOWN_ISSUES.md` T1. The GB10 host census (2026-11-04) found `LDL.64 Rd, [Rn+URm+imm]`
+  without an SM120 row (95 cuBLASLt words), a wrong `MUFU` UR-form function field, the F2F type-pair
+  rows and the IMAD alias groups — fixed in `15caf70`; the remaining SM121a text-parity families
+  (`R2P`, `BAR`, `IMNMX`, `SEL`, IMMA `.ROW/.COL`, …, 61 words) are listed in cubit's V3.
 - `sm121a.json` still carries 15 keys with a glued predicate token whose plain rows do not provably
   cover them (`HMMA.1688.F16_P0_…`, `HMMA.SP.16816.*_P0_…`, `LEA_P0_R_R_R_II`, `MOV_P0_R_II`,
   `PLOP3.LUT_P1_…`, `STS.64_P0_AR_R`, …); they need a GB10-side probe batch.

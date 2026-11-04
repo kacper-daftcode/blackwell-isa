@@ -1,6 +1,29 @@
 # blackwell-isa Changelog
 
-## SM120: era-key aliases, undocumented-form provenance, measured `stallfix` section (November 4, 2026)
+## SM120/SM121a batch 2: the GB10-host census follow-up (November 4, 2026, `15caf70`)
+
+The 2026-09 SM121a census script re-run on `gx4` (NVIDIA GB10) exposed four defects, fixed with
+nvdisasm 13.1 probes (`blackwell-isa-internal/tools/t3_batch2_20261104.py`; probes, fixtures and
+tests in cubit):
+
+- `sm120.json` `LDL_R_ARURI` — `LDL[.size][.LU] Rd, [Ra+URb+imm]` had no row (95 cuBLASLt sm_120
+  words): 14 groups, size enum [75:73] (7 = INVALID7), bit 84 (`.EF` when clear), 85 = `.LU`, 86 =
+  `.NA`, 91 = the uniform frame, 76 = the descriptor form (`tools/probes/re_sm120_ldl_aruri.py`).
+- `sm120.json` `MUFU_R_UR` rebuilt — 26 groups (10 functions [77:74] × the half types the function
+  takes, abs 62 / neg 63 on the UR operand); the four harvest rows had baked a sample's UR and
+  function with a few-bit mask (`MUFU.EX2 R4, UR7` decoded as `LG2`; `re_sm120_mufu_ur.py`).
+- `F2F.F64.F32_R_R` / `F2F.F32.F64_R_R` on both tables — Rd[23:16], Ra[39:32], abs, neg, guard; the
+  sm121a rows had Rd at shift 17 / Ra at 33, so 217 census words fell into the `F2F_R_R` 'F32,F64'
+  harvest group and printed the wrong type order; that group is removed on both tables (on SM120 it
+  assembled `F2F.F32.F64 R8, |R15|` with the abs in the text-inert bit 73).
+- `sm120.json` IMAD — the seven alias-named harvest groups (`MOV`, `MOV,U32`, `IADD`, `IADD,U32`,
+  `SHL,U32`; they put the Ra token on the Rb field) are removed and every four-operand form has a
+  `U32` twin: nvdisasm's `.MOV` / `.IADD` / `.SHL` are a print of the operands (law measured on 144
+  words, `re_sm120_imad_alias.py`), applied by cubit's printer and encoder.
+
+SM120 16 106 → 16 107 forms / 20 863 → 20 894 variants; SM121a 26 381 → 26 380 variants.
+
+## SM120: era-key aliases, undocumented-form provenance, measured `stallfix` section (November 4, 2026, `b063d43`)
 
 Session T-3 of the cubit quality work (`blackwell-isa-internal/tools/t3_20261104.py`; evidence in cubit
 `tests/fixtures/sm120_era_keys_20261104_nvdisasm.jsonl`, `tests/sm120_era_keys_20261104.rs`,
