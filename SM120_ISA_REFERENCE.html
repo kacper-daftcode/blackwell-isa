@@ -50,7 +50,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (consumer) (RTX 5090) &mdash; Unofficial Reference<br>4888 base-op families &middot; 16126 instruction forms &middot; 20883 encoding variants &middot; 16052 with scheduling data &middot; 1565 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-03 from <code>sm120.json</code> (6619782 2026-11-03), SHA-256 4393444a0753e1f2&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (consumer) (RTX 5090) &mdash; Unofficial Reference<br>4887 base-op families &middot; 16107 instruction forms &middot; 20894 encoding variants &middot; 16033 with scheduling data &middot; 1635 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-04 from <code>sm120.json</code> (6f11f6b 2026-11-04), SHA-256 e61189da687e0d92&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -204,24 +204,24 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>0</td><td class="m"><strong>UNKNOWN_0</strong></td><td>0</td><td></td></tr>
 <tr><td>1</td><td class="m"><strong>CTRL_FLOW</strong></td><td>65</td><td>ACQBULK, BMOV, BMOV.32, BMOV.64, BPT.TRAP, BRA, BRA.DIV, BRA.U</td></tr>
 <tr><td>2</td><td class="m"><strong>CTRL_FLOW_2</strong></td><td>0</td><td></td></tr>
-<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>14326</td><td>ATOMG, ATOMG.E.ADD.EL.STRONG.GPU, ATOMG.E.ADD.STRONG.GPU, ATOMG.E.MAX.S32.STRONG.GPU, ATOMG.E.MIN.STRONG.GPU, ATOMG.E.OR.EL.STRONG.GPU, DMMA.8x8x4, DMMA.8x8x4.RM</td></tr>
+<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>14323</td><td>ATOMG, ATOMG.E.ADD.EL.STRONG.GPU, ATOMG.E.ADD.STRONG.GPU, ATOMG.E.MAX.S32.STRONG.GPU, ATOMG.E.MIN.STRONG.GPU, ATOMG.E.OR.EL.STRONG.GPU, DMMA.8x8x4, DMMA.8x8x4.RM</td></tr>
 <tr><td>4</td><td class="m"><strong>MEMORY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>5</td><td class="m"><strong>MEMORY_GLOBAL</strong></td><td>1</td><td>ATOMG.E.ADD.F64.RN.STRONG.GPU</td></tr>
 <tr><td>6</td><td class="m"><strong>MEMORY_SHARED</strong></td><td>24</td><td>ATOMS, LDS, LDSM, LDSM.U4x16P64TO8.M816, LDSM.U6x16P32TO8.M816, MOVM.16.M832, MOVM.16.M864, MOVM.16.MT88</td></tr>
-<tr><td>7</td><td class="m"><strong>MEMORY_LOCAL</strong></td><td>5</td><td>LDL, STL</td></tr>
+<tr><td>7</td><td class="m"><strong>MEMORY_LOCAL</strong></td><td>6</td><td>LDL, STL</td></tr>
 <tr><td>9</td><td class="m"><strong>TEXTURE</strong></td><td>0</td><td></td></tr>
 <tr><td>10</td><td class="m"><strong>TEXTURE_2</strong></td><td>0</td><td></td></tr>
 <tr><td>11</td><td class="m"><strong>SURFACE</strong></td><td>0</td><td></td></tr>
 <tr><td>12</td><td class="m"><strong>BARRIER</strong></td><td>36</td><td>ACQSHMINIT, B2R, B2R.RESULT, BAR.ARV, BAR.RED.AND.DEFER, BAR.RED.OR.DEFER, BAR.RED.OR.DEFER_BLOCKING, BAR.RED.POPC.DEFER</td></tr>
 <tr><td>13</td><td class="m"><strong>TEX_LOAD</strong></td><td>8</td><td>MOV64IUR, MUFU, NANOSLEEP, SULD.D.BA.2D.STRONG.SM.TRAP</td></tr>
 <tr><td>14</td><td class="m"><strong>TEX_STORE</strong></td><td>0</td><td></td></tr>
-<tr><td>15</td><td class="m"><strong>SPECIAL</strong></td><td>28</td><td>CS2R, CS2R.32, CS2UR, LDC, LDC.64, LDCU, S2R, S2UR</td></tr>
+<tr><td>15</td><td class="m"><strong>SPECIAL</strong></td><td>27</td><td>CS2R, CS2R.32, CS2UR, LDC, LDC.64, LDCU, S2R, S2UR</td></tr>
 <tr><td>16</td><td class="m"><strong>SPECIAL_2</strong></td><td>0</td><td></td></tr>
 <tr><td>17</td><td class="m"><strong>SPECIAL_3</strong></td><td>0</td><td></td></tr>
 <tr><td>18</td><td class="m"><strong>CVT</strong></td><td>0</td><td></td></tr>
 <tr><td>19</td><td class="m"><strong>UDP</strong></td><td>4</td><td>R2UR</td></tr>
 <tr><td>20</td><td class="m"><strong>UDP_2</strong></td><td>0</td><td></td></tr>
-<tr><td>21</td><td class="m"><strong>WARP_SYNC</strong></td><td>20</td><td>ELECT, MATCH, MATCH.ANY, SHFL, VOTE, VOTEU, WARPSYNC, WARPSYNC.ALL</td></tr>
+<tr><td>21</td><td class="m"><strong>WARP_SYNC</strong></td><td>19</td><td>ELECT, MATCH, MATCH.ANY, SHFL, VOTE, VOTEU, WARPSYNC, WARPSYNC.ALL</td></tr>
 <tr><td>22</td><td class="m"><strong>WARP_2</strong></td><td>0</td><td></td></tr>
 <tr><td>23</td><td class="m"><strong>MMA_SETUP</strong></td><td>1</td><td>HSET2</td></tr>
 <tr><td>24</td><td class="m"><strong>MMA_SETUP_2</strong></td><td>0</td><td></td></tr>
@@ -230,14 +230,14 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>27</td><td class="m"><strong>ASYNC_COPY</strong></td><td>0</td><td></td></tr>
 <tr><td>28</td><td class="m"><strong>ASYNC_COPY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>29</td><td class="m"><strong>CLUSTER</strong></td><td>0</td><td></td></tr>
-<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>298</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
+<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>293</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
 <tr><td>31</td><td class="m"><strong>IMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>32</td><td class="m"><strong>DMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>33</td><td class="m"><strong>GMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>34</td><td class="m"><strong>QMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>35</td><td class="m"><strong>OMMA</strong></td><td>4</td><td>UBLKCP.S.G, UTMACMDFLUSH, UTMALDG.1D, UTMALDG.2D</td></tr>
-<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>552</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
-<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>575</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
+<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>546</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
+<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>571</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
 <p>Dependencies are tracked with 6 scoreboard barriers (B0&ndash;B5). A barrier-insertion pass
@@ -306,11 +306,11 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <h2 id="instruction-reference">9. Instruction Reference</h2>
 <div class="note">
 <strong>Latency legend:</strong>
-<span class="lat-hw">N ★</span> = measured on hardware (711 instructions; the SM120 measurements are from an RTX 5090) &nbsp;&middot;&nbsp;
+<span class="lat-hw">N ★</span> = measured on hardware (708 instructions; the SM120 measurements are from an RTX 5090) &nbsp;&middot;&nbsp;
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 196 of 16,126 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 196 of 16,107 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -617,7 +617,6 @@ Collapsed by default — click to expand.
 <a href="#F2IP.S8.F32.NTZ">F2IP.S8.F32.NTZ</a><br>
 <a href="#F2IP.U8.F32">F2IP.U8.F32</a><br>
 <a href="#F2IP.U8.F32.NTZ">F2IP.U8.F32.NTZ</a><br>
-<a href="#F2IP.U8.F32.RELU">F2IP.U8.F32.RELU</a><br>
 <a href="#FADD">FADD</a><br>
 <a href="#FADD.FTZ">FADD.FTZ</a><br>
 <a href="#FADD.RZ">FADD.RZ</a><br>
@@ -8635,9 +8634,6 @@ Collapsed by default — click to expand.
 <h3>DMMA.8x8x4</h3>
 <p class="desc">FP64 matrix multiply-accumulate (SM120). Shape: 8&times;8&times;4. Performs double-precision warp MMA. Variants: <code>DMMA.RM</code> (round to &minus;&infin;), <code>DMMA.RP</code> (round to +&infin;).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DMMA.8x8x4_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
-<tr><td class="m">DMMA.8x8x4_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
-<tr><td class="m">DMMA.8x8x4_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 <tr><td class="m">DMMA.8x8x4_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 <tr><td class="m">DMMA.8x8x4_R_R_R_R</td><td class="m">R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 </table>
@@ -8669,54 +8665,6 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>DMMA.8x8x4_P0_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMMA.8x8x4_P2_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMMA.8x8x4_P5_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>DMMA.8x8x4_P_R_R_R_R &mdash; 11 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
 <div class="ab">var_mask: <code>0x0000000000000fffc00000fffffff000</code></div>
@@ -8733,9 +8681,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>DMMA.8x8x4_R_R_R_R &mdash; 10 fields &middot; 32 samples</summary><div class="var">
+<details><summary>DMMA.8x8x4_R_R_R_R &mdash; 11 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000723f</code></div>
-<div class="ab">var_mask: <code>0x0000000000000fffc00000ffffff0000</code></div>
+<div class="ab">var_mask: <code>0x0000000000000fffc00000fffffff000</code></div>
+<div class="ab">measured: <code>t3-2026-11-04</code></div>
+<div class="ab">guard field [15:12] added 2026-11-04 (nvdisasm 13.1: guard 0/3/8/15 print @P0/@P3/@!P0/@!PT DMMA.8x8x4); and_base keeps PT. Replaces the DMMA.8x8x4_P0/P2/P5 era rows (aliases).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
@@ -8747,6 +8697,7 @@ Collapsed by default — click to expand.
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="DMMA.8x8x4.RM" id="DMMA.8x8x4.RM">
@@ -11456,18 +11407,8 @@ Collapsed by default — click to expand.
 <div class="ib" data-op="ELECT" id="ELECT">
 <h3>ELECT</h3>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">ELECT_P0_P_UR_P</td><td class="m">P0_P_UR_P</td><td class="m">&amp;mdash;</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">ELECT_P_UR_P</td><td class="m">P_UR_P</td><td class="m">IGNOREKILL</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>ELECT_P0_P_UR_P &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000ff082f</code></div>
-<div class="ab">var_mask: <code>0x78e0000000000000000f000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>ELECT_P_UR_P &mdash; 5 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000082f</code></div>
 <div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
@@ -11593,17 +11534,9 @@ Collapsed by default — click to expand.
 <h3>F2F</h3>
 <p class="desc">Float-to-float precision conversion.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2F_R_R</td><td class="m">R_R</td><td class="m">F32,F64</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
+<tr><td class="m">F2F_R_R</td><td class="m">R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
 <tr><td class="m">F2F_R_UR</td><td class="m">R_UR</td><td class="m">F32,F64, F64,F32</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<details><summary>F2F_R_R.F32,F64 &mdash; 3 fields &middot; 3 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000003010000000000800087310</code></div>
-<div class="ab">var_mask: <code>0x1c00000000000000000000ff00ff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
 <details><summary>F2F_R_UR.F32,F64 &mdash; 2 fields &middot; 12 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000083010000000000000007d10</code></div>
 <div class="ab">var_mask: <code>0x00f08600000000000000000e003f0000</code></div>
@@ -11661,12 +11594,17 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">F2F.F32.F64_R_R</td><td class="m">R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>F2F.F32.F64_R_R &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000003010000000000000007310</code></div>
-<div class="ab">var_mask: <code>0xff00ff0000</code></div>
+<details><summary>F2F.F32.F64_R_R &mdash; 5 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000003010000000000000000310</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>f2f-pair-2026-11-04</code></div>
+<div class="ab">type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="F2F.F64.F32" id="F2F.F64.F32">
@@ -11677,24 +11615,29 @@ Collapsed by default — click to expand.
 <tr><td class="m">F2F.F64.F32_R_R_R</td><td class="m">R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2F.F64.F32_R_UR</td><td class="m">R_UR</td><td class="m">F32,F64</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
-<details><summary>F2F.F64.F32_R_R &mdash; 4 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000002018000000000000007310</code></div>
-<div class="ab">var_mask: <code>0xc00000ff00ff0000</code></div>
+<details><summary>F2F.F64.F32_R_R &mdash; 5 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000002018000000000000000310</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>f2f-pair-2026-11-04</code></div>
+<div class="ab">type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>F2F.F64.F32_R_R.F32,F64 &mdash; 4 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000002018000000000000007310</code></div>
-<div class="ab">var_mask: <code>0xc00000ff00ff0000</code></div>
-<div class="ab">measured: <code>bug240-2026-08-28</code></div>
+<details><summary>F2F.F64.F32_R_R.F32,F64 &mdash; 5 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000002018000000000000000310</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>f2f-pair-2026-11-04</code></div>
+<div class="ab">BUG-240 candidate-route alias of the &#x27;&#x27; row (field-identical by contract); type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>F2F.F64.F32_R_R_R &mdash; 4 fields &middot; 21 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000002018000000000000007310</code></div>
@@ -12457,8 +12400,6 @@ Collapsed by default — click to expand.
 <h3>F2FP.F16.F32.PACK</h3>
 <p class="desc">Float-to-float precision conversion with packing. Converts FP32 inputs to FP16, BF16, or FP8 (E4M3/E5M2) format. <code>.PACK_AB</code> packs two FP32 values into one FP16 register pair. <code>.MERGE_C</code> blends with an existing packed value. Used in quantization pipelines before QMMA.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2FP.F16.F32.PACK_AB_P2_R_R_R</td><td class="m">AB_P2_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-<tr><td class="m">F2FP.F16.F32.PACK_AB_P5_R_R_R</td><td class="m">AB_P5_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP.F16.F32.PACK_AB_R_R_R</td><td class="m">AB_R_R_R</td><td class="m">_AB</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
 <details class="partials"><summary>1 partial encoding &mdash; operand types not fully identified</summary>
@@ -12473,31 +12414,16 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>F2FP.F16.F32.PACK_AB_P2_R_R_R &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023e</code></div>
-<div class="ab">var_mask: <code>0xc00000000000000000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>F2FP.F16.F32.PACK_AB_P5_R_R_R &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023e</code></div>
-<div class="ab">var_mask: <code>0xc00000000000000000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>F2FP.F16.F32.PACK_AB_R_R_R &mdash; 3 fields &middot; 32 samples</summary><div class="var">
+<details><summary>F2FP.F16.F32.PACK_AB_R_R_R &mdash; 4 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000ff000000000000723e</code></div>
-<div class="ab">var_mask: <code>0x0000000000000000000000ffffff0000</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>t3-2026-11-04</code></div>
+<div class="ab">guard field [15:12] and the text-inert window [71:64] (nvdisasm 13.1 prints `F2FP.F16.F32.PACK_AB R4, R6, R8` for 0x00/0x01/0x7f/0x80/0xfe/0xff there; the encoder keeps 0xff = nvcc) added 2026-11-04. The lattice around it (same sweep): bits 62/63/72/84/88 text-inert and left unclaimed, 73/74/82/83 rejected by nvdisasm, 79-81 printed as ???n, 75 = RELU, 76 = BF16, 77 = SATFINITE, 78 = MERGE_C (their own rows); cubit&#x27;s decoder fails closed on F2FP sign-window neighbours instead of absorbing them here. Replaces the F2FP.F16.F32.PACK_AB_P2/P5 era rows (aliases), whose words had [71:64] = 0.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>F2FP.F16.F32.PACK_AB_R_R_R._AB &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0xff000000000000023e</code></div>
@@ -16518,47 +16444,8 @@ Collapsed by default — click to expand.
 <h3>F2IP.U8.F32</h3>
 <p class="desc">Float-to-integer conversion with pack. Converts FP32 to INT8 (U8) for use with IMMA tensor cores. <code>.SAT</code> saturates on overflow.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2IP.U8.F32_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-<tr><td class="m">F2IP.U8.F32_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-<tr><td class="m">F2IP.U8.F32_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2IP.U8.F32_R_R_R_R</td><td class="m">R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>F2IP.U8.F32_P0_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000000243</code></div>
-<div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
-<div class="ab">measured: <code>bug340-2026-09-02</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t4</td><td><code>opmod:H1</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>F2IP.U8.F32_P2_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000000243</code></div>
-<div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
-<div class="ab">measured: <code>bug340-2026-09-02</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t4</td><td><code>opmod:H1</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>F2IP.U8.F32_P5_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000000243</code></div>
-<div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
-<div class="ab">measured: <code>bug340-2026-09-02</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t4</td><td><code>opmod:H1</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>F2IP.U8.F32_R_R_R_R &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000000007243</code></div>
 <div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
@@ -16588,25 +16475,6 @@ Collapsed by default — click to expand.
 <tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="F2IP.U8.F32.RELU" id="F2IP.U8.F32.RELU">
-<h3>F2IP.U8.F32.RELU</h3>
-<p class="desc">Float-to-integer conversion with pack. Converts FP32 to INT8 (U8) for use with IMMA tensor cores. <code>.SAT</code> saturates on overflow.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2IP.U8.F32.RELU_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-</table>
-<details><summary>F2IP.U8.F32.RELU_P0_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000000243</code></div>
-<div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
-<div class="ab">measured: <code>bug340-2026-09-02</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t4</td><td><code>opmod:H1</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -42593,35 +42461,9 @@ Collapsed by default — click to expand.
 <h3>HMMA.1688.F16</h3>
 <p class="desc">Half-precision warp MMA (tensor core). Rd = Ra &times; Rb + Rc. Shapes: <code>HMMA.16816</code> (m16n8k16), <code>HMMA.1688</code> (m16n8k8), <code>HMMA.1684</code> (m16n8k4). Input types: F16 (default), BF16 (<code>.BF16</code>), TF32 (<code>.TF32</code>). Accumulator: F16 or F32. Sparse variants (<code>.SP</code>) exploit 2:4 sparsity. Executes across all 32 threads in a warp; register operands span multiple registers.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">HMMA.1688.F16_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">HMMA.1688.F16_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">HMMA.1688.F16_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">HMMA.1688.F16_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 </table>
-<details><summary>HMMA.1688.F16_P2_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
-<div class="ab">var_mask: <code>0x8000000000001ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>HMMA.1688.F16_P5_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
-<div class="ab">var_mask: <code>0x8000000000001ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>HMMA.1688.F16_P_R_R_R_R &mdash; 10 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
 <div class="ab">var_mask: <code>0x1c000000000001ff800000fffffff000</code></div>
@@ -60335,7 +60177,6 @@ Collapsed by default — click to expand.
 <h3>IADD</h3>
 <p class="desc">2-input integer add.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IADD_P0_R_R_II</td><td class="m">P0_R_R_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">IADD_P_R_R_II</td><td class="m">P_R_R_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">IADD_P_R_R_R</td><td class="m">P_R_R_R</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">IADD_R_P_R_II</td><td class="m">R_P_R_II</td><td class="m">64</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
@@ -60357,16 +60198,6 @@ Collapsed by default — click to expand.
 <tr><td class="m">IADD_R_P_R_R_?</td><td class="m">R_P_R_R_?</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
 </details>
-<details><summary>IADD_P0_R_R_II &mdash; 5 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x78e00000000000000000835</code></div>
-<div class="ab">var_mask: <code>0x100fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>IADD_P_R_R_II &mdash; 5 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x78e00000000000000000835</code></div>
 <div class="ab">var_mask: <code>0x1c00000000000100fffffffffffff000</code></div>
@@ -61513,15 +61344,15 @@ Collapsed by default — click to expand.
 <tr><td class="m">IMAD_R_P_R_R_R_P</td><td class="m">R_P_R_R_R_P</td><td class="m">U32,WIDE,X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_P_R_UR_R</td><td class="m">R_P_R_UR_R</td><td class="m">HI,U32, U32,WIDE, HI</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_P_R_UR_R_P</td><td class="m">R_P_R_UR_R_P</td><td class="m">HI,U32,X, HI,X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">IMAD_R_R_II_R</td><td class="m">R_R_II_R</td><td class="m">HI, HI,U32, IADD, IADD,U32, SHL,U32, U32, U32,WIDE, WIDE</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
+<tr><td class="m">IMAD_R_R_II_R</td><td class="m">R_R_II_R</td><td class="m">HI, HI,U32, U32, U32,WIDE, WIDE</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_II_R_P</td><td class="m">R_R_II_R_P</td><td class="m">U32,WIDE,X, X, HI,U32,X, HI,X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">IMAD_R_R_R_II</td><td class="m">R_R_R_II</td><td class="m">MOV, MOV,U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
+<tr><td class="m">IMAD_R_R_R_II</td><td class="m">R_R_R_II</td><td class="m">U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_R_II_P</td><td class="m">R_R_R_II_P</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">IMAD_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">HI,U32, MOV, MOV,U32, U32,WIDE, WIDE</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
+<tr><td class="m">IMAD_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">HI,U32, U32,WIDE, WIDE, U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_R_R_P</td><td class="m">R_R_R_R_P</td><td class="m">U32,WIDE,X, X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_R_UR</td><td class="m">R_R_R_UR</td><td class="m">HI,U32, U32, U32,WIDE, WIDE</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_R_UR_P</td><td class="m">R_R_R_UR_P</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">IMAD_R_R_UR_R</td><td class="m">R_R_UR_R</td><td class="m">HI,U32, U32,WIDE, WIDE</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
+<tr><td class="m">IMAD_R_R_UR_R</td><td class="m">R_R_UR_R</td><td class="m">HI,U32, U32,WIDE, WIDE, U32</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_UR_R_P</td><td class="m">R_R_UR_R_P</td><td class="m">U32,WIDE,X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 </table>
 <details><summary>IMAD_R_P_R_II_R.U32,WIDE &mdash; 5 fields &middot; 136 samples</summary><div class="var">
@@ -61769,42 +61600,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R.IADD &mdash; 8 fields &middot; 13,605 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e02000000000100000824</code></div>
-<div class="ab">var_mask: <code>0x17f03e00000008ff00000000fffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMAD_R_R_II_R.IADD,U32 &mdash; 7 fields &middot; 282 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e00000000000100000824</code></div>
-<div class="ab">var_mask: <code>0x14003e000000007f000000007f7f7000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMAD_R_R_II_R.SHL,U32 &mdash; 6 fields &middot; 16,025 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e00ff0000000000000824</code></div>
-<div class="ab">var_mask: <code>0x07f03e000000000007b0fffefffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>IMAD_R_R_II_R.U32 &mdash; 7 fields &middot; 3,833 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e00000000000000000824</code></div>
 <div class="ab">var_mask: <code>0x17f03e00000000fffffffffefffff000</code></div>
@@ -61907,25 +61702,18 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_II.MOV &mdash; 5 fields &middot; 26 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e02ff00000001ff000424</code></div>
-<div class="ab">var_mask: <code>0x000026000000000000000000003ff000</code></div>
+<details><summary>IMAD_R_R_R_II.U32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000078e00000000000000007424</code></div>
+<div class="ab">var_mask: <code>0x0ff03e000000007fffffffff3f7f0000</code></div>
+<div class="ab">measured: <code>imad-alias-sm120-2026-11-04</code></div>
+<div class="ab">U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm&#x27;s print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMAD_R_R_R_II.MOV,U32 &mdash; 5 fields &middot; 7,661 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e00ff00000000ff000424</code></div>
-<div class="ab">var_mask: <code>0x03f03e0000000000ffffffff00fff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>IMAD_R_R_R_II_P.X &mdash; 5 fields &middot; 611 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000e06ff40004040ff007424</code></div>
@@ -61963,29 +61751,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R.MOV &mdash; 7 fields &middot; 5,598 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e0200000000ffff000224</code></div>
-<div class="ab">var_mask: <code>0x13f03e00000008ff0000000000fff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMAD_R_R_R_R.MOV,U32 &mdash; 6 fields &middot; 12,744 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000078e0000000000ffff000224</code></div>
-<div class="ab">var_mask: <code>0x13f03e00000000ff0000000000fff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>IMAD_R_R_R_R.U32,WIDE &mdash; 8 fields &middot; 13,077 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e00000000000000000225</code></div>
 <div class="ab">var_mask: <code>0x1ff03e00000000ff000000fffffef000</code></div>
@@ -62006,6 +61771,22 @@ Collapsed by default — click to expand.
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMAD_R_R_R_R.U32 &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000078e00000000000000000224</code></div>
+<div class="ab">var_mask: <code>0x1ff03e00000008ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imad-alias-sm120-2026-11-04</code></div>
+<div class="ab">U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm&#x27;s print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -62063,13 +61844,18 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_UR.U32 &mdash; 5 fields &middot; 9,881 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000f8e00ff00000000ff000e24</code></div>
-<div class="ab">var_mask: <code>0x03f03e00000000000000007f00fff000</code></div>
+<details><summary>IMAD_R_R_R_UR.U32 &mdash; 8 fields &middot; 9,881 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f8e00000000000000000e24</code></div>
+<div class="ab">var_mask: <code>0x0ff03e00000000ff8000003ffffff000</code></div>
+<div class="ab">measured: <code>imad-alias-sm120-2026-11-04</code></div>
+<div class="ab">U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm&#x27;s print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -62151,6 +61937,21 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMAD_R_R_UR_R.U32 &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f8e00000000000000000c24</code></div>
+<div class="ab">var_mask: <code>0x17f03e00000008ff0000003ffffff000</code></div>
+<div class="ab">measured: <code>imad-alias-sm120-2026-11-04</code></div>
+<div class="ab">U32 twin of the plain row (bit 73 clear), 2026-11-04: the harvest only had this flavour as the alias-named `MOV,U32` group with Ra baked to RZ and the Ra token on the Rb field. The `.MOV` / `.IADD` / `.SHL` names are nvdisasm&#x27;s print of the operands (tools/probes/re_sm120_imad_alias.py), not an encoding.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -178346,6 +178147,7 @@ Collapsed by default — click to expand.
 <p class="desc">Load from local (thread-private stack) memory.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LDL_R_ARI</td><td class="m">R_ARI</td><td class="m">128, 64, 64,LU, LU, S16, U16, LU,S16</td><td>MEMORY_LOCAL</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">100 ~</span></td></tr>
+<tr><td class="m">LDL_R_ARURI</td><td class="m">R_ARURI</td><td class="m">U8, LU,U8, S8, LU,S8, U16, LU,U16, S16, LU,S16, LU, 64, 64,LU, 128, 128,LU</td><td>MEMORY_LOCAL</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">100 ~</span></td></tr>
 <tr><td class="m">LDL_R_AURI</td><td class="m">R_AURI</td><td class="m">128, 64</td><td>MEMORY_LOCAL</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">100 ~</span></td></tr>
 </table>
 <details><summary>LDL_R_ARI &mdash; 4 fields &middot; 2,899 samples</summary><div class="var">
@@ -178413,6 +178215,174 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.U8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081000000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 0 (U8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.LU,U8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000083000000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 0 (U8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.S8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081002000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 1 (S8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.LU,S8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000083002000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 1 (S8; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.U16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081004000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 2 (U16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.LU,U16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000083004000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 2 (U16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.S16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081006000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 3 (S16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.LU,S16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000083006000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 3 (S16; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081008000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 4 (plain; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.LU &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000083008000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 4 (plain; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.64 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008100a000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 5 (64; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.64,LU &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008300a000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 5 (64; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.128 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008100c000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 6 (128; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (clear), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDL_R_ARURI.128,LU &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008300c000000000000000983</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>ldl-aruri-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16], Ra[31:24] (255 = RZ is the [UR+imm] twin LDL_R_AURI), UR[39:32] (255 = URZ), imm[63:40] signed 24-bit; size enum [75:73] = 6 (128; 7 = INVALID7, unclaimed), bit 84 set (clear = .EF, unclaimed), bit 85 = LU (set), bit 86 = NA (unclaimed), bit 91 = the uniform frame, bit 76 = the desc form (unclaimed). Bits 72, 77-83, 87-90, 92-95 are text-inert - outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -181471,7 +181441,6 @@ Collapsed by default — click to expand.
 <h3>MOV</h3>
 <p class="desc">Move. Copies a register value or loads an immediate into Rd.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">MOV_P0_R_II</td><td class="m">P0_R_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_P_R_II</td><td class="m">P_R_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_P_R_R</td><td class="m">P_R_R</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_R_II</td><td class="m">R_II</td><td class="m">64</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
@@ -181539,15 +181508,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>MOV_P0_R_II &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0xf000000000000000802</code></div>
-<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff080</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>imm</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-<tr><td>[7]</td><td>1</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>MOV_P_R_II &mdash; 4 fields</summary><div class="var">
 <div class="ab">and_base: <code>0xf000000000000000802</code></div>
 <div class="ab">var_mask: <code>0x1c00000000000000fffffffffffff080</code></div>
@@ -181824,7 +181784,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">MUFU_R_FI</td><td class="m">R_FI</td><td class="m">RCP64H</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">MUFU_R_II</td><td class="m">R_II</td><td class="m">RCP64H, RSQ</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">MUFU_R_R</td><td class="m">R_R</td><td class="m">COS, EX2, LG2, RCP, RCP64H, RSQ, RSQ64H, SIN, SQRT, TANH, EX2,F16, BF16,EX2</td><td>TEX_LOAD</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
-<tr><td class="m">MUFU_R_UR</td><td class="m">R_UR</td><td class="m">LG2, RCP, RCP64H, RSQ64H</td><td>TEX_LOAD</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
+<tr><td class="m">MUFU_R_UR</td><td class="m">R_UR</td><td class="m">COS, COS,F16, BF16,COS, SIN, F16,SIN, BF16,SIN, EX2, EX2,F16, BF16,EX2, LG2, F16,LG2, BF16,LG2, RCP, F16,RCP, BF16,RCP, RSQ, F16,RSQ, BF16,RSQ, RCP64H, RSQ64H, SQRT, F16,SQRT, BF16,SQRT, TANH, F16,TANH, BF16,TANH</td><td>TEX_LOAD</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
 </table>
 <details><summary>MUFU_R_FI.RCP64H &mdash; 2 fields &middot; 642 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000018004005554400017908</code></div>
@@ -181969,37 +181929,317 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>MUFU_R_UR.LG2 &mdash; 2 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000008000c000000000700007d08</code></div>
-<div class="ab">var_mask: <code>0x00000000000000000000000000020000</code></div>
-<div class="ab">measured: <code>bug226d-2026-08-28</code></div>
+<details><summary>MUFU_R_UR.COS &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080000000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>MUFU_R_UR.RCP &mdash; 2 fields &middot; 6 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000080010000000000000007d08</code></div>
-<div class="ab">var_mask: <code>0x0001fc00000000000000000e003b0000</code></div>
-<div class="ab">measured: <code>bug226d-2026-08-28</code></div>
+<details><summary>MUFU_R_UR.COS,F16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080001000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>MUFU_R_UR.RCP64H &mdash; 2 fields &middot; 18 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000080018000000000000017d08</code></div>
-<div class="ab">var_mask: <code>0x0030ce00000000000000000f000e0000</code></div>
-<div class="ab">measured: <code>bug226d-2026-08-28</code></div>
+<details><summary>MUFU_R_UR.BF16,COS &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080002000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 0 (COS; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>MUFU_R_UR.RSQ64H &mdash; 2 fields &middot; 45 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000008001c000000000400017d08</code></div>
-<div class="ab">var_mask: <code>0x01f1c0000000000000000003003e0000</code></div>
-<div class="ab">measured: <code>bug226d-2026-08-28</code></div>
+<details><summary>MUFU_R_UR.SIN &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080004000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,SIN &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080005000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,SIN &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080006000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 1 (SIN; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.EX2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080008000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.EX2,F16 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080009000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,EX2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000a000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 2 (EX2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.LG2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000c000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,LG2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000d000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,LG2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000e000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 3 (LG2; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.RCP &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080010000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,RCP &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080011000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,RCP &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080012000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 4 (RCP; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.RSQ &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080014000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,RSQ &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080015000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,RSQ &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080016000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 5 (RSQ; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.RCP64H &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080018000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 6 (RCP64H; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.RSQ64H &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008001c000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 7 (RSQ64H; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.SQRT &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080020000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,SQRT &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080021000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,SQRT &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080022000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 8 (SQRT; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.TANH &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080024000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = none (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.F16,TANH &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080025000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = F16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16,TANH &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080026000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-ur-sm120-2026-11-04</code></div>
+<div class="ab">nvdisasm 13.1 sweeps (2026-11-04, found by the GB10-host census of cuBLASLt sm_120 code): guard[15:12], Rd[23:16] (255 = RZ), UR[39:32] (255 = URZ), abs bit 62, neg bit 63; function [77:74] = 9 (TANH; 10-15 = INVALIDn, unclaimed), half type bits 72/73 = BF16 (both set is rejected; INVALIDn on RCP64H / RSQ64H, unclaimed), bit 91 = the uniform frame (required). Bits 24-31, 40-61, 78-90 are text-inert - outside the row. Replaces four harvest rows that baked a sample&#x27;s UR and function into and_base with a few-bit mask (EX2 decoded as LG2, RSQ as RCP / RCP64H).</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="NANOSLEEP" id="NANOSLEEP">
@@ -182603,28 +182843,9 @@ Collapsed by default — click to expand.
 <h3>PLOP3.LUT</h3>
 <p class="desc">3-input predicate logical operation.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">PLOP3.LUT_P1_P_P_P_P_P_II_II</td><td class="m">P1_P_P_P_P_P_II_II</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">PLOP3.LUT_P_P_P_P_P_II_II</td><td class="m">P_P_P_P_P_II_II</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">PLOP3.LUT_P_P_P_P_UP_II_II</td><td class="m">P_P_P_P_UP_II_II</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>PLOP3.LUT_P1_P_P_P_P_P_II_II &mdash; 13 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000081c</code></div>
-<div class="ab">var_mask: <code>0x7fffff70000000000fff080</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
-<tr><td>[86:84]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
-<tr><td>[80]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[79:77]</td><td>3</td><td>t4</td><td><code>pred</code></td></tr>
-<tr><td>[76:72]</td><td>5</td><td>t6</td><td><code>imm_shr3</code></td></tr>
-<tr><td>[71]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
-<tr><td>[70:68]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
-<tr><td>[66:64]</td><td>3</td><td>t6</td><td><code>imm</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t7</td><td><code>imm</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-<tr><td>[7]</td><td>1</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>PLOP3.LUT_P_P_P_P_P_II_II &mdash; 12 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000081c</code></div>
 <div class="ab">var_mask: <code>0x1c00000007fffff70000000000fff000</code></div>
@@ -183072,47 +183293,8 @@ Collapsed by default — click to expand.
 <h3>QMMA.16816.F16.E4M3.E4M3</h3>
 <p class="desc">Quantized matrix multiply-accumulate. <strong>SM120-exclusive</strong> (RTX 5090). Performs FP8/FP6 warp-group MMA in a single instruction. Opcode 0x27A. Supported types: E4M3 (FP8), E5M2 (FP8), E2M3 (FP6). Shapes: 16&times;8&times;16, 16&times;8&times;32, 16&times;8&times;64 (K=64). SP variants (.SP) exploit 2:4 structured sparsity for ~1.6&times; throughput. SF variants (.SF, opcode 0x47A) add per-block UE8M0 scale factors for microscaling (PTX: <code>kind::mxf8f6f4.block_scale</code>, requires <code>compute_120f</code> / CUDA 13+). SF.SP variants combine block-scaling with 2:4 sparsity. Undocumented modifier bits: negate accumulator (shape bit[0]), exponent scale A/B (shape bits[6:7]), negate B (lo[63]).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">QMMA.16816.F16.E4M3.E4M3_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 </table>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>QMMA.16816.F16.E4M3.E4M3_R_R_R_R &mdash; 7 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x400000000000000027a</code></div>
 <div class="ab">var_mask: <code>0x1c000000000005ff800000fffffff000</code></div>
@@ -184761,6 +184943,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E2M1.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000248000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185006,6 +185189,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E2M3.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000240000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185251,6 +185435,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M2.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000148000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185361,6 +185546,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E2M1.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000184000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185381,6 +185567,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E2M3.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000180000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185401,6 +185588,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E3M2.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000144000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185421,6 +185609,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000140000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185441,6 +185630,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E4M3.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000100000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185461,6 +185651,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E5M2.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000104000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185616,6 +185807,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E4M3.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000040000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -185861,6 +186053,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E5M2.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000048000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -186112,6 +186305,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E2M1.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x258000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186366,6 +186560,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E2M3.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x250000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186620,6 +186815,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M2.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x158000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186733,6 +186929,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E2M1.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x194000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186752,6 +186949,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E2M3.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x190000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186771,6 +186969,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E3M2.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x154000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186790,6 +186989,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x150000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186809,6 +187009,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E4M3.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x110000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186828,6 +187029,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E5M2.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x114000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -186988,6 +187190,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E4M3.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x50000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -187242,6 +187445,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E5M2.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x58000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -276549,7 +276753,6 @@ Collapsed by default — click to expand.
 <h3>S2R</h3>
 <p class="desc">Read special register. Provides access to per-thread hardware state: <code>SR_TID.X/Y/Z</code> (thread index within block), <code>SR_CTAID.X/Y/Z</code> (block index within grid), <code>SR_CLOCK</code> (clock counter), <code>SR_LANEID</code> (warp lane), etc. ~20 cycle latency; uses ADU pipe.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">S2R_P0_R_L</td><td class="m">P0_R_L</td><td>SPECIAL</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">S2R_R_II</td><td class="m">R_II</td><td>SPECIAL</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">S2R_R_L</td><td class="m">R_L</td><td>SPECIAL</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">S2R_R_L_II</td><td class="m">R_L_II</td><td>SPECIAL</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
@@ -276575,15 +276778,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>S2R_P0_R_L &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x80000000000000000919</code></div>
-<div class="ab">var_mask: <code>0xb000000000000fff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t0</td><td><code>imm</code></td></tr>
-<tr><td>[73:72]</td><td>2</td><td>t2</td><td><code>imm</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>S2R_R_II &mdash; 3 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000000000919</code></div>
 <div class="ab">var_mask: <code>0x1c00000000007f000000000000fff000</code></div>
@@ -277800,7 +277994,6 @@ Collapsed by default — click to expand.
 <h3>SHF.L.U32</h3>
 <p class="desc">Funnel shift. Concatenates Ra:Rb as a 64-bit value and extracts a 32-bit window. <code>.L</code> = shift left (extract from high end), <code>.R</code> = shift right (extract from low end). <code>.HI</code> = use upper 32 bits of the 64-bit source. <code>.CLAMP</code> = clamp shift amount to [0,31].</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">SHF.L.U32_P0_R_R_II_R</td><td class="m">P0_R_R_II_R</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">SHF.L.U32_R_R_II_II</td><td class="m">R_R_II_II</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">SHF.L.U32_R_R_II_R</td><td class="m">R_R_II_R</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">SHF.L.U32_R_R_R_R</td><td class="m">R_R_R_R</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
@@ -277838,16 +278031,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>SHF.L.U32_P0_R_R_II_R &mdash; 5 fields</summary><div class="var">
-<div class="ab">and_base: <code>0xff0000000000000819</code></div>
-<div class="ab">var_mask: <code>0x1400200000000000fffffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[109]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>SHF.L.U32_R_R_II_II &mdash; 4 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000006ff0000000000000819</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000fffff7000</code></div>
@@ -312513,6 +312696,7 @@ Collapsed by default — click to expand.
 <details><summary>UTCATOMSWS_UP_UR_UR.2CTA,ALIGN,FIND_AND_SET &mdash; 3 fields &middot; 3 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000820080000000004000475e3</code></div>
 <div class="ab">var_mask: <code>0xc000000e00000000000200020000</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
@@ -312521,6 +312705,7 @@ Collapsed by default — click to expand.
 <details><summary>UTCATOMSWS_UP_UR_UR.ALIGN,FIND_AND_SET &mdash; 3 fields &middot; 16 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000800080000000000000075e3</code></div>
 <div class="ab">var_mask: <code>0x600000e00000000000f000f0000</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
@@ -312529,6 +312714,7 @@ Collapsed by default — click to expand.
 <details><summary>UTCATOMSWS_UP_UR_UR.FIND_AND_SET &mdash; 4 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080e000000000001000485e3</code></div>
 <div class="ab">var_mask: <code>0xc000000e00000000000e00001000</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
@@ -312538,6 +312724,7 @@ Collapsed by default — click to expand.
 <details><summary>UTCATOMSWS_UR_UR.AND &mdash; 3 fields &middot; 10 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080000000000000000ff09e3</code></div>
 <div class="ab">var_mask: <code>0x2e3a00000000000000000f0000f000</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
@@ -312551,6 +312738,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCHMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -312567,6 +312755,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCIMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -312583,6 +312772,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -312599,6 +312789,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCQMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -314156,8 +314347,8 @@ Collapsed by default — click to expand.
 </details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-03 from sm120.json (6619782 2026-11-03), SHA-256 4393444a0753e1f27d5defa449ea8f23422f2e530748c522fc6479e2fe5c654c<br>
-16126 instruction forms &middot; 20883 encoding variants &middot; 1565 with a measurement tag &middot; 37 pipeline classes<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-04 from sm120.json (6f11f6b 2026-11-04), SHA-256 e61189da687e0d928b4cc3618416cc81939c34529f5749d3f7495b26f80aa25f<br>
+16107 instruction forms &middot; 20894 encoding variants &middot; 1635 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

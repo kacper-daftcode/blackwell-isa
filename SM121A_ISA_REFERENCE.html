@@ -50,7 +50,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM121A Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Grace-Blackwell (DGX Spark) (NVIDIA GB10 (DGX Spark)) &mdash; Unofficial Reference<br>12065 base-op families &middot; 23833 instruction forms &middot; 26391 encoding variants &middot; 23636 with scheduling data &middot; 608 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-03 from <code>sm121a.json</code> (64eaa21 2026-11-03), SHA-256 a5a63cc7bbe75540&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Grace-Blackwell (DGX Spark) (NVIDIA GB10 (DGX Spark)) &mdash; Unofficial Reference<br>12065 base-op families &middot; 23823 instruction forms &middot; 26380 encoding variants &middot; 23626 with scheduling data &middot; 638 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-04 from <code>sm121a.json</code> (6f11f6b 2026-11-04), SHA-256 5dcf4ac08fd7ed01&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -204,7 +204,7 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>0</td><td class="m"><strong>UNKNOWN_0</strong></td><td>0</td><td></td></tr>
 <tr><td>1</td><td class="m"><strong>CTRL_FLOW</strong></td><td>59</td><td>ACQBULK, BMOV.32, BMOV.64, BPT.TRAP, BRA, BRA.DIV, BRA.U, BREAK</td></tr>
 <tr><td>2</td><td class="m"><strong>CTRL_FLOW_2</strong></td><td>0</td><td></td></tr>
-<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>21536</td><td>ATOM, ATOM.E.ADD, ATOM.E.ADD.64, ATOM.E.ADD.64.CONSTANT.CTA, ATOM.E.ADD.64.CONSTANT.CTA.PRIVATE, ATOM.E.ADD.64.CONSTANT.GPU, ATOM.E.ADD.64.CONSTANT.PRIVATE, ATOM.E.ADD.64.CONSTANT.SM</td></tr>
+<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>21533</td><td>ATOM, ATOM.E.ADD, ATOM.E.ADD.64, ATOM.E.ADD.64.CONSTANT.CTA, ATOM.E.ADD.64.CONSTANT.CTA.PRIVATE, ATOM.E.ADD.64.CONSTANT.GPU, ATOM.E.ADD.64.CONSTANT.PRIVATE, ATOM.E.ADD.64.CONSTANT.SM</td></tr>
 <tr><td>4</td><td class="m"><strong>MEMORY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>5</td><td class="m"><strong>MEMORY_GLOBAL</strong></td><td>2</td><td>ATOMG.E.ADD.F64.RN.STRONG.GPU, STG.E.64</td></tr>
 <tr><td>6</td><td class="m"><strong>MEMORY_SHARED</strong></td><td>78</td><td>ATOMS, LDS, LDS.128, LDS.64, LDS.S8, LDS.U16, LDS.U8, LDSM</td></tr>
@@ -230,13 +230,13 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>27</td><td class="m"><strong>ASYNC_COPY</strong></td><td>0</td><td></td></tr>
 <tr><td>28</td><td class="m"><strong>ASYNC_COPY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>29</td><td class="m"><strong>CLUSTER</strong></td><td>0</td><td></td></tr>
-<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>310</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
+<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>305</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
 <tr><td>31</td><td class="m"><strong>IMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>32</td><td class="m"><strong>DMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>33</td><td class="m"><strong>GMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>34</td><td class="m"><strong>QMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>35</td><td class="m"><strong>OMMA</strong></td><td>134</td><td>UBLKCP.G.S, UBLKCP.S.G, UBLKCP.S.S, UBLKPF.L2, UBLKRED.G.S.ADD, UBLKRED.G.S.ADD.U64, UBLKRED.G.S.AND, UBLKRED.G.S.AND.U64</td></tr>
-<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>481</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
+<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>479</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
 <tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>646</td><td>BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2, CCTL.IVALL</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
@@ -310,7 +310,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 259 of 23,833 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 259 of 23,823 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -136239,9 +136239,6 @@ Collapsed by default — click to expand.
 <h3>DMMA.8x8x4</h3>
 <p class="desc">FP64 matrix multiply-accumulate (SM120). Shape: 8&times;8&times;4. Performs double-precision warp MMA. Variants: <code>DMMA.RM</code> (round to &minus;&infin;), <code>DMMA.RP</code> (round to +&infin;).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DMMA.8x8x4_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
-<tr><td class="m">DMMA.8x8x4_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
-<tr><td class="m">DMMA.8x8x4_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 <tr><td class="m">DMMA.8x8x4_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 <tr><td class="m">DMMA.8x8x4_R_R_R_R</td><td class="m">R_R_R_R</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">32 ~</span></td></tr>
 </table>
@@ -136273,54 +136270,6 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>DMMA.8x8x4_P0_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMMA.8x8x4_P2_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMMA.8x8x4_P5_R_R_R_R &mdash; 11 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
-<div class="ab">var_mask: <code>0xfffc00000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>DMMA.8x8x4_P_R_R_R_R &mdash; 11 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000023f</code></div>
 <div class="ab">var_mask: <code>0x0000000000000fffc00000fffffff000</code></div>
@@ -136337,9 +136286,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>DMMA.8x8x4_R_R_R_R &mdash; 10 fields &middot; 32 samples</summary><div class="var">
+<details><summary>DMMA.8x8x4_R_R_R_R &mdash; 11 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000723f</code></div>
-<div class="ab">var_mask: <code>0x0000000000000fffc00000ffffff0000</code></div>
+<div class="ab">var_mask: <code>0x0000000000000fffc00000fffffff000</code></div>
+<div class="ab">measured: <code>t3-2026-11-04</code></div>
+<div class="ab">guard field [15:12] added 2026-11-04 (nvdisasm 13.1: guard 0/3/8/15 print @P0/@P3/@!P0/@!PT DMMA.8x8x4); and_base keeps PT. Replaces the DMMA.8x8x4_P0/P2/P5 era rows (aliases).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[74]</td><td>1</td><td>t4</td><td><code>abs</code></td></tr>
@@ -136351,6 +136302,7 @@ Collapsed by default — click to expand.
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="DMMA.8x8x4.RM" id="DMMA.8x8x4.RM">
@@ -137435,7 +137387,7 @@ Collapsed by default — click to expand.
 <h3>F2F</h3>
 <p class="desc">Float-to-float precision conversion.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2F_R_R</td><td class="m">R_R</td><td class="m">BF16,F32, BF16,F32,FTZ, BF16,F32,FTZ,RM, BF16,F32,FTZ,RP, BF16,F32,FTZ,RZ, BF16,F32,RM, BF16,F32,RP, BF16,F32,RZ, BF16,F64, BF16,F64,FTZ, BF16,F64,FTZ,RM, BF16,F64,FTZ,RP, BF16,F64,FTZ,RZ, BF16,F64,RM, BF16,F64,RP, BF16,F64,RZ, F16,F32, F16,F32,FTZ, F16,F32,FTZ,RM, F16,F32,FTZ,RP, F16,F32,FTZ,RZ, F16,F32,RM, F16,F32,RP, F16,F32,RZ, F16,F64, F16,F64,FTZ, F16,F64,FTZ,RM, F16,F64,FTZ,RP, F16,F64,FTZ,RZ, F16,F64,RM, F16,F64,RP, F16,F64,RZ, F32,F64, F32,F64,RM, F32,F64,RP, F32,F64,RZ</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
+<tr><td class="m">F2F_R_R</td><td class="m">R_R</td><td class="m">BF16,F32, BF16,F32,FTZ, BF16,F32,FTZ,RM, BF16,F32,FTZ,RP, BF16,F32,FTZ,RZ, BF16,F32,RM, BF16,F32,RP, BF16,F32,RZ, BF16,F64, BF16,F64,FTZ, BF16,F64,FTZ,RM, BF16,F64,FTZ,RP, BF16,F64,FTZ,RZ, BF16,F64,RM, BF16,F64,RP, BF16,F64,RZ, F16,F32, F16,F32,FTZ, F16,F32,FTZ,RM, F16,F32,FTZ,RP, F16,F32,FTZ,RZ, F16,F32,RM, F16,F32,RP, F16,F32,RZ, F16,F64, F16,F64,FTZ, F16,F64,FTZ,RM, F16,F64,FTZ,RP, F16,F64,FTZ,RZ, F16,F64,RM, F16,F64,RP, F16,F64,RZ, F32,F64,RM, F32,F64,RP, F32,F64,RZ</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">8 &#9733;</span></td></tr>
 <tr><td class="m">F2F_R_UR</td><td class="m">R_UR</td><td class="m">F32,F64, F32,F64,RM, F32,F64,RP, F32,F64,RZ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>F2F_R_R.BF16,F32 &mdash; 6 fields</summary><div class="var">
@@ -137790,19 +137742,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>F2F_R_R.F32,F64 &mdash; 8 fields &middot; 549 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000002010000000000000000310</code></div>
-<div class="ab">var_mask: <code>0x0</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[84]</td><td>1</td><td>t0</td><td><code>mnemod1:F32</code></td></tr>
-<tr><td>[75]</td><td>1</td><td>t0</td><td><code>mnemod1:F64</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>F2F_R_R.F32,F64,RM &mdash; 8 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x2050000000000000000310</code></div>
 <div class="ab">var_mask: <code>0x0</code></div>
@@ -137970,12 +137909,17 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">F2F.F32.F64_R_R</td><td class="m">R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>F2F.F32.F64_R_R &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000003010000000000000007310</code></div>
-<div class="ab">var_mask: <code>0x0000000000000000000001fe00ff0000</code></div>
+<details><summary>F2F.F32.F64_R_R &mdash; 5 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000003010000000000000000310</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>f2f-pair-2026-11-04</code></div>
+<div class="ab">type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[40:33]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="F2F.F64.F32" id="F2F.F64.F32">
@@ -137985,12 +137929,17 @@ Collapsed by default — click to expand.
 <tr><td class="m">F2F.F64.F32_R_R</td><td class="m">R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2F.F64.F32_R_R_R</td><td class="m">R_R_R</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
-<details><summary>F2F.F64.F32_R_R &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000002018000000000000007310</code></div>
-<div class="ab">var_mask: <code>0x0000000000000000000000ff01fe0000</code></div>
+<details><summary>F2F.F64.F32_R_R &mdash; 5 fields &middot; 32 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000002018000000000000000310</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>f2f-pair-2026-11-04</code></div>
+<div class="ab">type pair in bits 67/76/77 (F64.F32 = 0x2018, F32.F64 = 0x3010 at [95:64]); Rd[23:16], Ra[39:32], abs 62, neg 63, guard [15:12] (nvdisasm 13.1 -b SM120 and -b SM121: `@P0 F2F.F64.F32 R8, R15`, `|R15|`, `-R15`). Rebuilt 2026-11-04 after the GB10-host census (217 sm_121 words printed with the wrong type order: the sm121a row had Rd at shift 17).</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>F2F.F64.F32_R_R_R &mdash; 2 fields &middot; 21 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000002018000000000000007310</code></div>
@@ -138475,8 +138424,6 @@ Collapsed by default — click to expand.
 <h3>F2FP.F16.F32.PACK</h3>
 <p class="desc">Float-to-float precision conversion with packing. Converts FP32 inputs to FP16, BF16, or FP8 (E4M3/E5M2) format. <code>.PACK_AB</code> packs two FP32 values into one FP16 register pair. <code>.MERGE_C</code> blends with an existing packed value. Used in quantization pipelines before QMMA.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">F2FP.F16.F32.PACK_AB_P2_R_R_R</td><td class="m">AB_P2_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-<tr><td class="m">F2FP.F16.F32.PACK_AB_P5_R_R_R</td><td class="m">AB_P5_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP.F16.F32.PACK_AB_P_R_R_R</td><td class="m">AB_P_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP.F16.F32.PACK_AB_R_R_R</td><td class="m">AB_R_R_R</td><td class="m">_AB</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
@@ -138492,24 +138439,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>F2FP.F16.F32.PACK_AB_P2_R_R_R &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023e</code></div>
-<div class="ab">var_mask: <code>0xc00000000000000000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>F2FP.F16.F32.PACK_AB_P5_R_R_R &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023e</code></div>
-<div class="ab">var_mask: <code>0xc00000000000000000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>F2FP.F16.F32.PACK_AB_P_R_R_R &mdash; 3 fields &middot; 8 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
 <div class="ab">var_mask: <code>0x0000000000000000000001fffffc0002</code></div>
@@ -138518,13 +138447,16 @@ Collapsed by default — click to expand.
 <tr><td>[32:25]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[25:18]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>F2FP.F16.F32.PACK_AB_R_R_R &mdash; 3 fields &middot; 32 samples</summary><div class="var">
+<details><summary>F2FP.F16.F32.PACK_AB_R_R_R &mdash; 4 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000ff000000000000723e</code></div>
-<div class="ab">var_mask: <code>0x0000000000000000000000ffffff0000</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>t3-2026-11-04</code></div>
+<div class="ab">guard field [15:12] and the text-inert window [71:64] (nvdisasm 13.1 prints `F2FP.F16.F32.PACK_AB R4, R6, R8` for 0x00/0x01/0x7f/0x80/0xfe/0xff there; the encoder keeps 0xff = nvcc) added 2026-11-04. The lattice around it (same sweep): bits 62/63/72/84/88 text-inert and left unclaimed, 73/74/82/83 rejected by nvdisasm, 79-81 printed as ???n, 75 = RELU, 76 = BF16, 77 = SATFINITE, 78 = MERGE_C (their own rows); cubit&#x27;s decoder fails closed on F2FP sign-window neighbours instead of absorbing them here. Replaces the F2FP.F16.F32.PACK_AB_P2/P5 era rows (aliases), whose words had [71:64] = 0.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>F2FP.F16.F32.PACK_AB_R_R_R._AB &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0xff000000000000023e</code></div>
@@ -157493,8 +157425,6 @@ Collapsed by default — click to expand.
 <p class="desc">Half-precision warp MMA (tensor core). Rd = Ra &times; Rb + Rc. Shapes: <code>HMMA.16816</code> (m16n8k16), <code>HMMA.1688</code> (m16n8k8), <code>HMMA.1684</code> (m16n8k4). Input types: F16 (default), BF16 (<code>.BF16</code>), TF32 (<code>.TF32</code>). Accumulator: F16 or F32. Sparse variants (<code>.SP</code>) exploit 2:4 sparsity. Executes across all 32 threads in a warp; register operands span multiple registers.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">HMMA.1688.F16_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">HMMA.1688.F16_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">HMMA.1688.F16_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">HMMA.1688.F16_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">HMMA.1688.F16_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 </table>
@@ -157505,30 +157435,6 @@ Collapsed by default — click to expand.
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>HMMA.1688.F16_P2_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
-<div class="ab">var_mask: <code>0x8000000000001ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>HMMA.1688.F16_P5_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
-<div class="ab">var_mask: <code>0x8000000000001ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>HMMA.1688.F16_P_R_R_R_R &mdash; 10 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000000000000000000023c</code></div>
@@ -285068,48 +284974,9 @@ Collapsed by default — click to expand.
 <h3>QMMA.16816.F16.E4M3.E4M3</h3>
 <p class="desc">Quantized matrix multiply-accumulate. <strong>SM120-exclusive</strong> (RTX 5090). Performs FP8/FP6 warp-group MMA in a single instruction. Opcode 0x27A. Supported types: E4M3 (FP8), E5M2 (FP8), E2M3 (FP6). Shapes: 16&times;8&times;16, 16&times;8&times;32, 16&times;8&times;64 (K=64). SP variants (.SP) exploit 2:4 structured sparsity for ~1.6&times; throughput. SF variants (.SF, opcode 0x47A) add per-block UE8M0 scale factors for microscaling (PTX: <code>kind::mxf8f6f4.block_scale</code>, requires <code>compute_120f</code> / CUDA 13+). SF.SP variants combine block-scaling with 2:4 sparsity. Undocumented modifier bits: negate accumulator (shape bit[0]), exponent scale A/B (shape bits[6:7]), negate B (lo[63]).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R</td><td class="m">P0_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R</td><td class="m">P2_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R</td><td class="m">P5_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">QMMA.16816.F16.E4M3.E4M3_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 <tr><td class="m">QMMA.16816.F16.E4M3.E4M3_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
 </table>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400000000000000027a</code></div>
-<div class="ab">var_mask: <code>0x8000000000005ff800000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>QMMA.16816.F16.E4M3.E4M3_P_R_R_R_R &mdash; 3 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000400000000000000023a</code></div>
 <div class="ab">var_mask: <code>0x0000000000000000000001fffeff0044</code></div>
@@ -286705,6 +286572,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E2M1.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000248000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -286825,6 +286693,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E2M3.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000240000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -286945,6 +286814,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M2.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000148000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287005,6 +286875,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E2M1.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000184000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287025,6 +286896,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E2M3.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000180000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287045,6 +286917,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E3M2.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000144000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287065,6 +286938,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000140000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287085,6 +286959,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E4M3.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000100000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287105,6 +286980,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E3M4.E5M2.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000104000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287185,6 +287061,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E4M3.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000040000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287305,6 +287182,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.16832.F32.E5M2.E3M4.E8_R_R_R_R_R_R_UR &mdash; 8 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000048000000000000000747a</code></div>
 <div class="ab">var_mask: <code>0x3fff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:60]</td><td>4</td><td>t7</td><td><code>ureg</code></td></tr>
@@ -287422,6 +287300,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E2M1.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x258000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287536,6 +287415,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E2M3.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x250000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287650,6 +287530,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M2.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x158000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287707,6 +287588,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E2M1.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x194000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287726,6 +287608,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E2M3.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x190000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287745,6 +287628,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E3M2.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x154000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287764,6 +287648,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x150000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287783,6 +287668,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E4M3.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x110000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287802,6 +287688,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E3M4.E5M2.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x114000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287878,6 +287765,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E4M3.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x50000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -287992,6 +287880,7 @@ Collapsed by default — click to expand.
 <details><summary>QMMA.SF.SP.16864.F32.E5M2.E3M4.E8_R_R_R_R_R_R_UR_II &mdash; 7 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x58000600000000000747a</code></div>
 <div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
+<div class="ab">measured: <code>undocumented-e3m4-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
@@ -411415,6 +411304,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCHMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -411431,6 +411321,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCIMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -411447,6 +411338,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCIMMA.1CTA.KIND2_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -411463,6 +411355,7 @@ Collapsed by default — click to expand.
 </table>
 <details><summary>UTCQMMA.1CTA_UR_UR_UR_UR_UR_UP &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0b8001040000ffffffff0075ea</code></div>
+<div class="ab">measured: <code>undocumented-utc-sm120-2026-03</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:56]</td><td>8</td><td>t5</td><td><code>upred</code></td></tr>
 <tr><td>[55:48]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -413973,8 +413866,8 @@ Collapsed by default — click to expand.
 </details>
 </div>
 <div class="foot">
-SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-03 from sm121a.json (64eaa21 2026-11-03), SHA-256 a5a63cc7bbe75540aed20a2a360be40dbc10a0c80a9d088e6b24e14c484fbedc<br>
-23833 instruction forms &middot; 26391 encoding variants &middot; 608 with a measurement tag &middot; 37 pipeline classes<br>
+SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-04 from sm121a.json (6f11f6b 2026-11-04), SHA-256 5dcf4ac08fd7ed01efd16ed72dcbef165992fe4bbf2cee7b3bf943eae0c97daa<br>
+23823 instruction forms &middot; 26380 encoding variants &middot; 638 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
