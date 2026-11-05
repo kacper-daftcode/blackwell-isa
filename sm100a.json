@@ -300,6 +300,13 @@
      "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
      "test": "tests/b3001_lea_iadd3_shadowing.rs",
      "rows": 1
+    },
+    "b3002-ldg-desc-offset-2026-11-05": {
+     "kind": "field restored from sibling measurement: the desc offset window of LDG_R_dARI STRONG forms (sub_imm2 24b SIGNED @ [40..64), BUG-388) was missing from the E,SM,STRONG,U16 group; census: 13 680 words on sm100a re-encode with the offset zeroed (nvdisasm arbiter)",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/b300/b3002a_rebuild_ldg_row.py + census fail_sm100a_final.jsonl",
+     "test": "tests/b3002_ldg_desc_offset.rs",
+     "rows": 1
     }
    },
    "history": {
@@ -451192,9 +451199,17 @@
        "extraction": "sub_ur0",
        "shift": 32,
        "token_idx": 2
+      },
+      {
+       "_src": "bug388-2026-09-05",
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_note": "BUG-388: vendor window 24b@[40..64) SIGNED (arb388 x4 AGREE); B300-2: field was absent from the SM-scope group -- 13 680 census words (cublasLt.480 et al.) lost the desc offset on re-encode; restored 1:1 from the sibling STRONG groups"
       }
      ],
-     "variable_mask": "0x000fce0000000000000000007e7f7000"
+     "variable_mask": "0x000fce0000000000ffffff7f7e7f7000"
     },
     "E,STRONG,SYS": {
      "and_base": "0x000000000c1f59000000000000000981",
