@@ -314,6 +314,13 @@
      "tool": "pubwave/wave11/b300/b3002b_rebuild_ldgsts_row.py + census fail_sm100a_final.jsonl",
      "test": "tests/b3002b_ldgsts_imm_sign.rs",
      "rows": 1
+    },
+    "b3003-utmaldg-2026-11-05": {
+     "kind": "row rebuild from measurement: the '2D' group's harvest-era fields (5b sub_ur0 @32, 24b sub_imm1 @37, 18b sub_imm1 @61 -- overlapping) were unusable, so 70 census words (16 codes, libcublas.so.75 sm_100) failed decode; rebuilt to the nvdisasm-13.3-measured layout (UP-guard [15:12], URa [39:32], URb [31:24]), mirroring the sibling tc5-mk307:sibling _II rows",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/b300/b3003_rebuild_utmaldg_row.py + census fail_sm100a_final.jsonl",
+     "test": "tests/b3003_utmaldg_row.rs",
+     "rows": 1
     }
    },
    "history": {
@@ -489236,41 +489243,33 @@
    "base_op": "UTMALDG",
    "mod_groups": {
     "2D": {
-     "_note": "stara grupa bez-desc 2D zjadala slowa desc (106 konfliktow strict z nowa _II::2D); zero slow ksztaltu [UR],[UR] w korpusie 1.25M -> retire z decode-surface (BUG-090 retention, roundtrip tekst zachowany)",
-     "and_base": "0x000000000800800000000000000075b4",
+     "_note": "BUG-090 retention reactivated (b3003, 2026-11-05): the 1.25M-word era corpus had zero [UR],[UR] words so the group was retired to encode-only; the sm100a census corpus (19.9M words) carries 70 of them (16 distinct codes, libcublas.so.75). Fields rebuilt from the nvdisasm-13.3 sweep (guard [15:12], URa [39:32], URb [31:24]) so the group no longer eats desc words -- and_base pins every modifier bit except 79 (GATHER4 bit 84 pinned 0 excludes the _II forms), and the old harvest-era fields (5b sub_ur0@32 + overlapping 24b/18b imms) were the desc-eating defect.",
+     "and_base": "0x000000000800800000000000000005b4",
      "count": 16,
-     "encode_only": true,
      "fields": [
       {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 24,
-       "token_idx": 2
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
       },
       {
-       "_src": "2aE",
-       "bits": 5,
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
        "extraction": "sub_ur0",
        "shift": 32,
        "token_idx": 1
       },
       {
-       "_src": "2c",
-       "bits": 24,
-       "extraction": "sub_imm1",
-       "shift": 37,
-       "token_idx": 1
-      },
-      {
-       "_src": "2c",
-       "bits": 18,
-       "extraction": "sub_imm1",
-       "shift": 61,
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x009e3e00000000000000001c1e000000"
+     "variable_mask": "0x0000000000000000000000ffff00f000"
     }
    },
    "operand_sig": "AURI_AURI",
