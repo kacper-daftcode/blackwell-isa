@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22199,
-   "rows_without_src": 21697,
+   "rows_without_src": 21695,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -252,6 +252,13 @@
      "date": "2026-11-04",
      "tool": "tools/probes/re_sm120_idp_types.py",
      "test": "tests/wave11_idp_type_law.rs"
+    },
+    "atomg-el-aruri-2026-11-05": {
+     "rows": 2,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-05",
+     "tool": "tools/probes/re_sm120_atomg_el_aruri.py",
+     "test": "tests/sm120_atomg_el_aruri.rs"
     }
    },
    "history": {
@@ -685,120 +692,6 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
-  },
-  "ATOMG.E.ADD.EL.STRONG.GPU_P_R_dARI_R": {
-   "base_op": "ATOMG",
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000082ee10000000000000009a8",
-     "count": 63,
-     "fields": [
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 2
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "sub_r1",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 64,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x03fffe00000000ff000080fffffff000"
-    }
-   },
-   "operand_sig": "P_R_dARI_R",
-   "scheduling": {
-    "_src": "b4fill2-2026-08-21",
-    "confidence": "corpus-family",
-    "def_latency": 200,
-    "is_variable_latency": true,
-    "pipe_class": 3,
-    "pipe_name": "MEMORY",
-    "throughput": 4
-   }
-  },
-  "ATOMG.E.OR.EL.STRONG.GPU_P_R_dARI_R": {
-   "base_op": "ATOMG",
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000b2ee10000010000000009a8",
-     "count": 1,
-     "fields": [
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 2
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "sub_r1",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 64,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x03fffe00000000ff000000fffffff000"
-    }
-   },
-   "operand_sig": "P_R_dARI_R",
-   "scheduling": {
-    "_src": "b4fill2-2026-08-21",
-    "confidence": "corpus-family",
-    "def_latency": 200,
-    "is_variable_latency": true,
-    "pipe_class": 3,
-    "pipe_name": "MEMORY",
-    "throughput": 4
    }
   },
   "ATOMG_P_R_ARI_R": {
@@ -1665526,6 +1665419,186 @@
     "throughput": 4,
     "write_latency": 0
    }
+  },
+  "ATOMG.E.ADD.EL.STRONG.GPU_P_R_ARURI_R": {
+   "base_op": "ATOMG.E.ADD.EL.STRONG.GPU",
+   "operand_sig": "P_R_ARURI_R",
+   "scheduling": {
+    "_src": "b4fill2-2026-08-21",
+    "confidence": "corpus-family",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "throughput": 4
+   },
+   "mod_groups": {
+    "ADD,E,EL,GPU,STRONG": {
+     "and_base": "0x000000000820e10000000000000009a8",
+     "count": 63,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 23,
+       "extraction": "imm",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "atomg-el-aruri-2026-11-05"
+      }
+     ],
+     "variable_mask": "0x00000000000e00ff7ffffffffffff000",
+     "_src": "atomg-el-aruri-2026-11-05",
+     "_note": "nvdisasm 13.1 (-b SM120; -b SM103 / -b SM100 text-identical), tools/probes/re_sm120_atomg_el_aruri.py: plain uniform-indexed .EL atomic `ATOMG.E.<op>.EL.STRONG.GPU Pd, Rd, [Ra.U32+URb(+off)], Rb`: guard [15:12], Pd [83:81], Rd [23:16], Ra [31:24] (255 = RZ), Rb [39:32], URb [71:64] (8 bits, 255 = URZ), offset [62:40] signed 23-bit (bit 62 prints +-0x400000). Bit 63 is the address width (the `[Ra.64+URb]` form), bit 76 the descriptor form (legal only with bit 63: the ATOMG_P_R_dARI_R rows); both are claim_forbid (the decoder's broad operand-window match would otherwise claim the .64 word). Replaces the rt98-era `..._P_R_dARI_R` keys of sm103a / sm100a (same words, the desc[URb][Ra.64] glyph was the era decoder's fabrication) and the sm120 rows' 24-bit offset / 6-bit UR fields.",
+     "claim_forbid": [
+      {
+       "bits": 1,
+       "shift": 63,
+       "values": [
+        1
+       ]
+      },
+      {
+       "bits": 1,
+       "shift": 76,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "_src": "atomg-el-aruri-2026-11-05"
+  },
+  "ATOMG.E.OR.EL.STRONG.GPU_P_R_ARURI_R": {
+   "base_op": "ATOMG.E.OR.EL.STRONG.GPU",
+   "operand_sig": "P_R_ARURI_R",
+   "scheduling": {
+    "_src": "b4fill2-2026-08-21",
+    "confidence": "corpus-family",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "throughput": 4
+   },
+   "mod_groups": {
+    "E,EL,GPU,OR,STRONG": {
+     "and_base": "0x000000000b20e10000000000000009a8",
+     "count": 1,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 23,
+       "extraction": "imm",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri-2026-11-05"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "atomg-el-aruri-2026-11-05"
+      }
+     ],
+     "variable_mask": "0x00000000000e00ff7ffffffffffff000",
+     "_src": "atomg-el-aruri-2026-11-05",
+     "_note": "nvdisasm 13.1 (-b SM120; -b SM103 / -b SM100 text-identical), tools/probes/re_sm120_atomg_el_aruri.py: plain uniform-indexed .EL atomic `ATOMG.E.<op>.EL.STRONG.GPU Pd, Rd, [Ra.U32+URb(+off)], Rb`: guard [15:12], Pd [83:81], Rd [23:16], Ra [31:24] (255 = RZ), Rb [39:32], URb [71:64] (8 bits, 255 = URZ), offset [62:40] signed 23-bit (bit 62 prints +-0x400000). Bit 63 is the address width (the `[Ra.64+URb]` form), bit 76 the descriptor form (legal only with bit 63: the ATOMG_P_R_dARI_R rows); both are claim_forbid (the decoder's broad operand-window match would otherwise claim the .64 word). Replaces the rt98-era `..._P_R_dARI_R` keys of sm103a / sm100a (same words, the desc[URb][Ra.64] glyph was the era decoder's fabrication) and the sm120 rows' 24-bit offset / 6-bit UR fields.",
+     "claim_forbid": [
+      {
+       "bits": 1,
+       "shift": 63,
+       "values": [
+        1
+       ]
+      },
+      {
+       "bits": 1,
+       "shift": 76,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "_src": "atomg-el-aruri-2026-11-05"
   }
  },
  "operand_roles": {

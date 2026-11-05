@@ -172,10 +172,13 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (19 270 of 20 863 SM120 variants at this revision) are
-  the 2026-06..08 *harvest*: fields learned from compiler output and validated by the round-trip
-  census, not by per-field probes. Their known defect classes and the audit of them are tracked in
-  cubit's `docs/KNOWN_ISSUES.md`.
+  measurement in prose. Rows **without** `_src` (24 974 of 26 612 SM120 variants at this revision) are
+  the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
+  census, not by per-field probes — plus, since 2026-11-05, the **wave-11 lattice rows** (5 718 SM120
+  rows of the lane merge `e9b0808`, 5 692 of them the modifier lattices of `ATOM_P_R_dARI_R` and
+  `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each): nvdisasm-enumerated modifier lattices whose measurement
+  record is the lane's own report and which are not yet tagged in the tables (see "Known issues"). The harvest rows' known defect classes and the audit of
+  them are tracked in cubit's `docs/KNOWN_ISSUES.md`.
 - `_meta.provenance.history` keeps the fix-wave notes (formerly loose `_meta.bugNNN` keys) verbatim;
   `_meta.provenance.errata` the former top-level `_errata_*` notes of `sm121a.json`.
 - `count` is the number of harvest samples a row was learned from; `null` on measured rows.
@@ -255,8 +258,11 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 19 270 of 20 863 SM120 encoding variants are harvest rows without a per-field measurement. A static
-  audit (cubit `tools/audit_table.py`, 2026-11-02) flags 1 223 fields that address an operand the key
+- 24 974 of 26 612 SM120 encoding variants carry no `_src`: the 19 270 harvest rows of 2026-06..08 without
+  a per-field measurement plus the 5 718 wave-11 lattice rows (2026-11-05, lane merge `e9b0808`) whose
+  provenance tags are still owed — the lane's commit message describes the silicon adjudication of the
+  26 conflicting rows, not the lattice rows' derivation. A static
+  audit (cubit `tools/audit_table.py`, 2026-11-02, pre-wave-11 numbers) flags 1 223 fields that address an operand the key
   does not have, 994 register fields off the standard slots, 257 immediate-bearing keys without an
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of

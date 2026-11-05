@@ -1,5 +1,40 @@
 # blackwell-isa Changelog
 
+## Wave 11 (lane October stack) merged; ATOMG `.EL` plain form rebuilt from measurement (November 5, 2026)
+
+- **Wave 11 integration (`e9b0808`, `e99598a`; coldface, B300 host, 07:33–07:39Z):** the lane lineage of
+  30 table-only commits (BUG-477..523) merged onto `bb11659` with `merge_tables.py` (3-way at key →
+  mod_group → field); the 26 distinct SM120 conflicts were adjudicated by measurement (each side's canonical
+  word executed on an RTX PRO 6000 sm_120, driver 580.178.04, 96 probes; field geometry driven to 1 and
+  to max; no baked payload in a declared operand slot): 17 same-word metadata conflicts resolved to the
+  richer field set, 5 to main (`FADD_R_R_UR` SAT/RZ — the lane's 0x0221 rows trap from UR15, the 0x0e21
+  uniform form runs for UR0..UR63; `ENDCOLLECTIVE_P`; `FCHK_P_R_FI` baked payload; `UIADD3.64` 4/5-bit
+  ureg fields), 4 deletions kept (`ENDCOLLECTIVE_?_?`, the `F2FP.RELU…_P_R_R_R` phantom = `HMMA.16816.F16`
+  for nvdisasm, both `WARPSYNC.COLLECTIVE _?` keys trap), 0 to the lane. On top: the IDP type law
+  (`4A,U8,U8` row on sm120 / sm100a / sm103a; b73/b74 select U8/S8, b76 = 2A form, b75 = `-Rc`; heals 2 716
+  vendor words), and the `claim_forbid` exclusions on ctrl[109:105] (15 sm120 + 17 sm121a rows) and
+  reuse[124:122] (47 F2FP/HMMA/DMMA PACK_AB rows) removed: silicon executes those control values
+  (96/96 IMAD / MOV.64 / MUFU; 8/8 F2FP.PACK_AB) while nvdisasm only refuses to render them. Sizes:
+  sm120 16 107 → 16 143 keys / 20 894 → 26 612 variants (5 692 of the 5 718 new variants are the
+  modifier lattices of `ATOM_P_R_dARI_R` and `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each), sm103a
+  14 879 → 14 902 / 16 451 → 22 199, sm100a 14 879 → 14 902 / 16 455 → 22 199, sm121a 23 825 → 23 850 /
+  26 381 → 26 406. The lane's census: sm120 238 848 / 238 848 (578 vendor cubins), `validate_isa`
+  0 errors × 4. **The new rows carry no `_src`** — their measurement record is the lane's own report,
+  not yet tagged in the tables (listed under "Known issues"). The merged tables were written
+  without the trailing newline of the canonical `json.dumps(indent=1)` form; restored in this commit for
+  the three tables below.
+- **`ATOMG.E.{ADD,OR}.EL.STRONG.GPU_P_R_ARURI_R` rebuilt on sm120, sm103a, sm100a** (cubit
+  `tools/probes/re_sm120_atomg_el_aruri.py`, nvdisasm 13.1 `-b SM120` / `-b SM103` / `-b SM100`
+  text-identical, 98 form + 25 lattice words per target; provenance `atomg-el-aruri-2026-11-05`). The
+  sm103a / sm100a tables keyed the plain `[Ra.U32+URb(+off)]` word as `…_P_R_dARI_R` (rt98 era,
+  2026-08-21): cubit printed `desc[UR6][RZ.64]` for a word nvdisasm reads as `[RZ.U32+UR6]`, and since
+  wave 11 carries the real `.EL` descriptor rows (`ATOMG_P_R_dARI_R`, bits 76 + 63) that text re-encoded
+  to a different word (cubit `tests/b4fill2_rows.rs` red on the merged tree). Measured layout: guard
+  [15:12], Pd [83:81], Rd [23:16], Ra [31:24], Rb [39:32], URb [71:64] (8 bits, 255 = URZ), offset
+  [62:40] **signed 23-bit** (bit 62 → `+-0x400000`); bit 63 is the address width (`[Ra.64+URb]`, another
+  form) and bit 76 the descriptor form — both `claim_forbid` on the rows (the sm120 rows had a 24-bit
+  offset field that swallowed bit 63, a 6-bit UR field and no Pd field). Keys / variant counts unchanged.
+
 ## SM121a text parity to 100 %; SM120 `stallfix` r2ur floor measured (November 4, 2026, session T-4)
 
 The GB10 census of 2026-11-04 left 60 SM121a text differences in shared families whose SM120 rows
