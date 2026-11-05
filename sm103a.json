@@ -287,6 +287,13 @@
      "tool": "pubwave/wave11/merge_tables.py + remote/resolve_sm120.py + remote/arb_silicon.py",
      "test": "tests/wave11_idp_type_law.rs",
      "rows": 51
+    },
+    "b3001-lea-rebuild-2026-11-05": {
+     "kind": "row rebuild from measurement: nvdisasm 13.3 single-bit + imm-field sweep on the LEA/IADD3 opcode region (62 vendor words, all IADD3; LEA mode mapped via bit-0 flip)",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
+     "test": "tests/b3001_lea_iadd3_shadowing.rs",
+     "rows": 1
     }
    },
    "history": {
@@ -461691,11 +461698,11 @@
      "count": 4,
      "fields": [
       {
-       "_src": "2c",
+       "_src": "b3001-lea-rebuild-2026-11-05",
        "bits": 4,
-       "extraction": "pred",
-       "shift": 0,
-       "token_idx": 2
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
       },
       {
        "_src": "2aE",
@@ -461705,10 +461712,30 @@
        "token_idx": 1
       },
       {
+       "_src": "b3001-lea-rebuild-2026-11-05",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2
+      },
+      {
        "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3001-lea-rebuild-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
        "token_idx": 3
       },
       {
@@ -461719,6 +461746,13 @@
        "token_idx": 4
       },
       {
+       "_src": "b3001-lea-rebuild-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4
+      },
+      {
        "_src": "2c",
        "bits": 8,
        "extraction": "reg",
@@ -461726,11 +461760,11 @@
        "token_idx": 5
       },
       {
-       "_src": "2aE",
+       "_src": "b3001-lea-rebuild-2026-11-05",
        "bits": 1,
        "extraction": "reuse",
-       "shift": 75,
-       "token_idx": 3
+       "shift": 124,
+       "token_idx": 5
       },
       {
        "_src": "2aE",
@@ -461738,22 +461772,9 @@
        "extraction": "imm",
        "shift": 75,
        "token_idx": 6
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 76,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
       }
      ],
-     "variable_mask": "0x0400000000007800000000001a3c0000"
+     "variable_mask": "0x17f03e0000e0f9ff8000007ffffff000"
     }
    },
    "operand_sig": "R_P_R_UR_R_II",
