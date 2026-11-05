@@ -1,5 +1,41 @@
 # blackwell-isa Changelog
 
+## tcgen05 LDTM/STTM and SM120 SHF rebuilt from measurement; `stallfix` v4 (November 5, 2026, session T-5's measurement, landed by T-6 on the wave-11 tables)
+
+- **`sm100a.json` / `sm103a.json`: `LDTM_R_II` and `STTM_II_R` rebuilt** — 96 measured groups each
+  (`cubit tools/probes/re_sm100_ldtm_sttm.py`, nvdisasm 13.1 `-b SM100` and `-b SM103`, 576 form + 80
+  lattice words, text-identical on both targets; provenance `ldtm-sttm-sm100-2026-11-05`). The
+  `16dp32bit_t16_t31` x2 / x8 / x32 harvest rows had no uniform-register field (the sample's URZ = 0xff
+  half-baked as `0xc0` in `and_base`), a 2-3-bit register field and a 32-bit offset field overlapping the
+  UR slot — the five tcgen05 words of the 2026-11-03 B300 strict round trip that re-encoded to a different
+  word (cubit KNOWN_ISSUES V5 (a)): cubit printed `tmem[URZ+0x20]` and re-encoded `tmem[UR192+0x20]`.
+  Measured layout: shape enum bits {87, 82, 81} (`16dp128bit` 0, `16dp256bit` 1, `32dp32bit` 2 = no
+  modifier, `16dp64bit` 3, `16dp32bit_t0_t15` 4, `16dp32bit_t16_t31` 5; 6/7 INVALID), count `x2^n` at
+  [85:83], bit 80 = `PACK16BIT` (LDTM) / `EXPAND16BIT` (STTM), 8-bit register (LDTM Rd [23:16], STTM Ra
+  [39:32]) and 8-bit UR (LDTM [39:32], STTM [71:64]; 255 = URZ, printed `tmem[URZ]` with offset 0 and
+  elided with one), the tmem offset [63:40] (24 bits; its high byte [79:72] stays outside the rows), bit 91
+  = frame; the guard is **uniform** (`@UP0 LDTM …`). Variants 22 199 → 22 340 on both tables; keys unchanged.
+- **`sm120.json`: the `SHF` family rebuilt** (`cubit tools/probes/re_sm120_shf.py`, 380 form + 78 lattice
+  words, provenance `shf-sm120-2026-11-05`): the 40 dotted harvest keys (`SHF.L.U32_R_R_II_R`,
+  `SHF.R.S32.HI_R_R_II_R_II_II_?`, … — one sample's modifiers baked, truncated fields; `SHF.L.U32_R_R_II_R`'s
+  own canonical word printed `SHF.L.S64` for nvdisasm) are gone and the five generic keys, which mixed the
+  opcodes of different forms, carry 32 measured groups each: forms 0x219 `Rd, Ra, Rb, Rc`, 0x419 `Rd, Ra,
+  Rc, imm32` (the immediate is the fourth operand), 0x819 `Rd, Ra, imm32, Rc`, 0xc19 `Rd, Ra, URb, Rc`
+  and 0xe19 `Rd, Ra, Rc, URb` (frame bit 91 on the UR forms); modifiers bit 73 unsigned / 74 32-bit
+  (`U32` = both set, `S64` = both clear) / 75 `.W` / 76 `.R` / 80 `.HI`; bits 72, 77-79, 81-90 text-inert
+  (outside the rows). The era alias `SHF.L.U32_P0_R_R_II_R` now points at `SHF_R_R_II_R`. Keys 16 143 →
+  16 103, variants 26 612 → 26 656. (The wave-11 merge had touched three of the dotted keys — metadata only;
+  they are among the 40 removed.)
+- **`sm120.json` `stallfix` v4:** `guard_d0_forbid` false, **`floor_guard_d0` 13**, `cap_stall` 15,
+  `legacy_stall_risk_from` 15. The v3 sweep ended at S11 (all wrong) and called a predicate producer directly
+  followed by its `@P` guard consumer a violation; harness v4 (session T-5, 2026-11-05, `rtx` = 2× RTX 5090 /
+  GB202, 98 kernels: the `guard` path swept to S15 and a new `guardbra` path `ISETP → @P BRA`) measures
+  **S12 still wrong (618 880 / 655 360 threads), S13 / S14 / S15 clean** on the data consumer and on the
+  guarded branch alike (d1 = 11, d2 = 9 as before). cubit's own `schedule()` writes S14 before a guarded
+  branch (one above the floor); session V's silicon-validated kernel uses S14 at its 7 guard-d0 sites and was
+  refused by v3. Confirmation on the RTX PRO 6000 Server Edition (the production SKU) is still owed — every
+  other floor measured on both SKUs agreed field by field.
+
 ## Wave 11 (lane October stack) merged; ATOMG `.EL` plain form rebuilt from measurement (November 5, 2026)
 
 - **Wave 11 integration (`e9b0808`, `e99598a`; coldface, B300 host, 07:33–07:39Z):** the lane lineage of
