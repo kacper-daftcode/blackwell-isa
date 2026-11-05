@@ -307,6 +307,13 @@
      "tool": "pubwave/wave11/b300/b3002a_rebuild_ldg_row.py + census fail_sm100a_final.jsonl",
      "test": "tests/b3002_ldg_desc_offset.rs",
      "rows": 1
+    },
+    "b3002b-ldgsts-imm-sign-2026-11-05": {
+     "kind": "field removed on measurement: sub_imm1_shr5 (3b@[87..85), tok 2) is a phantom -- the imm is a plain 12-bit SIGNED @ [43:32) (nvdisasm sweep: 0x080 -> +0x80, 0xf80 -> -0x80); bits [87:85] are .LU/.NA modifiers and the predicate LSB; cubit read the imm sign off bit 87, flipping every odd-predicate word (28 census words on sm100a, libcublas.so.1070)",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/b300/b3002b_rebuild_ldgsts_row.py + census fail_sm100a_final.jsonl",
+     "test": "tests/b3002b_ldgsts_imm_sign.rs",
+     "rows": 1
     }
    },
    "history": {
@@ -448877,20 +448884,13 @@
       },
       {
        "_src": "2aE",
-       "bits": 3,
-       "extraction": "sub_imm1_shr5",
-       "shift": 85,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
        "bits": 4,
        "extraction": "pred",
        "shift": 87,
        "token_idx": 3
       }
      ],
-     "variable_mask": "0x000e0600018000140ec800801e070000"
+     "variable_mask": "0x000e0600078001ffffffffffffff0000"
     },
     "64,E,LTC128B": {
      "and_base": "0x00000000081a06000000000000007dae",
