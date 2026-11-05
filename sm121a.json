@@ -395,7 +395,7 @@
      "test": "tests/wave11_ctrl_silicon.rs"
     },
     "wave11-integration-2026-11-05": {
-     "rows": 26406,
+     "rows": 0,
      "kind": "wave-11 integration (see sm120)",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/merge_tables.py + remote/resolve_sm120.py"
@@ -586695,22 +586695,6 @@
        "values": [
         1
        ]
-      },
-      {
-       "shift": 122,
-       "bits": 2,
-       "values": [
-        1,
-        2,
-        3
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
       }
      ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
@@ -593975,22 +593959,6 @@
       }
      ],
      "variable_mask": "0x0000000000000000000001fffffc0002",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -594060,22 +594028,6 @@
       },
       {
        "shift": 74,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 122,
-       "bits": 2,
-       "values": [
-        1,
-        2,
-        3
-       ]
-      },
-      {
-       "shift": 124,
        "bits": 1,
        "values": [
         1
@@ -594344,22 +594296,6 @@
       },
       {
        "shift": 74,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 122,
-       "bits": 2,
-       "values": [
-        1,
-        2,
-        3
-       ]
-      },
-      {
-       "shift": 124,
        "bits": 1,
        "values": [
         1
@@ -654454,22 +654390,6 @@
       }
      ],
      "variable_mask": "0x1c000000000001ff800000fffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -654554,22 +654474,6 @@
       }
      ],
      "variable_mask": "0x1c000000000001ff800000fffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -655847,22 +655751,6 @@
       }
      ],
      "variable_mask": "0x1c000000000001ff800000fffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -655953,22 +655841,6 @@
       }
      ],
      "variable_mask": "0x1c000000000001ff800000fffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -656609,22 +656481,6 @@
       }
      ],
      "variable_mask": "0x8000000000001ff8003fffffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -657365,22 +657221,6 @@
       }
      ],
      "variable_mask": "0x8000000000001ff8003fffffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -657471,22 +657311,6 @@
       }
      ],
      "variable_mask": "0x1c000000000001ff800000fffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -657571,22 +657395,6 @@
       }
      ],
      "variable_mask": "0x8000000000001ff8003fffffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     }
@@ -658895,22 +658703,6 @@
       }
      ],
      "variable_mask": "0x1c000000000000ff00000ffffffff000",
-     "claim_forbid": [
-      {
-       "shift": 122,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 124,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
      "_src504l1xv3": "bug504-L1-expand-v3-2026-10-04",
      "_src": "ctrl-silicon-sm120-2026-11-04"
     },
