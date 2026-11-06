@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
    "rows_total": 26406,
-   "rows_without_src": 25740,
+   "rows_without_src": 25696,
    "sources": {
     "ERR-194 port fleet b4fill4 (f2i38-ldef); silicon-verify nvdisasm SM121a 25/25 iter143": {
      "rows": 25,
@@ -395,10 +395,17 @@
      "test": "tests/wave11_ctrl_silicon.rs"
     },
     "wave11-integration-2026-11-05": {
-     "rows": 0,
+     "rows": 41,
      "kind": "wave-11 integration (see sm120)",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/merge_tables.py + remote/resolve_sm120.py"
+    },
+    "wave11-atom-lattice-2026-11-05": {
+     "kind": "lane lineage + silicon probe (RTX PRO 6000 sm_120, 2026-11-05)",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/merge_tables.py + remote/probe_run.py",
+     "test": "tests/bug195_atom_scope_width.rs, tests/bug199_atom_lane.rs",
+     "rows": 3
     }
    },
    "history": {
@@ -579941,7 +579948,8 @@
       }
      ],
      "variable_mask": "0x1c27c000000000000000000000000000",
-     "_src479": "bug479-2026-09-18"
+     "_src479": "bug479-2026-09-18",
+     "_src": "wave11-atom-lattice-2026-11-05"
     },
     "AND,E,SM,STRONG": {
      "and_base": "0xa90b100800000000000098a",
@@ -580008,7 +580016,8 @@
       }
      ],
      "variable_mask": "0x1c300000000000000000000000000000",
-     "_src479": "bug479-2026-09-18"
+     "_src479": "bug479-2026-09-18",
+     "_src": "wave11-atom-lattice-2026-11-05"
     },
     "E,GPU,MAX,S64,STRONG": {
      "and_base": "0x910f700800000000000098a",
@@ -580075,7 +580084,8 @@
       }
      ],
      "variable_mask": "0x1c000000000000000000000000000000",
-     "_src479": "bug479-2026-09-18"
+     "_src479": "bug479-2026-09-18",
+     "_src": "wave11-atom-lattice-2026-11-05"
     }
    },
    "operand_sig": "P_R_dARI_R",
@@ -594233,7 +594243,8 @@
       }
      ],
      "_src458d2": "bug458d2-2026-09-24",
-     "_src458d2b": "bug458d2b-2026-09-24"
+     "_src458d2b": "bug458d2b-2026-09-24",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "AB_R_R_R",
@@ -594445,7 +594456,8 @@
       }
      ],
      "_src458d2": "bug458d2-2026-09-24",
-     "_src458d2b": "bug458d2b-2026-09-24"
+     "_src458d2b": "bug458d2b-2026-09-24",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "AB_R_R_R",
@@ -594750,7 +594762,8 @@
       }
      ],
      "_src458d2": "bug458d2-2026-09-24",
-     "_src458d2b": "bug458d2b-2026-09-24"
+     "_src458d2b": "bug458d2b-2026-09-24",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "AB_R_R_R",
@@ -594890,7 +594903,8 @@
       }
      ],
      "_src458d2": "bug458d2-2026-09-24",
-     "_src458d2b": "bug458d2b-2026-09-24"
+     "_src458d2b": "bug458d2b-2026-09-24",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "AB_R_R_R",
@@ -2059816,7 +2059830,8 @@
      ],
      "_note511cf": "511-F: bity [1:4) = sub-select opkodu rodziny 0x7d0N (v0=FLO.U32,v1=FCHK,v3=I2F,v4=MUFU.COS, vendor x4 arb511b); FCHK_UR legalny WYLACZNIE v==1, inne v => REFUSE vendor-side. Era-pole pred4@1 = artefakt nauki na korpusie v==1-only; bez cf engine drukuje FCHK P2..P15 na syntetyku (corpus-0).",
      "_src511": "511",
-     "_note511": "511-E: graft verbatim z sm103a (and/vm/fields; FCHK_P_R_UR brakowal na 121a, 2uniq/4occ korpus realne, vendor 121a drukuje). count=4 == census occ. + cf v!=1 jak x3 (klasa F)."
+     "_note511": "511-E: graft verbatim z sm103a (and/vm/fields; FCHK_P_R_UR brakowal na 121a, 2uniq/4occ korpus realne, vendor 121a drukuje). count=4 == census occ. + cf v!=1 jak x3 (klasa F).",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "P_R_UR",
@@ -2060220,7 +2060235,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II",
@@ -2060562,7 +2060578,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II",
@@ -2060646,7 +2060663,8 @@
        "shift": 87,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II_P",
@@ -2060718,7 +2060736,8 @@
        "shift": 87,
        "token_idx": 4
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_P",
@@ -2061060,7 +2061079,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II",
@@ -2061144,7 +2061164,8 @@
        "shift": 87,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II_P",
@@ -2061216,7 +2061237,8 @@
        "shift": 87,
        "token_idx": 4
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_P",
@@ -2061558,7 +2061580,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II",
@@ -2061642,7 +2061665,8 @@
        "shift": 87,
        "token_idx": 5
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II_P",
@@ -2061714,7 +2061738,8 @@
        "shift": 87,
        "token_idx": 4
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_P",
@@ -2062057,7 +2062082,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II",
@@ -2062142,7 +2062168,8 @@
        "token_idx": 5
       }
      ],
-     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8."
+     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8.",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II_P",
@@ -2062215,7 +2062242,8 @@
        "token_idx": 4
       }
      ],
-     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8."
+     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8.",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_P",
@@ -2062558,7 +2062586,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II",
@@ -2062901,7 +2062930,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II",
@@ -2063244,7 +2063274,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI64_II",
@@ -2063587,7 +2063618,8 @@
         65535
        ]
       }
-     ]
+     ],
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II",
@@ -2063672,7 +2063704,8 @@
        "token_idx": 5
       }
      ],
-     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8."
+     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8.",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_II_P",
@@ -2063745,7 +2063778,8 @@
        "token_idx": 4
       }
      ],
-     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8."
+     "_note": "468 LTC-width selector [74:73] lattice closure (arb468 3140 sond x4 AGREE): LDG E*L2.256 plain ARURI64 sel->LTC64B/128B/256B klucze ab|=selbits (klon donora verbatim; kills b91 stoja; ra255->[URm], ur255->URZ = plain-geometria 464); NA-side +LTC128B/LTC256B x8.",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_ARURI_P",
@@ -2063825,7 +2063859,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2063900,7 +2063935,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.16x2 zywa w krzemie sm_121a.",
-     "_src505a": "bug505a-2026-09-21"
+     "_src505a": "bug505a-2026-09-21",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2063975,7 +2064011,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505a": "bug505a-2026-09-21"
+     "_src505a": "bug505a-2026-09-21",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064050,7 +2064087,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32 zywa w krzemie sm_121a.",
-     "_src505a": "bug505a-2026-09-21"
+     "_src505a": "bug505a-2026-09-21",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064125,7 +2064163,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064200,7 +2064239,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32 zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064275,7 +2064315,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064350,7 +2064391,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32 zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064425,7 +2064467,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064500,7 +2064543,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32 zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064575,7 +2064619,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064650,7 +2064695,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.S32 zywa w krzemie sm_121a.",
-     "_src505a": "bug505a-2026-09-21"
+     "_src505a": "bug505a-2026-09-21",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064725,7 +2064771,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064800,7 +2064847,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32 zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064875,7 +2064923,8 @@
       }
      ],
      "_note": "ERR-199 (iter150): forma dead-decode ROZSTRZYGNIETA sonda exec patched-cubin na GB10 (32/32..46/46 EXACT-fit modeli semantycznych). VIADD.32.ISAT zywa w krzemie sm_121a.",
-     "_src505b": "bug505b-2026-09-26"
+     "_src505b": "bug505b-2026-09-26",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "scheduling": {
@@ -2064986,7 +2065035,8 @@
       }
      ],
      "variable_mask": "0xc000000f7fef1fffffffffffffff000",
-     "_src505a": "bug505a-2026-09-21"
+     "_src505a": "bug505a-2026-09-21",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "R_R_UR",
@@ -2065052,7 +2065102,8 @@
       }
      ],
      "_src496": "bug496-2026-09-20",
-     "_note496": "496: forma z predem trailing [89:87]+neg@90 (PIERWSZY operand tekstu): arb496c x4 AGREE; bit91 illegal rovne. Jak bare."
+     "_note496": "496: forma z predem trailing [89:87]+neg@90 (PIERWSZY operand tekstu): arb496c x4 AGREE; bit91 illegal rovne. Jak bare.",
+     "_src": "wave11-integration-2026-11-05"
     }
    },
    "operand_sig": "P_R_II",
