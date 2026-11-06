@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22344,
-   "rows_without_src": 15897,
+   "rows_without_src": 15892,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -293,28 +293,28 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
      "test": "tests/b3001_lea_iadd3_shadowing.rs",
-     "rows": 0
+     "rows": 1
     },
     "b3002-ldg-desc-offset-2026-11-05": {
      "kind": "field restored from sibling measurement (sm103a mirror of the sm100a 1c037d0 fix; arch parity: nvdisasm-13.3 renders the witness word identically on both archs): the desc offset window of LDG_R_dARI STRONG forms (sub_imm2 24b SIGNED @ [40..64), BUG-388) was missing from the E,SM,STRONG,U16 group; zero sm103a witnesses, every sibling STRONG group carries the field",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3002a_rebuild_ldg_row.py (sm100a) + audit_table.py catch (sm103a) + arch-parity check",
      "test": "tests/b3002_ldg_desc_offset.rs (sm100a legs; the witness word decodes on sm103a too)",
-     "rows": 0
+     "rows": 1
     },
     "b3003-utmaldg-2026-11-05": {
      "kind": "row rebuild from measurement (sm103a mirror of the sm100a 1c0a95a rebuild; nvdisasm-13.3 renders all 16 census words identically on both archs): fields guard/sub_ur0@32/sub_ur0@24, and_base guard nibble cleared, mask = field-span union; the plain [URa],[URb] form is real (70 sm100a census words; sm103a words unwitnessed but the encoding region is arch-identical)",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3003_rebuild_utmaldg_row.py (sm100a) + arch-parity sweep (this dir)",
      "test": "tests/b3003_utmaldg_row.rs; BARRACUDA/tests/test_b300_bridge.py",
-     "rows": 0
+     "rows": 1
     },
     "b3004-lea-x-2026-11-05": {
      "kind": "count_null rows added on the owner's order (R 22:10Z C3, NEEDS_OWNER 30 LEA-family audit): the three unowned forms of the B300-1 opcode region, measured by the nvdisasm-13.3 single-bit + value sweeps in pubwave/wave11/b300/ (b3004_lea_x_family.md); zero corpus witnesses",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
      "test": "tests/b3004_lea_x_family.rs",
-     "rows": 0
+     "rows": 2
     },
     "iadd3x-urform-carry-neg-2026-11-06": {
      "rows": 1,
@@ -451215,7 +451215,8 @@
        "_note": "BUG-388: vendor window 24b@[40..64) SIGNED (arb388 x4 AGREE); B300-2a mirror (sm103a): the field was absent from the SM-scope group here too -- the sm100a census words (libcublasLt.480/492, 13680 words) proved the defect there; sm103a has zero witnesses but every sibling STRONG group carries the field and nvdisasm-13.3 renders the witness word identically on SM103a"
       }
      ],
-     "variable_mask": "0x000fce0000000000ffffff7f7e7f7000"
+     "variable_mask": "0x000fce0000000000ffffff7f7e7f7000",
+     "_src": "b3002-ldg-desc-offset-2026-11-05"
     },
     "E,STRONG,SYS": {
      "and_base": "0x000000000c1f59000000000000000981",
@@ -461739,7 +461740,7 @@
    "base_op": "LEA",
    "mod_groups": {
     "HI": {
-     "and_base": "0x000000000f8380ff0000001a00017c11",
+     "and_base": "0x000000000f8100000000000000000c11",
      "count": 4,
      "fields": [
       {
@@ -461819,7 +461820,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0x17f03e0000e0f9ff8000007ffffff000"
+     "variable_mask": "0x14000000000ef9ff800000fffffff000",
+     "_src": "b3001-lea-rebuild-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R_II",
@@ -489256,7 +489258,8 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x0000000000000000000000ffff00f000"
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "b3003-utmaldg-2026-11-05"
     }
    },
    "operand_sig": "AURI_AURI",
@@ -1677574,7 +1677577,8 @@
        "token_idx": 5
       }
      ],
-     "variable_mask": "0x17f03e0000e001ff8000007ffffff000"
+     "variable_mask": "0x14000000000e01ff800000fffffff000",
+     "_src": "b3004-lea-x-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R",
@@ -1677591,7 +1677595,7 @@
    "mod_groups": {
     "": {
      "_note": "B300-4: the .X (bit 74) companion of the B300-1 LEA_R_P_R_UR_R_II rebuild; carry-in pred [89:87]+neg@90 mirrors the structurally-sound sm120 LEA.HI.X_R_R_UR_R_II_P row (its junk 'HI,X' mod-group sibling is NOT mirrored; sm103a bit 123 is must-0 per the sweep, so sm120's reuse@123 is not copied).",
-     "and_base": "0x000000000f8384ff0000001a00017c11",
+     "and_base": "0x00000000080104000000000000000c11",
      "count": 1,
      "fields": [
       {
@@ -1677686,7 +1677690,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x17f03e0007e0f9ff8000007ffffff000"
+     "variable_mask": "0x14000000078ef9ff800000fffffff000",
+     "_src": "b3004-lea-x-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R_II_P",

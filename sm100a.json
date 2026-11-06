@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22344,
-   "rows_without_src": 15898,
+   "rows_without_src": 15892,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -299,35 +299,35 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
      "test": "tests/b3001_lea_iadd3_shadowing.rs",
-     "rows": 0
+     "rows": 1
     },
     "b3002-ldg-desc-offset-2026-11-05": {
      "kind": "field restored from sibling measurement: the desc offset window of LDG_R_dARI STRONG forms (sub_imm2 24b SIGNED @ [40..64), BUG-388) was missing from the E,SM,STRONG,U16 group; census: 13 680 words on sm100a re-encode with the offset zeroed (nvdisasm arbiter)",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3002a_rebuild_ldg_row.py + census fail_sm100a_final.jsonl",
      "test": "tests/b3002_ldg_desc_offset.rs",
-     "rows": 0
+     "rows": 1
     },
     "b3002b-ldgsts-imm-sign-2026-11-05": {
      "kind": "field removed on measurement: sub_imm1_shr5 (3b@[87..85), tok 2) is a phantom -- the imm is a plain 12-bit SIGNED @ [43:32) (nvdisasm sweep: 0x080 -> +0x80, 0xf80 -> -0x80); bits [87:85] are .LU/.NA modifiers and the predicate LSB; cubit read the imm sign off bit 87, flipping every odd-predicate word (28 census words on sm100a, libcublas.so.1070)",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3002b_rebuild_ldgsts_row.py + census fail_sm100a_final.jsonl",
      "test": "tests/b3002b_ldgsts_imm_sign.rs",
-     "rows": 0
+     "rows": 1
     },
     "b3003-utmaldg-2026-11-05": {
      "kind": "row rebuild from measurement: the '2D' group's harvest-era fields (5b sub_ur0 @32, 24b sub_imm1 @37, 18b sub_imm1 @61 -- overlapping) were unusable, so 70 census words (16 codes, libcublas.so.75 sm_100) failed decode; rebuilt to the nvdisasm-13.3-measured layout (UP-guard [15:12], URa [39:32], URb [31:24]), mirroring the sibling tc5-mk307:sibling _II rows",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3003_rebuild_utmaldg_row.py + census fail_sm100a_final.jsonl",
      "test": "tests/b3003_utmaldg_row.rs",
-     "rows": 0
+     "rows": 1
     },
     "b3004-lea-x-2026-11-05": {
      "kind": "count_null rows added on the owner's order (R 22:10Z C3, NEEDS_OWNER 30 LEA-family audit): the three unowned forms of the B300-1 opcode region, measured by the nvdisasm-13.3 single-bit + value sweeps in pubwave/wave11/b300/ (b3004_lea_x_family.md); zero corpus witnesses",
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
      "test": "tests/b3004_lea_x_family.rs",
-     "rows": 0
+     "rows": 2
     },
     "iadd3x-urform-carry-neg-2026-11-06": {
      "rows": 1,
@@ -448906,11 +448906,12 @@
        "token_idx": 1
       },
       {
-       "_src": "2aE",
-       "bits": 9,
+       "_src": "t7-review-2026-11-06",
+       "bits": 8,
        "extraction": "sub_ur1",
        "shift": 64,
-       "token_idx": 1
+       "token_idx": 1,
+       "_note": "bit 72 is the LTC size selector (set = LTC256B, measured nvdisasm 13.1 -b SM100), not the 9th bit of the UR field"
       },
       {
        "_src": "2aE",
@@ -448920,7 +448921,8 @@
        "token_idx": 3
       }
      ],
-     "variable_mask": "0x000e0600078001ffffffffffffff0000"
+     "variable_mask": "0x000e0600078000ffffffffffffff0000",
+     "_src": "b3002b-ldgsts-imm-sign-2026-11-05"
     },
     "64,E,LTC128B": {
      "and_base": "0x00000000081a06000000000000007dae",
@@ -451239,7 +451241,8 @@
        "_note": "BUG-388: vendor window 24b@[40..64) SIGNED (arb388 x4 AGREE); B300-2: field was absent from the SM-scope group -- 13 680 census words (cublasLt.480 et al.) lost the desc offset on re-encode; restored 1:1 from the sibling STRONG groups"
       }
      ],
-     "variable_mask": "0x000fce0000000000ffffff7f7e7f7000"
+     "variable_mask": "0x000fce0000000000ffffff7f7e7f7000",
+     "_src": "b3002-ldg-desc-offset-2026-11-05"
     },
     "E,STRONG,SYS": {
      "and_base": "0x000000000c1f59000000000000000981",
@@ -461763,7 +461766,7 @@
    "base_op": "LEA",
    "mod_groups": {
     "HI": {
-     "and_base": "0x000000000f8380ff0000001a00017c11",
+     "and_base": "0x000000000f8100000000000000000c11",
      "count": 4,
      "fields": [
       {
@@ -461843,7 +461846,8 @@
        "token_idx": 6
       }
      ],
-     "variable_mask": "0x17f03e0000e0f9ff8000007ffffff000"
+     "variable_mask": "0x14000000000ef9ff800000fffffff000",
+     "_src": "b3001-lea-rebuild-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R_II",
@@ -489292,7 +489296,8 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x0000000000000000000000ffff00f000"
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "b3003-utmaldg-2026-11-05"
     }
    },
    "operand_sig": "AURI_AURI",
@@ -1677610,7 +1677615,8 @@
        "token_idx": 5
       }
      ],
-     "variable_mask": "0x17f03e0000e001ff8000007ffffff000"
+     "variable_mask": "0x14000000000e01ff800000fffffff000",
+     "_src": "b3004-lea-x-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R",
@@ -1677627,7 +1677633,7 @@
    "mod_groups": {
     "": {
      "_note": "B300-4: the .X (bit 74) companion of the B300-1 LEA_R_P_R_UR_R_II rebuild; carry-in pred [89:87]+neg@90 mirrors the structurally-sound sm120 LEA.HI.X_R_R_UR_R_II_P row (its junk 'HI,X' mod-group sibling is NOT mirrored; sm103a bit 123 is must-0 per the sweep, so sm120's reuse@123 is not copied).",
-     "and_base": "0x000000000f8384ff0000001a00017c11",
+     "and_base": "0x00000000080104000000000000000c11",
      "count": 1,
      "fields": [
       {
@@ -1677722,7 +1677728,8 @@
        "token_idx": 7
       }
      ],
-     "variable_mask": "0x17f03e0007e0f9ff8000007ffffff000"
+     "variable_mask": "0x14000000078ef9ff800000fffffff000",
+     "_src": "b3004-lea-x-2026-11-05"
     }
    },
    "operand_sig": "R_P_R_UR_R_II_P",
