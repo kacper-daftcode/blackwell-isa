@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22363,
-   "rows_without_src": 15873,
+   "rows_total": 22420,
+   "rows_without_src": 15864,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -336,6 +336,14 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_lea.py",
      "test": "tests/sm120_lea.rs"
+    },
+    "bra-family-2026-11-06": {
+     "rows": 66,
+     "kind": "nvdisasm 13.1 field probe (-b SM103)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_bra.py",
+     "test": "tests/sm103a_sm100a_bra.rs",
+     "note": "SM103a / SM100a parity of the SM120 measurement (T-10): the 551 probe words render the same text on -b SM103; fixture tests/fixtures/sm103a_bra_nvdisasm.jsonl"
     }
    },
    "history": {
@@ -679,7 +687,8 @@
    "6": "MEMORY_SHARED",
    "7": "MEMORY_LOCAL",
    "9": "TEXTURE"
-  }
+  },
+  "key_aliases": {}
  },
  "cost_model": {
   "arch": "sm_103a",
@@ -395719,296 +395728,6 @@
     }
    },
    "operand_sig": "II",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "BRA_II": {
-   "base_op": "BRA",
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000038000000000000000340947",
-     "count": 12969,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x03f03e000003ffffffffffff00fcf000"
-    },
-    "ANY,U": {
-     "and_base": "0x000000000393fffffffffffd00ec0947",
-     "count": 12,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x01f032000000000000000000003c3000"
-    },
-    "U": {
-     "and_base": "0x00000000038000000000000100440947",
-     "count": 115,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x03b03200000000000000007c00fcf000"
-    }
-   },
-   "operand_sig": "II",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "BRA_P_II": {
-   "base_op": "BRA",
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000100947",
-     "count": 4167,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x03f03e000783fffffffffffc00fcf000"
-    }
-   },
-   "operand_sig": "P_II",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "BRA_P_UR_II": {
-   "base_op": "BRA",
-   "mod_groups": {
-    "CONV": {
-     "and_base": "0x00000000080400000000000300000947",
-     "count": 10,
-     "fields": [
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 1
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 1,
-       "extraction": "inv",
-       "shift": 90,
-       "token_idx": 1
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "ureg_ff",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 18,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x03fffe00078000000000007cfffcf000"
-    },
-    "DIV": {
-     "and_base": "0x00000000080400000000000200000947",
-     "count": 10,
-     "fields": [
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 1
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 1,
-       "extraction": "inv",
-       "shift": 90,
-       "token_idx": 1
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 8,
-       "extraction": "ureg_ff",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 18,
-       "token_idx": 3
-      },
-      {
-       "_src": "b4fill2-2026-08-21",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x03fffe00078000000000007cfffcf000"
-    }
-   },
-   "operand_sig": "P_UR_II",
-   "scheduling": {
-    "_src": "b4fill2-2026-08-21",
-    "confidence": "synthetic",
-    "pipe_class": 0,
-    "pipe_name": "CONTROL"
-   }
-  },
-  "BRA_UP_II": {
-   "base_op": "BRA",
-   "mod_groups": {
-    "ANY,U": {
-     "and_base": "0x000000000b9000000000015d00047547",
-     "count": 6,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aS",
-       "bits": 3,
-       "extraction": "imm_shr4",
-       "shift": 21,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x001006000003fffffffffebc01fc0000"
-    },
-    "U": {
-     "and_base": "0x000000000b80000000000001001c7547",
-     "count": 17806,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 27,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x03f03e000003fffffffffffc0ffc0000"
-    }
-   },
-   "operand_sig": "UP_II",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "BRA_UR_II": {
-   "base_op": "BRA",
-   "mod_groups": {
-    "DIV": {
-     "and_base": "0x000000000b8000000000000600940947",
-     "count": 8765,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 24,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x03f03e0000000000000007fc1ffcf000"
-    }
-   },
-   "operand_sig": "UR_II",
    "scheduling": {
     "def_latency": 1,
     "is_variable_latency": false,
@@ -1679135,6 +1678854,2826 @@
     "pipe_name": "UNKNOWN",
     "throughput": 1
    }
+  },
+  "BRA_II": {
+   "base_op": "BRA",
+   "operand_sig": "_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000038000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x0000000003c000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x0000000003a000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "U": {
+     "and_base": "0x00000000038000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "NOT_TID0,U": {
+     "and_base": "0x00000000038800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,U": {
+     "and_base": "0x00000000039000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,NOT_TID0,U": {
+     "and_base": "0x00000000039800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x0000000003c000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,NOT_TID0,U": {
+     "and_base": "0x0000000003c800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,U": {
+     "and_base": "0x0000000003d000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,NOT_TID0,U": {
+     "and_base": "0x0000000003d800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x0000000003a000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,NOT_TID0,U": {
+     "and_base": "0x0000000003a800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,U": {
+     "and_base": "0x0000000003b000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,NOT_TID0,U": {
+     "and_base": "0x0000000003b800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV": {
+     "and_base": "0x00000000038000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x0000000003c000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x0000000003a000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x00000000038000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x0000000003c000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x0000000003a000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
+  },
+  "BRA_P_II": {
+   "base_op": "BRA",
+   "operand_sig": "_P_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x00000000004000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x00000000002000000000000000000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "U": {
+     "and_base": "0x00000000000000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "NOT_TID0,U": {
+     "and_base": "0x00000000000800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,U": {
+     "and_base": "0x00000000001000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,NOT_TID0,U": {
+     "and_base": "0x00000000001800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x00000000004000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,NOT_TID0,U": {
+     "and_base": "0x00000000004800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,U": {
+     "and_base": "0x00000000005000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,NOT_TID0,U": {
+     "and_base": "0x00000000005800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x00000000002000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,NOT_TID0,U": {
+     "and_base": "0x00000000002800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,U": {
+     "and_base": "0x00000000003000000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,NOT_TID0,U": {
+     "and_base": "0x00000000003800000000000100000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV": {
+     "and_base": "0x00000000000000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x00000000004000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x00000000002000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x00000000000000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x00000000004000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x00000000002000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc00fff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
+  },
+  "BRA_UR_II": {
+   "base_op": "BRA",
+   "operand_sig": "_UR_II",
+   "mod_groups": {
+    "DIV": {
+     "and_base": "0x000000000b8000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x000000000bc000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x000000000ba000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x000000000b8000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x000000000bc000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x000000000ba000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000007fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
+  },
+  "BRA_P_UR_II": {
+   "base_op": "BRA",
+   "operand_sig": "_P_UR_II",
+   "mod_groups": {
+    "DIV": {
+     "and_base": "0x00000000080000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x00000000084000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x00000000082000000000000200000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x00000000080000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x00000000084000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x00000000082000000000000300000947",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000787fffffffffffcfffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
+  },
+  "BRA_UP_II": {
+   "base_op": "BRA",
+   "operand_sig": "_UP_II",
+   "mod_groups": {
+    "U": {
+     "and_base": "0x000000000b8000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,U": {
+     "and_base": "0x000000000b9000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x000000000bc000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,U": {
+     "and_base": "0x000000000bd000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x000000000ba000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,U": {
+     "and_base": "0x000000000bb000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
+  },
+  "BRA_P_UP_II": {
+   "base_op": "BRA",
+   "operand_sig": "_P_UP_II",
+   "mod_groups": {
+    "U": {
+     "and_base": "0x00000000080000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,U": {
+     "and_base": "0x00000000081000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x00000000084000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,DEC,U": {
+     "and_base": "0x00000000085000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x00000000082000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    },
+    "ANY,INC,U": {
+     "and_base": "0x00000000083000000000000100000547",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 27,
+       "token_idx": 2,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "bra-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffc0ffff000",
+     "_src": "bra-family-2026-11-06",
+     "_note": "BRA family (0x947; 0x547 + bit 91 = the uniform-predicate form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_bra.py (session T-9, 2026-11-06): target = PC + 16 + signed 56-bit dword offset [23:16] + [81:34]; mode [33:32] plain/U/DIV/CONV, 85 INC, 86 DEC, 84 ANY and 83 NOT_TID0 with .U; predicate operand [89:87] + 90; UR operand [31:24] + ~ 82 with the frame bit 91 (DIV/CONV only); bits 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "bra-family-2026-11-06"
   }
  },
  "operand_roles": {
