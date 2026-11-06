@@ -1,3 +1,38 @@
+## November 6–7, 2026 (session T-12 / session G): the T1 production line — HSETP2 and ISETP / UISETP measured whole on `sm120.json`
+
+The harvest rows of 2026-06..08 (rows without `_src`) are being replaced family by family: session G (rtx) and the B300
+lane measure, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, gates and
+pushes. **`sm120.json`: 26 662 rows, 9 101 with `_src` — 17 561 harvest rows left** (18 841 of 26 598 at `c896e8f`).
+
+- **HSETP2 measured whole** (`dc1f485`; cubit `tools/probes/re_sm120_hsetp2.py`, 1 002 form + 88 lattice words, the
+  same text on the three targets; provenance `hsetp2-family-2026-11-06`, 768 rows; cubit `tests/sm120_hsetp2.rs`).
+  The 384 + 384 "mode grid" rows of `HSETP2_P_P_R_R_P` / `HSETP2_P_P_R_UR_P` (2026-10-22) were field-correct and are
+  re-emitted from the measurement with provenance; three dotted harvest keys are `_meta.key_aliases` of the plain keys
+  (`HSETP2.GEU.AND_P_P_R_R_P`, an encode-only twin; `HSETP2.GEU.AND_P_P_R_R_R` / `_P_P_R_UR_UR`, a `R2.H0_H0, R3.H0_H0`
+  sample mis-tokenised as a third register; 0 census witnesses). Law: opcode 0x234 (register form; bit 91 illegal) /
+  0xe34 + bit 91 (uniform); guard [15:12]; Ra [31:24], `-Ra` 72, `|Ra|` 73, selector [75:74] (0 none, 2 `.H0_H0`,
+  3 `.H1_H1`, 1 = the vendor's `.INVALID1`); Rb / URb [39:32], selector [61:60], `|Rb|` 62, `-Rb` 63; the type [65:64]
+  (0 fp16, 2 `.BF16_V2`, 1 / 3 `INVALID1` / `INVALID3`), the boolean [70:69] (AND / OR / XOR / `INVALID3`), `.H_AND` 71,
+  the comparison [79:76] (F LT EQ LE GT NE GE NUM NAN LTU EQU LEU GTU NEU GEU T), `.FTZ` 80, Pd0 [83:81], Pd1 [86:84],
+  Pc [89:87] + `!` 90; [23:16], [59:40], 66–68, [95:92] text-inert (fail-closed). `.reuse`: Ra 122, Rb 124.
+- **ISETP / UISETP measured whole** (`6dff9c7`; cubit `tools/probes/re_sm120_isetp.py`, 1 944 form + 192 lattice
+  words; provenance `isetp-family-2026-11-06`, 576 rows; cubit `tests/sm120_isetp.rs`): 960 groups on the ten keys
+  `ISETP_P_P_R_{R,UR,II}_P` (0x20c / 0xc0c + 91 / 0x80c), `UISETP_UP_UP_UR_{UR,II}_UP` (0x28c + 91 / 0x88c + 91) and
+  their `.EX` twins (`_P` / `_UP`) — 509 harvest rows rebuilt (they baked PT guards and a sample's predicates, their
+  masks excluded their own fields), 67 missing immediate-form groups added, the 384 dsv41 rows of 2026-10-22 reproduced
+  field for field and kept with their tag. Law: guard [15:12]; [23:16] inert; Ra / URa [31:24]; Rb / URb [39:32] or
+  imm32 [63:32]; the `.EX` carry-in `[!]Pn` at [71:68] is read only with bit 72 (`.EX`) — without it the window is
+  text-inert and nvcc writes PT (7 414 / 7 414 census words), so the non-EX rows bake `[70:68] = 7` and fail closed
+  elsewhere; 73 signed (32-bit signed prints no type, clear = `.U32`); [75:74] the boolean (3 = `INVALID3`); [78:76] the
+  comparison (F LT EQ LE GT NE GE T); 79 inert; **80 = the 64-bit compare (`.S64` / `.U64`) — SM120-only: on `-b SM103`
+  / `SM100` nvdisasm 13.1 renders no 64-bit compare and the bit is text-inert** (977 of the 2 136 sweep words differ by
+  that suffix alone; the sm103a / sm100a harvest `S64` / `U64` ISETP groups are therefore a question for the B300 lane);
+  Pd0 [83:81], Pd1 [86:84], Pc [89:87] + `!` 90; 91 = the uniform frame. `.reuse`: Ra 122, Rb 123 (register form);
+  UISETP none. The BUG-092 encode-only retention group of `UISETP_UP_UP_UR_UR_UP` stays.
+- For the record (met in both reviews): nvdisasm prints `.reuse` only when the control word's yield bit (109) is set —
+  a fixture's `.reuse` texts reproduce only under the probe's control code.
+- The SM120 reference page regenerated at `6dff9c7`.
+
 ## November 6, 2026 (session T-11): the IDP family on the four tables (coldface's D2 keys reviewed and completed), the SM120 audit's named exceptions 14 → 1
 
 - **`sm120.json` / `sm103a.json` / `sm100a.json` / `sm121a.json`: the `IDP` family measured whole** (cubit
