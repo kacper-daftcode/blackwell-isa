@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26599,
-   "rows_without_src": 19047,
+   "rows_total": 26596,
+   "rows_without_src": 19044,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -417647,65 +417647,6 @@
     "write_latency": 0
    }
   },
-  "F2FP.BF16.F32.PACK_AB_R_R_R_?": {
-   "base_op": "F2FP.BF16.F32.PACK",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000010ff00000000ff00723e",
-     "count": 22,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0xffff00ff0000",
-     "_src458d2": "bug458d2-2026-09-24",
-     "claim_forbid": [
-      {
-       "shift": 73,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 74,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
-     "_srcrrb": "bugrrb-2026-10-04"
-    }
-   },
-   "operand_sig": "AB_R_R_R_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "F2FP.F16.E4M3.UNPACK_B_R_R": {
    "base_op": "F2FP.F16.E4M3.UNPACK_B",
    "ctrl_class": "alu_simple",
@@ -418124,65 +418065,6 @@
     }
    },
    "operand_sig": "AB_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "F2FP.F16.F32.PACK_AB_R_R_R_?": {
-   "base_op": "F2FP.F16.F32.PACK",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000ff00000000ff00723e",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0xffff00ff0000",
-     "_src458d2": "bug458d2-2026-09-24",
-     "claim_forbid": [
-      {
-       "shift": 73,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      },
-      {
-       "shift": 74,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ],
-     "_srcrrb": "bugrrb-2026-10-04"
-    }
-   },
-   "operand_sig": "AB_R_R_R_?",
    "scheduling": {
     "confidence": "synthetic",
     "def_latency": 4,
@@ -419142,34 +419024,6 @@
      ],
      "variable_mask": "0xffff00ff0000",
      "encode_only": true,
-     "_src458d2": "bug458d2-2026-09-24",
-     "claim_forbid": [
-      {
-       "shift": 73,
-       "bits": 1,
-       "values": [
-        1
-       ]
-      }
-     ]
-    },
-    "TF32,F32,PACK_B": {
-     "and_base": "0x00000000024050ff00000000ff00723e",
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0xffff00ff0000",
      "_src458d2": "bug458d2-2026-09-24",
      "claim_forbid": [
       {
