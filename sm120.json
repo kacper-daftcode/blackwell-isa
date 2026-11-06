@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26646,
-   "rows_without_src": 19000,
+   "rows_total": 26676,
+   "rows_without_src": 18987,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -623,6 +623,13 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_bra.py",
      "test": "tests/sm120_bra.rs"
+    },
+    "brx-ret-family-2026-11-06": {
+     "rows": 46,
+     "kind": "nvdisasm 13.1 field probe (-b SM120)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_brx_ret.py",
+     "test": "tests/sm120_brx_ret.rs"
     }
    },
    "history": {
@@ -1120,7 +1127,9 @@
    "SHF.L.U32_P0_R_R_II_R": "SHF_R_R_II_R",
    "BRA.U_UP_II": "BRA_UP_II",
    "BRA.DIV_UR_II": "BRA_UR_II",
-   "BRA.U_?_II": "BRA_II"
+   "BRA.U_?_II": "BRA_II",
+   "RET.REL.NODEC_R_II": "RET_R_II",
+   "RET.REL.NODEC_R": "RET_R_II"
   }
  },
  "instructions": {
@@ -400080,196 +400089,6 @@
     "write_latency": 0
    }
   },
-  "BRXU_II": {
-   "base_op": "BRXU",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000b83fffffffffe0000047958",
-     "count": 2,
-     "fields": [
-      {
-       "bits": 21,
-       "extraction": "imm",
-       "shift": 19,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "ureg",
-       "shift": 26,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x0000000000000000000000fffff80000"
-    }
-   },
-   "operand_sig": "II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "BRXU_L": {
-   "base_op": "BRXU",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000b8000000000000000007958",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "",
-       "shift": 16,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "bits": 48,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffcffff0000"
-    }
-   },
-   "operand_sig": "L",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "BRX_II": {
-   "base_op": "BRX",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000383ffffffffffc000007949",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 20,
-       "extraction": "imm",
-       "shift": 18,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000003ffffc0000"
-    }
-   },
-   "operand_sig": "II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "BRX_L": {
-   "base_op": "BRX",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000038000000000000000007949",
-     "count": 62,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "guard_neg",
-       "shift": 16,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "bits": 48,
-       "extraction": "imm_shr16",
-       "shift": 34,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffcffff0000"
-    }
-   },
-   "operand_sig": "L",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
   "BSSY.RECONVERGENT_II_II": {
    "base_op": "BSSY.RECONVERGENT",
    "ctrl_class": "ctrl_flow",
@@ -738011,358 +737830,6 @@
    },
    "base_op": "REDUX",
    "operand_sig": "UR_R"
-  },
-  "RET.ABS.NODEC_?": {
-   "base_op": "RET.ABS.NODEC",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000003e000000000000014007950",
-     "count": 8,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "RET.REL.NODEC_II": {
-   "base_op": "RET.REL.NODEC",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000003c3fffffffffe0000007950",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 23,
-       "extraction": "imm",
-       "shift": 18,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x0000000000000000000001fffffc0000"
-    }
-   },
-   "operand_sig": "II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "RET.REL.NODEC_R": {
-   "base_op": "RET.REL.NODEC",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000950",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 48,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000783fffffffffffcfffff000"
-    }
-   },
-   "operand_sig": "R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "RET.REL.NODEC_R_II": {
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000003c3ffff0000000000000950",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "mask": 15,
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "mask": 255,
-       "shift": 24,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000000000fffffffffffff000"
-    }
-   },
-   "base_op": "RET.REL.NODEC",
-   "operand_sig": "R_II"
-  },
-  "RET_II": {
-   "base_op": "RET",
-   "ctrl_class": "static_ctrl",
-   "mercury": [],
-   "mod_groups": {
-    "NODEC,REL": {
-     "and_base": "0x0000000003c3ffffffffffff02007950",
-     "count": 2,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x00000000000000000000000000007000"
-    }
-   },
-   "operand_sig": "II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "RET_L": {
-   "base_op": "RET",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "ABS,NODEC": {
-     "and_base": "0x0000000003e000000000000002007950",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "",
-       "shift": 16,
-       "token_idx": 0
-      },
-      {
-       "bits": 48,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffc00ff0000",
-     "encode_only": true
-    },
-    "NODEC,REL": {
-     "and_base": "0x0000000003c000000000000002007950",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "",
-       "shift": 16,
-       "token_idx": 0
-      },
-      {
-       "bits": 48,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffcffff0000"
-    }
-   },
-   "operand_sig": "L",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "RET_R_II": {
-   "mod_groups": {
-    "NODEC,REL": {
-     "and_base": "0x0000000003c000000000000000000950",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "mask": 15,
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "mask": 255,
-       "shift": 24,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffffffff000"
-    },
-    "REL,NODEC": {
-     "and_base": "0x0000000003c000000000000000000950",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "mask": 15,
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "mask": 255,
-       "shift": 24,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffffffff000"
-    },
-    "ABS,NODEC": {
-     "and_base": "0x0000000003e000000000000000000950",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm_shr2",
-       "shift": 16,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 48,
-       "extraction": "imm_shr10",
-       "shift": 34,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x000000000003fffffffffffcfffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 RET.ABS.NODEC takes register8@24 plusabsoluteq56*4target low8@16/high48@34; no pc+16additionforABS. bit85distinguishesABSfromREL."
-    }
-   },
-   "base_op": "RET",
-   "operand_sig": "R_II",
-   "ctrl_class": "ctrl_flow"
   },
   "S2R_R_II": {
    "base_op": "S2R",
@@ -2004185,138 +2003652,6 @@
     "write_latency": 0
    }
   },
-  "BRX_R_II": {
-   "base_op": "BRX",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000038000000000000000000949",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm_shr2",
-       "shift": 16,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 48,
-       "extraction": "imm_shr10",
-       "shift": 34,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x040000000003fffffffffffcfffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 indirectbranch takes register8@24 and raw signedq56*4 byteoffset; target is relative toregister, not instructionPC."
-    }
-   },
-   "operand_sig": "R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "BRXU_UR_II": {
-   "base_op": "BRXU",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000b8000000000000000000958",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 24,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm_shr2",
-       "shift": 16,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 48,
-       "extraction": "imm_shr10",
-       "shift": 34,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x040000000003fffffffffffcfffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 indirectbranch takes register8@24 and raw signedq56*4 byteoffset; target is relative toregister, not instructionPC."
-    }
-   },
-   "operand_sig": "UR_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
   "FHADD_R_R_R": {
    "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
    "base_op": "FHADD",
@@ -2042273,6 +2041608,2086 @@
     }
    },
    "_src": "bra-family-2026-11-06"
+  },
+  "BRX_R_II": {
+   "base_op": "BRX",
+   "operand_sig": "_R_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000038000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x0000000003a000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x0000000003c000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "BRX_P_R_II": {
+   "base_op": "BRX",
+   "operand_sig": "_P_R_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x00000000002000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x00000000004000000000000000000949",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "BRXU_UR_II": {
+   "base_op": "BRXU",
+   "operand_sig": "_UR_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x000000000b8000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x000000000ba000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x000000000bc000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "U": {
+     "and_base": "0x000000000b8000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x000000000ba000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x000000000bc000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DIV": {
+     "and_base": "0x000000000b8000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x000000000ba000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x000000000bc000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x000000000b8000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x000000000ba000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x000000000bc000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "BRXU_P_UR_II": {
+   "base_op": "BRXU",
+   "operand_sig": "_P_UR_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000080000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x00000000082000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x00000000084000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "U": {
+     "and_base": "0x00000000080000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "INC,U": {
+     "and_base": "0x00000000082000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC,U": {
+     "and_base": "0x00000000084000000000000100000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DIV": {
+     "and_base": "0x00000000080000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DIV,INC": {
+     "and_base": "0x00000000082000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "DEC,DIV": {
+     "and_base": "0x00000000084000000000000200000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV": {
+     "and_base": "0x00000000080000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV,INC": {
+     "and_base": "0x00000000082000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "CONV,DEC": {
+     "and_base": "0x00000000084000000000000300000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "RET_R_II": {
+   "base_op": "RET",
+   "operand_sig": "_R_II",
+   "mod_groups": {
+    "REL": {
+     "and_base": "0x00000000038000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "NODEC,REL": {
+     "and_base": "0x0000000003c000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS": {
+     "and_base": "0x0000000003a000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS,NODEC": {
+     "and_base": "0x0000000003e000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "RET_P_R_II": {
+   "base_op": "RET",
+   "operand_sig": "_P_R_II",
+   "mod_groups": {
+    "REL": {
+     "and_base": "0x00000000000000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "NODEC,REL": {
+     "and_base": "0x00000000004000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS": {
+     "and_base": "0x00000000002000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS,NODEC": {
+     "and_base": "0x00000000006000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "RET_UR_II": {
+   "base_op": "RET",
+   "operand_sig": "_UR_II",
+   "mod_groups": {
+    "REL": {
+     "and_base": "0x000000000b8000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "NODEC,REL": {
+     "and_base": "0x000000000bc000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS": {
+     "and_base": "0x000000000ba000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS,NODEC": {
+     "and_base": "0x000000000be000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
+  },
+  "RET_P_UR_II": {
+   "base_op": "RET",
+   "operand_sig": "_P_UR_II",
+   "mod_groups": {
+    "REL": {
+     "and_base": "0x00000000080000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "NODEC,REL": {
+     "and_base": "0x00000000084000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS": {
+     "and_base": "0x00000000082000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    },
+    "ABS,NODEC": {
+     "and_base": "0x00000000086000000000000000000950",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 1,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 3,
+       "_src": "brx-ret-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000783fffffffffffcfffff000",
+     "_src": "brx-ret-family-2026-11-06",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "brx-ret-family-2026-11-06"
   }
  },
  "operand_roles": {
