@@ -679,6 +679,14 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_isetp.py",
      "test": "tests/sm120_isetp.rs"
+    },
+    "qmma-sf-opcode-bit2-silicon-2026-11-06": {
+     "rows": 1,
+     "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
+     "date": "2026-11-06",
+     "nvdisasm_sm120": "no text",
+     "silicon": "RTX PRO 6000 Blackwell Server Edition (sm_120), test host GPU 0, 2026-11-06 22:3x-22:4xZ (session R): the 0x47e word executes on one warp without a fault and writes fp32 \u2014 an E8M0 scale of 0xff yields NaN on every element, doubling scale A doubles the result; on identical operands (A = 0x38, B = 0x40, scales 1.0) the documented QMMA.SF E4M3.E4M3 gives 64.0, E2M1.E2M1 0.0, this word 28.0 (A = B = 0x38: 32.0 / 512.0 / 24.5; A = 0x44, B = 0x3c: 144.0 / -96.0 / 31.875): a dense block-scaled MMA over some other input element type, unidentified. Replaces the 2026-03-26 hypothesis row IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR (no numerical oracle; its operand model disagreed with the family). Probe kernels and host driver: the coordination record of 2026-11-06 (R/immasf).",
+     "note": "The element types are the open question (one-hot inputs per position against the 4- and 6-bit candidates, ~1 h with the same harness)."
     }
    },
    "history": {
@@ -1187,7 +1195,8 @@
    "FADD.SAT_R_R_R": "FADD_R_R_R",
    "HSETP2.GEU.AND_P_P_R_R_P": "HSETP2_P_P_R_R_P",
    "HSETP2.GEU.AND_P_P_R_R_R": "HSETP2_P_P_R_R_P",
-   "HSETP2.GEU.AND_P_P_R_UR_UR": "HSETP2_P_P_R_UR_P"
+   "HSETP2.GEU.AND_P_P_R_UR_UR": "HSETP2_P_P_R_UR_P",
+   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR"
   }
  },
  "instructions": {
@@ -640627,104 +640636,6 @@
     "stall_base": 10,
     "throughput": 2,
     "write_latency": 5
-   }
-  },
-  "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": {
-   "_discovery": {
-    "date": "2026-03-26",
-    "identity": "Historical opcode 0x47e hypothesis; IMMA.SF identity and operand semantics unproven",
-    "method": "Historical opcode sweep classified nonzero output as OK without a numerical oracle; the mnemonic was assigned by analogy",
-    "opcode_pattern": "0x47a and 0x47e differ at bit2; that fact does not establish instruction identity or execution resources",
-    "pipeline_dual_issue": "UNVERIFIED: no validated native form or IMMA.SF versus QMMA/HMMA overlap measurement is retained",
-    "sass_hex_example": {
-     "note": "Unvalidated patched candidate; operand/scale mapping and native mnemonic require independent RE before hardware use"
-    },
-    "status": "unvalidated_historical_hypothesis"
-   },
-   "base_op": "IMMA.SF.16832.U8.U8",
-   "mod_groups": {
-    "": {
-     "_source": "Unverified historical opcode0x47e candidate; prior silicon label has no retained numerical or native-mnemonic validation",
-     "and_base": "0x600000000000747e",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 40,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 48,
-       "token_idx": 6
-      }
-     ],
-     "variable_mask": "0xff00fffffffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R_R_R_UR",
-   "scheduling": {
-    "confidence": "unverified",
-    "latency_source": "none: historical inference from QMMA.SF was not a measured IMMA.SF latency",
-    "opcode_id": null,
-    "_note": "Former pipeline and timing values are preserved under _historical_unvalidated_claims only; do not use as measured scheduling facts."
-   },
-   "_historical_unvalidated_claims": {
-    "discovery": {
-     "date": "2026-03-26",
-     "identity": "Block-scaled INT8 MMA on INT_ARITH pipeline (dual-issue with HMMA)",
-     "method": "session7: opcode 0x47E = IMMA | bit[10] (SF mode), hardware-verified",
-     "opcode_pattern": "QMMA.SF(0x47A) vs IMMA.SF(0x47E): differ at bit[2] only (FP vs INT input)",
-     "pipeline_dual_issue": "IMMA.SF (INT_ARITH) can execute in parallel with IMMA/QMMA/HMMA (HMMA pipeline)",
-     "sass_hex_example": {
-      "note": "Patched from IMMA(0x237), operand layout needs further RE for proper scale operands"
-     }
-    },
-    "scheduling": {
-     "confidence": "hardware_verified",
-     "latency_source": "inferred_from_QMMA.SF",
-     "opcode_id": null,
-     "pipe_class": 37,
-     "pipe_name": "INT_ARITH",
-     "read_latency": 0,
-     "res_busy_a": 0,
-     "res_busy_b": 12,
-     "stall_base": 0,
-     "write_latency": 0
-    },
-    "encoding_source": "session7: IMMA.SF = block-scaled INT8 MMA, hardware-verified on RTX 5090"
    }
   },
   "IMMA.SP.16832.S8.S8_R_R_R_R_R_II": {
@@ -2056915,6 +2056826,132 @@
     }
    },
    "_src": "idp-family-2026-11-06"
+  },
+  "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR": {
+   "base_op": "QMMA.SF.16832.F32.UNIDENTIFIED.E8",
+   "operand_sig": "R_R_R_R_R_R_UR",
+   "mod_groups": {
+    "": {
+     "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06",
+     "_note": "opcode 0x47e = QMMA.SF (0x47a) with bit 2 set. Measured on sm_120 silicon 2026-11-06 (R; test host GPU 0, RTX PRO 6000 SE; cubit-assembled probe next to the documented E4M3.E4M3 / E2M1.E2M1 forms on identical fragments): executes, fp32 output, E8M0 block scales honoured (scale 0xff -> NaN, scale x2 -> result x2), the input element types match neither E4M3 nor E2M1 and are unidentified; the type field of this row is zero as on the E4M3.E4M3 donor. nvdisasm 13.1 / 13.3 have no text for the word. Fields = the QMMA.SF family's (Rd@16 Ra@24 Rb@32 Rc@64 sfA@40 sfB@52 UR@60+73); the 2026-03 hypothesis row read R6 at [55:48] and had no UR field.",
+     "and_base": "0x47e",
+     "variable_mask": "0x0800000000003ffffff8fffffffff000",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "shift": 40,
+       "bits": 8,
+       "extraction": "reg",
+       "token_idx": 5,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "shift": 52,
+       "bits": 8,
+       "extraction": "reg",
+       "token_idx": 6,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "shift": 51,
+       "bits": 1,
+       "extraction": "reuse",
+       "token_idx": 6,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "shift": 60,
+       "bits": 3,
+       "extraction": "ureg",
+       "token_idx": 7,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      },
+      {
+       "shift": 73,
+       "bits": 5,
+       "extraction": "ureg_shr3",
+       "token_idx": 7,
+       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+      }
+     ],
+     "count": null
+    }
+   },
+   "_discovery": {
+    "date": "2026-03-26 (opcode found), 2026-11-06 (measured on silicon)",
+    "identity": "undocumented block-scaled MMA with fp32 output in the QMMA.SF family, selected by opcode bit 2; input element types unidentified (not E4M3, not E2M1, not an integer MMA)",
+    "method": "2026-11-06: cubit-assembled probe kernels on sm_120 silicon next to the documented QMMA.SF forms on identical operands (R, test host GPU 0); the 2026-03 claim 'IMMA.SF / U8 inputs' had no numerical oracle and is withdrawn",
+    "status": "executes; element types unidentified (NEEDS_OWNER 44)",
+    "historical_key": "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR"
+   },
+   "scheduling": {
+    "confidence": "copied_from_family_donor",
+    "latency_source": "sched_table",
+    "opcode_id": 133,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "read_latency": 0,
+    "res_busy_a": 0,
+    "res_busy_b": 12,
+    "stall_base": 0,
+    "write_latency": 0,
+    "_note": "scheduling copied from the E4M3.E4M3 donor row (same opcode family, same pipe); the variant's own latency is not measured"
+   }
   }
  },
  "operand_roles": {
