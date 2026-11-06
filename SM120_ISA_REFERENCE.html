@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>4874 opcodes &middot; 15934 instruction forms &middot; 26557 encoding variants &middot; 15847 with scheduling data &middot; 7701 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (71ff64f 2026-11-06), SHA-256 c414f9019ec60c8b&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>4866 opcodes &middot; 15953 instruction forms &middot; 26580 encoding variants &middot; 15834 with scheduling data &middot; 7735 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (c258f8a 2026-11-06), SHA-256 6455192092c1c23f&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -219,7 +219,7 @@ matching and encoders overwrite it with the authored or scheduled control.</p>
 <tr><td>0</td><td class="m"><strong>UNKNOWN_0</strong></td><td>0</td><td></td></tr>
 <tr><td>1</td><td class="m"><strong>CTRL_FLOW</strong></td><td>40</td><td>ACQBULK, BMOV, BMOV.32, BMOV.64, BPT.TRAP, BREAK, BREAK.RELIABLE, BSSY</td></tr>
 <tr><td>2</td><td class="m"><strong>CTRL_FLOW_2</strong></td><td>0</td><td></td></tr>
-<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>14347</td><td>ATOMG, ATOMG.E.ADD.EL.STRONG.GPU, ATOMG.E.ADD.STRONG.GPU, ATOMG.E.MAX.S32.STRONG.GPU, ATOMG.E.MIN.STRONG.GPU, ATOMG.E.OR.EL.STRONG.GPU, DMMA.8x8x4, DMMA.8x8x4.RM</td></tr>
+<tr><td>3</td><td class="m"><strong>MEMORY</strong></td><td>14348</td><td>ATOMG, ATOMG.E.ADD.EL.STRONG.GPU, ATOMG.E.ADD.STRONG.GPU, ATOMG.E.MAX.S32.STRONG.GPU, ATOMG.E.MIN.STRONG.GPU, ATOMG.E.OR.EL.STRONG.GPU, DMMA.8x8x4, DMMA.8x8x4.RM</td></tr>
 <tr><td>4</td><td class="m"><strong>MEMORY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>5</td><td class="m"><strong>MEMORY_GLOBAL</strong></td><td>1</td><td>ATOMG.E.ADD.F64.RN.STRONG.GPU</td></tr>
 <tr><td>6</td><td class="m"><strong>MEMORY_SHARED</strong></td><td>22</td><td>ATOMS, LDS, LDSM, MOVM.16.M832, MOVM.16.M864, MOVM.16.MT88, MOVM.U4TO8.M832, MOVM.U4TO8.M864</td></tr>
@@ -245,7 +245,7 @@ matching and encoders overwrite it with the authored or scheduled control.</p>
 <tr><td>27</td><td class="m"><strong>ASYNC_COPY</strong></td><td>0</td><td></td></tr>
 <tr><td>28</td><td class="m"><strong>ASYNC_COPY_2</strong></td><td>0</td><td></td></tr>
 <tr><td>29</td><td class="m"><strong>CLUSTER</strong></td><td>0</td><td></td></tr>
-<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>236</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
+<tr><td>30</td><td class="m"><strong>HMMA</strong></td><td>222</td><td>HMMA, HMMA.16816.F16, HMMA.16816.F16.BF16, HMMA.16816.F16.TF32, HMMA.16816.F32, HMMA.16816.F32.BF16, HMMA.16816.F32.TF32, HMMA.1684.F16</td></tr>
 <tr><td>31</td><td class="m"><strong>IMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>32</td><td class="m"><strong>DMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>33</td><td class="m"><strong>GMMA</strong></td><td>0</td><td></td></tr>
@@ -325,7 +325,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 123 of 15,934 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 121 of 15,953 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -766,15 +766,7 @@ Collapsed by default — click to expand.
 <a href="#IADD3.X">IADD3.X</a><br>
 <a href="#IDP">IDP</a><br>
 <a href="#IMAD">IMAD</a><br>
-<a href="#IMMA.16816.S8.S8">IMMA.16816.S8.S8</a><br>
-<a href="#IMMA.16816.S8.S8.SAT">IMMA.16816.S8.S8.SAT</a><br>
-<a href="#IMMA.16816.S8.U8">IMMA.16816.S8.U8</a><br>
-<a href="#IMMA.16816.U8.S8">IMMA.16816.U8.S8</a><br>
-<a href="#IMMA.16816.U8.U8">IMMA.16816.U8.U8</a><br>
-<a href="#IMMA.16816.U8.U8.SAT">IMMA.16816.U8.U8.SAT</a><br>
-<a href="#IMMA.16832.S8.S8">IMMA.16832.S8.S8</a><br>
-<a href="#IMMA.16832.S8.S8.SAT">IMMA.16832.S8.S8.SAT</a><br>
-<a href="#IMMA.16832.U8.U8">IMMA.16832.U8.U8</a><br>
+<a href="#IMMA">IMMA</a><br>
 <a href="#IMMA.SF.16832.U8.U8">IMMA.SF.16832.U8.U8</a><br>
 <a href="#IMMA.SP.16832.S8.S8">IMMA.SP.16832.S8.S8</a><br>
 <a href="#IMMA.SP.16832.S8.U8">IMMA.SP.16832.S8.U8</a><br>
@@ -135533,7 +135525,7 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">IADD3_P_R_P_P_R_II_R</td><td class="m">P_R_P_P_R_II_R</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_II_II</td><td class="m">R_P_P_R_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
-<tr><td class="m">IADD3_R_P_P_R_II_R</td><td class="m">R_P_P_R_II_R</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
+<tr><td class="m">IADD3_R_P_P_R_II_R</td><td class="m">R_P_P_R_II_R</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_II_R_P_P</td><td class="m">R_P_P_R_II_R_P_P</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_R_II</td><td class="m">R_P_P_R_R_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IADD3_R_P_P_R_R_II_II</td><td class="m">R_P_P_R_R_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
@@ -135578,6 +135570,25 @@ Collapsed by default — click to expand.
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
 <tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IADD3_R_P_P_R_II_R.X &mdash; 14 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000007004000000000000000810</code></div>
+<div class="ab">var_mask: <code>0x1ffffe00078fe8fffffffffffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t6</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[90]</td><td>1</td><td>t7</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t7</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[80]</td><td>1</td><td>t6</td><td><code>reg_ff</code></td></tr>
+<tr><td>[80]</td><td>1</td><td>t8</td><td><code>inv</code></td></tr>
+<tr><td>[79:77]</td><td>3</td><td>t8</td><td><code>pred</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t6</td><td><code>inv</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
@@ -136511,202 +136522,533 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
-<div class="ib" data-op="IMMA.16816.S8.S8" id="IMMA.16816.S8.S8">
-<h3>IMMA.16816.S8.S8</h3>
+<div class="ib" data-op="IMMA" id="IMMA">
+<h3>IMMA</h3>
 <p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.S8.S8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
+<tr><td class="m">IMMA.16816.S8.S8.SAT_R_R_R_R</td><td class="m">.16816.S8.S8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.S8.SAT_R_R_R_R_UP</td><td class="m">.16816.S8.S8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.S8_R_R_R_R</td><td class="m">.16816.S8.S8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.S8_R_R_R_R_UP</td><td class="m">.16816.S8.S8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.U8.SAT_R_R_R_R</td><td class="m">.16816.S8.U8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.U8.SAT_R_R_R_R_UP</td><td class="m">.16816.S8.U8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.U8_R_R_R_R</td><td class="m">.16816.S8.U8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.S8.U8_R_R_R_R_UP</td><td class="m">.16816.S8.U8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.S8.SAT_R_R_R_R</td><td class="m">.16816.U8.S8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.S8.SAT_R_R_R_R_UP</td><td class="m">.16816.U8.S8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.S8_R_R_R_R</td><td class="m">.16816.U8.S8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.S8_R_R_R_R_UP</td><td class="m">.16816.U8.S8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.U8.SAT_R_R_R_R</td><td class="m">.16816.U8.U8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.U8.SAT_R_R_R_R_UP</td><td class="m">.16816.U8.U8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.U8_R_R_R_R</td><td class="m">.16816.U8.U8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16816.U8.U8_R_R_R_R_UP</td><td class="m">.16816.U8.U8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.S8.SAT_R_R_R_R</td><td class="m">.16832.S8.S8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.S8.SAT_R_R_R_R_UP</td><td class="m">.16832.S8.S8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.S8_R_R_R_R</td><td class="m">.16832.S8.S8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.S8_R_R_R_R_UP</td><td class="m">.16832.S8.S8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.U8.SAT_R_R_R_R</td><td class="m">.16832.S8.U8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.U8.SAT_R_R_R_R_UP</td><td class="m">.16832.S8.U8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.U8_R_R_R_R</td><td class="m">.16832.S8.U8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.S8.U8_R_R_R_R_UP</td><td class="m">.16832.S8.U8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.S8.SAT_R_R_R_R</td><td class="m">.16832.U8.S8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.S8.SAT_R_R_R_R_UP</td><td class="m">.16832.U8.S8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.S8_R_R_R_R</td><td class="m">.16832.U8.S8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.S8_R_R_R_R_UP</td><td class="m">.16832.U8.S8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.U8.SAT_R_R_R_R</td><td class="m">.16832.U8.U8.SAT_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.U8.SAT_R_R_R_R_UP</td><td class="m">.16832.U8.U8.SAT_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.U8_R_R_R_R</td><td class="m">.16832.U8.U8_R_R_R_R</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="m">IMMA.16832.U8.U8_R_R_R_R_UP</td><td class="m">.16832.U8.U8_R_R_R_R_UP</td><td>&mdash;</td><td>&mdash;</td></tr>
 </table>
-<details><summary>IMMA.16816.S8.S8_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x4054000000000000000237</code></div>
+<details><summary>IMMA.16816.S8.S8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004454000000000000000237</code></div>
 <div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16816.S8.S8.SAT" id="IMMA.16816.S8.S8.SAT">
-<h3>IMMA.16816.S8.S8.SAT</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.S8.S8.SAT_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details class="partials"><summary>2 partial encodings &mdash; operand types not fully identified</summary>
-<table style="margin-top:4px"><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.S8.S8.SAT_R_R_R_R_?</td><td class="m">R_R_R_R_?</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">IMMA.16816.S8.S8.SAT_R_R_R_R_II_?</td><td class="m">R_R_R_R_II_?</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-</details>
-<details><summary>IMMA.16816.S8.S8.SAT_R_R_R_R &mdash; 4 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004454000000000000007237</code></div>
-<div class="ab">var_mask: <code>0x00000000000003fc000000fffffc0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73:66]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[33:26]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[25:18]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16816.S8.U8" id="IMMA.16816.S8.U8">
-<h3>IMMA.16816.S8.U8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.S8.U8_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">IMMA.16816.S8.U8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16816.S8.U8_P_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004014ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[74]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMMA.16816.S8.U8_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004014ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[74]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16816.U8.S8" id="IMMA.16816.U8.S8">
-<h3>IMMA.16816.U8.S8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.U8.S8_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">IMMA.16816.U8.S8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16816.U8.S8_P_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004044ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[74]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMMA.16816.U8.S8_R_R_R_R &mdash; 6 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004044ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[74]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16816.U8.U8" id="IMMA.16816.U8.U8">
-<h3>IMMA.16816.U8.U8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.U8.U8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16816.U8.U8_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x4004000000000000000237</code></div>
-<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16816.U8.U8.SAT" id="IMMA.16816.U8.U8.SAT">
-<h3>IMMA.16816.U8.U8.SAT</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16816.U8.U8.SAT_P_R_R_R_R</td><td class="m">P_R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-<tr><td class="m">IMMA.16816.U8.U8.SAT_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16816.U8.U8.SAT_P_R_R_R_R &mdash; 5 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004404ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>IMMA.16816.U8.U8.SAT_R_R_R_R &mdash; 5 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000004404ff0000000000000237</code></div>
-<div class="ab">var_mask: <code>0x600000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16832.S8.S8" id="IMMA.16832.S8.S8">
-<h3>IMMA.16832.S8.S8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16832.S8.S8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16832.S8.S8_R_R_R_R &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x405c000000000000000237</code></div>
-<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16832.S8.S8.SAT" id="IMMA.16832.S8.S8.SAT">
-<h3>IMMA.16832.S8.S8.SAT</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16832.S8.S8.SAT_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16832.S8.S8.SAT_R_R_R_R &mdash; 4 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000445c000000000000000237</code></div>
-<div class="ab">var_mask: <code>0x00000000000003fc000000fffffc0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[73:66]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[33:26]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[25:18]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-</div>
-<div class="ib" data-op="IMMA.16832.U8.U8" id="IMMA.16832.U8.U8">
-<h3>IMMA.16832.U8.U8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.16832.U8.U8_R_R_R_R</td><td class="m">R_R_R_R</td><td>HMMA</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">16 ~</span></td></tr>
-</table>
-<details><summary>IMMA.16832.U8.U8_R_R_R_R &mdash; 8 fields</summary><div class="var">
-<div class="ab">and_base: <code>0x400c000000000000000237</code></div>
-<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.S8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004454000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.S8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004054000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.S8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004054000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.U8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004414000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.U8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004414000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.U8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004014000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.S8.U8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004014000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.S8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004444000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.S8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004444000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.S8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004044000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.S8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004044000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.U8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004404000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.U8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004404000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.U8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004004000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16816.U8.U8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000004004000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.S8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000445c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.S8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000445c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.S8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000405c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.S8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000405c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.U8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000441c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.U8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000441c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.U8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000401c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.S8.U8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000401c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.S8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000444c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.S8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000444c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.S8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000404c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.S8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000404c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.U8.SAT_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000440c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.U8.SAT_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000440c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.U8_R_R_R_R &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000400c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>IMMA.16832.U8.U8_R_R_R_R_UP &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000400c000000000000000237</code></div>
+<div class="ab">var_mask: <code>0x1c000000078000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>imma-family-2026-11-06</code></div>
+<div class="ab">dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[90:87]</td><td>4</td><td>t5</td><td><code>pred_inv4</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -145142,6 +145484,7 @@ Collapsed by default — click to expand.
 <p class="desc">Generic load (address space determined by pointer).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">LD_R_ARI</td><td class="m">R_ARI</td><td class="m">128, 128,E, 128,E,EF, 128,EF, 64, 64,E, 64,E,EF, 64,EF, E, E,EF, E,EF,S16, E,EF,S8, E,EF,U16, E,EF,U8, E,S16, E,S8, E,U16, E,U8, EF, EF,S16, EF,S8, EF,U16, EF,U8, S16, S8, U16, U8</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
+<tr><td class="m">LD_R_ARURI</td><td class="m">R_ARURI</td><td class="m">E</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LD_R_dARI</td><td class="m">R_dARI</td><td class="m">128,E, 128,E,GPU,STRONG, 128,E,STRONG,SYS, 64,E, 64,E,GPU,STRONG, E, E,GPU,STRONG, E,S8, E,STRONG,SYS, E,U16, E,U8, 128,E,LTC64B, 128,E,LTC128B, 128,E,LTC256B, E,LTC64B, E,LTC128B, E,LTC256B, E,STRONG,SYS,U8, 64,E,STRONG,SYS, E,SM,STRONG</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LD_R_dARI_P</td><td class="m">R_dARI_P</td><td class="m">E,LTC64B, E,LTC128B, E,LTC256B, E, 128,E,LTC64B, 128,E,LTC128B, 128,E,LTC256B, 128,E</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 </table>
@@ -145396,6 +145739,17 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LD_R_ARURI.E &mdash; 4 fields &middot; 1 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081009000000000000007980</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffffffff0000</code></div>
+<div class="ab">measured: <code>audit-fix-2026-11-06-t10</code></div>
+<div class="ab">T-10 audit: the plain U32 + UR form of LD.E (BUG-097 corpus word LD.E R0, [RZ.U32+UR4]); Rd [23:16], Ra [31:24], URb [39:32], 24-bit offset [63:40] measured with nvdisasm 13.1; the harvest row baked every operand and read Rd from bit 15</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>LD_R_dARI.128,E &mdash; 5 fields &middot; 1,680 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000c101d000000000000000980</code></div>
@@ -251886,10 +252240,10 @@ Collapsed by default — click to expand.
 <h3>LDGSTS</h3>
 <p class="desc">Asynchronous global→shared memory copy. Implements <code>cp.async</code>. The copy is issued to the async copy engine; completion is signaled via <code>DEPBAR</code> / <code>LDGDEPBAR</code>. Supports 4, 8, 16-byte transfers with optional zero-fill on predicated execution.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">LDGSTS_ARI_ARI</td><td class="m">ARI_ARI</td><td class="m">128,BYPASS,E,LTC128B, 64,E,LTC128B, E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
-<tr><td class="m">LDGSTS_ARI_ARI_P</td><td class="m">ARI_ARI_P</td><td class="m">128,BYPASS,E,LTC128B, 64,E,LTC128B, E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
+<tr><td class="m">LDGSTS_ARI_ARI</td><td class="m">ARI_ARI</td><td class="m">128,BYPASS,E,LTC128B, 64,E,LTC128B, E,LTC128B, 128,E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
+<tr><td class="m">LDGSTS_ARI_ARI_P</td><td class="m">ARI_ARI_P</td><td class="m">128,BYPASS,E,LTC128B, 64,E,LTC128B, E,LTC128B, 128,E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LDGSTS_ARI_ARURI</td><td class="m">ARI_ARURI</td><td class="m">128,BYPASS,E,LTC128B, 128,E,LTC128B, 64,E,LTC128B, E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
-<tr><td class="m">LDGSTS_ARI_ARURI_P</td><td class="m">ARI_ARURI_P</td><td class="m">E,LTC128B, 128,BYPASS,E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
+<tr><td class="m">LDGSTS_ARI_ARURI_P</td><td class="m">ARI_ARURI_P</td><td class="m">E,LTC128B, 128,BYPASS,E,LTC128B, 128,E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LDGSTS_ARI_dARI</td><td class="m">ARI_dARI</td><td class="m">128,BYPASS,E, 128,BYPASS,E,LTC128B, 64,E, 64,E,LTC128B, E, E,LTC128B, 128,E, 128,E,LTC128B, 128,E,ZFILL, 128,E,LTC128B,ZFILL, E,LTC256B, 64,E,LTC256B, 128,BYPASS,E,ZFILL, E,LTC64B, 64,E,LTC64B, 128,E,LTC64B, 128,E,LTC64B,ZFILL, 128,BYPASS,E,LTC64B, 128,BYPASS,E,LTC64B,ZFILL, 128,E,LTC256B, 128,E,LTC256B,ZFILL, 128,BYPASS,E,LTC256B, 128,BYPASS,E,LTC256B,ZFILL, 128,BYPASS,E,LTC128B,ZFILL, BYPASS,E, 64,BYPASS,E, E,ZFILL, 64,E,ZFILL, BYPASS,E,ZFILL, 64,BYPASS,E,ZFILL</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LDGSTS_ARI_dARI_P</td><td class="m">ARI_dARI_P</td><td class="m">128,BYPASS,E,LTC128B, 64,E, 64,E,LTC128B, E, E,LTC128B, 128,E, 128,E,LTC128B, 128,E,ZFILL, 128,E,LTC128B,ZFILL, 64,E,LTC256B, E,LTC256B, 128,BYPASS,E, 128,BYPASS,E,ZFILL, E,LTC64B, 64,E,LTC64B, 128,E,LTC64B, 128,E,LTC64B,ZFILL, 128,BYPASS,E,LTC64B, 128,BYPASS,E,LTC64B,ZFILL, 128,E,LTC256B, 128,E,LTC256B,ZFILL, 128,BYPASS,E,LTC256B, 128,BYPASS,E,LTC256B,ZFILL, 128,BYPASS,E,LTC128B,ZFILL, BYPASS,E, 64,BYPASS,E, E,ZFILL, 64,E,ZFILL, BYPASS,E,ZFILL, 64,BYPASS,E,ZFILL</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
 <tr><td class="m">LDGSTS_ARURI_ARI</td><td class="m">ARURI_ARI</td><td class="m">128,BYPASS,E,LTC128B, 128,E,LTC128B, 64,E,LTC128B, E,LTC128B</td><td>MEMORY</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">200 ~</span></td></tr>
@@ -251927,6 +252281,17 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>LDGSTS_ARI_ARI.128,E,LTC128B &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b9a0aff0000000000007fae</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffffffff0000</code></div>
+<div class="ab">measured: <code>audit-fix-2026-11-06-t10</code></div>
+<div class="ab">T-10 audit: the PT-baked twin of LDGSTS_ARI_ARI_P [128,E,LTC128B] -- nvdisasm elides a PT predicate operand (`LDGSTS.E.LTC128B.128 [R5+0x10], [R7.64+0x10]`), so the two-operand text needs the key without the P token (the LEA / BRA twin convention)</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:44]</td><td>20</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[43:32]</td><td>12</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+</table></div></details>
 <details><summary>LDGSTS_ARI_ARI_P.128,BYPASS,E,LTC128B &mdash; 5 fields &middot; 128 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000008180aff0000000000807fae</code></div>
 <div class="ab">var_mask: <code>0x000e0e000180000007e80080fe3f0000</code></div>
@@ -251957,6 +252322,16 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDGSTS_ARI_ARI_P.128,E,LTC128B &mdash; 5 fields &middot; 128 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081a0aff0000000000007fae</code></div>
+<div class="ab">var_mask: <code>0x000e0e00038000001eb80380decf0000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90:87]</td><td>4</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[63:44]</td><td>20</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[43:32]</td><td>12</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>LDGSTS_ARI_ARURI.128,BYPASS,E,LTC128B &mdash; 6 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000b980a040180000090860fae</code></div>
@@ -252024,6 +252399,17 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDGSTS_ARI_ARURI_P.128,E,LTC128B &mdash; 6 fields &middot; 16 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000081a0a000088000000047fae</code></div>
+<div class="ab">var_mask: <code>0x000c0a000380000e160000801ec90000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90:87]</td><td>4</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:44]</td><td>20</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[43:32]</td><td>12</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 </table></div></details>
 <details><summary>LDGSTS_ARI_dARI.128,BYPASS,E &mdash; 6 fields &middot; 714 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000b9818000000000000000fae</code></div>
@@ -372867,13 +373253,22 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>STS_ARI_R.64 &mdash; 5 fields &middot; 18,599 samples</summary><div class="var">
+<details><summary>STS_ARI_R.64 &mdash; 14 fields &middot; 18,599 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000a000000000000000388</code></div>
-<div class="ab">var_mask: <code>0x000000000000c000ffffffffff00f000</code></div>
+<div class="ab">var_mask: <code>0x03fe3e00080131fffffff8ffff00f000</code></div>
 <div class="ab">measured: <code>audit-fix-2026-11-06-t10</code></div>
-<div class="ab">T-10 audit: opcode bit 9 baked (0x188 words are illegal); [71:64] text-inert on this form, baked 0x00 (the value of every census word) and fail-closed</div>
+<div class="ab">T-10 audit: opcode bit 9 baked (the 0x188 words are illegal for nvdisasm 13.1 at every [71:64] value; the STS opcode byte is 0x388); everything else as the BUG-425 / 425b arbitration of 2026-09 left it (the text-inert bits 72 / 76 / 77 / 80, [71:64], 91 tolerated)</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[91]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
 <tr><td>[79:78]</td><td>2</td><td>t1</td><td><code>addr_scale</code></td></tr>
+<tr><td>[71]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[70]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[69]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[68]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[67]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[66]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[65]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
+<tr><td>[64]</td><td>1</td><td>t1</td><td><code>urz_expl</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
@@ -388830,8 +389225,8 @@ Collapsed by default — click to expand.
 </details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (71ff64f 2026-11-06), SHA-256 c414f9019ec60c8b2d9865349a73ed928c87c019d0497304c67c705002e6c395<br>
-15934 instruction forms &middot; 26557 encoding variants &middot; 7701 with a measurement tag &middot; 37 pipeline classes<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (c258f8a 2026-11-06), SHA-256 6455192092c1c23f887e21b7f74c8cfb6ed786fe435783d417b8cc4e962b5da3<br>
+15953 instruction forms &middot; 26580 encoding variants &middot; 7735 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

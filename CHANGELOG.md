@@ -1,4 +1,4 @@
-## November 6, 2026 (session T-10): BRA on sm103a / sm100a, the BRX / BRXU / RET family, the SM120 dynamic audit at its end state
+## November 6, 2026 (session T-10): BRA on sm103a / sm100a, the BRX / BRXU / RET and dense IMMA families, the SM120 dynamic audit at its end state
 
 - **`sm103a.json` / `sm100a.json`: the `BRA` family is the measured SM120 family** (cubit `tools/probes/re_sm120_bra.py
   probe --arch SM103` / `SM100` — the 551 words of the SM120 sweep print the same text on the three nvdisasm 13.1
@@ -20,28 +20,50 @@
   `BRXU 0xfffe0220` for the vendor's `BRXU UR20 -0x1fdf0` —, `BRXU_L`, `RET_II`, `RET_L`, `RET.REL.NODEC_II` (no register),
   `RET.REL.NODEC_R`, `RET.ABS.NODEC_?` (no fields), the duplicated `RET_R_II` groups and the three `dsv41-sm120-2026-10-22`
   rows the measurement supersedes; aliases `RET.REL.NODEC_R_II` / `RET.REL.NODEC_R` → `RET_R_II`).
-- **`sm120.json`: the dynamic audit of the harvest rows is at its end state — 22 rows, every one a named exception**
-  (cubit `docs/KNOWN_ISSUES.md` T1: the IMMA.16816/16832 harvest rows (8), the T5 `IMMA.SF` hypothesis, the seven RZ-base
-  64-bit descriptor words cubit's decoder tolerates (BUG-461), the `UPT`-destination elision of ULEA / ULOP3,
-  `BMOV.64 ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT` bit 62, `USETMAXREG` bit 63). Two batches (blackwell-isa-internal
-  `tools/audit_fix_20261106_t10.py` + `_t10b.py`, provenance `audit-fix-2026-11-06-t10`, every vendor text asserted
-  against nvdisasm 13.1 before the write; cubit `tests/sm120_audit_t10.rs`): **15 harvest-row field repairs** — ATOMG CAS
+- **`sm120.json`: the dynamic audit of the harvest rows is at its end state — 14 rows, every one a named exception**
+  (cubit `docs/KNOWN_ISSUES.md` T1, replay `T/audit/dyn21`: the T5 `IMMA.SF` hypothesis, the seven RZ-base 64-bit
+  descriptor words cubit's decoder tolerates (BUG-461), the `UPT`-destination elision of ULEA / ULOP3, `BMOV.64
+  ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT` bit 62, `USETMAXREG` bit 63; 22 before the dense IMMA family below). Five batches
+  (blackwell-isa-internal `tools/audit_fix_20261106_t10.py` + `_t10b.py` … `_t10e.py`, provenance
+  `audit-fix-2026-11-06-t10`, every vendor text asserted against nvdisasm 13.1 before the write; cubit
+  `tests/sm120_audit_t10.rs`): **15 harvest-row field repairs** — ATOMG CAS
   Pd = [83:81] (the harvest's `pred@7` sat on the opcode bits), STS.64 opcode bit 9 baked (the 0x188 words are illegal)
   and the text-inert [71:64] fail-closed, the MOV / MOV.64 junk destination copies at [31:24] (text-inert, every census
   word 0), WARPSYNC.ALL has no operands, VOTE / VOTEU phantom predicate fields, IMAD.X Ra = RZ baked, UFMUL's three 8-bit
   URs at 16 / 24 / 32, UTMAREDG operands [39:32] / [31:24], USETMAXREG's 10-bit count [41:32], the LDCU size groups'
   uniform index field (U8's index is a UR), BAR.RED.{AND,OR} count-less twins rebuilt from the measured `_II_II_P` row
   (the vendor elides a zero thread count), HADD2_R_R_FI_FI fp16 immediates, the SYNCS RED.A1T0 destination [23:16], the
-  F2I.NTZ UR-form fields — and **72 junk keys / 8 groups retired** under the census-witness rule (0 witnesses among the
+  F2I.NTZ UR-form fields — and **105 junk keys / 5 groups retired** under the census-witness rule (0 witnesses among the
   249 929 distinct words of the production census + our kernels, no alias target, every probe word vendor-invalid /
-  illegal or decoded by the remaining rows): the `_?` partial keys (CS2R, DADD, DMUL, F2I.TRUNC.NTZ ×3, FMNMX ×2,
+  illegal or decoded by the remaining rows): the `_?` partial keys (CS2R ×2, DADD, DMUL, F2I.TRUNC.NTZ ×3, FMNMX ×2,
   HADD2.F32 ×2, IADD.64, MOV ×4, PRMT, VIMNMX.S32, HADD2), the shifted-field / phantom-token twins (F2I ×3, FLO, I2FP,
-  POPC, SEL, FSETP ×2, FSEL, IADD.64 ×6, IADD.X, IADD3 ×5, IADD, UIADD3 ×3, the `_P_R_R_R_R` HMMA ×5 / QMMA ×20 twins with
-  2-bit-shifted register fields, HMMA.SP.1688, LDSM `_R_AUR` ×2, LD_R_ARURI, SULD.D.BA.2D (nvdisasm names its words
-  `SULD.P.1D.EF.INVALID0.IGN`), PLOP3.LUT_P_P_P_P_UP_II_II, MOV_P_R_R) and the groups IADD3 `[X]` ×2, LDGSTS LTC128B ×3,
-  HADD2_R_R_II_II [""], MUFU_R_II [RCP64H], F2I_R_UR [NTZ,U32]. Counts 16 045 → 15 934 forms, 26 646 → 26 557 variants,
-  18 856 rows without `_src`. The production census stays 1 811 600 / 1 811 600.
-- The SM120, SM103A and SM100A references regenerated at this revision.
+  POPC, SEL, FSETP ×2, FSEL, IADD.64 ×6, IADD.X, IADD3 ×4, IADD, UIADD3 ×3, the `_P_R_R_R_R` HMMA ×5 / QMMA ×51 twins with
+  2-bit-shifted register fields, HMMA.SP.1688, LDSM `_R_AUR` ×2, SULD.D.BA.2D (nvdisasm names its words
+  `SULD.P.1D.EF.INVALID0.IGN`), PLOP3.LUT_P_P_P_P_UP_II_II, MOV_P_R_R) and the groups `IADD3_R_P_P_R_UR_R [X]`,
+  `LDGSTS_ARI_ARURI_P [64,E,LTC128B]`, HADD2_R_R_II_II [""], MUFU_R_II [RCP64H], F2I_R_UR [NTZ,U32]. Three batch-1
+  retirements were refuted by cubit's pins and **undone with the measurement** (`_t10c.py` / `_t10d.py`): `LD_R_ARURI [E]`
+  (BUG-097: the plain U32+UR `LD.E` form — fields Rd [23:16] / Ra [31:24] / URb [39:32] / offset [63:40] measured),
+  `IADD3_R_P_P_R_II_R [X]` (BUG-089's canonical row, restored verbatim), `LDGSTS_ARI_ARI_P` / `LDGSTS_ARI_ARURI_P
+  [128,E,LTC128B]` (BUG-164; plus the PT-baked twin `LDGSTS_ARI_ARI [128,E,LTC128B]` — the vendor elides the PT
+  operand, the two-operand text now encodes); `STS_ARI_R [64]` is the f2d67b6 row + opcode bit 9 baked (`_t10e.py`: the
+  BUG-425 / 425b tolerance of the text-inert bits 72 / 76 / 77 / 80, [71:64], 91 stays as arbitrated in 2026-09).
+- **`sm120.json`: the dense `IMMA` family measured** (cubit `tools/probes/re_sm120_imma.py`, nvdisasm 13.1 `-b SM120`, 240
+  form words every text predicted by the layout + 16 lattice words; provenance `imma-family-2026-11-06`, test cubit
+  `tests/sm120_imma.rs`; measured by the session's second instance T2, reviewed and applied by T-10): opcode 0x237, Rd
+  [23:16], Ra [31:24] `.ROW`, Rb [39:32] `.COL`, Rc [71:64]; bit 86 the dense frame (clear = `INVALID0`), 75 the shape
+  (`16816` / `16832`), 76 A = `S8` (else `U8`), 78 B = `S8`, 82 `.SAT`, 73 / 74 the only legal layouts (`ROW` / `COL`;
+  `???1` / `???0` otherwise — baked, fail-closed), 77 / 79 / 83 / 84 / 85 the vendor's `INVALID` codes, the fifth operand
+  `[!]UPn` = the 4-bit `pred_inv4` window [90:87] (`UPT` elided unless negated), bit 72 the sparse form (`IMMA.SP.*`,
+  untouched), 91 illegal, 80 / 81 / 92-95 text-inert. The type pair is order-sensitive and a sorted mod-group name cannot
+  tell `S8.U8` from `U8.S8`, so the family uses typed keys `IMMA.<16816|16832>.<A>.<B>[.SAT]_R_R_R_R[_UP]` — **32 keys ×
+  1 row replace the 14 dense harvest keys** (2-bit-shifted register fields that printed `R4, R6.ROW, R8.COL, R10` for the
+  vendor's `R16, R24.ROW, R8.COL, R40`, `neg` junk fields on the layout bits whose canonical words rendered `R8.???0`,
+  the `_P_` / `_?` twins → `_meta.key_aliases`). No census witness decodes through a dense IMMA row; the audit's eight
+  IMMA exception rows leave the table. `IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR` (the T5 hypothesis) is untouched.
+- Counts (from the T-9 tables 16 045 forms / 26 646 variants): the BRX / BRXU / RET family 16 040 / 26 676, the audit
+  batches 15 935 / 26 562, the IMMA family **15 953 / 26 580**; **18 845 rows without `_src`**. The production census
+  stays 1 811 600 / 1 811 600.
+- The SM120 reference regenerated at `c258f8a`, the SM103A / SM100A references at `c95e264` (their tables' last change).
 
 ## November 6, 2026 (session T-9): the SM120 BRA family rebuilt from measurement
 

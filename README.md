@@ -172,7 +172,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (18 856 of 26 557 SM120 variants at this revision) are
+  measurement in prose. Rows **without** `_src` (18 845 of 26 580 SM120 variants at this revision) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06
@@ -258,7 +258,7 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 18,856 of 26,557 SM120 encoding variants carry no `_src` (sm103a 15,864 / 22,420,
+- 18,845 of 26,580 SM120 encoding variants carry no `_src` (sm103a 15,864 / 22,420,
   sm100a 15,864 / 22,420, sm121a 25,696 / 26,406): these are the harvest rows of 2026-06..08
   (fields learned from compiler output, validated by the round-trip census, not by per-field probes). Every
   row added since carries a tag — the 5 736 / 5 748 / 5 744 / 44 wave-11 rows were stamped on 2026-11-06
@@ -270,23 +270,28 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  **is at its end state (2026-11-06, session T-10): 22 rows, every one a named exception** — from 1 977 on
-  2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9); the 22 are the IMMA.16816/16832 harvest rows (8: a
-  missing layout bit, registers read two bits off — an IMMA family probe closes them), the documented `IMMA.SF`
-  hypothesis, the seven RZ-base 64-bit descriptor words cubit's decoder tolerates while nvdisasm marks them
-  `???255` (BUG-461), the `UPT`-destination elision of ULEA / ULOP3, `BMOV.64 ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT`
-  bit 62, `USETMAXREG` bit 63 (what closes each: cubit `docs/KNOWN_ISSUES.md` T1). The audit tool names five
-  measured non-defect classes (a reuse bit on a register-less slot that nvdisasm rejects, text-inert bits the
-  measured rows fail closed on, the vendor's own `INVALIDn`, the NaN print policy); 118 words of the undocumented
+  **is at its end state (2026-11-06, session T-10): 14 rows, every one a named exception** — from 1 977 on
+  2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 22 before the dense IMMA family was measured the same
+  day; the 14 are the documented `IMMA.SF` hypothesis, the seven RZ-base 64-bit descriptor words cubit's decoder
+  tolerates while nvdisasm marks them `???255` (BUG-461), the `UPT`-destination elision of ULEA / ULOP3, `BMOV.64
+  ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT` bit 62, `USETMAXREG` bit 63 (what closes each: cubit `docs/KNOWN_ISSUES.md`
+  T1). The audit tool names six measured non-defect classes (a reuse bit on a register-less slot that nvdisasm
+  rejects, text-inert bits the measured rows fail closed on, the vendor's own `INVALIDn`, the NaN print policy, a
+  text both oracles print that cubit refuses to assemble under a silicon-measured law — BUG-037's MMA operand
+  alignment); 118 words of the undocumented
   forms above are `vendor_unknown`, not defects; the 2026-11-04 oracle records had 386 legal words marked as
   rejected through a scratch-file race of the tool — re-measured on
   2026-11-06); the families are listed in cubit `docs/KNOWN_ISSUES.md` T1. Rebuilt from measurement
   since: the **`BRX` / `BRXU` / `RET` family** (2026-11-06, session T-10: 8 keys × 46 rows — register, a signed
   56-bit dword offset, predicate operand, `.INC` / `.DEC`, BRXU's `.U` / `.DIV` / `.CONV`, RET's `.ABS` / `.NODEC`
-  and UR form; 13 harvest keys retired), **15 harvest-row field repairs + 72 junk keys / 8 groups retired**
-  (T-10, `audit-fix-2026-11-06-t10`: every repair asserted against nvdisasm before the write, every retirement
-  checked against the 249 929 distinct words of the production census — ATOMG CAS Pd, STS.64 opcode bit 9,
-  the MOV / WARPSYNC / VOTE junk fields, UFMUL, UTMAREDG, USETMAXREG, LDCU, BAR.RED twins, SYNCS RED.A1T0, F2I.NTZ UR),
+  and UR form; 13 harvest keys retired), the **dense `IMMA` family** (T-10: 32 typed keys `IMMA.<16816|16832>.<A>.<B>
+  [.SAT]_R_R_R_R[_UP]` × 1 measured row — types, shape, `.SAT`, the ROW / COL layouts baked and fail-closed, the
+  `[!]UPn` fifth operand — for 14 dense harvest keys whose register fields sat two bits off), **15 harvest-row field
+  repairs + 105 junk keys / 5 groups retired** (T-10, `audit-fix-2026-11-06-t10`: every repair asserted against
+  nvdisasm before the write, every retirement checked against the 249 929 distinct words of the production census —
+  ATOMG CAS Pd, STS.64 opcode bit 9, the MOV / WARPSYNC / VOTE junk fields, UFMUL, UTMAREDG, USETMAXREG, LDCU, BAR.RED
+  twins, SYNCS RED.A1T0, F2I.NTZ UR; three batch-1 retirements refuted by cubit's pins were undone with the
+  measurement: `LD_R_ARURI [E]`, `IADD3_R_P_P_R_II_R [X]`, the LDGSTS `[128,E,LTC128B]` rows),
   the **`BRA` family on sm103a / sm100a** (T-10: the SM120 measurement applies 1:1, the 0x547 uniform-predicate
   form included — 5 harvest keys / 9 rows → the same 6 keys / 66 rows per table),
   since: the **SM120 `BRA` family** (2026-11-06, session T-9: 6 keys × 66 rows — `BRA[.INC|.DEC][.U|.DIV|.CONV]
