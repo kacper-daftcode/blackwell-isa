@@ -174,7 +174,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (18 845 of 26 580 SM120 variants at this revision) are
+  measurement in prose. Rows **without** `_src` (18 841 of 26 598 SM120 variants at this revision) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06
@@ -272,19 +272,26 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  **is at its end state (2026-11-06, session T-10): 14 rows, every one a named exception** — from 1 977 on
-  2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 22 before the dense IMMA family was measured the same
-  day; the 14 are the documented `IMMA.SF` hypothesis, the seven RZ-base 64-bit descriptor words cubit's decoder
-  tolerates while nvdisasm marks them `???255` (BUG-461), the `UPT`-destination elision of ULEA / ULOP3, `BMOV.64
-  ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT` bit 62, `USETMAXREG` bit 63 (what closes each: cubit `docs/KNOWN_ISSUES.md`
-  T1). The audit tool names six measured non-defect classes (a reuse bit on a register-less slot that nvdisasm
+  **is at its end state (2026-11-06, session T-11): 1 row — the documented `IMMA.SF.16832.U8.U8` hypothesis**
+  (every probe word nvdisasm-rejected, kept by the owner's rule for undocumented forms until a numerical oracle on
+  silicon) — from 1 977 on 2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 14 (T-10). The 13 closed on
+  2026-11-06 (T-11, each re-measured with nvdisasm 13.1 on the four targets, cubit `tests/sm120_audit_t11.rs`): the
+  seven RZ-base 64-bit descriptor words print the vendor's `[???255.64+UR..]` glyph as the REDG / ATOMG `.EL` twins do
+  (BUG-461 doctrine: text-faithful decode, the encoder refuses the glyph), ULEA's `-URa` bit and its elided `UPT`
+  operand, ULOP3's source-predicate fields on the dest-less row (the elided `UPT` destination), `BMOV.64 ATEXIT_PC`,
+  `DEPBAR` SB6 / SB7 claim-forbidden, the SAT-less `FADD.SAT_R_R_R` row retired, `USETMAXREG` off cubit's
+  sign-tolerant fallback (what closes the last one: cubit `docs/KNOWN_ISSUES.md` T1). The audit tool names six measured non-defect classes (a reuse bit on a register-less slot that nvdisasm
   rejects, text-inert bits the measured rows fail closed on, the vendor's own `INVALIDn`, the NaN print policy, a
   text both oracles print that cubit refuses to assemble under a silicon-measured law — BUG-037's MMA operand
   alignment); 118 words of the undocumented
   forms above are `vendor_unknown`, not defects; the 2026-11-04 oracle records had 386 legal words marked as
   rejected through a scratch-file race of the tool — re-measured on
   2026-11-06); the families are listed in cubit `docs/KNOWN_ISSUES.md` T1. Rebuilt from measurement
-  since: the **`BRX` / `BRXU` / `RET` family** (2026-11-06, session T-10: 8 keys × 46 rows — register, a signed
+  since: the **`IDP` family on the four tables** (2026-11-06, session T-11, the review of the B300 lane's D2 rows for
+  NEEDS 36: 12 forms × 2 operand shapes — `IDP.{4A,2A.LO,2A.HI}.<A>.<B> Rd, Ra, Rb | URb, [-]Rc`, [77:76] the mode,
+  73 / 74 the signedness of the two types, 75 `-Rc`; the mixed types as typed keys (D2), the symmetric forms as
+  mod-group rows; 24 rows per table — the uniform rows had no `-Rc` field, the 2A half of the family no rows, the
+  sm121a register rows no `-Rc` and `Rc = RZ` baked), the **`BRX` / `BRXU` / `RET` family** (2026-11-06, session T-10: 8 keys × 46 rows — register, a signed
   56-bit dword offset, predicate operand, `.INC` / `.DEC`, BRXU's `.U` / `.DIV` / `.CONV`, RET's `.ABS` / `.NODEC`
   and UR form; 13 harvest keys retired), the **dense `IMMA` family** (T-10: 32 typed keys `IMMA.<16816|16832>.<A>.<B>
   [.SAT]_R_R_R_R[_UP]` × 1 measured row — types, shape, `.SAT`, the ROW / COL layouts baked and fail-closed, the

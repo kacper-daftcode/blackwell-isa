@@ -1,3 +1,42 @@
+## November 6, 2026 (session T-11): the IDP family on the four tables (coldface's D2 keys reviewed and completed), the SM120 audit's named exceptions 14 → 1
+
+- **`sm120.json` / `sm103a.json` / `sm100a.json` / `sm121a.json`: the `IDP` family measured whole** (cubit
+  `tools/probes/re_sm120_idp.py`, nvdisasm 13.1: 128 form + 480 lattice words per table, the same text on `-b SM120` /
+  `SM103` / `SM100` / `SM121` for every word; provenance `idp-family-2026-11-06`, test cubit `tests/sm120_idp.rs`).
+  Law: guard [15:12], Rd [23:16], Ra [31:24], Rb [39:32] (opcode 0x7226) / URb [39:32] (opcode byte 0xc26 + bit 91 —
+  the frame bit flipped either way is illegal), Rc [71:64]; the enum window [79:72]: [77:76] the mode (00 `4A`,
+  01 `2A.LO`, 11 `2A.HI`, 10 illegal — the 64 vendor-rejected values), 73 = the first type signed (`S8` / `S16`),
+  74 = the second type signed (`S8`), 75 `-Rc`; 72, 78, 79, [63:40], [95:80] text-inert (fail-closed on the measured
+  rows). Twelve legal forms per operand shape: the mixed-type forms carry typed keys (`IDP.4A.S8.U8_R_R_R_R`, …,
+  `IDP.2A.HI.U16.S8_R_R_UR_R` — NEEDS 36 = the owner's D2 decision of 2026-11-06; the B300 lane's
+  `IDP.4A.{S8.U8,U8.S8}_R_R_R_R` rows, `42192f0`, are the first of them and were taken as they are after a word-by-word
+  review), the symmetric forms stay mod-group rows of `IDP_R_R_R_R` / `IDP_R_R_UR_R` (sm121a keeps typed keys for every
+  register form, its schema). **24 rows per table.** What the measurement closed: the uniform-register rows (the 2026-08
+  harvest donor `IDP_R_R_UR_R [4A,S8,S8]` and D2's three typed copies of it) had no `-Rc` field, failed closed on the
+  inert bit 72 and baked `Rc = 0xff` / UR bit 34 under their fields — `IDP.4A.U8.U8 R15, R15, UR6, -R7` decoded as the
+  `S8.S8` row through cubit's sign-tolerant fallback; the 2A half of the family had no rows (the mixed `LO` types and
+  every `HI` form: 6 register + 8 uniform forms) and a `2A.LO.U16.U8` word with bit 72 set printed as `2A.LO.S16.S8`;
+  the two 2A.LO harvest rows baked `Ra = R4` / `Rc = R4`; sm121a's register rows lacked `-Rc`,
+  `IDP.2A.LO.U16.U8_R_R_R_R` carried no mode bit and baked `Rc = RZ`, its two `_?` junk twins of the S8.S8 row are retired
+  (`key_aliases` → `IDP.4A.S8.S8_R_R_R_R`). Counts: sm120 15 953 → 15 964 forms, 26 580 → 26 598 variants;
+  sm103a / sm100a 14 913 → 14 925, 22 420 → 22 439; sm121a 23 850 → 23 860, 26 406 → 26 421. The lane's `42192f0` had
+  carried its `_src` tag without a `_meta.provenance.sources` entry (cubit's validator refuses that) — the legend entry
+  is in.
+- **The named audit exceptions closed from measurement** (`audit-fix-2026-11-06-t11`, nvdisasm 13.1 on the four targets;
+  cubit `tests/sm120_audit_t11.rs`): `DEPBAR_II_II [LE]` forbids the scoreboard values 6 / 7 (`INVALID6` / `INVALID7`);
+  `FADD.SAT_R_R_R` (sm120, sm121a) retired — a SAT-less harvest row (no bit 77 in its and_base, `Ra = RZ` baked, its
+  `abs@62` the `|Rb|` of a plain FADD; alias → `FADD_R_R_R`, the `[SAT]` group carries bit 77); `ULEA_UR_UR_UR_II []`
+  gains `neg@72` (`-URa`, the first source; bit 63 stays `-URb`); `ULOP3_UR_UR_II_UR_II_UP [LUT]` gains the source
+  predicate fields `upred@87` + `inv@90` (the harvest row baked `!UPT`; the UPT-destination words of the `_UP_` rows —
+  printed by the vendor with six operands — decode through it now). With cubit's side of the same push (the
+  `[???255.64+UR..]` glyph on the plain 64-bit-base LDG / STG / ST forms, `BMOV.64 ATEXIT_PC`, USETMAXREG off the
+  sign-tolerant fallback) the replay of the complete audit word set at `c896e8f` (cubit `T/audit/dyn22`, 85 886 words)
+  leaves **1 row**: the documented `IMMA.SF.16832.U8.U8` hypothesis (every probe word vendor-rejected; the owner's rule
+  for undocumented forms).
+- The four references regenerated at `c896e8f` (SM120 15 964 forms / 26 598 variants; SM103A / SM100A 14 925 / 22 439;
+  SM121A 23 860 / 26 421); README: the rows without `_src` (18 841 of 26 598 SM120 variants), the audit end state, the
+  IDP family in the "rebuilt from measurement" list.
+
 ## November 6, 2026 (session T-10): BRA on sm103a / sm100a, the BRX / BRXU / RET and dense IMMA families, the SM120 dynamic audit at its end state
 
 - **`sm103a.json` / `sm100a.json`: the `BRA` family is the measured SM120 family** (cubit `tools/probes/re_sm120_bra.py
