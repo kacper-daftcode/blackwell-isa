@@ -174,7 +174,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (17 561 of 26 662 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family, HSETP2 and ISETP / UISETP first) are
+  measurement in prose. Rows **without** `_src` (17 560 of 26 662 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family, HSETP2 and ISETP / UISETP first) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06
@@ -272,9 +272,9 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  **is at its end state (2026-11-06, session T-11): 1 row — the documented `IMMA.SF.16832.U8.U8` hypothesis**
-  (every probe word nvdisasm-rejected, kept by the owner's rule for undocumented forms until a numerical oracle on
-  silicon) — from 1 977 on 2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 14 (T-10). The 13 closed on
+  **is at its end state: 0 rows with a finding (2026-11-06, replay at `39bafbb`; 1 row at the T-11 tables — the
+  `IMMA.SF.16832.U8.U8` hypothesis, since measured on silicon and renamed `QMMA.SF.16832.F32.UNIDENTIFIED.E8`, see
+  below)** — from 1 977 on 2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 14 (T-10), 1 (T-11). The 13 closed on
   2026-11-06 (T-11, each re-measured with nvdisasm 13.1 on the four targets, cubit `tests/sm120_audit_t11.rs`): the
   seven RZ-base 64-bit descriptor words print the vendor's `[???255.64+UR..]` glyph as the REDG / ATOMG `.EL` twins do
   (BUG-461 doctrine: text-faithful decode, the encoder refuses the glyph), ULEA's `-URa` bit and its elided `UPT`
@@ -344,15 +344,14 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   or internal pattern names) where NVIDIA has no public terminology.
 - Metadata under `_discovery` records provenance and confidence for unusual entries; users
   should inspect it before relying on those forms in production code.
-- The `IMMA.SF.16832.U8.U8` entry is an **unvalidated historical hypothesis**.
-  Its former hardware-validation, pipeline, latency and dual-issue claims were not
-  supported by a numerical oracle or retained overlap measurement. The historical
-  opcode sweep classified nonzero output as success and assigned the mnemonic by
-  analogy. NVIDIA `nvdisasm` 13.1 does not identify the canonical candidate or the
-  tested QMMA-derived candidates. That does not prove the opcode is unimplemented;
-  its identity and operands still require independent reverse engineering. Encoding
-  fields remain available as a historical record, but must not be used to infer
-  scheduling safety or a performance advantage.
+- The former `IMMA.SF.16832.U8.U8` entry (opcode 0x47e; a 2026-03-26 hypothesis without a numerical
+  oracle) is **`QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR` since 2026-11-06, measured on sm_120
+  silicon**: the word executes, writes fp32, honours the E8M0 block scales and matches neither documented
+  QMMA.SF input type on identical operands — an undocumented block-scaled MMA of the QMMA.SF family
+  selected by opcode bit 2, whose input element types are not yet identified (the mnemonic says so). nvdisasm
+  13.1 / 13.3 have no text for it. `_discovery` records the measurement and the withdrawn claims; the old key
+  is a `_meta.key_aliases` entry. Scheduling fields are copied from the E4M3.E4M3 donor row and marked so —
+  not a measured latency.
 
 ## Related Work
 

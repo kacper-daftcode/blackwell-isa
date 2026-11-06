@@ -31,7 +31,18 @@ pushes. **`sm120.json`: 26 662 rows, 9 101 with `_src` — 17 561 harvest rows l
   UISETP none. The BUG-092 encode-only retention group of `UISETP_UP_UP_UR_UR_UP` stays.
 - For the record (met in both reviews): nvdisasm prints `.reuse` only when the control word's yield bit (109) is set —
   a fixture's `.reuse` texts reproduce only under the probe's control code.
-- The SM120 reference page regenerated at `6dff9c7`.
+- **NEEDS 44 (`39bafbb`): the `IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR` hypothesis row (opcode 0x47e, 2026-03-26, no numerical
+  oracle) is `QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR`** — measured on sm_120 silicon by session R on 2026-11-06
+  (test host GPU 0, RTX PRO 6000 SE; cubit-assembled probes next to the documented QMMA.SF E4M3.E4M3 / E2M1.E2M1 forms on
+  identical fragments): the word executes, writes fp32, honours the E8M0 block scales (scale 0xff → NaN on every element,
+  scale ×2 → result ×2) and matches neither documented input type (A = 0x38, B = 0x40, scales 1.0: 64.0 / 0.0 / 28.0) —
+  an undocumented block-scaled MMA of the QMMA.SF family (0x47a) selected by opcode bit 2, input element types
+  unidentified, not an integer MMA. The row carries the family's fields (Rd@16 Ra@24 Rb@32 Rc@64 sfA@40 sfB@52 UR@60+73;
+  the hypothesis row read R6 at [55:48] and had no UR field), provenance `qmma-sf-opcode-bit2-silicon-2026-11-06`
+  (undocumented form measured on silicon, `nvdisasm_sm120: "no text"`), the old key as a `_meta.key_aliases` entry; the
+  IMMA / U8 claims are withdrawn (`_discovery`). What stays open: the input element types (~1 h of silicon time with R's
+  harness). With it the SM120 dynamic audit's replay shows **0 rows with a finding** (cubit `T/audit/dyn23`).
+- The SM120 reference page regenerated at `39bafbb`.
 
 ## November 6, 2026 (session T-11): the IDP family on the four tables (coldface's D2 keys reviewed and completed), the SM120 audit's named exceptions 14 → 1
 

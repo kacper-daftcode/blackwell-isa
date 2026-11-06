@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>4870 opcodes &middot; 15961 instruction forms &middot; 26662 encoding variants &middot; 15842 with scheduling data &middot; 9101 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (6dff9c7 2026-11-06), SHA-256 d51879ea422b6725&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>4870 opcodes &middot; 15961 instruction forms &middot; 26662 encoding variants &middot; 15842 with scheduling data &middot; 9102 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (39bafbb 2026-11-06), SHA-256 26bac684984b7743&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -252,7 +252,7 @@ matching and encoders overwrite it with the authored or scheduled control.</p>
 <tr><td>34</td><td class="m"><strong>QMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>35</td><td class="m"><strong>OMMA</strong></td><td>2</td><td>UBLKCP.S.G, UTMACMDFLUSH</td></tr>
 <tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>511</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
-<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>483</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
+<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>484</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
 <p>SM120 uses a scoreboard-based dependency tracking system with 6 barriers (B0&ndash;B5).
@@ -771,7 +771,6 @@ Collapsed by default — click to expand.
 <a href="#IDP.4A.U8.S8">IDP.4A.U8.S8</a><br>
 <a href="#IMAD">IMAD</a><br>
 <a href="#IMMA">IMMA</a><br>
-<a href="#IMMA.SF.16832.U8.U8">IMMA.SF.16832.U8.U8</a><br>
 <a href="#IMMA.SP.16832.S8.S8">IMMA.SP.16832.S8.S8</a><br>
 <a href="#IMMA.SP.16832.S8.U8">IMMA.SP.16832.S8.U8</a><br>
 <a href="#IMMA.SP.16832.U8.S8">IMMA.SP.16832.U8.S8</a><br>
@@ -1708,6 +1707,7 @@ Collapsed by default — click to expand.
 <a href="#QMMA.SF.16832.F32.E5M2.E3M4.E8">QMMA.SF.16832.F32.E5M2.E3M4.E8</a><br>
 <a href="#QMMA.SF.16832.F32.E5M2.E4M3.E8">QMMA.SF.16832.F32.E5M2.E4M3.E8</a><br>
 <a href="#QMMA.SF.16832.F32.E5M2.E5M2.E8">QMMA.SF.16832.F32.E5M2.E5M2.E8</a><br>
+<a href="#QMMA.SF.16832.F32.UNIDENTIFIED.E8">QMMA.SF.16832.F32.UNIDENTIFIED.E8</a><br>
 <a href="#QMMA.SF.SP.16864.F32.E2M1.E2M1.E8">QMMA.SF.SP.16864.F32.E2M1.E2M1.E8</a><br>
 <a href="#QMMA.SF.SP.16864.F32.E2M1.E2M3.E8">QMMA.SF.SP.16864.F32.E2M1.E2M3.E8</a><br>
 <a href="#QMMA.SF.SP.16864.F32.E2M1.E3M2.E8">QMMA.SF.SP.16864.F32.E2M1.E3M2.E8</a><br>
@@ -138896,25 +138896,6 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
-<div class="ib" data-op="IMMA.SF.16832.U8.U8" id="IMMA.SF.16832.U8.U8">
-<h3>IMMA.SF.16832.U8.U8</h3>
-<p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
-<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR</td><td class="m">R_R_R_R_R_R_UR</td><td>&mdash;</td><td>&mdash;</td></tr>
-</table>
-<details><summary>IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x600000000000747e</code></div>
-<div class="ab">var_mask: <code>0xff00fffffffffff000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[55:48]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
-<tr><td>[47:40]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-</div>
 <div class="ib" data-op="IMMA.SP.16832.S8.S8" id="IMMA.SP.16832.S8.S8">
 <h3>IMMA.SP.16832.S8.S8</h3>
 <p class="desc">Integer 8-bit warp MMA (tensor core). Performs INT8 or UINT8 matrix multiply. Shape: <code>IMMA.16816</code> (m16n8k16). Types: S8.S8 (signed), U8.U8 (unsigned), S8.U8, U8.S8 mixed. .SAT variant saturates the INT32 accumulator.</p>
@@ -263215,6 +263196,33 @@ Collapsed by default — click to expand.
 <tr><td>[59:52]</td><td>8</td><td>t7</td><td><code>reg</code></td></tr>
 <tr><td>[51]</td><td>1</td><td>t7</td><td><code>reuse</code></td></tr>
 <tr><td>[47:40]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="QMMA.SF.16832.F32.UNIDENTIFIED.E8" id="QMMA.SF.16832.F32.UNIDENTIFIED.E8">
+<h3>QMMA.SF.16832.F32.UNIDENTIFIED.E8</h3>
+<p class="desc">Quantized matrix multiply-accumulate. <strong>SM120-exclusive</strong> (RTX 5090). Performs FP8/FP6 warp-group MMA in a single instruction. Opcode 0x27A. Supported types: E4M3 (FP8), E5M2 (FP8), E2M3 (FP6). Shapes: 16&times;8&times;16, 16&times;8&times;32, 16&times;8&times;64 (K=64). SP variants (.SP) exploit 2:4 structured sparsity for ~1.6&times; throughput. SF variants (.SF, opcode 0x47A) add per-block UE8M0 scale factors for microscaling (PTX: <code>kind::mxf8f6f4.block_scale</code>, requires <code>compute_120f</code> / CUDA 13+). SF.SP variants combine block-scaling with 2:4 sparsity. Undocumented modifier bits: negate accumulator (shape bit[0]), exponent scale A/B (shape bits[6:7]), negate B (lo[63]).</p>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR</td><td class="m">R_R_R_R_R_R_UR</td><td>INT_ARITH</td><td>&mdash;</td></tr>
+</table>
+<details><summary>QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR &mdash; 13 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x47e</code></div>
+<div class="ab">var_mask: <code>0x0800000000003ffffff8fffffffff000</code></div>
+<div class="ab">measured: <code>qmma-sf-opcode-bit2-silicon-2026-11-06</code></div>
+<div class="ab">opcode 0x47e = QMMA.SF (0x47a) with bit 2 set. Measured on sm_120 silicon 2026-11-06 (R; test host GPU 0, RTX PRO 6000 SE; cubit-assembled probe next to the documented E4M3.E4M3 / E2M1.E2M1 forms on identical fragments): executes, fp32 output, E8M0 block scales honoured (scale 0xff -&gt; NaN, scale x2 -&gt; result x2), the input element types match neither E4M3 nor E2M1 and are unidentified; the type field of this row is zero as on the E4M3.E4M3 donor. nvdisasm 13.1 / 13.3 have no text for the word. Fields = the QMMA.SF family&#x27;s (Rd@16 Ra@24 Rb@32 Rc@64 sfA@40 sfB@52 UR@60+73); the 2026-03 hypothesis row read R6 at [55:48] and had no UR field.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[77:73]</td><td>5</td><td>t7</td><td><code>ureg_shr3</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[62:60]</td><td>3</td><td>t7</td><td><code>ureg</code></td></tr>
+<tr><td>[59:52]</td><td>8</td><td>t6</td><td><code>reg</code></td></tr>
+<tr><td>[51]</td><td>1</td><td>t6</td><td><code>reuse</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -393205,8 +393213,8 @@ Collapsed by default — click to expand.
 </details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (6dff9c7 2026-11-06), SHA-256 d51879ea422b6725bd70ca080f07339fc002ffa61c4e46c2e1795c91de07dde7<br>
-15961 instruction forms &middot; 26662 encoding variants &middot; 9101 with a measurement tag &middot; 37 pipeline classes<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (39bafbb 2026-11-06), SHA-256 26bac684984b7743a151448f35c6d5ddac3524ae35517e9570be40e58a2322b3<br>
+15961 instruction forms &middot; 26662 encoding variants &middot; 9102 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
