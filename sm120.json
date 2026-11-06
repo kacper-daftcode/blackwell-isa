@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26596,
-   "rows_without_src": 19044,
+   "rows_total": 26621,
+   "rows_without_src": 19034,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -609,6 +609,13 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_lea.py",
      "test": "tests/sm120_lea.rs"
+    },
+    "atoms-aruri-ops-sm120-2026-11-06": {
+     "rows": 36,
+     "kind": "nvdisasm 13.1 field probe (-b SM120)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_atoms_aruri_ops.py",
+     "test": "tests/sm120_atoms_aruri_ops.rs"
     }
    },
    "history": {
@@ -199411,43 +199418,6 @@
      ],
      "variable_mask": "0x1c000000037001fffffffffffffff000"
     },
-    "AND": {
-     "and_base": "0x000000000a800004000000031211798c",
-     "count": 2,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
-    },
     "CAS": {
      "and_base": "0x0000000000000009000000080110738d",
      "count": 2,
@@ -199517,92 +199487,6 @@
       }
      ],
      "variable_mask": "0x1c000000037001fffffffffffffff000"
-    },
-    "EXCH": {
-     "and_base": "0x000000000c0000040000000c1210798c",
-     "count": 2,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
-    },
-    "OR": {
-     "and_base": "0x000000000b000000000000000000798c",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
     },
     "S32,CAS": {
      "_src": "f2-181",
@@ -199674,55 +199558,6 @@
       }
      ],
      "variable_mask": "0x1c000000037001fffffffffffffff000"
-    },
-    "XOR": {
-     "and_base": "0x000000000b800000000000000000798c",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
     }
    },
    "operand_sig": "R_ARI_R_R",
@@ -199897,195 +199732,462 @@
    "mod_groups": {
     "ADD": {
      "and_base": "0x0000000008000000000000000000098c",
-     "count": 1,
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_r0",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_ur1",
        "shift": 64,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 24,
        "extraction": "sub_imm2",
        "shift": 40,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       }
      ],
-     "variable_mask": "0x00000000000000fffffffffffffff000"
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.ADD Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
     },
-    "AND": {
-     "and_base": "0x000000000a800004000000031211798c",
-     "count": 2,
+    "ADD,S32": {
+     "and_base": "0x0000000008000200000000000000098c",
+     "count": null,
      "fields": [
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
-    },
-    "CAS": {
-     "and_base": "0x0000000000000009000000080110738d",
-     "count": 2,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
-    },
-    "EXCH": {
-     "and_base": "0x000000000c0000040000000c1210798c",
-     "count": 2,
-     "fields": [
-      {
-       "_src": "f2-181",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "_src": "f2-181",
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "_src": "f2-181",
        "bits": 8,
        "extraction": "sub_r0",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "_src": "f2-181",
-       "bits": 24,
-       "extraction": "sub_imm1",
-       "shift": 40,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
        "bits": 8,
-       "extraction": "sub_ur0",
+       "extraction": "sub_ur1",
        "shift": 64,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "_src": "f2-181",
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "f2-181",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000037003fffffffffffffff000"
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.ADD.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,ADD": {
+     "and_base": "0x0000000008000400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.ADD.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,ADD": {
+     "and_base": "0x0000000008000800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.ADD.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "MIN": {
+     "and_base": "0x0000000008800000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MIN Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "MIN,S32": {
+     "and_base": "0x0000000008800200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MIN.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,MIN": {
+     "and_base": "0x0000000008800400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MIN.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,MIN": {
+     "and_base": "0x0000000008800800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MIN.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "MAX": {
+     "and_base": "0x0000000009000000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MAX Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
     },
     "MAX,S32": {
      "and_base": "0x0000000009000200000000000000098c",
@@ -200096,145 +200198,1373 @@
        "extraction": "guard",
        "shift": 12,
        "token_idx": 0,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
        "token_idx": 1,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_r0",
        "shift": 24,
        "token_idx": 2,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_ur1",
        "shift": 64,
        "token_idx": 2,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 24,
        "extraction": "sub_imm2",
        "shift": 40,
        "token_idx": 2,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
        "token_idx": 3,
-       "_src": "atoms-aruri-sm120-2026-10-29"
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       }
      ],
      "variable_mask": "0x00000000000000fffffffffffffff000",
-     "_src": "atoms-aruri-sm120-2026-10-29",
-     "_note": "nvdisasm 13.1 sweeps: guard[15:12], destination[23:16], base register[31:24] (255 = RZ, printed [UR+imm]), source[39:32], signed offset[63:40], uniform register[71:64] (255 = URZ); opcode 0x98c with bit 91 is the uniform-indexed address (0x38c = [R+imm]; the mixes are illegal), [90:87] = 2 MAX, bit 73 = S32. Bits 72/76/77/80-86/92-95 are text-inert, 74/75 INVALID3/INVALID5, 78/79 the .X4/.X8 scale - all outside the row. Replaces the harvest leftover that read the UR byte as a fourth register and had no offset field."
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MAX.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,MAX": {
+     "and_base": "0x0000000009000400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MAX.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,MAX": {
+     "and_base": "0x0000000009000800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.MAX.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "INC": {
+     "and_base": "0x0000000009800000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.INC Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "INC,S32": {
+     "and_base": "0x0000000009800200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.INC.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,INC": {
+     "and_base": "0x0000000009800400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.INC.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,INC": {
+     "and_base": "0x0000000009800800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.INC.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "DEC": {
+     "and_base": "0x000000000a000000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.DEC Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "DEC,S32": {
+     "and_base": "0x000000000a000200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.DEC.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,DEC": {
+     "and_base": "0x000000000a000400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.DEC.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,DEC": {
+     "and_base": "0x000000000a000800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.DEC.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "AND": {
+     "and_base": "0x000000000a800000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.AND Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "AND,S32": {
+     "and_base": "0x000000000a800200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.AND.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,AND": {
+     "and_base": "0x000000000a800400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.AND.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,AND": {
+     "and_base": "0x000000000a800800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.AND.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
     },
     "OR": {
-     "and_base": "0x000000000b000000000000000000798c",
-     "count": 1,
+     "and_base": "0x000000000b000000000000000000098c",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_r0",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.OR Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "OR,S32": {
+     "and_base": "0x000000000b000200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.OR.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,OR": {
+     "and_base": "0x000000000b000400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.OR.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,OR": {
+     "and_base": "0x000000000b000800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.OR.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
     },
     "XOR": {
-     "and_base": "0x000000000b800000000000000000798c",
-     "count": 1,
+     "and_base": "0x000000000b800000000000000000098c",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "sub_r0",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.XOR Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "S32,XOR": {
+     "and_base": "0x000000000b800200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       },
       {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000037003ff000000ffffff0000"
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.XOR.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,XOR": {
+     "and_base": "0x000000000b800400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.XOR.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,XOR": {
+     "and_base": "0x000000000b800800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.XOR.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "EXCH": {
+     "and_base": "0x000000000c000000000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.EXCH Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "EXCH,S32": {
+     "and_base": "0x000000000c000200000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.EXCH.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "64,EXCH": {
+     "and_base": "0x000000000c000400000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.EXCH.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
+    },
+    "128,EXCH": {
+     "and_base": "0x000000000c000800000000000000098c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm2",
+       "shift": 40,
+       "token_idx": 2,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "atoms-aruri-ops-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000000fffffffffffffff000",
+     "_src": "atoms-aruri-ops-sm120-2026-11-06",
+     "_note": "ATOMS.EXCH.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row."
     }
    },
    "operand_sig": "R_ARURI_R",
@@ -200267,7 +201597,8 @@
     "stall_base": 4,
     "throughput": 4,
     "write_latency": 30
-   }
+   },
+   "_src": "atoms-aruri-ops-sm120-2026-11-06"
   },
   "ATOMS_R_AURI": {
    "base_op": "ATOMS",
