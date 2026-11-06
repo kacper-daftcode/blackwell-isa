@@ -673598,7 +673598,7 @@
    ],
    "mod_groups": {
     "": {
-     "and_base": "0xff0000000000000226",
+     "and_base": "0x00000000000002000000000000000226",
      "fields": [
       {
        "bits": 4,
@@ -673613,12 +673613,6 @@
        "token_idx": 1
       },
       {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 109,
-       "token_idx": 2
-      },
-      {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
@@ -673631,9 +673625,9 @@
        "token_idx": 3
       },
       {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
        "token_idx": 4
       },
       {
@@ -673647,9 +673641,17 @@
        "extraction": "reuse",
        "shift": 123,
        "token_idx": 3
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4
       }
      ],
-     "variable_mask": "0x1c00200000000800000000fffffff000"
+     "variable_mask": "0xfc000000000000ff000000fffffff000",
+     "_src": "idp-mixed-d2-2026-11-06",
+     "_note": "D2 typed key (NEEDS 36, T-9 2026-11-06): the mod-group name sorts, so S8.U8 / U8.S8 need their own rows. and_base = the measured sibling group with only the sign bits of the enum window [79:72] changed (bit 73 = Rb/URb sign, bit 74 = Rc sign; nvdisasm 13.3 -b SM103/SM100/SM120/SM121 on the 8-word fixture + the UR-form sweep, this session; wave-11 256-value sweep idp_enum_window.json, nvdisasm 13.4). sm121a harvest repair: the old group carried junk 0xff<<120 and no sign bit (both mixed rows shared one and_base); the R-form opcode here is 0x0226 (nvdisasm -b SM121 measured)."
     }
    },
    "operand_sig": "R_R_R_R",
@@ -673674,7 +673676,7 @@
    "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0xff0000000000000226",
+     "and_base": "0x00000000000004000000000000000226",
      "fields": [
       {
        "bits": 4,
@@ -673701,9 +673703,9 @@
        "token_idx": 3
       },
       {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 75,
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
        "token_idx": 4
       },
       {
@@ -673717,9 +673719,17 @@
        "extraction": "reuse",
        "shift": 123,
        "token_idx": 3
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4
       }
      ],
-     "variable_mask": "0x1c00000000000800000000fffffff000"
+     "variable_mask": "0xfc000000000000ff000000fffffff000",
+     "_src": "idp-mixed-d2-2026-11-06",
+     "_note": "D2 typed key (NEEDS 36, T-9 2026-11-06): the mod-group name sorts, so S8.U8 / U8.S8 need their own rows. and_base = the measured sibling group with only the sign bits of the enum window [79:72] changed (bit 73 = Rb/URb sign, bit 74 = Rc sign; nvdisasm 13.3 -b SM103/SM100/SM120/SM121 on the 8-word fixture + the UR-form sweep, this session; wave-11 256-value sweep idp_enum_window.json, nvdisasm 13.4). sm121a harvest repair: the old group carried junk 0xff<<120 and no sign bit (both mixed rows shared one and_base); the R-form opcode here is 0x0226 (nvdisasm -b SM121 measured)."
     }
    },
    "operand_sig": "R_R_R_R",
@@ -2065143,6 +2065153,174 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
+   }
+  },
+  "IDP.4A.U8.U8_R_R_UR_R": {
+   "base_op": "IDP.4A.U8.U8",
+   "operand_sig": "R_R_UR_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000080000ff0000000400007c26",
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4
+      }
+     ],
+     "variable_mask": "0x07f02e00000000000000001bffff0000",
+     "_src": "idp-mixed-d2-2026-11-06",
+     "_note": "D2 typed key (NEEDS 36, T-9 2026-11-06): the mod-group name sorts, so S8.U8 / U8.S8 need their own rows. and_base = the measured sibling group with only the sign bits of the enum window [79:72] changed (bit 73 = Rb/URb sign, bit 74 = Rc sign; nvdisasm 13.3 -b SM103/SM100/SM120/SM121 on the 8-word fixture + the UR-form sweep, this session; wave-11 256-value sweep idp_enum_window.json, nvdisasm 13.4). The U8.U8 UR form is measured too (enum 0/1) and completes the typed lattice."
+    }
+   }
+  },
+  "IDP.4A.S8.U8_R_R_UR_R": {
+   "base_op": "IDP.4A.S8.U8",
+   "operand_sig": "R_R_UR_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000080002ff0000000400007c26",
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4
+      }
+     ],
+     "variable_mask": "0x07f02e00000000000000001bffff0000",
+     "_src": "idp-mixed-d2-2026-11-06",
+     "_note": "D2 typed key (NEEDS 36, T-9 2026-11-06): the mod-group name sorts, so S8.U8 / U8.S8 need their own rows. and_base = the measured sibling group with only the sign bits of the enum window [79:72] changed (bit 73 = Rb/URb sign, bit 74 = Rc sign; nvdisasm 13.3 -b SM103/SM100/SM120/SM121 on the 8-word fixture + the UR-form sweep, this session; wave-11 256-value sweep idp_enum_window.json, nvdisasm 13.4). The U8.U8 UR form is measured too (enum 0/1) and completes the typed lattice."
+    }
+   }
+  },
+  "IDP.4A.U8.S8_R_R_UR_R": {
+   "base_op": "IDP.4A.U8.S8",
+   "operand_sig": "R_R_UR_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000080004ff0000000400007c26",
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4
+      }
+     ],
+     "variable_mask": "0x07f02e00000000000000001bffff0000",
+     "_src": "idp-mixed-d2-2026-11-06",
+     "_note": "D2 typed key (NEEDS 36, T-9 2026-11-06): the mod-group name sorts, so S8.U8 / U8.S8 need their own rows. and_base = the measured sibling group with only the sign bits of the enum window [79:72] changed (bit 73 = Rb/URb sign, bit 74 = Rc sign; nvdisasm 13.3 -b SM103/SM100/SM120/SM121 on the 8-word fixture + the UR-form sweep, this session; wave-11 256-value sweep idp_enum_window.json, nvdisasm 13.4). The U8.U8 UR form is measured too (enum 0/1) and completes the typed lattice."
+    }
    }
   }
  },
