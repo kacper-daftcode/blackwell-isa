@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26663,
-   "rows_without_src": 19140,
+   "rows_total": 26599,
+   "rows_without_src": 19047,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -602,6 +602,13 @@
      "date": "2026-11-06",
      "tool": "T/t7/review (session T-7)",
      "test": "tests/sm120_utmaldg_plain.rs"
+    },
+    "lea-family-2026-11-06": {
+     "rows": 36,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_lea.py",
+     "test": "tests/sm120_lea.rs"
     }
    },
    "history": {
@@ -688032,1363 +688039,10 @@
     "write_latency": 0
    }
   },
-  "LEA.HI.SX32_R_R_II_II": {
-   "base_op": "LEA.HI.SX32",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fc2fffffffffc00007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 2,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x000000000000380000000003ffff0000"
-    }
-   },
-   "operand_sig": "R_R_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.SX32_R_R_UR_II": {
-   "base_op": "LEA.HI.SX32",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8fd2ff0000000000007c11",
-     "count": 14,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000000000000000fffff0000"
-    }
-   },
-   "operand_sig": "R_R_UR_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X.SX32_R_P_R_R_II_P": {
-   "base_op": "LEA.HI.X.SX32",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000010eff0000000000007211",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 83,
-       "token_idx": 2
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000038e0000000000ffffff0000"
-    }
-   },
-   "operand_sig": "R_P_R_R_II_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X.SX32_R_R_R_II_P": {
-   "base_op": "LEA.HI.X.SX32",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000f0eff0000000000007211",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x0000000003800000000000ffffff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_II_R_II_P": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000008f5407ffffffff04037811",
-     "count": 4,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 18,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000000003fc0000"
-    }
-   },
-   "operand_sig": "R_R_II_R_II_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_R_R_II_P": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0xe00000000000000000211",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 6
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000780f9ff800000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_R_R_II_P_II_?": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000020f143500000041341d7211",
-     "count": 2,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II_P_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_R_R_II_P_P": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000f14000000000000017211",
-     "count": 10,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 18,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 33,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000038000ff000001fffffc0000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II_P_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_UR_R_II_P": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x80f04000000000000000c11",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 6
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0xff0000000780f9ff800000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_UR_R_II_P_II_?": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000080f14010000000000017c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 65,
-       "token_idx": 4
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000038001fe0000001ffffe0000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II_P_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_UR_R_II_P_II_II_?": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000080f14010000000000017c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "pred",
-       "shift": 88,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 65,
-       "token_idx": 4
-      },
-      {
-       "bits": 3,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000010001fe0000000ffffe0000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II_P_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI.X_R_R_UR_R_II_P_P": {
-   "base_op": "LEA.HI.X",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000080f14010000000000017c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 65,
-       "token_idx": 4
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000018001fe0000001ffffe0000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II_P_P",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_II_R_II": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fc0ff0000000100007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 2,
-       "extraction": "imm",
-       "shift": 76,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x000000000000300000000000ffff0000"
-    }
-   },
-   "operand_sig": "R_R_II_R_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_II_R_II_II": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fc0ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x00000000000038000000000ffeff0000"
-    }
-   },
-   "operand_sig": "R_R_II_R_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_II_R_II_II_?": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fe0ff0000000000007811",
-     "count": 14,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 76,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x000000000000100000000001feff0000"
-    }
-   },
-   "operand_sig": "R_R_II_R_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_II_R_II_II_II_?": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fd0ff0000000100007811",
-     "count": 17,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 77,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x000000000000200000000000ffff0000"
-    }
-   },
-   "operand_sig": "R_R_II_R_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_R_R_II": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x78e00ff0000000000000211",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c0000000000f900800000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_R_R_II_II": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078fc0000000000000007211",
-     "count": 3,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000038ff000000fffeff0000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_UR_R_II": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8fc0ff0000000000007c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000038000000000fffff0000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA.HI_R_R_UR_R_II_?": {
-   "base_op": "LEA.HI",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8fe0ff0000000000007c11",
-     "count": 4,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 19,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 27,
-       "token_idx": 2
-      },
-      {
-       "bits": 2,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x000000000000000000000007fff80000"
-    }
-   },
-   "operand_sig": "R_R_UR_R_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "LEA_R_P_R_II_II": {
-   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
    "base_op": "LEA",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078000ff0000000000000811",
-     "count": 69,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      }
-     ],
-     "variable_mask": "0x1c000000000ef800fffffffffffff000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000007211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 83,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c00000007fe0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
-    }
-   },
    "operand_sig": "R_P_R_II_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -689404,193 +688058,491 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_II": {
-   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
-     "and_base": "0x00000000078000ff0000000000007211",
-     "count": 22,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      }
-     ],
-     "variable_mask": "0x1c000000000ef900000000ffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+     "and_base": "0x00000000078000ff0000000000000811",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 32,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
+     "variable_mask": "0x00000000000ef900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
+    "HI,SX32": {
+     "and_base": "0x00000000078102ff0000000000000811",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000ef900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_II_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_II_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "X": {
+     "and_base": "0x00000000000004ff0000000000000811",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 2,
+       "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
+     "variable_mask": "0x00000000078ef900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
+    "HI,SX32,X": {
+     "and_base": "0x00000000000106ff0000000000000811",
+     "count": null,
      "fields": [
       {
        "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x00000000078ef900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_II_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_II_R_II",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "HI": {
+     "and_base": "0x00000000078100000000000000000811",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000ef9fffffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_II_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_II_R_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "HI,X": {
+     "and_base": "0x00000000000104000000000000000811",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000078ef9fffffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X II form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_P_R_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -689606,360 +688558,145 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_II_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
      "and_base": "0x00000000078000ff0000000000000211",
-     "count": 32,
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x0000000000063800000001fefffe7000"
-    }
-   },
-   "operand_sig": "R_P_R_R_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078000ff0000000000007211",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000e7800000001fffffe0000"
-    }
-   },
-   "operand_sig": "R_P_R_R_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078038ff0000000000047211",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x0000000000000000000001fffe000000"
-    }
-   },
-   "operand_sig": "R_P_R_R_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_II_P": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 32,
-       "extraction": "imm",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
+     "variable_mask": "0x00000000000ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
+    "HI,SX32": {
+     "and_base": "0x00000000078102ff0000000000000211",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x00000000000ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_P_R_R_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -689975,64 +688712,173 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_R_R_II": {
-   "_o2_fleet": "fleet-add per O2 2026-08-25 (BUG-081;pin:bug081_decoder_corruption_families.rs)",
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "HI": {
-     "and_base": "0x00000000078100000000000000000211",
-     "count": 668,
+    "X": {
+     "and_base": "0x00000000000004ff0000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 5
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 6
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000000ef8ff000000fffffff000"
+     "variable_mask": "0x00000000078ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
+    },
+    "HI,SX32,X": {
+     "and_base": "0x00000000000106ff0000000000000211",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000078ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_R_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_P_R_R_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -690048,186 +688894,197 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8000ff0000000000007c11",
-     "count": 65,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000000ef800000000ffffff0000"
-    },
     "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+     "and_base": "0x00000000078100000000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 32,
-       "extraction": "imm",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
+     "variable_mask": "0x00000000000ef9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_R_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_R_R_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "HI,X": {
+     "and_base": "0x00000000000104000000000000000211",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x00000000078ef9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X R form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_UR_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_P_R_UR_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -690243,316 +689100,327 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
-     "and_base": "0x000000000f8018ff0000000000007c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000e00000000001ffffe0000"
-    }
-   },
-   "operand_sig": "R_P_R_UR_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8018ff0000000000007c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 82,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000c00000000001ffffe0000"
-    }
-   },
-   "operand_sig": "R_P_R_UR_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8010ff0000000000007c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      },
-      {
-       "bits": 4,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000608000000001ffffe0000"
-    }
-   },
-   "operand_sig": "R_P_R_UR_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8010ff00000004080a7c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000200000000000200000000"
-    }
-   },
-   "operand_sig": "R_P_R_UR_II_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_II_II_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8010ff00000004080a7c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "ureg",
-       "shift": 33,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000200000000000200000000"
-    }
-   },
-   "operand_sig": "R_P_R_UR_II_II_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_P_R_UR_R_II": {
-   "_o2_fleet": "fleet-add per O2 2026-08-25 (BUG-081;pin:bug081_decoder_corruption_families.rs)",
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "HI": {
-     "and_base": "0x000000000f8100000000000000000c11",
-     "count": 2,
+     "and_base": "0x000000000f8000ff0000000000000c11",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 5
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 6
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000000ef8ff000000fffffff000"
+     "variable_mask": "0x00000000000ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    },
+    "HI,SX32": {
+     "and_base": "0x000000000f8102ff0000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_UR_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_UR_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "X": {
+     "and_base": "0x00000000080004ff0000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000078ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
+    },
+    "HI,SX32,X": {
+     "and_base": "0x00000000080106ff0000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000078ef900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_UR_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_P_R_UR_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -690568,162 +689436,197 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e00ff0000000000007811",
-     "count": 14,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c0000000000f800ffffffffffff0000"
-    },
-    "HI,SX32": {
-     "_evidence": "donor-clone sm100a; donor-table decode==vendor for ALL class words (donor226b_ctrl_decodes.json, true-ctrl occurrence playback); graft arb226b x{100a,120a} print-IDENTICAL over bits [10,11]+[62..95] for 7/7 LEA clusters",
-     "_src": "bug226b-2026-08-27",
-     "and_base": "0x00000000078f02ff0000000000000811",
-     "count": 235,
+    "HI": {
+     "and_base": "0x000000000f8100000000000000000c11",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00202e000000f800ffffffffffff7000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
+       "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000ef9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_P_R_UR_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_P_R_UR_R_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "HI,X": {
+     "and_base": "0x00000000080104000000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x00000000078ef9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X UR form with Pd: measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_II_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_II_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -690739,383 +689642,271 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_II_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e00ff0000000000017811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 9,
-       "extraction": "imm",
-       "shift": 33,
-       "token_idx": 3
-      },
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x0000000000007800000003fefffe0000"
-    }
    },
-   "operand_sig": "R_R_II_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
    "mod_groups": {
     "": {
-     "and_base": "0x00000000078e00ff0000000000017811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 3
-      },
-      {
-       "bits": 4,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x0000000000007800000003fcfffe0000"
-    }
-   },
-   "operand_sig": "R_R_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e00ff0000000000017811",
-     "count": 6,
-     "fields": [
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 3
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x00000000000038000000007cfffe0000"
-    }
-   },
-   "operand_sig": "R_R_II_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_II_II_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e18ff0000000205077811",
-     "count": 2,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_II_II_II_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_R_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+     "and_base": "0x00000000078e00ff0000000000000811",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 32,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
+     "variable_mask": "0x000000000000f900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
+    "HI,SX32": {
+     "and_base": "0x00000000078f02ff0000000000000811",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 3
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000000f900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_II_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "R_R_II_II_P",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "X": {
+     "and_base": "0x00000000000e04ff0000000000000811",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
+     "variable_mask": "0x000000000780f900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
+    "HI,SX32,X": {
+     "and_base": "0x00000000000f06ff0000000000000811",
+     "count": null,
      "fields": [
       {
        "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x000000000780f900fffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_II_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_II_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -691131,186 +689922,73 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_II_R_II_P": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000060010ff0000000000007811",
-     "count": 32,
+    "HI": {
+     "and_base": "0x00000000078f00000000000000000811",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "imm",
-       "shift": 34,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 81,
-       "token_idx": 0
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c00000001ffc000ffffffffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 32,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0xfc0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000007211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 81,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 83,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0xfc00000007fe0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x000000000000f9fffffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_II_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_II_R_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -691326,266 +690004,87 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "_evidence": "graft arb230 x{100a,103a,120a} print-IDENTICAL: b63=neg tok3 (reg@32), b72=neg tok2 (reg@24), b122/123=reuse sideband (era row mislabels as neg), b73-flip illegal cell x3; population 234 occurrence-paired (popdiff229 cls 'neg') strict-routes to the extended row with true ctrl; proto verify 105/105 vendor-exact; encode 40/40; LEA_P0 glyph absent from vendor gold everywhere (key-name fold artifact)",
-     "_src": "bug230-2026-08-28",
-     "and_base": "0x00000000078e00ff0000000000000211",
-     "count": 19,
+    "HI,X": {
+     "and_base": "0x00000000000f04000000000000000811",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
-       "name": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
-       "name": "Rd",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
-       "name": "Ra",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "neg",
-       "name": "[72:72]",
+       "extraction": "inv",
        "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "name": "[122:122]",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "name": "Rb",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "name": "[63:63]",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "name": "[123:123]",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "name": "[79:75]",
-       "shift": 75,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f800000000fffffff000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 32,
        "extraction": "imm",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32": {
-     "_evidence": "donor-clone sm100a; donor-table decode==vendor for ALL class words (donor226b_ctrl_decodes.json, true-ctrl occurrence playback); graft arb226b x{100a,120a} print-IDENTICAL over bits [10,11]+[62..95] for 7/7 LEA clusters",
-     "_src": "bug226b-2026-08-27",
-     "and_base": "0x00000000078f02ff0000000000000211",
-     "count": 308,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x0ff03e000000f800000000ff7ffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x000000000780f9fffffffffffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X II form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -691601,376 +690100,131 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_II_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
-     "and_base": "0x00000000078e00ff0000000000007211",
-     "count": 32,
+     "and_base": "0x00000000078e00ff0000000000000211",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x000000000000f800000000ffffff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e00ff0000000000001211",
-     "count": 19,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "guard",
-       "shift": 13,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x0000000000003800000000ffffffe000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078e00ff0000000000007211",
-     "count": 32,
+     "variable_mask": "0x000000000000f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    },
+    "HI,SX32": {
+     "and_base": "0x00000000078f02ff0000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x0000000000007800000000ffffff0000"
+     "variable_mask": "0x000000000000f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
-   "operand_sig": "R_R_R_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
+   "_src": "lea-family-2026-11-06"
   },
   "LEA_R_R_R_II_P": {
    "base_op": "LEA",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "_evidence": "donor-clone sm100a; donor-table decode==vendor for ALL class words (donor226b_ctrl_decodes.json, true-ctrl occurrence playback); graft arb226b x{100a,120a} print-IDENTICAL over bits [10,11]+[62..95] for 7/7 LEA clusters",
-     "_src": "bug226b-2026-08-27",
-     "and_base": "0x00000000000f06ff0000000000000211",
-     "count": 6450,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "inv",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 5
-      }
-     ],
-     "variable_mask": "0x0ff03e000380f800800000fffffff000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
-    }
-   },
    "operand_sig": "R_R_R_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -691986,216 +690240,159 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_R_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
+    "X": {
+     "and_base": "0x00000000000e04ff0000000000000211",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 0
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000007211",
-     "count": 10918,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8ff800000ffffff0000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
        "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000800000ffffff0000"
+     "variable_mask": "0x000000000780f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
+    "HI,SX32,X": {
+     "and_base": "0x00000000000f06ff0000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
        "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000000000080000000003c0000"
+     "variable_mask": "0x000000000780f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_R_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_R_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -692211,241 +690408,80 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_R_R_II_P": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
     "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+     "and_base": "0x00000000078f00000000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 32,
-       "extraction": "imm",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x00000000000f04000000000000007211",
-     "count": 22,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
        "token_idx": 4,
-       "_src": "dsv41-sm120-2026-10-22"
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000380f8ff000000ffffff0000"
+     "variable_mask": "0x000000000000f9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_R_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_R_R_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -692461,248 +690497,94 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8e00ff0000000000007c11",
-     "count": 39,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c0000000000f800800000ffffff0000"
-    },
-    "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+    "HI,X": {
+     "and_base": "0x00000000000f04000000000000000211",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 32,
-       "extraction": "imm",
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32": {
-     "_evidence": "donor-clone sm100a; donor-table decode==vendor for ALL class words (donor226b_ctrl_decodes.json, true-ctrl occurrence playback); graft arb226b x{100a,120a} print-IDENTICAL over bits [10,11]+[62..95] for 7/7 LEA clusters",
-     "_src": "bug226b-2026-08-27",
-     "and_base": "0x000000000f8fd2ff0000000000007c11",
-     "count": 373,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x07f02600000008000000003fffff0000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
        "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c000000038e0000800000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c0000000000000080000000003c0000"
+     "variable_mask": "0x000000000780f9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X R form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_UR_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_UR_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -692718,269 +690600,131 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
-     "and_base": "0x000000000f8e18ff800000062e147c11",
-     "count": 2,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_UR_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8e00ff0000000400007c11",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 2,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x000000000000380000000003ffff0000"
-    }
-   },
-   "operand_sig": "R_R_UR_II_II",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8e00ff0000000000007c11",
-     "count": 31,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 5,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000038000000001fffff0000"
-    }
-   },
-   "operand_sig": "R_R_UR_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II_II_II_?": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000f8e00ff0000000000007c11",
-     "count": 24,
-     "fields": [
-      {
-       "bits": 2,
-       "extraction": "imm",
-       "shift": 76,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 5,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000030000000001fffff0000"
-    }
-   },
-   "operand_sig": "R_R_UR_II_II_II_?",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_II_P": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "HI,SX32,X": {
-     "_evidence": "donor-clone sm100a; donor-table decode==vendor for ALL class words (donor226b_ctrl_decodes.json, true-ctrl occurrence playback); graft arb226b x{100a,120a} print-IDENTICAL over bits [10,11]+[62..95] for 7/7 LEA clusters",
-     "_src": "bug226b-2026-08-27",
-     "and_base": "0x00000000080f06ff0000000000000c11",
-     "count": 1493,
+     "and_base": "0x000000000f8e00ff0000000000000c11",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 1,
-       "extraction": "inv",
+       "extraction": "neg",
        "shift": 63,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 5
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x05f03e000380f8008000003f7f7ff000"
+     "variable_mask": "0x000000000000f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
+    },
+    "HI,SX32": {
+     "and_base": "0x000000000f8f02ff0000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000000f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.SX32 UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; Rc [71:64] is text-inert here and baked RZ; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_UR_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_UR_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -692996,194 +690740,159 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_R_II": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000060010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 81,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c00000001ffc000ffffffffffff0000"
-    },
-    "HI": {
-     "_evidence": "donor-clone sm100a; graft arb229 x{100a,103a,120a} print-IDENTICAL: tok5=imm5@[79:75], b36=ureg bit4, b80=.HI pivot, b74=.X, b81/b82=output-pred; donor table itself diverges for II_II[''] (imm6 incl b80 prints wrong glyph on donor's own arch), so only the UR_R_II[HI] row (which matches the law) is cloned; routing to the lawful sm120 rows asserted per occurrence with true ctrl (popdiff229.jsonl)",
-     "_src": "bug229-2026-08-27",
-     "and_base": "0x000000000f8f00ff0000000000000c11",
-     "count": 1023,
+    "X": {
+     "and_base": "0x00000000080e04ff0000000000000c11",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2aE",
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x07f03e000000f8000000003ffffff000"
+     "variable_mask": "0x000000000780f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.X UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     },
     "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000007211",
-     "count": 7,
+     "and_base": "0x00000000080f06ff0000000000000c11",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
-       "bits": 2,
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
        "extraction": "pred",
-       "shift": 81,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 83,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
        "shift": 87,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0xfc0000007ffe0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x8f5407ffffffff04037811",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "",
-       "shift": 18,
-       "token_idx": 0
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000000003c0000"
+     "variable_mask": "0x000000000780f900800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X.SX32 UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; Rc [71:64] is text-inert here and baked RZ; bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_UR_R_II": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_UR_R_II",
    "scheduling": {
     "confidence": "hw_measured",
@@ -693199,240 +690908,80 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
-  },
-  "LEA_R_R_UR_R_II_P": {
-   "base_op": "LEA",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
-    "": {
-     "and_base": "0x00000000078010ff0000000000007811",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 26,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 28,
-       "token_idx": 0
-      },
-      {
-       "bits": 30,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "imm",
-       "shift": 81,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c00000000024000ffffffffffff0000"
-    },
     "HI": {
-     "and_base": "0x00000000078f00000000000000000811",
-     "count": 347,
+     "and_base": "0x000000000f8f00000000000000000c11",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 5,
-       "extraction": "imm",
-       "shift": 75,
-       "token_idx": 5
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c0000000000f8fffffffffffffff000"
-    },
-    "HI,SX32,X": {
-     "and_base": "0x0000000000010eff0000000000407211",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 2,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "guard_neg",
-       "shift": 83,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000038e0000000000ffffff0000"
-    },
-    "HI,X": {
-     "and_base": "0x00000000080f04000000000000007c11",
-     "count": 66,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
-       "token_idx": 4
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
       },
       {
        "bits": 5,
        "extraction": "imm",
        "shift": 75,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x1c0000000380f8ff000000ffffff0000"
+     "variable_mask": "0x000000000000f9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 print `-`; the carry-in [90:87] is text-inert here and baked `!PT` (nvcc's value); bits 84-86 / 92-95 text-inert, outside the row."
     }
    },
+   "_src": "lea-family-2026-11-06"
+  },
+  "LEA_R_R_UR_R_II_P": {
+   "base_op": "LEA",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
    "operand_sig": "R_R_UR_R_II_P",
    "scheduling": {
     "confidence": "hw_measured",
@@ -693448,7 +690997,89 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "mod_groups": {
+    "HI,X": {
+     "and_base": "0x00000000080f04000000000000000c11",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 5,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "lea-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x000000000780f9ff800000fffffff000",
+     "_src": "lea-family-2026-11-06",
+     "_note": "LEA.HI.X UR form (Pd = PT elided): measured with nvdisasm 13.1 -b SM120 (-b SM103 / -b SM100 text-identical), tools/probes/re_sm120_lea.py (session T-8, 2026-11-06). Sign bits 72 / 63 are the bitwise inverse `~` on the .X forms; bits 84-86 / 92-95 text-inert, outside the row."
+    }
+   },
+   "_src": "lea-family-2026-11-06"
   },
   "LOP3.LUT_P_R_R_II_R_II_P": {
    "base_op": "LOP3.LUT",
