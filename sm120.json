@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26560,
-   "rows_without_src": 18860,
+   "rows_total": 26557,
+   "rows_without_src": 18856,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -632,10 +632,10 @@
      "test": "tests/sm120_brx_ret.rs"
     },
     "audit-fix-2026-11-06-t10": {
-     "rows": 21,
+     "rows": 23,
      "kind": "nvdisasm 13.1 field repair of harvest rows (-b SM120), census-witness-checked retirements",
      "date": "2026-11-06",
-     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py",
+     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + audit_fix_20261106_t10b.py",
      "test": "tests/sm120_audit_t10.rs"
     }
    },
@@ -421982,57 +421982,37 @@
      "variable_mask": "0x1c00000000000000000000ff00ff0000"
     },
     "NTZ": {
-     "and_base": "0x82031000000000400017d05",
+     "and_base": "0x00000000082031000000000000007d05",
      "count": 24,
      "fields": [
       {
-       "bits": 3,
-       "extraction": "",
-       "shift": 17,
-       "token_idx": 0
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "audit-fix-2026-11-06-t10"
       },
       {
-       "bits": 2,
+       "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "audit-fix-2026-11-06-t10"
       },
       {
        "bits": 1,
        "extraction": "reuse",
        "shift": 123,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "audit-fix-2026-11-06-t10"
       }
      ],
-     "variable_mask": "0x1c0000000000000000000003000e0000"
+     "variable_mask": "0x0800000000000000000000ff00ff0000",
+     "_src": "audit-fix-2026-11-06-t10",
+     "_note": "T-10 audit: Rd [23:16], URa [39:32] (nvdisasm 13.1: `F2I.NTZ R1, UR6`, UR63, URZ, R200); the harvest's 2-bit ureg@32 and unnamed 3-bit field at 17 printed UR2 for UR6"
     },
     "NTZ,TRUNC": {
      "and_base": "0x000000000020f1000000000c00007305",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 3,
-       "extraction": "",
-       "shift": 17,
-       "token_idx": 0
-      },
-      {
-       "bits": 2,
-       "extraction": "ureg",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c0000000000000000000003000e0000"
-    },
-    "NTZ,U32": {
-     "and_base": "0x00000000002030004000000c00017305",
      "count": 1,
      "fields": [
       {
@@ -691389,180 +691369,6 @@
     "write_latency": 0
    }
   },
-  "MOV_R_R_II_II_?": {
-   "base_op": "MOV",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000202",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 32,
-       "extraction": "imm_shr8",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "imm_shr40",
-       "shift": 64,
-       "token_idx": 2
-      },
-      {
-       "bits": 4,
-       "extraction": "imm_shr48",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 12,
-       "extraction": "imm_shr52",
-       "shift": 76,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c00000000fffffffffffffffffff000"
-    }
-   },
-   "operand_sig": "R_R_II_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "MOV.64",
-      "opcode_id": 110,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "MOV.64.HI",
-      "opcode_id": 111,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 2,
-      "write_latency": 1
-     },
-     {
-      "name": "MOV.64.LO",
-      "opcode_id": 112,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 2,
-      "write_latency": 12
-     },
-     {
-      "name": "MOV (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "MOV_R_R_II_II_II_?": {
-   "base_op": "MOV",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000f000000000000007202",
-     "count": 15,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x0000000000000000000000ff00ff0000"
-    }
-   },
-   "operand_sig": "R_R_II_II_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "MOV.64",
-      "opcode_id": 110,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "MOV.64.HI",
-      "opcode_id": 111,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 2,
-      "write_latency": 1
-     },
-     {
-      "name": "MOV.64.LO",
-      "opcode_id": 112,
-      "pipe_name": "TEX_LOAD",
-      "read_latency": 2,
-      "write_latency": 12
-     },
-     {
-      "name": "MOV (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "MOV_R_R_R": {
    "base_op": "MOV",
    "ctrl_class": "alu_simple",
@@ -741835,8 +741641,8 @@
    "mod_groups": {
     "A1T0,ARRIVE,RED,TRANS64": {
      "_evidence": "witness=arrive220 probes payload-eq x3 + 103-corpus signatures (battery s120ass: 2409 cured lines, 7 files); graft arb220b.json 132/132 x3 (b74=RED b84/85/86 A-enum b73=TMASK b75=OPTOUT RED+TMASK=INVALID3); donor=canonical sm100a era rows",
-     "_src": "bug221-2026-08-27",
-     "and_base": "0x00000000081004ff000000ff00ff09a7",
+     "_src": "audit-fix-2026-11-06-t10",
+     "and_base": "0x00000000081004ff00000000000009a7",
      "count": 1,
      "fields": [
       {
@@ -741861,16 +741667,18 @@
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 1
+       "token_idx": 3
       },
       {
        "bits": 8,
        "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "audit-fix-2026-11-06-t10"
       }
      ],
-     "variable_mask": "0x01ee0e0000000000000000007f00f000"
+     "variable_mask": "0x0000000000000000fffffffffffff000",
+     "_note": "T-10 audit: the destination is [23:16] (nvdisasm: R4 when set; the census words carry RZ); the harvest duplicated the data register's field onto token 1"
     },
     "A1T0,ARRIVE,TRANS64": {
      "_evidence": "witness=arrive220 probes payload-eq x3 + 103-corpus signatures (battery s120ass: 2409 cured lines, 7 files); graft arb220b.json 132/132 x3 (b74=RED b84/85/86 A-enum b73=TMASK b75=OPTOUT RED+TMASK=INVALID3); donor=canonical sm100a era rows",
