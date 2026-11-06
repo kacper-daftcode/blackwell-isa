@@ -172,7 +172,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (19 025 of 26 611 SM120 variants at this revision) are
+  measurement in prose. Rows **without** `_src` (19 000 of 26 646 SM120 variants at this revision) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes — plus, since 2026-11-05, the **wave-11 lattice rows** (5 718 SM120
   rows of the lane merge `e9b0808`, 5 692 of them the modifier lattices of `ATOM_P_R_dARI_R` and
@@ -270,12 +270,16 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  stands at 230 rows with at least one defect after the 2026-11-06 LEA and ATOMS rebuilds (from 1 977 on
-  2026-11-02 and 418 on the T-7 tables; 59 of the remaining rows' words are ones nvdisasm rejects and cubit decodes, 118
+  stands at 215 rows with at least one defect after the 2026-11-06 LEA, ATOMS and BRA rebuilds (from 1 977 on
+  2026-11-02, 418 on the T-7 tables and 230 on the T-8 tables; six of the 215 are only the inert-bit words of
+  the retired BRA harvest rows, which the measured rows fail closed on; 59 of the remaining rows' words are ones nvdisasm rejects and cubit decodes, 118
   words of the undocumented forms above are `vendor_unknown`, not defects; the 2026-11-04 oracle records
   had 386 legal words marked as rejected through a scratch-file race of the tool — re-measured on
   2026-11-06); the families are listed in cubit `docs/KNOWN_ISSUES.md` T1. Rebuilt from measurement
-  since: the **`LEA` family on the three tables** (2026-11-06: 24 keys × 36 rows, `LEA[.HI][.X][.SX32]`
+  since: the **SM120 `BRA` family** (2026-11-06, session T-9: 6 keys × 66 rows — `BRA[.INC|.DEC][.U|.DIV|.CONV]
+  [.ANY][.NOT_TID0] [Pn,] [[~]URn | [!]UPn,] target`, the signed 56-bit dword target, the `~UR` and `[!]UPn`
+  glyphs, the 0x547 uniform-predicate form; 15 harvest keys retired, the 0x947 words text-identical on
+  `-b SM103` / `SM100` where the harvest rows still stand), the **`LEA` family on the three tables** (2026-11-06: 24 keys × 36 rows, `LEA[.HI][.X][.SX32]`
   × register / imm32 / UR forms, the `~R` glyph of the `.X` forms, nvcc's text-inert values baked —
   56 / 18 / 18 harvest keys retired), the SM120 `ATOMS_R_ARURI_R` lattice (2026-11-06: 9 operations × 4
   types, the harvest groups that read the UR byte as a register retired), the SM120 `HADD2` register form

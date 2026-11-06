@@ -1,3 +1,26 @@
+## November 6, 2026 (session T-9): the SM120 BRA family rebuilt from measurement
+
+- **`sm120.json`: the `BRA` family rebuilt from measurement** (cubit `tools/probes/re_sm120_bra.py`, nvdisasm 13.1
+  `-b SM120`; the 0x947 words print identically on `-b SM103` / `-b SM100`, the 0x547 form is sm_120-only; 519 form
+  words every text predicted by the layout + 32 lattice words; provenance `bra-family-2026-11-06`, test cubit
+  `tests/sm120_bra.rs`): target = PC + 16 + a signed 56-bit dword offset ([23:16] + [81:34]; nvdisasm prints the sum
+  signed, `BRA -0x14a0` for an isolated backward word); guard [15:12]; predicate operand [89:87] + `!` 90 (PT elided —
+  the keys without `_P_` bake it, `BRA !PT, 0x50` is a word of its own); mode [33:32] plain / `.U` / `.DIV` / `.CONV`;
+  85 `.INC`, 86 `.DEC` (both = `INVALID3`); 84 `.ANY` and 83 `.NOT_TID0` with `.U` only (inert otherwise); the UR
+  operand [31:24] + `~` 82 behind the frame bit 91, legal with `.DIV` / `.CONV` only (`INVALID0/1` otherwise — the
+  harvest `BRA_UP_II [U]` claimed those words); 0x547 + 91 = the uniform-predicate form `BRA.U[.ANY] [!]UPn, target`
+  (UP [26:24], `!` 27; `.U` required, `???n` without it; bit 83 inert there; a vector predicate may precede the UP);
+  bits 92-95 text-inert, outside the rows. Six keys `BRA_II`, `BRA_P_II`, `BRA_UR_II`, `BRA_P_UR_II`, `BRA_UP_II`,
+  `BRA_P_UP_II` × one group per legal modifier set = **66 rows replace 15 harvest keys / 31 rows**: `BRA_II_II`,
+  `BRA_II_II_?`, `BRA_II_II_II_?`, `BRA_II_II_II_II_?`, `BRA_P_II_II`, `BRA_P_II_II_?` (junk twins of `BRA_II` /
+  `BRA_P_II`), `BRA.U_?_II`, `BRA.DIV_UR_II`, `BRA.U_UP_II` (now `_meta.key_aliases` of the plain keys), the
+  triplicated `CONV` / `DIV` groups with `guard@29` / `imm_shr3@28` junk fields, `BRA_UP_II [""]` / `BRA_UR_II [""]`
+  (twins of `BRA_II [""]`, bits 29 / 30 baked), `BRA_P_UR_II [CONV]` / `[DIV]` (they printed `PT, UR6` for the
+  vendor's `~UR6`), `BRA_P_P_II`, `BRA_II [NOT_TID0,U]`. Counts: 16 054 → 16 045 forms, 26 611 → 26 646 variants,
+  19 000 rows without `_src`. The production census stays 1 811 600 / 1 811 600. The sm103a / sm100a BRA rows are
+  still harvest rows (the measured rows apply there verbatim minus the 0x547 form — a follow-up).
+- The SM120 reference regenerated at this revision.
+
 # blackwell-isa Changelog
 
 ## November 6, 2026 (session T-8): the LEA family rebuilt from measurement on the three tables, the ATOMS uniform-indexed lattice, junk keys retired, the audit oracle corrected
