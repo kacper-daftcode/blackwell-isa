@@ -1,3 +1,48 @@
+## November 6, 2026 (session T-10): BRA on sm103a / sm100a, the BRX / BRXU / RET family, the SM120 dynamic audit at its end state
+
+- **`sm103a.json` / `sm100a.json`: the `BRA` family is the measured SM120 family** (cubit `tools/probes/re_sm120_bra.py
+  probe --arch SM103` / `SM100` — the 551 words of the SM120 sweep print the same text on the three nvdisasm 13.1
+  targets, the uniform-predicate form 0x547 included: the T-9 note that it was sm_120-only was wrong, the sm103a
+  harvest row `BRA_UP_II [U]` had counted 17 806 such words; fixtures cubit `tests/fixtures/{sm103a,sm100a}_bra_nvdisasm.jsonl`,
+  test `tests/sm103a_sm100a_bra.rs`): 5 harvest keys / 9 rows per table (`BRA_II` with a guard-only field list,
+  `BRA_P_UR_II [CONV]` / `[DIV]` with `imm@18:6` + `imm@34:5` junk target fields, `BRA_UP_II [ANY,U]` with a `pred@24:4`
+  field over the UP operand) → the same six keys / 66 rows as sm120 (`bra-family-2026-11-06`). Counts 14 912 → 14 913
+  forms, 22 363 → 22 420 variants per table.
+- **`sm120.json`: the `BRX` / `BRXU` / `RET` family measured** (cubit `tools/probes/re_sm120_brx_ret.py`, nvdisasm 13.1
+  `-b SM120`, 506 form words every text predicted by the layout + 29 lattice words; provenance `brx-ret-family-2026-11-06`,
+  test cubit `tests/sm120_brx_ret.rs`): register [31:24] (255 = RZ / URZ); the offset is the BRA split — a signed 56-bit
+  dword at [23:16] + [81:34] — printed `Rn off*4` by BRX / BRXU (relative to the register, 0 elided: `BRX R8`) and
+  RET.ABS, `Rn PC+16+off*4` by RET.REL; predicate operand [89:87] + `!` 90 before the register (`BRX !P3, R8 0x100`);
+  BRX / BRXU 85 `.INC`, 86 `.DEC` (both = `INVALID3`), BRXU mode [33:32] plain / `.U` / `.DIV` / `.CONV`, bit 91 required
+  on BRXU and illegal on BRX; RET 85 `.ABS` (clear = `.REL`, always printed), 86 `.NODEC`, bit 91 = the uniform-register
+  form (`RET.REL URZ 0x110`); bits 82-84 and 92-95 text-inert. Eight keys `{BRX,BRXU,RET}[_P]_{R,UR}_II` / **46 rows
+  replace 13 harvest keys / 16 rows** (`BRX_II` with `imm@18:20` + `reg@25:8` junk fields, `BRX_L`, `BRXU_II` — it printed
+  `BRXU 0xfffe0220` for the vendor's `BRXU UR20 -0x1fdf0` —, `BRXU_L`, `RET_II`, `RET_L`, `RET.REL.NODEC_II` (no register),
+  `RET.REL.NODEC_R`, `RET.ABS.NODEC_?` (no fields), the duplicated `RET_R_II` groups and the three `dsv41-sm120-2026-10-22`
+  rows the measurement supersedes; aliases `RET.REL.NODEC_R_II` / `RET.REL.NODEC_R` → `RET_R_II`).
+- **`sm120.json`: the dynamic audit of the harvest rows is at its end state — 22 rows, every one a named exception**
+  (cubit `docs/KNOWN_ISSUES.md` T1: the IMMA.16816/16832 harvest rows (8), the T5 `IMMA.SF` hypothesis, the seven RZ-base
+  64-bit descriptor words cubit's decoder tolerates (BUG-461), the `UPT`-destination elision of ULEA / ULOP3,
+  `BMOV.64 ATEXIT_PC`, `DEPBAR SB7`, `FADD.SAT` bit 62, `USETMAXREG` bit 63). Two batches (blackwell-isa-internal
+  `tools/audit_fix_20261106_t10.py` + `_t10b.py`, provenance `audit-fix-2026-11-06-t10`, every vendor text asserted
+  against nvdisasm 13.1 before the write; cubit `tests/sm120_audit_t10.rs`): **15 harvest-row field repairs** — ATOMG CAS
+  Pd = [83:81] (the harvest's `pred@7` sat on the opcode bits), STS.64 opcode bit 9 baked (the 0x188 words are illegal)
+  and the text-inert [71:64] fail-closed, the MOV / MOV.64 junk destination copies at [31:24] (text-inert, every census
+  word 0), WARPSYNC.ALL has no operands, VOTE / VOTEU phantom predicate fields, IMAD.X Ra = RZ baked, UFMUL's three 8-bit
+  URs at 16 / 24 / 32, UTMAREDG operands [39:32] / [31:24], USETMAXREG's 10-bit count [41:32], the LDCU size groups'
+  uniform index field (U8's index is a UR), BAR.RED.{AND,OR} count-less twins rebuilt from the measured `_II_II_P` row
+  (the vendor elides a zero thread count), HADD2_R_R_FI_FI fp16 immediates, the SYNCS RED.A1T0 destination [23:16], the
+  F2I.NTZ UR-form fields — and **72 junk keys / 8 groups retired** under the census-witness rule (0 witnesses among the
+  249 929 distinct words of the production census + our kernels, no alias target, every probe word vendor-invalid /
+  illegal or decoded by the remaining rows): the `_?` partial keys (CS2R, DADD, DMUL, F2I.TRUNC.NTZ ×3, FMNMX ×2,
+  HADD2.F32 ×2, IADD.64, MOV ×4, PRMT, VIMNMX.S32, HADD2), the shifted-field / phantom-token twins (F2I ×3, FLO, I2FP,
+  POPC, SEL, FSETP ×2, FSEL, IADD.64 ×6, IADD.X, IADD3 ×5, IADD, UIADD3 ×3, the `_P_R_R_R_R` HMMA ×5 / QMMA ×20 twins with
+  2-bit-shifted register fields, HMMA.SP.1688, LDSM `_R_AUR` ×2, LD_R_ARURI, SULD.D.BA.2D (nvdisasm names its words
+  `SULD.P.1D.EF.INVALID0.IGN`), PLOP3.LUT_P_P_P_P_UP_II_II, MOV_P_R_R) and the groups IADD3 `[X]` ×2, LDGSTS LTC128B ×3,
+  HADD2_R_R_II_II [""], MUFU_R_II [RCP64H], F2I_R_UR [NTZ,U32]. Counts 16 045 → 15 934 forms, 26 646 → 26 557 variants,
+  18 856 rows without `_src`. The production census stays 1 811 600 / 1 811 600.
+- The SM120, SM103A and SM100A references regenerated at this revision.
+
 ## November 6, 2026 (session T-9): the SM120 BRA family rebuilt from measurement
 
 - **`sm120.json`: the `BRA` family rebuilt from measurement** (cubit `tools/probes/re_sm120_bra.py`, nvdisasm 13.1
