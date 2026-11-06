@@ -174,10 +174,10 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
   measurement in prose. Rows **without** `_src` (18 856 of 26 557 SM120 variants at this revision) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
-  census, not by per-field probes — plus, since 2026-11-05, the **wave-11 lattice rows** (5 718 SM120
-  rows of the lane merge `e9b0808`, 5 692 of them the modifier lattices of `ATOM_P_R_dARI_R` and
-  `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each): nvdisasm-enumerated modifier lattices whose measurement
-  record is the lane's own report and which are not yet tagged in the tables (see "Known issues"). The harvest rows' known defect classes and the audit of
+  census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
+  lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06
+  (`wave11-atom-lattice-2026-11-05` / `wave11-integration-2026-11-05`, 5,736 SM120 rows); their measurement record is the
+  lane's own report (see "Known issues"). The harvest rows' known defect classes and the audit of
   them are tracked in cubit's `docs/KNOWN_ISSUES.md`.
 - `_meta.provenance.history` keeps the fix-wave notes (formerly loose `_meta.bugNNN` keys) verbatim;
   `_meta.provenance.errata` the former top-level `_errata_*` notes of `sm121a.json`.
