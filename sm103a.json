@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22344,
+   "rows_total": 22348,
    "rows_without_src": 15892,
    "sources": {
     "bug154-2026-08-25": {
@@ -322,6 +322,13 @@
      "date": "2026-11-06",
      "tool": "T/t7/review (session T-7, review of B300-4)",
      "test": "tests/sm120_iadd3x_carry_neg.rs"
+    },
+    "utmaldg-plain-dims-2026-11-06": {
+     "rows": 4,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-06",
+     "tool": "T/t7/review (session T-7)",
+     "test": "tests/sm120_utmaldg_plain.rs"
     }
    },
    "history": {
@@ -489260,6 +489267,126 @@
      ],
      "variable_mask": "0x0000000000000000000000ffff00f000",
      "_src": "b3003-utmaldg-2026-11-05"
+    },
+    "1D": {
+     "and_base": "0x000000000800000000000000000005b4",
+     "count": null,
+     "fields": [
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "utmaldg-plain-dims-2026-11-06",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, extension of coldface's b3003 row): the plain `UTMALDG.<dim> [URa], [URb]` form (uniform guard [15:12], URa [39:32], URb [31:24]) with the dimension enum at [81:79]: 0 = 1D, 1 = 2D, 2 = 3D, 3 = 4D, 4 = 5D, 5-7 INVALID5/6/7; bit 76 = the descriptor form (desc[URc], other rows), 84 = GATHER4, 85 = 2CTA, 86-90 / 72-75 / 77-78 / 16-23 / 40-64 text-inert, 91 frame."
+    },
+    "3D": {
+     "and_base": "0x000000000801000000000000000005b4",
+     "count": null,
+     "fields": [
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "utmaldg-plain-dims-2026-11-06",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, extension of coldface's b3003 row): the plain `UTMALDG.<dim> [URa], [URb]` form (uniform guard [15:12], URa [39:32], URb [31:24]) with the dimension enum at [81:79]: 0 = 1D, 1 = 2D, 2 = 3D, 3 = 4D, 4 = 5D, 5-7 INVALID5/6/7; bit 76 = the descriptor form (desc[URc], other rows), 84 = GATHER4, 85 = 2CTA, 86-90 / 72-75 / 77-78 / 16-23 / 40-64 text-inert, 91 frame."
+    },
+    "4D": {
+     "and_base": "0x000000000801800000000000000005b4",
+     "count": null,
+     "fields": [
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "utmaldg-plain-dims-2026-11-06",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, extension of coldface's b3003 row): the plain `UTMALDG.<dim> [URa], [URb]` form (uniform guard [15:12], URa [39:32], URb [31:24]) with the dimension enum at [81:79]: 0 = 1D, 1 = 2D, 2 = 3D, 3 = 4D, 4 = 5D, 5-7 INVALID5/6/7; bit 76 = the descriptor form (desc[URc], other rows), 84 = GATHER4, 85 = 2CTA, 86-90 / 72-75 / 77-78 / 16-23 / 40-64 text-inert, 91 frame."
+    },
+    "5D": {
+     "and_base": "0x000000000802000000000000000005b4",
+     "count": null,
+     "fields": [
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3003-utmaldg-2026-11-05",
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000000000ffff00f000",
+     "_src": "utmaldg-plain-dims-2026-11-06",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, extension of coldface's b3003 row): the plain `UTMALDG.<dim> [URa], [URb]` form (uniform guard [15:12], URa [39:32], URb [31:24]) with the dimension enum at [81:79]: 0 = 1D, 1 = 2D, 2 = 3D, 3 = 4D, 4 = 5D, 5-7 INVALID5/6/7; bit 76 = the descriptor form (desc[URc], other rows), 84 = GATHER4, 85 = 2CTA, 86-90 / 72-75 / 77-78 / 16-23 / 40-64 text-inert, 91 frame."
     }
    },
    "operand_sig": "AURI_AURI",
