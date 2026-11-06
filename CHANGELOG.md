@@ -1,5 +1,42 @@
 # blackwell-isa Changelog
 
+## November 6, 2026 (session T-8): the LEA family rebuilt from measurement on the three tables, F2FP junk twins retired
+
+- **`sm120.json` / `sm103a.json` / `sm100a.json`: the `LEA` family rebuilt from measurement** (cubit
+  `tools/probes/re_sm120_lea.py`, nvdisasm 13.1 `-b SM120`; `-b SM103` / `-b SM100` text-identical for every
+  one of the 824 probe words per target; provenance `lea-family-2026-11-06`, test cubit
+  `tests/sm120_lea.rs`): `LEA[.HI][.X][.SX32] Rd, [Pd,] Ra, <b>, [Rc,] imm5 [, Pcin]` in its three operand
+  forms — 0x211 register, 0x811 imm32 [63:32], 0xc11 uniform register (frame bit 91) — × the six legal
+  modifier groups (bit 80 `.HI`, 74 `.X`, 73 `.SX32`, the latter legal only with `.HI`) × {a `Pd` token,
+  `PT` baked} = 36 rows on 24 keys `LEA_R_[P_]R_<b>[_R]_II[_P]`. Fields: guard [15:12], Rd [23:16], Pd
+  [83:81] (the vendor elides `PT`), Ra [31:24], Rb / URb [39:32], Rc [71:64] (printed by `.HI` without
+  `.SX32` only), imm5 [79:75], carry-in [89:87] + `!` 90 (printed by `.X` only); the sign bits 72 (Ra) and
+  63 (Rb / URb) are the arithmetic negation `-R` on the forms without `.X` and the **bitwise inverse `~R`
+  on the `.X` forms** (`inv` fields); the text-inert bits (Rc and the carry-in where not printed, 84-86,
+  92-95, the imm32 window on the register / UR forms) are baked at nvcc's values (Rc = RZ, carry-in
+  `!PT`, the rest clear — checked on the 26 372 LEA words of the production census) and stay outside the
+  mask (fail-closed). Before: 56 keys / 100 harvest rows on sm120 — dozens of `?` junk keys with one
+  sample's operands baked into `and_base` and fields at the wrong bit, the modifier bits neither in
+  `and_base` nor in the mask (the plain `LEA R4, R8, R10, 0x1` word decoded as `LEA.HI.X R4, R8, R10,
+  RZ, 0x1, PT`), the `.X` carry-in `, PT` dropped from the text, `~R12` printed as `-R12`; on sm103a /
+  sm100a coldface's B300-1 / B300-4 rows of 2026-11-05 (UR form) agree with the measurement field by
+  field except the sign glyph of the `.X` row (`neg` → `inv`) and are replaced by the family rows
+  together with the harvest rows next to them that shadowed their `Pd = PT` words. Keys sm120
+  16 097 → 16 065 (variants 26 663 → 26 599), sm103a / sm100a 14 906 → 14 912 (22 348 → 22 363).
+- **`sm120.json`: F2FP junk twins retired** (`blackwell-isa-internal tools/audit_fix_20261106.py`): the
+  keys `F2FP.BF16.F32.PACK_AB_R_R_R_?` and `F2FP.F16.F32.PACK_AB_R_R_R_?` (harvest counts 22 / 32, `Ra = RZ`
+  and the guard baked into `and_base`) — every word they claim decodes through the measured
+  `F2FP_R_R_R` PACK_AB rows with the same text — and the byte-identical duplicate group `TF32,F32,PACK_B`
+  of `F2FP_R_R` (`F32,PACK_B,TF32` stays). Keys 16 065 → 16 063, variants 26 599 → 26 596. The cubit
+  printer now prints the `UNPACK_B_MERGE_C` conversions in the vendor's order (`F2FP.E4M3.BF16.
+  UNPACK_B_MERGE_C`: source type first — 96 audit words).
+- **Dynamic-audit oracle corrected:** the 2026-11-04 nvdisasm record set behind the audit replays had
+  386 legal words marked as rejected through a scratch-file race in cubit's `tools/audit_dynamic.py`
+  (two rows probing the same word in parallel); re-measured on 2026-11-06 and the tool fixed. With the
+  corrected records and the LEA rebuild the audit stands at **255 rows** with at least one defect (418 on
+  the T-7 tables); rows without `_src` are 19 044 / 15 873 / 15 873 / 25 696 (sm120 / sm103a / sm100a /
+  sm121a). The three references regenerated at this revision.
+
 ## November 6, 2026 (session T-7): HADD2 register form, the `.EL` 64-bit twin, coldface's B300 rows reviewed, wave-11 provenance stamped, the references regenerated
 
 - **`sm120.json` / `sm103a.json` / `sm100a.json`: the 64-bit-base twin of the plain `.EL` atomic**
