@@ -1,6 +1,6 @@
 # blackwell-isa Changelog
 
-## SM120 `HADD2` register form rebuilt from measurement (November 6, 2026, session T-7)
+## November 6, 2026 (session T-7): HADD2 register form, the `.EL` 64-bit twin, coldface's B300 rows reviewed, wave-11 provenance stamped, the references regenerated
 
 - **`sm120.json` / `sm103a.json` / `sm100a.json`: the 64-bit-base twin of the plain `.EL` atomic**
   (`cubit tools/probes/re_sm120_atomg_el_aruri64.py`, nvdisasm 13.1, 74 form + 8 lattice words per target,
@@ -27,6 +27,31 @@
   `exl3-wave-m8` kernels were written with it) — the spelling is a cubit parser alias now, the table
   carries only the vendor's text.
 
+- **Wave-11 provenance stamped** (`afc8162`, author coldface, run by T-7 with its `stamp_provenance.py`): the
+  5 736 / 5 748 / 5 744 / 44 rows the integration added without a `_src` carry `wave11-atom-lattice-2026-11-05`
+  (the BUG-509 ATOM/ATOMG [63:60] lattice, 5 692 / 5 697 / 5 693 / 3) or `wave11-integration-2026-11-05`
+  (the lane-lineage rows of the merge, 44 / 51 / 51 / 41); zero bit changes (deep comparison), every tag's
+  `rows` recounted from the data (the tool had written the "added since bb11659" counts — 84 for the 160 SHF
+  rows). Rows without `_src` are now exactly the 2026-06..08 harvest: 19 140 / 15 892 / 15 892 / 25 696.
+- **coldface's B300 rows (sm103a / sm100a), re-measured by T-7 on nvdisasm 13.1 `-b SM103` / `SM100` /
+  `SM120` and taken:** `LEA_R_P_R_UR_R_II` / HI rebuilt (B300-1: guard [15:12], Pd [83:81], `-Ra` 72, `-URb`
+  63, imm [79:75], bit 0 = the LEA / IADD3 discriminator — 62 vendor IADD3 words had shadowed into the old
+  row and re-encoded as IADD.XOR); `LDG_R_dARI` / E,SM,STRONG,U16 gets the desc offset [63:40] signed
+  (B300-2a, sm100a + sm103a: 13 680 census words re-encoded with the offset zeroed); `LDGSTS_ARURI_ARI_P` /
+  128,BYPASS,E,LTC128B loses the phantom `sub_imm1_shr5` field (B300-2b: the imm is 12-bit signed at
+  [43:32], [87:85] are `.LU` / `.NA` and the predicate LSB) and its UR field is 8 bits (bit 72 is the LTC
+  size, T-7); `UTMALDG_AURI_AURI` / 2D reactivated with measured fields (B300-3: 70 census words of
+  libcublas.so.75); `IADD.XOR_R_P_R_UR_R` and `LEA.HI.X_R_P_R_UR_R_II_P` (B300-4). Hygiene on all of them:
+  per-row `_src`, and_base clear in the field spans, mask = field union. **Not taken:** coldface's
+  `IADD3.X_R_P_P_R_UR_R_P` — it baked the second carry-in predicate as a constant `!PT` and printed `-R` for
+  the inverted operands; measured, the vendor text carries two carry-in predicates (Pc [89:87] + negation 90,
+  Pd [79:77] + negation 80) with the `~` glyph — the harvest row `IADD3_R_P_P_R_UR_R_P_P` / X (count 20 864)
+  keeps both and gets its one repair, a 3-bit `pred@87` + `neg@90`, on **sm120 / sm103a / sm100a**
+  (`iadd3x-urform-carry-neg-2026-11-06`); the proposed retirement of that row is not applied.
+- **`UTMALDG` plain `[URa], [URb]` form, five dimensions on the three tables** (`utmaldg-plain-dims-2026-11-06`):
+  the enum [81:79] = 1D / 2D / 3D / 4D / 5D (5-7 INVALID); sm120 had no plain key — its dotted era keys
+  `UTMALDG.1D_AUR_AUR` / `UTMALDG.2D_AUR_AUR` shared one and_base without the dimension bits and are retired.
+- The four HTML references regenerated at these tables (`export_html.py`); README provenance paragraph.
 ## tcgen05 LDTM/STTM and SM120 SHF rebuilt from measurement; `stallfix` v4 (November 5, 2026, session T-5's measurement, landed by T-6 on the wave-11 tables)
 
 - **`sm100a.json` / `sm103a.json`: `LDTM_R_II` and `STTM_II_R` rebuilt** — 96 measured groups each
