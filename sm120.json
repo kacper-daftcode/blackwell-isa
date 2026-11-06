@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26562,
-   "rows_without_src": 18859,
+   "rows_total": 26580,
+   "rows_without_src": 18845,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -637,6 +637,13 @@
      "date": "2026-11-06",
      "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py + _t10d.py + _t10e.py",
      "test": "tests/sm120_audit_t10.rs"
+    },
+    "imma-family-2026-11-06": {
+     "rows": 32,
+     "kind": "nvdisasm 13.1 field probe (-b SM120)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_imma.py",
+     "test": "tests/sm120_imma.rs"
     }
    },
    "history": {
@@ -1136,7 +1143,12 @@
    "BRA.DIV_UR_II": "BRA_UR_II",
    "BRA.U_?_II": "BRA_II",
    "RET.REL.NODEC_R_II": "RET_R_II",
-   "RET.REL.NODEC_R": "RET_R_II"
+   "RET.REL.NODEC_R": "RET_R_II",
+   "IMMA.16816.S8.S8.SAT_R_R_R_R_?": "IMMA.16816.S8.S8.SAT_R_R_R_R",
+   "IMMA.16816.S8.S8.SAT_R_R_R_R_II_?": "IMMA.16816.S8.S8.SAT_R_R_R_R",
+   "IMMA.16816.S8.U8_P_R_R_R_R": "IMMA.16816.S8.U8_R_R_R_R",
+   "IMMA.16816.U8.S8_P_R_R_R_R": "IMMA.16816.U8.S8_R_R_R_R",
+   "IMMA.16816.U8.U8.SAT_P_R_R_R_R": "IMMA.16816.U8.U8.SAT_R_R_R_R"
   }
  },
  "instructions": {
@@ -628416,825 +628428,6 @@
     "stall_base": 10,
     "throughput": 2,
     "write_latency": 5
-   }
-  },
-  "IMMA.16816.S8.S8.SAT_R_R_R_R": {
-   "base_op": "IMMA.16816.S8.S8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004454000000000000007237",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 18,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 66,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000003fc000000fffffc0000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.S8.S8.SAT_R_R_R_R_?": {
-   "base_op": "IMMA.16816.S8.S8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004454040000004402047237",
-     "count": 4,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_R_R_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.S8.S8.SAT_R_R_R_R_II_?": {
-   "base_op": "IMMA.16816.S8.S8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004454040000004402047237",
-     "count": 2,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_R_R_II_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.S8.S8_R_R_R_R": {
-   "base_op": "IMMA.16816.S8.S8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x4054000000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000000000ff000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.S8.U8_P_R_R_R_R": {
-   "base_op": "IMMA.16816.S8.U8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004014ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 74,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "P_R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.S8.U8_R_R_R_R": {
-   "base_op": "IMMA.16816.S8.U8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004014ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 74,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.U8.S8_P_R_R_R_R": {
-   "base_op": "IMMA.16816.U8.S8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004044ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 74,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "P_R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.U8.S8_R_R_R_R": {
-   "base_op": "IMMA.16816.U8.S8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004044ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 74,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.U8.U8.SAT_P_R_R_R_R": {
-   "base_op": "IMMA.16816.U8.U8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004404ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "P_R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.U8.U8.SAT_R_R_R_R": {
-   "base_op": "IMMA.16816.U8.U8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000004404ff0000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x600000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16816.U8.U8_R_R_R_R": {
-   "base_op": "IMMA.16816.U8.U8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x4004000000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000000000ff000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16832.S8.S8.SAT_R_R_R_R": {
-   "base_op": "IMMA.16832.S8.S8.SAT",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000445c000000000000000237",
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 18,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 66,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00000000000003fc000000fffffc0000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16832.S8.S8_R_R_R_R": {
-   "base_op": "IMMA.16832.S8.S8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x405c000000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000000000ff000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
-   }
-  },
-  "IMMA.16832.U8.U8_R_R_R_R": {
-   "base_op": "IMMA.16832.U8.U8",
-   "ctrl_class": "imma",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x400c000000000000000237",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 64,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x1c000000000000ff000000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 16,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 30,
-    "pipe_name": "HMMA",
-    "ptxas_raw": null,
-    "read_latency": 16,
-    "stall_base": 4,
-    "throughput": 4,
-    "write_latency": 16
    }
   },
   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": {
@@ -2033382,6 +2032575,2422 @@
     }
    },
    "_src": "audit-fix-2026-11-06-t10"
+  },
+  "IMMA.16816.S8.S8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.S8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004054000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.S8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.S8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004054000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.S8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.S8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004454000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.S8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.S8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004454000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.U8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.U8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004014000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.U8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.U8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004014000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.U8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.U8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004414000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.S8.U8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.S8.U8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004414000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.S8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.S8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004044000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.S8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.S8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004044000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.S8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.S8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004444000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.S8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.S8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004444000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.U8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.U8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004004000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.U8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.U8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004004000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.U8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.U8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004404000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16816.U8.U8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16816.U8.U8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000004404000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.S8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.S8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000405c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.S8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.S8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000405c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.S8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.S8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000445c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.S8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.S8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000445c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.U8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.U8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000401c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.U8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.U8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000401c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.U8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.U8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000441c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.S8.U8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.S8.U8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000441c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.S8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.S8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000404c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.S8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.S8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000404c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.S8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.S8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000444c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.S8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.S8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000444c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.U8_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.U8_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000400c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.U8_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.U8_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000400c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.U8.SAT_R_R_R_R": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.U8.SAT_R_R_R_R",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000440c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000000000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
+  },
+  "IMMA.16832.U8.U8.SAT_R_R_R_R_UP": {
+   "base_op": "IMMA",
+   "operand_sig": ".16832.U8.U8.SAT_R_R_R_R_UP",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000440c000000000000000237",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "imma-family-2026-11-06"
+      },
+      {
+       "bits": 4,
+       "extraction": "pred_inv4",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "imma-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "imma-family-2026-11-06",
+     "_note": "dense IMMA (0x237) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_imma.py (session T-10, 2026-11-06): Rd [23:16], Ra [31:24] .ROW, Rb [39:32] .COL, Rc [71:64]; bit 86 dense frame, 75 shape (16832), 76 A = S8, 78 B = S8, 82 .SAT, 73 / 74 the only legal layouts (ROW / COL) baked; [89:87] + 90 the optional UP operand; 80, 81, 92-95 text-inert."
+    }
+   },
+   "_src": "imma-family-2026-11-06"
   }
  },
  "operand_roles": {
