@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26422,
-   "rows_without_src": 25689,
+   "rows_total": 26421,
+   "rows_without_src": 25685,
    "sources": {
     "ERR-194 port fleet b4fill4 (f2i38-ldef); silicon-verify nvdisasm SM121a 25/25 iter143": {
      "rows": 25,
@@ -413,6 +413,13 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_idp.py",
      "test": "tests/sm120_idp.rs"
+    },
+    "audit-fix-2026-11-06-t11": {
+     "rows": 3,
+     "kind": "harvest-row repairs asserted against nvdisasm 13.1 (-b SM120 / SM103 / SM100 / SM121)",
+     "date": "2026-11-06",
+     "tool": "T/t11/exc_apply.py (session scratch) + tools/probes/README.md",
+     "test": "tests/sm120_audit_t11.rs"
     }
    },
    "history": {
@@ -940,7 +947,8 @@
    "QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
    "QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
    "IDP.4A.S8.S8_R_R_R_R_?": "IDP.4A.S8.S8_R_R_R_R",
-   "IDP.4A.S8.S8_R_R_R_R_II_?": "IDP.4A.S8.S8_R_R_R_R"
+   "IDP.4A.S8.S8_R_R_R_R_II_?": "IDP.4A.S8.S8_R_R_R_R",
+   "FADD.SAT_R_R_R": "FADD_R_R_R"
   }
  },
  "instructions": {
@@ -600360,85 +600368,6 @@
       }
      ],
      "variable_mask": "0x040000000000c300c00000fffffff000"
-    }
-   },
-   "operand_sig": "R_R_R",
-   "scheduling": {
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "FADD.SAT_R_R_R": {
-   "base_op": "FADD.SAT",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff000221",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 73,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 62,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c00000000000300c00000ff00fff000"
     }
    },
    "operand_sig": "R_R_R",
@@ -1345258,9 +1345187,18 @@
        "extraction": "neg",
        "shift": 63,
        "token_idx": 3
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "audit-fix-2026-11-06-t11"
       }
      ],
-     "variable_mask": "0x1c0000000000f800800000ffffff0000"
+     "variable_mask": "0x1c0000000000f900800000ffffff0000",
+     "_src": "audit-fix-2026-11-06-t11",
+     "_note": "audit exception closed by measurement (nvdisasm 13.1, -b SM120 = SM103 = SM100 = SM121; T-11, 2026-11-06, T/t11/exc_probe.py): bit 72 = -URa (the first source; `ULEA UR0, -UR7, UR0, 0x1`), bit 63 = -URb as before"
     },
     "HI": {
      "and_base": "0xf8fc0ff0000000100007891",
@@ -1346333,7 +1346271,7 @@
    "mercury": [],
    "mod_groups": {
     "LUT": {
-     "and_base": "0xf8e00000000000000007892",
+     "and_base": "0x00000000080e00000000000000007892",
      "count": 42,
      "fields": [
       {
@@ -1346371,9 +1346309,25 @@
        "extraction": "reuse",
        "shift": 122,
        "token_idx": 2
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 87,
+       "token_idx": 6,
+       "_src": "audit-fix-2026-11-06-t11"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "audit-fix-2026-11-06-t11"
       }
      ],
-     "variable_mask": "0x1c0000000000ffffffffffffffff0000"
+     "variable_mask": "0x1c0000000780ffffffffffffffff0000",
+     "_src": "audit-fix-2026-11-06-t11",
+     "_note": "audit exception closed by measurement (nvdisasm 13.1, -b SM120 = SM103 = SM100 = SM121; T-11, 2026-11-06, T/t11/exc_probe.py): the source predicate [89:87] + its negation 90 are fields (the harvest row baked `!UPT`); the UP destination 7 stays baked (elided by the vendor)"
     }
    },
    "operand_sig": "UR_UR_II_UR_II_UP",
@@ -2059648,7 +2059602,19 @@
        "token_idx": 2
       }
      ],
-     "variable_mask": "0x14003e000000000000007fc000000000"
+     "variable_mask": "0x14003e000000000000007fc000000000",
+     "claim_forbid": [
+      {
+       "bits": 3,
+       "shift": 44,
+       "values": [
+        6,
+        7
+       ]
+      }
+     ],
+     "_src": "audit-fix-2026-11-06-t11",
+     "_note": "audit exception closed by measurement (nvdisasm 13.1, -b SM120 = SM103 = SM100 = SM121; T-11, 2026-11-06, T/t11/exc_probe.py): scoreboards SB0..SB5 exist; nvdisasm prints INVALID6 / INVALID7 for the field values 6 / 7"
     }
    },
    "operand_sig": "II_II",
