@@ -92,9 +92,11 @@ re-run from the build host — they are **not** re-verified at this revision):
   host `cold-face-bounces-fin-02`** (cubit 0fdd91a, `sm103a.json` / `sm100a.json` at 77a3dfa): the
   publish corpus holds 328 cubins today — 177 / 177 SM103a and 151 / 151 SM100a cubins byte-identical
   through `cubit disassemble --frozen` → `asm -T` (104 + 28 words carried as `__raw__`); the strict
-  semantic round trip (no raw words) stands at 85 646 / 85 792 words, the refused words being
-  fail-closed refusals of silicon-unsafe forms (BUG-080 guarded ATOMS, BUG-004) plus 13 re-encode
-  mismatches (cubit `docs/KNOWN_ISSUES.md` V1).
+  semantic round trip (no raw words) stood at 85 646 / 85 792 words and **stands at 85 656 / 85 792
+  since the LDTM / STTM lane rebuild (third pass at cubit `52767f9`, 2026-11-06: 77 548 / 77 656 SM103a,
+  8 108 / 8 136 SM100a, 240 / 328 cubins strict-exact)**, the refused words being fail-closed refusals of
+  silicon-unsafe forms (BUG-080 guarded ATOMS, BUG-004) plus 3 re-encode residues of text-inert bits
+  (`UMOV URd, 0x0` with a reuse bit ×2, `I2F.S16` bit 74; cubit `docs/KNOWN_ISSUES.md` V1, V5).
 - SM100a (as of 2026-08-26): decoder/encoder replay over an archived sm_100 corpus (1 134 cubins,
   20 024 512 instructions, cuBLAS/cuBLASLt/cuSOLVER/cuSPARSE/curand + probes): 99.92 % EXACT-minus-sched.
   **Re-run 2026-11-03 on `cold-face-bounces-fin-02` with the archive's own tool: 99.924 %**
@@ -144,7 +146,7 @@ sm120.json
 ├── pipeline_config          # resource defaults, latency tables, per-opcode records
 ├── operand_roles            # operand read/write roles per base_op (liveness passes)
 └── stallfix                 # measured stall floors for cubit's `stallfix` pass
-                             #   sm103a.json: v2 (B300, 2026-08-22); sm120.json: v3 (RTX PRO 6000, 2026-11-03)
+                             #   sm103a.json: v2 (B300, 2026-08-22); sm120.json: v4 (RTX PRO 6000, 2026-11-03/05)
 ```
 
 A typical encoding entry:
