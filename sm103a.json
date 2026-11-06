@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22344,
-   "rows_without_src": 15898,
+   "rows_without_src": 15897,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -315,6 +315,13 @@
      "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
      "test": "tests/b3004_lea_x_family.rs",
      "rows": 0
+    },
+    "iadd3x-urform-carry-neg-2026-11-06": {
+     "rows": 1,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-06",
+     "tool": "T/t7/review (session T-7, review of B300-4)",
+     "test": "tests/sm120_iadd3x_carry_neg.rs"
     }
    },
    "history": {
@@ -432462,8 +432469,8 @@
        "token_idx": 6
       },
       {
-       "_src": "2aE",
-       "bits": 4,
+       "_src": "iadd3x-urform-carry-neg-2026-11-06",
+       "bits": 3,
        "extraction": "pred",
        "shift": 87,
        "token_idx": 7
@@ -432481,9 +432488,18 @@
        "extraction": "neg",
        "shift": 80,
        "token_idx": 8
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "iadd3x-urform-carry-neg-2026-11-06"
       }
      ],
-     "variable_mask": "0x17f03e0003ffe9ff8000003ffffff000"
+     "variable_mask": "0x17f03e0007ffe9ff8000003ffffff000",
+     "_src": "iadd3x-urform-carry-neg-2026-11-06",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, review of coldface's B300-4): `IADD3.X Rd, Pa, Pb, Ra, URb, Rc, Pc, Pd` -- the first carry-in Pc is pred [89:87] with its negation at bit 90 (the harvest row had a 4-bit field swallowing the negation and printed P8..P15), the second carry-in Pd is pred [79:77] with its negation at bit 80 (variable, not a constant `!PT`); ~Ra 72, ~URb 63, ~Rc 75; bits 73, 92-95 text-inert, bit 76 = IADD.X.XOR on sm103a/sm100a (another row), bit 91 frame. Row otherwise the harvest row (count kept)."
     }
    },
    "operand_sig": "R_P_P_R_UR_R_P_P",

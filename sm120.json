@@ -111,7 +111,7 @@
      "test": "tests/bug224_syncs_cctl_sm120.rs"
     },
     "bug226-2026-08-27": {
-     "rows": 4,
+     "rows": 3,
      "kind": "encoder fix wave (cubit BUG-226)",
      "date": "2026-08-27",
      "test": "tests/bug226_fsetp_iadd3_parity.rs"
@@ -588,6 +588,13 @@
      "tool": "pubwave/wave11/merge_tables.py + remote/probe_run.py",
      "test": "tests/bug195_atom_scope_width.rs, tests/bug199_atom_lane.rs",
      "rows": 5692
+    },
+    "iadd3x-urform-carry-neg-2026-11-06": {
+     "rows": 1,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-06",
+     "tool": "T/t7/review (session T-7, review of B300-4)",
+     "test": "tests/sm120_iadd3x_carry_neg.rs"
     }
    },
    "history": {
@@ -624992,7 +624999,7 @@
     },
     "X": {
      "_evidence": "donor-clone sm100a; graft arb226 x{100a,120a}: IADD3 6op law P1@81/P2@84, neg@72/63/75, b74=.X toggle, X-form inv classes + tail preds (@87+neg@90, @77+neg@80); truth226.json 3,397 witness words",
-     "_src": "bug226-2026-08-27",
+     "_src": "iadd3x-urform-carry-neg-2026-11-06",
      "and_base": "0x00000000080004000000000000000c10",
      "count": 20864,
      "fields": [
@@ -625080,8 +625087,8 @@
        "token_idx": 6
       },
       {
-       "_src": "2aE",
-       "bits": 4,
+       "_src": "iadd3x-urform-carry-neg-2026-11-06",
+       "bits": 3,
        "extraction": "pred",
        "shift": 87,
        "token_idx": 7
@@ -625099,9 +625106,17 @@
        "extraction": "neg",
        "shift": 80,
        "token_idx": 8
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "iadd3x-urform-carry-neg-2026-11-06"
       }
      ],
-     "variable_mask": "0x17f03e0003ffe9ff8000003ffffff000"
+     "variable_mask": "0x17f03e0007ffe9ff8000003ffffff000",
+     "_note": "nvdisasm 13.1 -b SM120 / SM103 / SM100 (session T-7, 2026-11-06, review of coldface's B300-4): `IADD3.X Rd, Pa, Pb, Ra, URb, Rc, Pc, Pd` -- the first carry-in Pc is pred [89:87] with its negation at bit 90 (the harvest row had a 4-bit field swallowing the negation and printed P8..P15), the second carry-in Pd is pred [79:77] with its negation at bit 80 (variable, not a constant `!PT`); ~Ra 72, ~URb 63, ~Rc 75; bits 73, 92-95 text-inert, bit 76 = IADD.X.XOR on sm103a/sm100a (another row), bit 91 frame. Row otherwise the harvest row (count kept)."
     }
    },
    "operand_sig": "R_P_P_R_UR_R_P_P",
