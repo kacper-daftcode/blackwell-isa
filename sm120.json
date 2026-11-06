@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26451,
-   "rows_without_src": 16918,
+   "rows_total": 26442,
+   "rows_without_src": 16906,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -680,6 +680,20 @@
      "tool": "tools/probes/re_sm120_isetp.py",
      "test": "tests/sm120_isetp.rs"
     },
+    "fsetp-dsetp-family-2026-11-06": {
+     "rows": 432,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_fsetp_dsetp.py",
+     "test": "tests/sm120_fsetp_dsetp.rs"
+    },
+    "plop3-p2r-r2p-family-2026-11-06": {
+     "rows": 8,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_plop3_p2r_r2p.py",
+     "test": "tests/sm120_plop3_p2r_r2p.rs"
+    },
     "qmma-sf-opcode-bit2-silicon-2026-11-06": {
      "rows": 1,
      "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
@@ -687,13 +701,6 @@
      "nvdisasm_sm120": "no text",
      "silicon": "RTX PRO 6000 Blackwell Server Edition (sm_120), test host GPU 0, 2026-11-06 22:3x-22:4xZ (session R): the 0x47e word executes on one warp without a fault and writes fp32 \u2014 an E8M0 scale of 0xff yields NaN on every element, doubling scale A doubles the result; on identical operands (A = 0x38, B = 0x40, scales 1.0) the documented QMMA.SF E4M3.E4M3 gives 64.0, E2M1.E2M1 0.0, this word 28.0 (A = B = 0x38: 32.0 / 512.0 / 24.5; A = 0x44, B = 0x3c: 144.0 / -96.0 / 31.875): a dense block-scaled MMA over some other input element type, unidentified. Replaces the 2026-03-26 hypothesis row IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR (no numerical oracle; its operand model disagreed with the family). Probe kernels and host driver: the coordination record of 2026-11-06 (R/immasf).",
      "note": "The element types are the open question (one-hot inputs per position against the 4- and 6-bit candidates, ~1 h with the same harness)."
-    },
-    "fsetp-dsetp-family-2026-11-06": {
-     "rows": 432,
-     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100)",
-     "date": "2026-11-06",
-     "tool": "tools/probes/re_sm120_fsetp_dsetp.py",
-     "test": "tests/sm120_fsetp_dsetp.rs"
     }
    },
    "history": {
@@ -1183,7 +1190,7 @@
    "HMMA.1688.F16_P5_R_R_R_R": "HMMA.1688.F16_R_R_R_R",
    "IADD_P0_R_R_II": "IADD_R_R_II",
    "MOV_P0_R_II": "MOV_R_II",
-   "PLOP3.LUT_P1_P_P_P_P_P_II_II": "PLOP3.LUT_P_P_P_P_P_II_II",
+   "PLOP3.LUT_P1_P_P_P_P_P_II_II": "PLOP3_P_P_P_P_P_II_II",
    "QMMA.16816.F16.E4M3.E4M3_P0_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
    "QMMA.16816.F16.E4M3.E4M3_P2_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
    "QMMA.16816.F16.E4M3.E4M3_P5_R_R_R_R": "QMMA.16816.F16.E4M3.E4M3_R_R_R_R",
@@ -1203,7 +1210,6 @@
    "HSETP2.GEU.AND_P_P_R_R_P": "HSETP2_P_P_R_R_P",
    "HSETP2.GEU.AND_P_P_R_R_R": "HSETP2_P_P_R_R_P",
    "HSETP2.GEU.AND_P_P_R_UR_UR": "HSETP2_P_P_R_UR_P",
-   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR",
    "FSETP.GE.FTZ.AND_P_P_R_R_R": "FSETP_P_P_R_R_P",
    "FSETP.NAN.FTZ.AND_P_P_R_R_R": "FSETP_P_P_R_R_P",
    "FSETP.GEU.AND_P_P_R_UR_UR": "FSETP_P_P_R_UR_P",
@@ -1214,7 +1220,18 @@
    "FSETP.NEU.OR_P_P_R_R_P_?": "FSETP_P_P_R_R_P",
    "FSETP_P_P_II_II_P": "FSETP_P_P_R_FI_P",
    "FSETP_P_P_II_R_P": "FSETP_P_P_R_R_P",
-   "FSETP_P_P_R_II_P": "FSETP_P_P_R_FI_P"
+   "FSETP_P_P_R_II_P": "FSETP_P_P_R_FI_P",
+   "PLOP3.LUT_P_P_P_P_P_II_II": "PLOP3_P_P_P_P_P_II_II",
+   "P2R.B1_R_R_R_II": "P2R_R_II_R_II",
+   "P2R_R_L_R_II": "P2R_R_II_R_II",
+   "P2R_R_R_R_II": "P2R_R_II_R_II",
+   "P2R_R_R_R_II_II": "P2R_R_II_R_II",
+   "P2R_R_R_R_II_II_?": "P2R_R_II_R_II",
+   "P2R_R_R_R_II_II_II_?": "P2R_R_II_R_II",
+   "P2R_R_R_R_II_II_II_II_?": "P2R_R_II_R_II",
+   "R2P_?_R_II": "R2P_II_R_II",
+   "R2P_L_R_II": "R2P_II_R_II",
+   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR"
   }
  },
  "instructions": {
@@ -695700,494 +695717,10 @@
    },
    "_semantic_re": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22"
   },
-  "P2R.B1_R_R_R_II": {
-   "base_op": "P2R.B1",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000010000000000e00007803",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 25,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x000000000000000000000001fffe0000"
-    }
-   },
-   "operand_sig": "R_R_R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_L_R_II": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000001ff007803",
-     "count": 6,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c000000000000000000000000ff0000"
-    }
-   },
-   "operand_sig": "R_L_R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_R_R_II": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff007803",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 7,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000007f00ff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_R_R_II_II": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff007803",
-     "count": 28,
-     "fields": [
-      {
-       "bits": 7,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000007f00ff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_R_R_II_II_?": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff007803",
-     "count": 10,
-     "fields": [
-      {
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000003f00ff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_R_R_II_II_II_?": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff007803",
-     "count": 7,
-     "fields": [
-      {
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000003f00ff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II_II_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "P2R_R_R_R_II_II_II_II_?": {
-   "base_op": "P2R",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000fe007803",
-     "count": 3,
-     "fields": [
-      {
-       "bits": 6,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 17,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x00000000000000000000003f01fe0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II_II_II_?",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
-  },
-  "PLOP3.LUT_P_P_P_P_P_II_II": {
-   "base_op": "PLOP3.LUT",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x0000000000000000000000000000081c",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 84,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 3
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 80,
-       "token_idx": 4
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 77,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 71,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 68,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 64,
-       "token_idx": 6
-      },
-      {
-       "bits": 5,
-       "extraction": "imm_shr3",
-       "shift": 72,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 16,
-       "token_idx": 7
-      }
-     ],
-     "variable_mask": "0x1c00000007fffff70000000000fff000"
-    }
-   },
-   "operand_sig": "P_P_P_P_P_II_II",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "PLOP3",
-      "opcode_id": 124,
-      "pipe_name": "MMA_SETUP",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "PLOP3 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "INT_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "PLOP3_P_P_P_P_P_II_II": {
    "base_op": "PLOP3",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "LUT": {
-     "and_base": "0x0000000000000000000000000000081c",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 84,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 90,
-       "token_idx": 3
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 80,
-       "token_idx": 4
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 77,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 71,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 68,
-       "token_idx": 5
-      },
-      {
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 64,
-       "token_idx": 6
-      },
-      {
-       "bits": 5,
-       "extraction": "imm_shr3",
-       "shift": 72,
-       "token_idx": 6
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 16,
-       "token_idx": 7
-      }
-     ],
-     "variable_mask": "0x1c00000007fffff70000000000fff000"
-    }
-   },
    "operand_sig": "P_P_P_P_P_II_II",
    "scheduling": {
     "_all_entries": [
@@ -696218,69 +695751,108 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "mod_groups": {
+    "LUT": {
+     "and_base": "0x0000000000000000000000000000081c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 77,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 80,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 68,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 71,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "imm",
+       "shift": 64,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm_shr3",
+       "shift": 72,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm",
+       "shift": 16,
+       "token_idx": 7,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0000000007fffff70000000000fff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "PLOP3_P_P_P_P_UP_II_II": {
    "base_op": "PLOP3",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "LUT": {
-     "and_base": "0x0000000000700008000000000000081c",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 16,
-       "token_idx": 7
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 68,
-       "token_idx": 5
-      },
-      {
-       "bits": 5,
-       "extraction": "imm_shr3",
-       "shift": 72,
-       "token_idx": 6
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 77,
-       "token_idx": 4
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 1
-      },
-      {
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 3
-      },
-      {
-       "_src": "bug169-2026-08-25",
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 64,
-       "token_idx": 6
-      }
-     ],
-     "variable_mask": "0x1ffffe00038eff700000000000fff000"
-    }
-   },
    "operand_sig": "P_P_P_P_UP_II_II",
    "scheduling": {
     "_all_entries": [
@@ -696311,7 +695883,103 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "mod_groups": {
+    "LUT": {
+     "and_base": "0x0000000000000008000000000000081c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 77,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 80,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 68,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 71,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "imm",
+       "shift": 64,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm_shr3",
+       "shift": 72,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm",
+       "shift": 16,
+       "token_idx": 7,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0000000007fffff70000000000fff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "POPC_R_R": {
    "base_op": "POPC",
@@ -725698,95 +725366,6 @@
     "throughput": 4,
     "write_latency": 16
    }
-  },
-  "R2P_?_R_II": {
-   "base_op": "R2P",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000010000000006002007804",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 26,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x000000000000200000000003fc000000"
-    }
-   },
-   "operand_sig": "?_R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "R2P_L_R_II": {
-   "base_op": "R2P",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000007804",
-     "count": 5,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 2,
-       "extraction": "byte_sel",
-       "shift": 76,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c00000000003000ffffffffff000000"
-    }
-   },
-   "operand_sig": "L_R_II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 37,
-    "pipe_name": "INT_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   },
-   "encode_only": true
   },
   "R2UR_UR_R": {
    "base_op": "R2UR",
@@ -1973290,184 +1972869,6 @@
    "base_op": "P2R",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000803",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0400000000000000000000fffffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "PR is the fixed predicate-file source token; Rd[23:16], source R[31:24], maskimm8[39:32]. Both register and mask sweeps cover 0..255."
-    },
-    "B1": {
-     "and_base": "0x00000000000010000000000000000803",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0400000000000000000000fffffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "PR is the fixed predicate-file source token; Rd[23:16], source R[31:24], maskimm8[39:32]. Both register and mask sweeps cover 0..255. Opcode .B1/.B2/.B3 selects byte via bits[77:76], independently bit-probed."
-    },
-    "B2": {
-     "and_base": "0x00000000000020000000000000000803",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0400000000000000000000fffffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "PR is the fixed predicate-file source token; Rd[23:16], source R[31:24], maskimm8[39:32]. Both register and mask sweeps cover 0..255. Opcode .B1/.B2/.B3 selects byte via bits[77:76], independently bit-probed."
-    },
-    "B3": {
-     "and_base": "0x00000000000030000000000000000803",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0400000000000000000000fffffff000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "PR is the fixed predicate-file source token; Rd[23:16], source R[31:24], maskimm8[39:32]. Both register and mask sweeps cover 0..255. Opcode .B1/.B2/.B3 selects byte via bits[77:76], independently bit-probed."
-    }
-   },
    "operand_sig": "R_II_R_II",
    "scheduling": {
     "confidence": "synthetic",
@@ -1973482,7 +1972883,186 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000000000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B1": {
+     "and_base": "0x00000000000010000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B2": {
+     "and_base": "0x00000000000020000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B3": {
+     "and_base": "0x00000000000030000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "ENDCOLLECTIVE_P": {
    "base_op": "ENDCOLLECTIVE",
@@ -1983131,52 +1982711,6 @@
    "base_op": "R2P",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000804",
-     "count": null,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 2,
-       "extraction": "byte_sel",
-       "shift": 76,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2,
-       "_src": "dsv41-sm120-2026-10-22"
-      }
-     ],
-     "variable_mask": "0x0400000000003000ffffffffff00f000",
-     "_src": "dsv41-sm120-2026-10-22",
-     "_note": "NVIDIA13.1 R2PfirstoperandisliteralPR; sourceR8@24/mask32@32/sourcebyte_selector2@76."
-    }
-   },
    "operand_sig": "II_R_II",
    "scheduling": {
     "confidence": "synthetic",
@@ -1983191,7 +1982725,54 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
-   }
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000000000000000000000804",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "byte_sel",
+       "shift": 76,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000003000ffffffffff00f000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "FFMA_R_R_II_R": {
    "_bug226c": {
@@ -2042002,6 +2041583,67 @@
     }
    },
    "_src": "idp-family-2026-11-06"
+  },
+  "R2P_II_R": {
+   "base_op": "R2P",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "operand_sig": "II_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 37,
+    "pipe_name": "INT_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "encode_only": true,
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000000000000000ff00000804",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "byte_sel",
+       "shift": 76,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x040000000000300000000000ff00f000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR": {
    "base_op": "QMMA.SF.16832.F32.UNIDENTIFIED.E8",
