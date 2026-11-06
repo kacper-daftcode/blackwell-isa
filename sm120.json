@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26612,
+   "rows_total": 26611,
    "rows_without_src": 19025,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
@@ -201750,70 +201750,6 @@
       }
      ],
      "variable_mask": "0xe0a000000010f00000c0300000000"
-    },
-    "EXCH": {
-     "_src": "f2-181",
-     "and_base": "0x000000000c0000040000000c1210798c",
-     "count": 1,
-     "fields": [
-      {
-       "_src": "f2-181",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "f2-181",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "f2-181",
-       "bits": 8,
-       "extraction": "sub_r0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
-       "bits": 24,
-       "extraction": "sub_imm1",
-       "shift": 40,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 64,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "f2-181",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "f2-181",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c000000037003fffffffffffffff000"
     },
     "MAX,S32": {
      "and_base": "0x000000000900020000000000ffff098c",
