@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26658,
+   "rows_total": 26660,
    "rows_without_src": 24878,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
@@ -574,6 +574,13 @@
      "date": "2026-11-06",
      "tool": "tools/probes/re_sm120_hadd2_sel.py",
      "test": "tests/bug484_hadd2_h1h1a_spelling.rs"
+    },
+    "atomg-el-aruri64-2026-11-06": {
+     "rows": 2,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_atomg_el_aruri64.py",
+     "test": "tests/sm120_atomg_el_aruri64.rs"
     }
    },
    "history": {
@@ -2036387,6 +2036394,220 @@
     "stall_base": 4,
     "throughput": 2,
     "write_latency": 0
+   }
+  },
+  "ATOMG.E.ADD.EL.STRONG.GPU_P_R_ARURI64_R": {
+   "_o2_fleet": "fleet-add per O2 2026-08-25 (cubit errata series)",
+   "base_op": "ATOMG.E.ADD.EL.STRONG.GPU",
+   "ctrl_class": "atomg",
+   "mercury": [],
+   "operand_sig": "P_R_ARURI64_R",
+   "scheduling": {
+    "_all_entries": [
+     {
+      "name": "ATOMG",
+      "opcode_id": 1,
+      "pipe_name": "INT_ARITH",
+      "read_latency": 0,
+      "write_latency": 0
+     },
+     {
+      "name": "ATOMG (synthetic)",
+      "opcode_id": null,
+      "pipe_name": "MEMORY",
+      "read_latency": 200,
+      "write_latency": 200
+     }
+    ],
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 200
+   },
+   "_src": "atomg-el-aruri64-2026-11-06",
+   "mod_groups": {
+    "ADD,E,EL,GPU,STRONG": {
+     "and_base": "0x000000000820e10080000000000009a8",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 23,
+       "extraction": "imm",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000e00ff7ffffffffffff000",
+     "_src": "atomg-el-aruri64-2026-11-06",
+     "_note": "nvdisasm 13.1 (-b SM120; -b SM103 / -b SM100 text-identical), tools/probes/re_sm120_atomg_el_aruri64.py: the 64-bit-base twin of the plain uniform-indexed .EL atomic, `ATOMG.E.<op>.EL.STRONG.GPU Pd, Rd, [Ra.64+URb(+off)], Rb`: the fields of the U32 row (guard [15:12], Pd [83:81], Rd [23:16], Ra [31:24], Rb [39:32], URb [71:64] 8 bits, offset [62:40] signed 23-bit) with the width bit 63 SET in and_base; bit 76 (the descriptor form, legal only with bit 63 = the ATOMG_P_R_dARI_R rows) is claim_forbid. Base 255 prints the degenerate `???255.64` glyph like the REDG twin (BUG-461) and stays a text-faithful decode only.",
+     "claim_forbid": [
+      {
+       "bits": 1,
+       "shift": 76,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "ATOMG.E.OR.EL.STRONG.GPU_P_R_ARURI64_R": {
+   "_o2_fleet": "fleet-add per O2 2026-08-25 (cubit errata series)",
+   "base_op": "ATOMG.E.OR.EL.STRONG.GPU",
+   "ctrl_class": "atomg",
+   "mercury": [],
+   "operand_sig": "P_R_ARURI64_R",
+   "scheduling": {
+    "_all_entries": [
+     {
+      "name": "ATOMG",
+      "opcode_id": 1,
+      "pipe_name": "INT_ARITH",
+      "read_latency": 0,
+      "write_latency": 0
+     },
+     {
+      "name": "ATOMG (synthetic)",
+      "opcode_id": null,
+      "pipe_name": "MEMORY",
+      "read_latency": 200,
+      "write_latency": 200
+     }
+    ],
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 200
+   },
+   "_src": "atomg-el-aruri64-2026-11-06",
+   "mod_groups": {
+    "E,EL,GPU,OR,STRONG": {
+     "and_base": "0x000000000b20e10080000000000009a8",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 23,
+       "extraction": "imm",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "atomg-el-aruri64-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x00000000000e00ff7ffffffffffff000",
+     "_src": "atomg-el-aruri64-2026-11-06",
+     "_note": "nvdisasm 13.1 (-b SM120; -b SM103 / -b SM100 text-identical), tools/probes/re_sm120_atomg_el_aruri64.py: the 64-bit-base twin of the plain uniform-indexed .EL atomic, `ATOMG.E.<op>.EL.STRONG.GPU Pd, Rd, [Ra.64+URb(+off)], Rb`: the fields of the U32 row (guard [15:12], Pd [83:81], Rd [23:16], Ra [31:24], Rb [39:32], URb [71:64] 8 bits, offset [62:40] signed 23-bit) with the width bit 63 SET in and_base; bit 76 (the descriptor form, legal only with bit 63 = the ATOMG_P_R_dARI_R rows) is claim_forbid. Base 255 prints the degenerate `???255.64` glyph like the REDG twin (BUG-461) and stays a text-faithful decode only.",
+     "claim_forbid": [
+      {
+       "bits": 1,
+       "shift": 76,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
    }
   }
  },
