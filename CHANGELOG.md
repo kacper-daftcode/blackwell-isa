@@ -2,6 +2,14 @@
 
 ## SM120 `HADD2` register form rebuilt from measurement (November 6, 2026, session T-7)
 
+- **`sm120.json` / `sm103a.json` / `sm100a.json`: the 64-bit-base twin of the plain `.EL` atomic**
+  (`cubit tools/probes/re_sm120_atomg_el_aruri64.py`, nvdisasm 13.1, 74 form + 8 lattice words per target,
+  text-identical on the three; provenance `atomg-el-aruri64-2026-11-06`): `ATOMG.E.{ADD,OR}.EL.STRONG.GPU
+  Pd, Rd, [Ra.64+URb(+off)], Rb` — the fields of the 2026-11-05 U32 rows (guard [15:12], Pd [83:81], Rd
+  [23:16], Ra [31:24], Rb [39:32], URb [71:64], offset [62:40] signed 23-bit) with the width bit 63 set,
+  bit 76 (the descriptor rows) excluded; base 255 prints the degenerate `???255.64` glyph like the REDG
+  twin. The U32 rows exclude bit 63 since 2026-11-05, so these words had no row (the four `[R8.64+UR7]`
+  decode misses of cubit's dynamic audit). Keys +2 per table.
 - **`sm120.json`: `HADD2_R_R_R` carries 12 measured groups** (`cubit tools/probes/re_sm120_hadd2_sel.py`,
   nvdisasm 13.1 `-b SM120`, 189 form + 28 lattice words; provenance `hadd2-rrr-sm120-2026-11-06`):
   `HADD2[.F32|.BF16_V2][.FTZ][.SAT] Rd, Ra, Rb` with the fp16 half-selectors Ra [75:74] / Rb [61:60]
