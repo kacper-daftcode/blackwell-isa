@@ -1,5 +1,24 @@
 # blackwell-isa Changelog
 
+## SM120 `HADD2` register form rebuilt from measurement (November 6, 2026, session T-7)
+
+- **`sm120.json`: `HADD2_R_R_R` carries 12 measured groups** (`cubit tools/probes/re_sm120_hadd2_sel.py`,
+  nvdisasm 13.1 `-b SM120`, 189 form + 28 lattice words; provenance `hadd2-rrr-sm120-2026-11-06`):
+  `HADD2[.F32|.BF16_V2][.FTZ][.SAT] Rd, Ra, Rb` with the fp16 half-selectors Ra [75:74] / Rb [61:60]
+  (0 natural, 2 `.H0_H0`, 3 `.H1_H1`; code 1 = nvdisasm `INVALID1`, outside the rows), `-Ra` 72, `|Ra|` 73
+  (text-inert under `.F32`, not a field there), `-Rb` 63, `|Rb|` 62, `.SAT` 77, `.F32` 78, `.FTZ` 80,
+  `.BF16_V2` 85 (`.F32` + `.BF16_V2` illegal), bit 91 illegal, every other bit of [64:96) text-inert.
+  Before: the plain group had no `|Ra|` / `|Rb|` fields, `BF16_V2` no sign fields at all, and the `F32`
+  group was a harvest sample with `-Ra`, `Rd = RZ` and `Rb.H0_H0` baked into `and_base`; a word with
+  `|R5|` fell to the junk row `HADD2_R_R_II_II_II_II_?` and printed `HADD2 R9, R2, 0x7000, 0x5, 0, 0,
+  UR0`. Removed: the dotted twins `HADD2.F32_R_R_R`, `HADD2.BF16_V2_R_R_R` (their words are the plain
+  key's groups) and the register-opcode junk rows `HADD2_R_R_R_R`, `HADD2_R_R_R_II_?`,
+  `HADD2_R_R_R_II_II_?`, `HADD2_R_R_II`, `HADD2_R_R_II_II_II_II_?`. Keys 16 103 → 16 096, variants
+  26 656 → 26 658. Found while measuring the form behind cubit's legacy input spelling `HADD2.H1H1A`
+  (cubit BUG-484: the 2026-08-08 mnemonic-suffix row `8f773da`, retired at the O2 cut; the production
+  `exl3-wave-m8` kernels were written with it) — the spelling is a cubit parser alias now, the table
+  carries only the vendor's text.
+
 ## tcgen05 LDTM/STTM and SM120 SHF rebuilt from measurement; `stallfix` v4 (November 5, 2026, session T-5's measurement, landed by T-6 on the wave-11 tables)
 
 - **`sm100a.json` / `sm103a.json`: `LDTM_R_II` and `STTM_II_R` rebuilt** — 96 measured groups each

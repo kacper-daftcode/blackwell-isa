@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26656,
-   "rows_without_src": 24885,
+   "rows_total": 26658,
+   "rows_without_src": 24878,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -567,6 +567,13 @@
      "date": "2026-11-05",
      "tool": "tools/probes/re_sm120_shf.py",
      "test": "tests/sm120_shf.rs"
+    },
+    "hadd2-rrr-sm120-2026-11-06": {
+     "rows": 12,
+     "kind": "nvdisasm 13.1 field probe",
+     "date": "2026-11-06",
+     "tool": "tools/probes/re_sm120_hadd2_sel.py",
+     "test": "tests/bug484_hadd2_h1h1a_spelling.rs"
     }
    },
    "history": {
@@ -500305,83 +500312,6 @@
    },
    "_semantic_re": "SM120 float RE 2026-10-22: NVIDIA mode grids and independent operand fields"
   },
-  "HADD2.BF16_V2_R_R_R": {
-   "base_op": "HADD2.BF16",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000002008002000000000000230",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x0000000000000000000000ffffff7000"
-    }
-   },
-   "operand_sig": "V2_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "HADD2.F32_R_?_?_II_?": {
    "base_op": "HADD2.F32",
    "ctrl_class": "alu_simple",
@@ -500395,108 +500325,6 @@
     }
    },
    "operand_sig": "R_?_?_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "HADD2.F32_R_R_R": {
-   "base_op": "HADD2.F32",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff000230",
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 74,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 60,
-       "token_idx": 3,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 123,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x1c00000000000d00b00000ff00fff000"
-    }
-   },
-   "operand_sig": "R_R_R",
    "scheduling": {
     "_all_entries": [
      {
@@ -501397,78 +501225,6 @@
     "write_latency": 0
    }
   },
-  "HADD2_R_R_II": {
-   "_o2_fleet": "fleet-add per O2 2026-08-25 (pin:encoding.rs)",
-   "base_op": "HADD2",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000007230",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x0000000000000800200000ffffff0000"
-    }
-   },
-   "operand_sig": "R_R_II",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "HADD2_R_R_II_?": {
    "base_op": "HADD2",
    "ctrl_class": "alu_simple",
@@ -501624,150 +501380,6 @@
     "write_latency": 0
    }
   },
-  "HADD2_R_R_II_II_II_II_?": {
-   "base_op": "HADD2",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000230",
-     "count": 1,
-     "fields": [
-      {
-       "bits": 1,
-       "extraction": "",
-       "shift": 85,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 78,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 80,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 77,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "",
-       "shift": 0,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "",
-       "shift": 2,
-       "token_idx": 0
-      },
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 72,
-       "token_idx": 0
-      },
-      {
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 74,
-       "token_idx": 2,
-       "_src": "bug261-2026-08-29"
-      },
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 73,
-       "token_idx": 2
-      },
-      {
-       "bits": 16,
-       "extraction": "imm",
-       "shift": 48,
-       "token_idx": 3
-      },
-      {
-       "bits": 16,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      }
-     ],
-     "variable_mask": "0x1c0000000021ff00fffffffffffff005"
-    }
-   },
-   "operand_sig": "R_R_II_II_II_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
   "HADD2_R_R_R": {
    "_discovery": {
     "hadd2_rrr_fix": {
@@ -501785,230 +501397,6 @@
    "base_op": "HADD2",
    "ctrl_class": "alu_simple",
    "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000000230",
-     "count": 1524,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 74,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 60,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x17f03e0000000d00b00000ff7f7ff000",
-     "_src": "bug241-2026-08-28",
-     "_evidence": {
-      "gold241_pre": "work/bug241/gold241_pre.json",
-      "arb": "work/bug241/arb241.json"
-     }
-    },
-    "BF16_V2": {
-     "and_base": "0x00000000002000000000000000000230",
-     "count": 2042,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 74,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 60,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x07f03e0000000c00300000ff7f7ff000",
-     "_src": "bug241-2026-08-28",
-     "_evidence": {
-      "gold241_pre": "work/bug241/gold241_pre.json",
-      "arb": "work/bug241/arb241.json"
-     }
-    },
-    "F32": {
-     "and_base": "0x000000000000410020000000ff000230",
-     "count": 4323,
-     "fields": [
-      {
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 32,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 63,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 124,
-       "token_idx": 3
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 60,
-       "token_idx": 3
-      },
-      {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "bug241-2026-08-28"
-      },
-      {
-       "bits": 2,
-       "extraction": "hsel",
-       "shift": 74,
-       "token_idx": 2,
-       "_src": "bug241-2026-08-28"
-      },
-      {
-       "bits": 1,
-       "extraction": "abs",
-       "shift": 62,
-       "token_idx": 3,
-       "_src": "bug241-2026-08-28"
-      }
-     ],
-     "variable_mask": "0x13f03e0000000d00d00000ff00fff000",
-     "_evidence": {
-      "gold241_pre": "work/bug241/gold241_pre.json",
-      "arb": "work/bug241/arb241.json"
-     },
-     "_src": "bug241-2026-08-28"
-    }
-   },
    "operand_sig": "R_R_R",
    "scheduling": {
     "_all_entries": [
@@ -502051,201 +501439,1098 @@
    "_bug241": {
     "date": "2026-08-28",
     "canonical-note": "mod_groups wholesale donor-law replacement + F32-law grafts (BUG-241); envelope kept"
-   }
-  },
-  "HADD2_R_R_R_II_?": {
-   "base_op": "HADD2",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
+   },
    "mod_groups": {
     "": {
-     "and_base": "0x00000000000008002000000100007230",
-     "count": 5,
+     "and_base": "0x00000000000000000000000000000230",
+     "count": null,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 33,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x0000000000000000000001feffff0000"
-    }
-   },
-   "operand_sig": "R_R_R_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "HADD2_R_R_R_II_II_?": {
-   "base_op": "HADD2",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000008002000000f12047230",
-     "count": 2,
-     "fields": [],
-     "variable_mask": "0x00000000000000000000000000000000"
-    }
-   },
-   "operand_sig": "R_R_R_II_II_?",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
-  },
-  "HADD2_R_R_R_R": {
-   "base_op": "HADD2",
-   "ctrl_class": "alu_simple",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000008002000000000007230",
-     "count": 32,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
       },
       {
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
       }
      ],
-     "variable_mask": "0x0000000000000000000000ffffff0000"
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R plain: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "SAT": {
+     "and_base": "0x00000000000020000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "FTZ": {
+     "and_base": "0x00000000000100000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R FTZ: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "FTZ,SAT": {
+     "and_base": "0x00000000000120000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R FTZ,SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "F32": {
+     "and_base": "0x00000000000040000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000d00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R F32: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73 (text-inert under .F32, not a field); Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "F32,SAT": {
+     "and_base": "0x00000000000060000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000d00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R F32,SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73 (text-inert under .F32, not a field); Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "F32,FTZ": {
+     "and_base": "0x00000000000140000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000d00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R F32,FTZ: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73 (text-inert under .F32, not a field); Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "F32,FTZ,SAT": {
+     "and_base": "0x00000000000160000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000d00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R F32,FTZ,SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73 (text-inert under .F32, not a field); Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "BF16_V2": {
+     "and_base": "0x00000000002000000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R BF16_V2: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "BF16_V2,SAT": {
+     "and_base": "0x00000000002020000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R BF16_V2,SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "BF16_V2,FTZ": {
+     "and_base": "0x00000000002100000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R BF16_V2,FTZ: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
+    },
+    "BF16_V2,FTZ,SAT": {
+     "and_base": "0x00000000002120000000000000000230",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "hsel",
+       "shift": 60,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "hadd2-rrr-sm120-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x1400000000000f00f00000fffffff000",
+     "_src": "hadd2-rrr-sm120-2026-11-06",
+     "_note": "HADD2 R_R_R BF16_V2,FTZ,SAT: measured with nvdisasm 13.1 -b SM120 (session T-7, 2026-11-06): Ra sel [75:74], -Ra 72, |Ra| 73; Rb sel [61:60], -Rb 63, |Rb| 62; SAT 77, F32 78, FTZ 80, BF16_V2 85; bit 91 illegal, the rest of [64:96) text-inert"
     }
    },
-   "operand_sig": "R_R_R_R",
-   "scheduling": {
-    "_all_entries": [
-     {
-      "name": "HADD2",
-      "opcode_id": 60,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2.F32",
-      "opcode_id": 61,
-      "pipe_name": "BARRIER",
-      "read_latency": 0,
-      "write_latency": 0
-     },
-     {
-      "name": "HADD2 (synthetic)",
-      "opcode_id": null,
-      "pipe_name": "FP_ARITH",
-      "read_latency": 4,
-      "write_latency": 0
-     }
-    ],
-    "confidence": "hw_measured",
-    "def_latency": 4,
-    "hw_def_latency": 4,
-    "is_variable_latency": false,
-    "latency_source": "hw_measured",
-    "opcode_id": null,
-    "pipe_class": 36,
-    "pipe_name": "FP_ARITH",
-    "ptxas_raw": null,
-    "read_latency": 4,
-    "stall_base": 4,
-    "throughput": 2,
-    "write_latency": 0
-   }
+   "_src": "hadd2-rrr-sm120-2026-11-06"
   },
   "HFMA2.BF16_V2_R_R_II_II_R": {
    "base_op": "HFMA2.BF16",
