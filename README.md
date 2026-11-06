@@ -258,18 +258,25 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 24 974 of 26 612 SM120 encoding variants carry no `_src`: the 19 270 harvest rows of 2026-06..08 without
-  a per-field measurement plus the 5 718 wave-11 lattice rows (2026-11-05, lane merge `e9b0808`) whose
-  provenance tags are still owed — the lane's commit message describes the silicon adjudication of the
-  26 conflicting rows, not the lattice rows' derivation. A static
-  audit (cubit `tools/audit_table.py`, 2026-11-02, pre-wave-11 numbers) flags 1 223 fields that address an operand the key
+- 19,140 of 26,663 SM120 encoding variants carry no `_src` (sm103a 15,892 / 22,348,
+  sm100a 15,892 / 22,348, sm121a 25,696 / 26,406): these are the harvest rows of 2026-06..08
+  (fields learned from compiler output, validated by the round-trip census, not by per-field probes). Every
+  row added since carries a tag — the 5 736 / 5 748 / 5 744 / 44 wave-11 rows were stamped on 2026-11-06
+  (`wave11-atom-lattice-2026-11-05`: the BUG-509 ATOM/ATOMG [63:60] lattice with its silicon-confirmed
+  claim_forbid; `wave11-integration-2026-11-05`: the lane-lineage rows of the 3-way merge; the stamp tool is
+  coldface's `stamp_provenance.py`, run with the `rows` recount corrected). A static audit (cubit
+  `tools/audit_table.py`, 2026-11-02, pre-wave-11 numbers) flags 1 223 fields that address an operand the key
   does not have, 994 register fields off the standard slots, 257 immediate-bearing keys without an
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  stands at 463 rows with at least one defect after the 2026-11-04 batch (from 1 977; 118 words of
-  the undocumented forms above are `vendor_unknown`, not defects); the families are listed in cubit
-  `docs/KNOWN_ISSUES.md` T1. The GB10 host census (2026-11-04) found `LDL.64 Rd, [Rn+URm+imm]`
+  stands at 423 rows with at least one defect after the 2026-11-05 SHF rebuild (from 1 977 on 2026-11-02;
+  118 words of the undocumented forms above are `vendor_unknown`, not defects); the families are listed
+  in cubit `docs/KNOWN_ISSUES.md` T1. Rebuilt from measurement since: the SM120 `HADD2` register form
+  (2026-11-06, 12 groups), the plain `.EL` ATOMG twins (U32 and 64-bit base), the `UTMALDG` plain form
+  (five dimensions), the sm103a/sm100a `LEA_R_P_R_UR_R_II`, `LDG_R_dARI` SM-scope offset, `LDGSTS` imm
+  sign and `IADD.XOR` / `LEA.HI.X` rows of coldface's B300 review, the `IADD3.X` carry-in negation on
+  the three tables. The GB10 host census (2026-11-04) found `LDL.64 Rd, [Rn+URm+imm]`
   without an SM120 row (95 cuBLASLt words), a wrong `MUFU` UR-form function field, the F2F type-pair
   rows and the IMAD alias groups — fixed in `15caf70`; the remaining SM121a text-parity families
   (`R2P`, `BAR`, `IMNMX`, `SEL`, IMMA `.ROW/.COL`, …, 61 words) are listed in cubit's V3.
