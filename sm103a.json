@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22342,
-   "rows_without_src": 15896,
+   "rows_total": 22344,
+   "rows_without_src": 15898,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -307,6 +307,13 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3003_rebuild_utmaldg_row.py (sm100a) + arch-parity sweep (this dir)",
      "test": "tests/b3003_utmaldg_row.rs; BARRACUDA/tests/test_b300_bridge.py",
+     "rows": 0
+    },
+    "b3004-lea-x-2026-11-05": {
+     "kind": "count_null rows added on the owner's order (R 22:10Z C3, NEEDS_OWNER 30 LEA-family audit): the three unowned forms of the B300-1 opcode region, measured by the nvdisasm-13.3 single-bit + value sweeps in pubwave/wave11/b300/ (b3004_lea_x_family.md); zero corpus witnesses",
+     "date": "2026-11-05",
+     "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
+     "test": "tests/b3004_lea_x_family.rs",
      "rows": 0
     }
    },
@@ -1677470,6 +1677477,209 @@
       }
      ]
     }
+   }
+  },
+  "IADD.XOR_R_P_R_UR_R": {
+   "base_op": "IADD.XOR",
+   "mod_groups": {
+    "": {
+     "_note": "B300-4: bit 76 (XOR) row of the IADD3/LEA region; the P0 slot [86:84] and the carry slots [90:87] are text-inert here (nvdisasm probe), as is bit 75 -- pinned 0; sm120 has no row for this form.",
+     "and_base": "0x000000000f81f0000000000000000c10",
+     "count": 1,
+     "fields": [
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 5
+      }
+     ],
+     "variable_mask": "0x17f03e0000e001ff8000007ffffff000"
+    }
+   },
+   "operand_sig": "R_P_R_UR_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   }
+  },
+  "LEA.HI.X_R_P_R_UR_R_II_P": {
+   "base_op": "LEA.HI.X",
+   "mod_groups": {
+    "": {
+     "_note": "B300-4: the .X (bit 74) companion of the B300-1 LEA_R_P_R_UR_R_II rebuild; carry-in pred [89:87]+neg@90 mirrors the structurally-sound sm120 LEA.HI.X_R_R_UR_R_II_P row (its junk 'HI,X' mod-group sibling is NOT mirrored; sm103a bit 123 is must-0 per the sweep, so sm120's reuse@123 is not copied).",
+     "and_base": "0x000000000f8384ff0000001a00017c11",
+     "count": 1,
+     "fields": [
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 2
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 4
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 4
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 5
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 5
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 5,
+       "extraction": "imm",
+       "shift": 75,
+       "token_idx": 6
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 7
+      },
+      {
+       "_src": "b3004-lea-x-2026-11-05",
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 7
+      }
+     ],
+     "variable_mask": "0x17f03e0007e0f9ff8000007ffffff000"
+    }
+   },
+   "operand_sig": "R_P_R_UR_R_II_P",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
    }
   }
  },
