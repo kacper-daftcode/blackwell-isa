@@ -1,6 +1,6 @@
 # blackwell-isa Changelog
 
-## November 6, 2026 (session T-8): the LEA family rebuilt from measurement on the three tables, F2FP junk twins retired
+## November 6, 2026 (session T-8): the LEA family rebuilt from measurement on the three tables, the ATOMS uniform-indexed lattice, junk keys retired, the audit oracle corrected
 
 - **`sm120.json` / `sm103a.json` / `sm100a.json`: the `LEA` family rebuilt from measurement** (cubit
   `tools/probes/re_sm120_lea.py`, nvdisasm 13.1 `-b SM120`; `-b SM103` / `-b SM100` text-identical for every
@@ -30,12 +30,28 @@
   of `F2FP_R_R` (`F32,PACK_B,TF32` stays). Keys 16 065 → 16 063, variants 26 599 → 26 596. The cubit
   printer now prints the `UNPACK_B_MERGE_C` conversions in the vendor's order (`F2FP.E4M3.BF16.
   UNPACK_B_MERGE_C`: source type first — 96 audit words).
+- **`sm120.json`: `ATOMS_R_ARURI_R` measured over its whole operation × type lattice** (cubit
+  `tools/probes/re_sm120_atoms_aruri_ops.py`, nvdisasm 13.1 `-b SM120`, 720 form + 27 lattice words;
+  provenance `atoms-aruri-ops-sm120-2026-11-06`, test cubit `tests/sm120_atoms_aruri_ops.rs`):
+  `ATOMS.<op>[.S32|.64|.128] Rd, [Ra+URb(+imm)], Rb` (0x98c + frame bit 91) — operation [90:87] ADD / MIN /
+  MAX / INC / DEC / AND / OR / XOR / EXCH (9+ `INVALIDn`), type [75:73] plain / S32 / 64 / 128 (others
+  `INVALIDn`), guard, Rd, Ra (RZ elided: `[UR4]`), Rb, signed 24-bit offset, URb (255 = URZ) — 36 groups replace
+  the one measured on 2026-10-29 (`MAX,S32`) and six harvest groups that read the UR byte as a fourth register
+  (`ATOMS.AND R4, [R7+UR4], R8` printed `ATOMS.AND R4, [R7], R8, R4`); retired with them the four 0x98c junk
+  groups of `ATOMS_R_ARI_R_R` and the mis-keyed `ATOMS_R_AURI_R` [EXCH] (a base-register field under the RZ-base
+  key; it absorbed `ATOMS.INVALID10` words as `EXCH`). Variants 26 596 → 26 611.
+- **`sm120.json`: nine harvest keys whose every probe word nvdisasm rejects retired** (`DADD_R_II_R`,
+  `DMUL_R_R_R_II_?`, `DMUL_R_R_R_II_II_II_?`, `DMUL_R_R_R_R`, `MOV_R_UR_II_?`, `MOV_R_UR_II_II_?`,
+  `MOV.64_R_UR_II_?`, `MOV.64_R_UR_II_II_?`, `MOV.64_R_UR_UR`; `blackwell-isa-internal tools/audit_fix_20261106.py`):
+  re-measured after the oracle correction below, no witness among the 237 844 distinct words of the
+  production census, no `key_aliases` target, a measured sibling carries the real form (`MOV_R_UR` 0xc02,
+  `DMUL_R_R_{R,II,UR,FI}`, `DADD_R_R_*`). Keys 16 063 → 16 054.
 - **Dynamic-audit oracle corrected:** the 2026-11-04 nvdisasm record set behind the audit replays had
   386 legal words marked as rejected through a scratch-file race in cubit's `tools/audit_dynamic.py`
   (two rows probing the same word in parallel); re-measured on 2026-11-06 and the tool fixed. With the
-  corrected records and the LEA rebuild the audit stands at **255 rows** with at least one defect (418 on
-  the T-7 tables); rows without `_src` are 19 044 / 15 873 / 15 873 / 25 696 (sm120 / sm103a / sm100a /
-  sm121a). The three references regenerated at this revision.
+  corrected records, the LEA rebuild, the ATOMS lattice and the retired keys the audit stands at **230 rows**
+  with at least one defect (418 on the T-7 tables); rows without `_src` are 19 025 / 15 873 / 15 873 / 25 696
+  (sm120 / sm103a / sm100a / sm121a). The three references regenerated at this revision.
 
 ## November 6, 2026 (session T-7): HADD2 register form, the `.EL` 64-bit twin, coldface's B300 rows reviewed, wave-11 provenance stamped, the references regenerated
 

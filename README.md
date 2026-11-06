@@ -172,7 +172,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (19 044 of 26 596 SM120 variants at this revision) are
+  measurement in prose. Rows **without** `_src` (19 025 of 26 611 SM120 variants at this revision) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes — plus, since 2026-11-05, the **wave-11 lattice rows** (5 718 SM120
   rows of the lane merge `e9b0808`, 5 692 of them the modifier lattices of `ATOM_P_R_dARI_R` and
@@ -258,7 +258,7 @@ These are included to orient readers; the primary contribution is the data itsel
 Everything below is known and listed rather than hidden; the detailed list with evidence and what
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
-- 19,044 of 26,596 SM120 encoding variants carry no `_src` (sm103a 15,873 / 22,363,
+- 19,025 of 26,611 SM120 encoding variants carry no `_src` (sm103a 15,873 / 22,363,
   sm100a 15,873 / 22,363, sm121a 25,696 / 26,406): these are the harvest rows of 2026-06..08
   (fields learned from compiler output, validated by the round-trip census, not by per-field probes). Every
   row added since carries a tag — the 5 736 / 5 748 / 5 744 / 44 wave-11 rows were stamped on 2026-11-06
@@ -270,14 +270,15 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   immediate field and 14 634 pairs of rows whose constant bits do not separate them (the decoder's
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
-  stands at 255 rows with at least one defect after the 2026-11-06 LEA rebuild (from 1 977 on 2026-11-02 and
-  418 on the T-7 tables; 120 of the remaining rows' words are ones nvdisasm rejects and cubit decodes, 118
+  stands at 230 rows with at least one defect after the 2026-11-06 LEA and ATOMS rebuilds (from 1 977 on
+  2026-11-02 and 418 on the T-7 tables; 59 of the remaining rows' words are ones nvdisasm rejects and cubit decodes, 118
   words of the undocumented forms above are `vendor_unknown`, not defects; the 2026-11-04 oracle records
   had 386 legal words marked as rejected through a scratch-file race of the tool — re-measured on
   2026-11-06); the families are listed in cubit `docs/KNOWN_ISSUES.md` T1. Rebuilt from measurement
   since: the **`LEA` family on the three tables** (2026-11-06: 24 keys × 36 rows, `LEA[.HI][.X][.SX32]`
   × register / imm32 / UR forms, the `~R` glyph of the `.X` forms, nvcc's text-inert values baked —
-  56 / 18 / 18 harvest keys retired), the SM120 `HADD2` register form
+  56 / 18 / 18 harvest keys retired), the SM120 `ATOMS_R_ARURI_R` lattice (2026-11-06: 9 operations × 4
+  types, the harvest groups that read the UR byte as a register retired), the SM120 `HADD2` register form
   (2026-11-06, 12 groups), the plain `.EL` ATOMG twins (U32 and 64-bit base), the `UTMALDG` plain form
   (five dimensions), the sm103a/sm100a `LEA_R_P_R_UR_R_II`, `LDG_R_dARI` SM-scope offset, `LDGSTS` imm
   sign and `IADD.XOR` / `LEA.HI.X` rows of coldface's B300 review, the `IADD3.X` carry-in negation on

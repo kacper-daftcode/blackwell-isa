@@ -50,7 +50,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (consumer) (RTX 5090) &mdash; Unofficial Reference<br>4884 base-op families &middot; 16063 instruction forms &middot; 26596 encoding variants &middot; 15989 with scheduling data &middot; 7552 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (09a7141 2026-11-06), SHA-256 ac957d67b1322cb3&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (consumer) (RTX 5090) &mdash; Unofficial Reference<br>4884 base-op families &middot; 16054 instruction forms &middot; 26611 encoding variants &middot; 15980 with scheduling data &middot; 7586 variants with a measurement tag<br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm120.json</code> (7094efc 2026-11-06), SHA-256 af22fff8d368bd57&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -236,8 +236,8 @@ harvest era, not part of the encoding identity.</p>
 <tr><td>33</td><td class="m"><strong>GMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>34</td><td class="m"><strong>QMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>35</td><td class="m"><strong>OMMA</strong></td><td>2</td><td>UBLKCP.S.G, UTMACMDFLUSH</td></tr>
-<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>536</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
-<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>514</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
+<tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>532</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
+<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>509</td><td>ARRIVES, BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
 <p>Dependencies are tracked with 6 scoreboard barriers (B0&ndash;B5). A barrier-insertion pass
@@ -306,11 +306,11 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <h2 id="instruction-reference">9. Instruction Reference</h2>
 <div class="note">
 <strong>Latency legend:</strong>
-<span class="lat-hw">N ★</span> = measured on hardware (629 instructions; the SM120 measurements are from an RTX 5090) &nbsp;&middot;&nbsp;
+<span class="lat-hw">N ★</span> = measured on hardware (620 instructions; the SM120 measurements are from an RTX 5090) &nbsp;&middot;&nbsp;
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 154 of 16,063 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 148 of 16,054 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -80635,11 +80635,11 @@ Collapsed by default — click to expand.
 <tr><td class="m">ATOMS_P_ARI_R_R</td><td class="m">P_ARI_R_R</td><td class="m">64,CAST,SPIN, CAST,SPIN</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">ATOMS_R_ARI</td><td class="m">R_ARI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">1 ~</span></td></tr>
 <tr><td class="m">ATOMS_R_ARI_R</td><td class="m">R_ARI_R</td><td class="m">64,EXCH, ADD, AND, AND,S32, EXCH, INC, MAX, MAX,S32, MIN, MIN,S32, OR, OR,S32, S32,XOR, XOR</td><td>MEMORY_SHARED</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">30 ~</span></td></tr>
-<tr><td class="m">ATOMS_R_ARI_R_R</td><td class="m">R_ARI_R_R</td><td class="m">128,CAS, 64,CAS, AND, CAS, EXCH, OR, S32,CAS, XOR</td><td>MEMORY_SHARED</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">30 ~</span></td></tr>
+<tr><td class="m">ATOMS_R_ARI_R_R</td><td class="m">R_ARI_R_R</td><td class="m">128,CAS, 64,CAS, CAS, S32,CAS</td><td>MEMORY_SHARED</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">30 ~</span></td></tr>
 <tr><td class="m">ATOMS_R_ARURI</td><td class="m">ARURI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">1 ~</span></td></tr>
-<tr><td class="m">ATOMS_R_ARURI_R</td><td class="m">R_ARURI_R</td><td class="m">ADD, AND, CAS, EXCH, MAX,S32, OR, XOR</td><td>MEMORY_SHARED</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">30 ~</span></td></tr>
+<tr><td class="m">ATOMS_R_ARURI_R</td><td class="m">R_ARURI_R</td><td class="m">ADD, ADD,S32, 64,ADD, 128,ADD, MIN, MIN,S32, 64,MIN, 128,MIN, MAX, MAX,S32, 64,MAX, 128,MAX, INC, INC,S32, 64,INC, 128,INC, DEC, DEC,S32, 64,DEC, 128,DEC, AND, AND,S32, 64,AND, 128,AND, OR, OR,S32, 64,OR, 128,OR, XOR, S32,XOR, 64,XOR, 128,XOR, EXCH, EXCH,S32, 64,EXCH, 128,EXCH</td><td>MEMORY_SHARED</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">30 ~</span></td></tr>
 <tr><td class="m">ATOMS_R_AURI</td><td class="m">R_AURI</td><td class="m">32,INC,POPC</td><td>UNKNOWN</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">1 ~</span></td></tr>
-<tr><td class="m">ATOMS_R_AURI_R</td><td class="m">R_AURI_R</td><td class="m">AND, AND,S32, EXCH, MAX,S32, MIN,S32, OR, OR,S32, S32,XOR, XOR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">ATOMS_R_AURI_R</td><td class="m">R_AURI_R</td><td class="m">AND, AND,S32, MAX,S32, MIN,S32, OR, OR,S32, S32,XOR, XOR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>ATOMS_P_ARI_R_R.64,CAST,SPIN &mdash; 6 fields &middot; 182 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000001800402000000000000758d</code></div>
@@ -80841,16 +80841,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARI_R_R.AND &mdash; 5 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000a800004000000031211798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
 <details><summary>ATOMS_R_ARI_R_R.CAS &mdash; 9 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000009000000080110738d</code></div>
 <div class="ab">var_mask: <code>0x1c000000037001fffffffffffffff000</code></div>
@@ -80864,28 +80854,6 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>ATOMS_R_ARI_R_R.EXCH &mdash; 5 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000c0000040000000c1210798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>ATOMS_R_ARI_R_R.OR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000b000000000000000000798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_ARI_R_R.S32,CAS &mdash; 9 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000209000000080110738d</code></div>
@@ -80902,18 +80870,6 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARI_R_R.XOR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000b800000000000000000798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
 <details><summary>ATOMS_R_ARURI.32,INC,POPC &mdash; 4 fields &middot; 222 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000d8000000000000000ff7f8c</code></div>
 <div class="ab">var_mask: <code>0x9e0e00000000000000000000000000</code></div>
@@ -80923,9 +80879,11 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.ADD &mdash; 6 fields &middot; 1 samples</summary><div class="var">
+<details><summary>ATOMS_R_ARURI_R.ADD &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000008000000000000000000098c</code></div>
 <div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.ADD Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
@@ -80934,36 +80892,105 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.AND &mdash; 5 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000a800004000000031211798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
+<details><summary>ATOMS_R_ARURI_R.ADD,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.ADD.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.CAS &mdash; 7 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000009000000080110738d</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
+<details><summary>ATOMS_R_ARURI_R.64,ADD &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.ADD.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.EXCH &mdash; 8 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000c0000040000000c1210798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003fffffffffffffff000</code></div>
+<details><summary>ATOMS_R_ARURI_R.128,ADD &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.ADD.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.MIN &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008800000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MIN Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.MIN,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008800200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MIN.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,MIN &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008800400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MIN.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,MIN &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008800800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MIN.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.MAX &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009000000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MAX Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
@@ -80972,8 +80999,8 @@ Collapsed by default — click to expand.
 <details><summary>ATOMS_R_ARURI_R.MAX,S32 &mdash; 6 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000009000200000000000000098c</code></div>
 <div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
-<div class="ab">measured: <code>atoms-aruri-sm120-2026-10-29</code></div>
-<div class="ab">nvdisasm 13.1 sweeps: guard[15:12], destination[23:16], base register[31:24] (255 = RZ, printed [UR+imm]), source[39:32], signed offset[63:40], uniform register[71:64] (255 = URZ); opcode 0x98c with bit 91 is the uniform-indexed address (0x38c = [R+imm]; the mixes are illegal), [90:87] = 2 MAX, bit 73 = S32. Bits 72/76/77/80-86/92-95 are text-inert, 74/75 INVALID3/INVALID5, 78/79 the .X4/.X8 scale - all outside the row. Replaces the harvest leftover that read the UR byte as a fourth register and had no offset field.</div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MAX.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
@@ -80982,29 +81009,343 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.OR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000b000000000000000000798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
+<details><summary>ATOMS_R_ARURI_R.64,MAX &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009000400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MAX.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>ATOMS_R_ARURI_R.XOR &mdash; 7 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000b800000000000000000798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003ff000000ffffff0000</code></div>
+<details><summary>ATOMS_R_ARURI_R.128,MAX &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009000800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.MAX.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.INC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009800000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.INC Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.INC,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009800200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.INC.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,INC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009800400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.INC.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,INC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000009800800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.INC.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.DEC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a000000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.DEC Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.DEC,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a000200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.DEC.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,DEC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a000400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.DEC.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,DEC &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a000800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.DEC.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.AND &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a800000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.AND Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.AND,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a800200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.AND.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,AND &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a800400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.AND.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,AND &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000a800800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.AND.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.OR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b000000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.OR Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.OR,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b000200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.OR.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,OR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b000400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.OR.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,OR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b000800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.OR.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.XOR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b800000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.XOR Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.S32,XOR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b800200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.XOR.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,XOR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b800400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.XOR.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,XOR &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000b800800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.XOR.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.EXCH &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c000000000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.EXCH Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.EXCH,S32 &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c000200000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.EXCH.S32 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.64,EXCH &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c000400000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.EXCH.64 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>ATOMS_R_ARURI_R.128,EXCH &mdash; 6 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000c000800000000000000098c</code></div>
+<div class="ab">var_mask: <code>0x00000000000000fffffffffffffff000</code></div>
+<div class="ab">measured: <code>atoms-aruri-ops-sm120-2026-11-06</code></div>
+<div class="ab">ATOMS.EXCH.128 Rd, [Ra+URb(+imm)], Rb (0x98c + frame bit 91): measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_atoms_aruri_ops.py (session T-8, 2026-11-06); operation [90:87], type [75:73]; bits 72, 76, 77, 80-86, 92-95 text-inert and outside the row.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_AURI.32,INC,POPC &mdash; 5 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000d8000000000000000ff7f8c</code></div>
@@ -81035,20 +81376,6 @@ Collapsed by default — click to expand.
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>ATOMS_R_AURI_R.EXCH &mdash; 8 fields &middot; 1 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000c0000040000000c1210798c</code></div>
-<div class="ab">var_mask: <code>0x1c000000037003fffffffffffffff000</code></div>
-<div class="ab">measured: <code>f2-181</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[71:64]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
-<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
-<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>ATOMS_R_AURI_R.MAX,S32 &mdash; 5 fields &middot; 89 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000900020000000000ffff098c</code></div>
@@ -82407,7 +82734,6 @@ Collapsed by default — click to expand.
 <h3>DADD</h3>
 <p class="desc">FP64 addition.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DADD_R_II_R</td><td class="m">R_II_R</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DADD_R_R_FI</td><td class="m">R_R_FI</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DADD_R_R_II</td><td class="m">R_R_II</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DADD_R_R_R</td><td class="m">R_R_R</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
@@ -82445,14 +82771,6 @@ Collapsed by default — click to expand.
 <tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>DADD_R_II_R &mdash; 3 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000007029</code></div>
-<div class="ab">var_mask: <code>0x0000000000000bfefff00000fffe0600</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[72:65]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>imm</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
 <details><summary>DADD_R_R_FI &mdash; 4 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000000007429</code></div>
 <div class="ab">var_mask: <code>0x1c00000000000300ffffffffffff0000</code></div>
@@ -82897,24 +83215,12 @@ Collapsed by default — click to expand.
 <tr><td class="m">DMUL_R_R_FI</td><td class="m">R_R_FI</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DMUL_R_R_II</td><td class="m">R_R_II</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DMUL_R_R_R</td><td class="m">R_R_R</td><td class="m">RM, RP, RZ</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
-<tr><td class="m">DMUL_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DMUL_R_R_UR</td><td class="m">R_R_UR</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 </table>
-<details class="partials"><summary>3 partial encodings &mdash; operand types not fully identified</summary>
+<details class="partials"><summary>1 partial encoding &mdash; operand types not fully identified</summary>
 <table style="margin-top:4px"><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">DMUL_R_R_R_II_?</td><td class="m">R_R_R_II_?</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 <tr><td class="m">DMUL_R_R_R_II_II_?</td><td class="m">R_R_R_II_II_?</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
-<tr><td class="m">DMUL_R_R_R_II_II_II_?</td><td class="m">R_R_R_II_II_II_?</td><td>FP_ARITH</td><td><span class="lat-hw" title="Measured on hardware">18 &#9733;</span></td></tr>
 </table>
-<details><summary>DMUL_R_R_R_II_? &mdash; 4 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000000028</code></div>
-<div class="ab">var_mask: <code>0x0000000008000300c00001fffffe7e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[40:33]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:25]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>DMUL_R_R_R_II_II_? &mdash; 4 fields &middot; 32 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000200000228</code></div>
 <div class="ab">var_mask: <code>0x0000000000000300c00003fdfffe7000</code></div>
@@ -82923,14 +83229,6 @@ Collapsed by default — click to expand.
 <tr><td>[32:25]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMUL_R_R_R_II_II_II_? &mdash; 3 fields &middot; 9 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000402007028</code></div>
-<div class="ab">var_mask: <code>0x0000000008000300c00007fbfdfe0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[42:35]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[33:26]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
 <details><summary>DMUL_R_R_FI &mdash; 4 fields &middot; 4 samples</summary><div class="var">
@@ -83005,14 +83303,6 @@ Collapsed by default — click to expand.
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>DMUL_R_R_R_R &mdash; 3 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000200007028</code></div>
-<div class="ab">var_mask: <code>0x0000000008000300c00003fdfffc0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[41:34]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
-<tr><td>[32:25]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[25:18]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 <details><summary>DMUL_R_R_UR &mdash; 5 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080000000000000400087c28</code></div>
@@ -255158,14 +255448,12 @@ Collapsed by default — click to expand.
 <tr><td class="m">MOV_R_R_R</td><td class="m">R_R_R</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_R_UR</td><td class="m">R_UR</td><td class="m">64</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 </table>
-<details class="partials"><summary>6 partial encodings &mdash; operand types not fully identified</summary>
+<details class="partials"><summary>4 partial encodings &mdash; operand types not fully identified</summary>
 <table style="margin-top:4px"><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">MOV_R_II_II_?</td><td class="m">R_II_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_R_R_II_?</td><td class="m">R_R_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_R_R_II_II_?</td><td class="m">R_R_II_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV_R_R_II_II_II_?</td><td class="m">R_R_II_II_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">MOV_R_UR_II_?</td><td class="m">R_UR_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">MOV_R_UR_II_II_?</td><td class="m">R_UR_II_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 </table>
 <details><summary>MOV_R_II_II_? &mdash; 3 fields &middot; 5 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000f000000000100010802</code></div>
@@ -255200,20 +255488,6 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x0000000000000000000000ff00ff0000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>MOV_R_UR_II_? &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000f000000000000007002</code></div>
-<div class="ab">var_mask: <code>0x0000000008000000000000ff00ff0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>MOV_R_UR_II_II_? &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000000f000000000000007002</code></div>
-<div class="ab">var_mask: <code>0x0000000008000000000000ff00ff0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </details>
@@ -255321,28 +255595,11 @@ Collapsed by default — click to expand.
 <tr><td class="m">MOV.64_R_II</td><td class="m">R_II</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV.64_R_R</td><td class="m">R_R</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 <tr><td class="m">MOV.64_R_UR</td><td class="m">R_UR</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">MOV.64_R_UR_UR</td><td class="m">R_UR_UR</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 </table>
-<details class="partials"><summary>3 partial encodings &mdash; operand types not fully identified</summary>
+<details class="partials"><summary>1 partial encoding &mdash; operand types not fully identified</summary>
 <table style="margin-top:4px"><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">MOV.64_R_II_?</td><td class="m">R_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">MOV.64_R_UR_II_?</td><td class="m">R_UR_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
-<tr><td class="m">MOV.64_R_UR_II_II_?</td><td class="m">R_UR_II_II_?</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on hardware">4 &#9733;</span></td></tr>
 </table>
-<details><summary>MOV.64_R_UR_II_? &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000010f000000000000007002</code></div>
-<div class="ab">var_mask: <code>0x0000000008000000000000ff01fe0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
-<details><summary>MOV.64_R_UR_II_II_? &mdash; 2 fields &middot; 15 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000010f000000000000007002</code></div>
-<div class="ab">var_mask: <code>0x0000000008000000000000ff01fe0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
-</table></div></details>
 </details>
 <details><summary>MOV.64_R_II &mdash; 3 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000000000000000000000402</code></div>
@@ -255368,13 +255625,6 @@ Collapsed by default — click to expand.
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
-<details><summary>MOV.64_R_UR_UR &mdash; 2 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000000010f000000000000007002</code></div>
-<div class="ab">var_mask: <code>0x0000000008000000000000ff01fe0e00</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
-<tr><td>[24:17]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="MOV64IUR" id="MOV64IUR">
@@ -389061,8 +389311,8 @@ Collapsed by default — click to expand.
 </details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (09a7141 2026-11-06), SHA-256 ac957d67b1322cb37040d709ad152b80ce09ab8aede0176efb6e84ace802ea91<br>
-16063 instruction forms &middot; 26596 encoding variants &middot; 7552 with a measurement tag &middot; 37 pipeline classes<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm120.json (7094efc 2026-11-06), SHA-256 af22fff8d368bd57936781f89db5244d6cdea1bf42f7a79edd8f96cb3cceac43<br>
+16054 instruction forms &middot; 26611 encoding variants &middot; 7586 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
