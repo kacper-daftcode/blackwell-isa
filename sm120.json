@@ -635,7 +635,7 @@
      "rows": 25,
      "kind": "nvdisasm 13.1 field repair of harvest rows (-b SM120), census-witness-checked retirements",
      "date": "2026-11-06",
-     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py + _t10d.py",
+     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py + _t10d.py + _t10e.py",
      "test": "tests/sm120_audit_t10.rs"
     }
    },
@@ -740043,6 +740043,69 @@
        "token_idx": 2
       },
       {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 64,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 65,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 66,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 67,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 68,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 69,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 70,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 71,
+       "token_idx": 1
+      },
+      {
+       "_src": "2d",
+       "bits": 1,
+       "extraction": "urz_expl",
+       "shift": 91,
+       "token_idx": 1
+      },
+      {
        "bits": 2,
        "extraction": "addr_scale",
        "shift": 78,
@@ -740051,9 +740114,9 @@
        "_note": "BUG-425: STS addr-scale window [79:78] -- arb425 law UNIFORM x4: b78=.X4 b79=.X8 both=.X16 on every width carrier x frame (ARI/ARURI/AURI-space; lustro BUG-420; STS_ARI_R|128 carried via BUG-014). Print via BUG-420 sts_lds arm + new BUG-425 AURI arm."
       }
      ],
-     "variable_mask": "0x000000000000c000ffffffffff00f000",
+     "variable_mask": "0x03fe3e00080131fffffff8ffff00f000",
      "_src425b": "bug425b-2026-09-10",
-     "_note": "T-10 audit: opcode bit 9 baked (0x188 words are illegal); [71:64] text-inert on this form, baked 0x00 (the value of every census word) and fail-closed",
+     "_note": "T-10 audit: opcode bit 9 baked (the 0x188 words are illegal for nvdisasm 13.1 at every [71:64] value; the STS opcode byte is 0x388); everything else as the BUG-425 / 425b arbitration of 2026-09 left it (the text-inert bits 72 / 76 / 77 / 80, [71:64], 91 tolerated)",
      "_src": "audit-fix-2026-11-06-t10"
     },
     "U16": {
