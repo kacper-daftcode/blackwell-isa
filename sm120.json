@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). `_meta.key_aliases` maps retired key names to the key that carries the rows today (cubit resolves them for text and lookups, never prints them).",
-   "rows_total": 26559,
-   "rows_without_src": 18857,
+   "rows_total": 26562,
+   "rows_without_src": 18859,
    "sources": {
     "arrives-ldgstsbar-sm120-2026-11-02": {
      "rows": 2,
@@ -632,10 +632,10 @@
      "test": "tests/sm120_brx_ret.rs"
     },
     "audit-fix-2026-11-06-t10": {
-     "rows": 24,
+     "rows": 25,
      "kind": "nvdisasm 13.1 field repair of harvest rows (-b SM120), census-witness-checked retirements",
      "date": "2026-11-06",
-     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py",
+     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py + _t10d.py",
      "test": "tests/sm120_audit_t10.rs"
     }
    },
@@ -670661,6 +670661,43 @@
      ],
      "variable_mask": "0x0000000000000000fffffffffffff000",
      "count": 1
+    },
+    "128,E,LTC128B": {
+     "and_base": "0x000000000b9a0aff0000000000007fae",
+     "count": null,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 20,
+       "extraction": "sub_imm1",
+       "shift": 44,
+       "token_idx": 1
+      },
+      {
+       "_src": "i84-180",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i84-180",
+       "bits": 12,
+       "extraction": "sub_imm1",
+       "shift": 32,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffffffffff0000",
+     "_src": "audit-fix-2026-11-06-t10",
+     "_note": "T-10 audit: the PT-baked twin of LDGSTS_ARI_ARI_P [128,E,LTC128B] -- nvdisasm elides a PT predicate operand (`LDGSTS.E.LTC128B.128 [R5+0x10], [R7.64+0x10]`), so the two-operand text needs the key without the P token (the LEA / BRA twin convention)"
     }
    },
    "operand_sig": "ARI_ARI",
@@ -670826,6 +670863,48 @@
      ],
      "variable_mask": "0x0000000007800000fffffffffffff000",
      "count": 1
+    },
+    "128,E,LTC128B": {
+     "and_base": "0x00000000081a0aff0000000000007fae",
+     "count": 128,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 20,
+       "extraction": "sub_imm1",
+       "shift": 44,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 4,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3
+      },
+      {
+       "_src": "i84-180",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i84-180",
+       "bits": 12,
+       "extraction": "sub_imm1",
+       "shift": 32,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x000e0e00038000001eb80380decf0000"
     }
    },
    "operand_sig": "ARI_ARI_P",
@@ -671187,6 +671266,55 @@
      ],
      "variable_mask": "0x00000000078000fffffffffffffff000",
      "count": 1
+    },
+    "128,E,LTC128B": {
+     "and_base": "0x00000000081a0a000088000000047fae",
+     "count": 16,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 20,
+       "extraction": "sub_imm1",
+       "shift": 44,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 4,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3
+      },
+      {
+       "_src": "i84-180",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "i84-180",
+       "bits": 12,
+       "extraction": "sub_imm1",
+       "shift": 32,
+       "token_idx": 2
+      },
+      {
+       "_src": "i84-180",
+       "bits": 8,
+       "extraction": "sub_ur1",
+       "shift": 64,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x000c0a000380000e160000801ec90000"
     }
    },
    "operand_sig": "ARI_ARURI_P",
