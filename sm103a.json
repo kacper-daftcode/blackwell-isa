@@ -321,7 +321,7 @@
      "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 text-identical)",
      "date": "2026-11-06",
      "tool": "T/t7/review (session T-7, review of B300-4)",
-     "test": "tests/sm120_iadd3x_carry_neg.rs"
+     "test": "tests/b3004_lea_x_family.rs"
     },
     "utmaldg-plain-dims-2026-11-06": {
      "rows": 4,
