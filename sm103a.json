@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22589,
-   "rows_without_src": 15813,
+   "rows_total": 22593,
+   "rows_without_src": 15811,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -387,6 +387,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_f2fp_pack.py",
      "test": "tests/k31_f2fp_pack.rs"
+    },
+    "k31-packed-fp32-2026-11-07": {
+     "rows": 6,
+     "kind": "nvdisasm 13.3.73 per-field and per-operand probes; H production witnesses",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_packed_fp32.py",
+     "test": "tests/k31_packed_fp32.rs"
     }
    },
    "history": {
@@ -408329,46 +408336,62 @@
    "base_op": "FADD2",
    "mod_groups": {
     "": {
-     "and_base": "0x0000000000000000000000000000724b",
-     "count": 354,
+     "and_base": "0x0000000000000000000000000000024b",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "k31-packed-fp32-2026-11-07"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
       },
       {
-       "_src": "2aE",
        "bits": 1,
        "extraction": "opmod:F32",
        "shift": 82,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
       },
       {
-       "_src": "2aE",
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
       },
       {
-       "_src": "2aE",
        "bits": 1,
        "extraction": "opmod:F32",
        "shift": 85,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
       }
      ],
-     "variable_mask": "0x03e03e0000240000000000ffff7e0000"
+     "variable_mask": "0x1000000000240000000000fffffff000",
+     "_src": "k31-packed-fp32-2026-11-07",
+     "_note": "Measured trtllm-gen packed-FP32 operand geometry on nvdisasm 13.3.73: Rd@16, Ra@24, or the third register/UR at 32. The F32x2.HI_LO // F32 donor modifiers are preserved; FFMA2's different four-operand row is not changed. All supplied witnesses of this exact form."
     }
    },
    "operand_sig": "R_R_R",
@@ -408378,7 +408401,8 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
   },
   "FADD_R_R_FI": {
    "base_op": "FADD",
@@ -411132,59 +411156,61 @@
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
       },
       {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
        "token_idx": 1
       },
       {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
        "token_idx": 2
       },
       {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 1,
        "extraction": "reuse",
        "shift": 122,
        "token_idx": 2
       },
       {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 1,
        "extraction": "opmod:F32",
        "shift": 82,
        "token_idx": 2
       },
       {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "opmod:HI_LO",
-       "shift": 88,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
        "token_idx": 3
       },
       {
-       "_src": "2aE",
+       "_src": "k31-packed-fp32-2026-11-07",
        "bits": 1,
        "extraction": "reuse",
        "shift": 123,
        "token_idx": 3
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 85,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
       }
      ],
-     "variable_mask": "0x0de03e0001040000000000fffffe7000"
+     "variable_mask": "0x0c00000000240000000000fffffff000",
+     "_src": "k31-packed-fp32-2026-11-07"
     }
    },
    "operand_sig": "R_R_R",
@@ -411194,7 +411220,8 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
   },
   "FMUL_R_R_FI": {
    "base_op": "FMUL",
@@ -1698278,6 +1698305,252 @@
     "throughput": 1
    },
    "_src": "k31-f2fp-satfinite-bf16-pack-2026-11-07"
+  },
+  "FADD2_R_R_FI": {
+   "base_op": "FADD2",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000200000000000000000044b",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000040000fffffffffffff000",
+     "_src": "k31-packed-fp32-2026-11-07",
+     "_note": "Measured trtllm-gen packed-FP32 operand geometry on nvdisasm 13.3.73: Rd@16, Ra@24, or the third register/UR at 32. The F32x2.HI_LO // F32 donor modifiers are preserved; FFMA2's different four-operand row is not changed. All supplied witnesses of this exact form."
+    }
+   },
+   "operand_sig": "R_R_FI",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
+  },
+  "FADD2_R_R_UR": {
+   "base_op": "FADD2",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000082000000000000000000e4b",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000040000000000fffffff000",
+     "_src": "k31-packed-fp32-2026-11-07",
+     "_note": "Measured trtllm-gen packed-FP32 operand geometry on nvdisasm 13.3.73: Rd@16, Ra@24, or the third register/UR at 32. The F32x2.HI_LO // F32 donor modifiers are preserved; FFMA2's different four-operand row is not changed. All supplied witnesses of this exact form."
+    }
+   },
+   "operand_sig": "R_R_UR",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
+  },
+  "FMUL2_R_R_FI": {
+   "base_op": "FMUL2",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000001000000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0400000000040000fffffffffffff000",
+     "_src": "k31-packed-fp32-2026-11-07",
+     "_note": "Measured trtllm-gen packed-FP32 operand geometry on nvdisasm 13.3.73: Rd@16, Ra@24, or the third register/UR at 32. The F32x2.HI_LO // F32 donor modifiers are preserved; FFMA2's different four-operand row is not changed. All supplied witnesses of this exact form."
+    }
+   },
+   "operand_sig": "R_R_FI",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
+  },
+  "FMUL2_R_R_UR": {
+   "base_op": "FMUL2",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000090000000000000000000c4a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "k31-packed-fp32-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-packed-fp32-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0400000000040000000000fffffff000",
+     "_src": "k31-packed-fp32-2026-11-07",
+     "_note": "Measured trtllm-gen packed-FP32 operand geometry on nvdisasm 13.3.73: Rd@16, Ra@24, or the third register/UR at 32. The F32x2.HI_LO // F32 donor modifiers are preserved; FFMA2's different four-operand row is not changed. All supplied witnesses of this exact form."
+    }
+   },
+   "operand_sig": "R_R_UR",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-packed-fp32-2026-11-07"
   }
  },
  "operand_roles": {
