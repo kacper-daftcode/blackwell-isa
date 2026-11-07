@@ -1,7 +1,7 @@
-## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP, the FP32 ALU, the uniform FP32 ALU and the conversions measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
+## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP, the FP32 ALU, the uniform FP32 ALU, the conversions and FSET / FSEL / FCHK measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`,
-gates and pushes. **`sm120.json`: 28 542 rows, 12 788 with `_src` — 15 754 harvest rows left** (16 905 of 26 442 at
+gates and pushes. **`sm120.json`: 28 729 rows, 13 082 with `_src` — 15 647 harvest rows left** (16 905 of 26 442 at
 `e1e8598`, 18 841 of 26 598 at `c896e8f`).
 
 - **UFSETP measured whole** (`63e5040`; cubit `tools/probes/re_sm120_ufsetp.py`, 394 form + 6 glyph + 66 lattice words;
@@ -100,7 +100,24 @@ gates and pushes. **`sm120.json`: 28 542 rows, 12 788 with `_src` — 15 754 har
   key (the typed-key convention of the IMMA / IDP families is the way; cubit `G/NEEDS_OWNER.md` 3). Reviewed by T-13: the
   3 059 words re-measured identical on SM120 (the 6 SM103 differences as recorded); 610 sampled census words of the touched
   keys print nvdisasm's text on the new rows.
-- The SM120 reference page regenerated at `9d054e4`.
+- **FSET / FSEL / FCHK measured whole** (`94ff281` = G's `b94a63e` re-applied on `9d054e4` by T, byte-identical to G's table
+  plus the NEEDS 44 rename; cubit `tools/probes/re_sm120_fset_fsel_fchk.py`, 885 form + 15 glyph + 375 lattice words, the
+  same text on the three targets; provenance `fset-fsel-fchk-family-2026-11-07`, 297 rows; cubit `tests/sm120_fset_fsel_fchk.rs`):
+  the 9 plain keys `FSET_R_R_{R,FI,UR}_P` (0x20a / 0x80a / 0xc0a + 91; the `_FI_P` / `_UR_P` keys are new), `FSEL_R_R_{R,FI,UR}_P`
+  (0x208 / 0x808 / 0xc08 + 91), `FCHK_P_R_{R,FI,UR}` (0x302 / 0x902 / 0xd02 + 91) — 102 harvest rows rewritten in place (the
+  2026-10-22 FSET mode grid, the FSEL / FCHK rows, three of the four `bug249-2026-08-28` FSEL rows with the same fields; that
+  legend 4 → 1) and **195 missing groups added**; 8 junk keys retired as `_meta.key_aliases` (`FSET.BF.F.AND_R_R_R_P` →
+  `FSET_R_R_R_P`; `FSEL_R_R_?_P_P`, `FSEL_R_R_II_P_P` → `FSEL_R_R_FI_P`; `FSEL_R_R_R_P_II_?` / `_II_II_?` / `_II_II_II_?`,
+  `FSEL_R_R_R_P_P` → `FSEL_R_R_R_P`; `FCHK_P_R_II` → `FCHK_P_R_FI`); **`FSEL_R_R_II_P` kept** — the BUG-178 / BUG-249 canonical
+  `+QNAN` lane (0x7fc00000 baked), measured by that wave, not harvest. The junk `FCHK_P_R_UR` row carried a `claim_forbid`
+  on the opcode nibble; the measured row pins the whole opcode (claim_forbid rows 7 012 → 7 011). Law: guard [15:12]; Rd
+  [23:16] (FSET / FSEL) or Pd [83:81] (FCHK); Ra [31:24] (`-` 72, `|` 73, `.reuse` 122); B [39:32] (Rb / URb, `|` 62, `-` 63;
+  Rb `.reuse` 123) or f32 [63:32]. FSET = the FSETP law with a register destination: the boolean [75:74] (3 = `INVALID3`), the
+  comparison [79:76], FTZ 80, Pc [89:87] + `!` 90, **`.BF` on every word** (no bit selects an integer-result form on SM120)
+  → `FSET.BF.<cmp>[.FTZ].<bool>`. FSEL = `[.FTZ]` (80) + Pc (PT spelled). FCHK = Pd, no modifier, no `.reuse` (text-inert).
+  Unused bits fail closed. Reviewed by T-13: the 1 275 words re-measured identical on the three targets; 220 sampled census
+  words of the touched keys print nvdisasm's text on the new rows.
+- The SM120 reference page regenerated at `94ff281`.
 
 ## November 6–7, 2026 (session T-12 / session G): the T1 production line — HSETP2 and ISETP / UISETP measured whole on `sm120.json`
 
