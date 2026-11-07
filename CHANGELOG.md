@@ -42,7 +42,38 @@ pushes. **`sm120.json`: 26 662 rows, 9 101 with `_src` — 17 561 harvest rows l
   (undocumented form measured on silicon, `nvdisasm_sm120: "no text"`), the old key as a `_meta.key_aliases` entry; the
   IMMA / U8 claims are withdrawn (`_discovery`). What stays open: the input element types (~1 h of silicon time with R's
   harness). With it the SM120 dynamic audit's replay shows **0 rows with a finding** (cubit `T/audit/dyn23`).
-- The SM120 reference page regenerated at `39bafbb`.
+- **FSETP / DSETP measured whole** (G's `8e6c8ae`, re-applied on the NEEDS 44 table as `5b4b03c`; cubit
+  `tools/probes/re_sm120_fsetp_dsetp.py`, 1 022 form + 12 glyph + 223 lattice words, the same text on the three targets;
+  provenance `fsetp-dsetp-family-2026-11-06`, 432 rows; cubit `tests/sm120_fsetp_dsetp.rs`): the six keys
+  `FSETP_P_P_R_{R,UR,FI}_P` (0x20b / 0xc0b + 91 / 0x80b) and `DSETP_P_P_R_{R,UR,FI}_P` (0x22a / 0xe2a + 91 / 0x42a) —
+  the 2026-10-22 "mode grid" rows confirmed field by field and re-emitted with provenance (DSETP's `reuse` fields
+  dropped: text-inert there). 112 junk keys gone: 100 dotted encode-only twins `FSETP.<cmp>[.FTZ].<bool>_P_P_R_{R,UR,FI,II}_P`
+  (byte-identical copies of the plain keys' groups; deleted — the SHF / HADD2 precedent), `FSETP_P_P_L_L_P` (five
+  vendor-rejected rows; deleted), 11 `_meta.key_aliases` (`FSETP.{GE,NAN}.FTZ.AND_P_P_R_R_R`,
+  `FSETP.{GEU,NEU}.AND_P_P_R_UR_UR`, `FSETP.NEU.OR_P_P_R_UR_UR`, `FSETP.NE.FTZ.AND_P_P_R_R_?`,
+  `FSETP.NEU.{AND,OR}_P_P_R_R_P_?`, `FSETP_P_P_II_II_P`, `FSETP_P_P_II_R_P` → the plain key of their opcode;
+  `FSETP_P_P_R_II_P` → `FSETP_P_P_R_FI_P`). Law: guard [15:12]; [23:16] inert; Ra [31:24], `-Ra` 72, `|Ra|` 73; Rb / URb
+  [39:32], `|Rb|` 62, `-Rb` 63 (register forms) or the immediate at [63:32] (f32 / the f64 high half); the boolean
+  [75:74] (AND / OR / XOR / `INVALID3`); the comparison [79:76] — FSETP F LT EQ LE GT NE GE NUM NAN LTU EQU LEU GTU
+  NEU GEU T, **DSETP names 0 / 15 `MIN` / `MAX`**; 80 `.FTZ` on FSETP, text-inert on DSETP; Pd0 [83:81]; Pd1 [86:84];
+  Pc [89:87] + `!` 90; 91 the uniform frame; [95:92] inert. `.reuse` Ra 122 / Rb 123 on FSETP, text-inert on DSETP.
+- **PLOP3 / P2R / R2P measured whole** (G's `eb9fad1`, re-applied as `e1e8598`; cubit
+  `tools/probes/re_sm120_plop3_p2r_r2p.py`, 202 form + 158 lattice words, the same text on the three targets;
+  provenance `plop3-p2r-r2p-family-2026-11-06`, 8 rows; cubit `tests/sm120_plop3_p2r_r2p.rs`). PLOP3 (0x81c): guard
+  [15:12]; imm8 [23:16]; [63:24] text-inert; the LUT = [66:64] + [76:72]; bit 67 = the third source predicate is a
+  uniform predicate (the `_UP_` key — the harvest row had it right but baked `UPT`); Pc [70:68] + `!` 71; Pb [79:77] +
+  `!` 80; Pd0 [83:81]; Pd1 [86:84]; Pa [89:87] + `!` 90. P2R (0x803): Rd [23:16]; Ra [31:24]; **the mask is imm32 at
+  [63:32]** (`P2R R17, PR, RZ, 0x80000040`; the 2026-10-22 rows had swept 0..255 and carried an 8-bit field, so masks
+  above 0xff did not decode); [77:76] the byte selector as the mnemonic suffix `.B1` / `.B2` / `.B3`; `.reuse` Ra 122.
+  R2P (0x804): [23:16] text-inert; Ra [31:24] with the byte selector [77:76] as the operand suffix (`R20.reuse.B2`);
+  imm32 [63:32], **elided by the vendor when it is 0xff** (`R2P PR, R0`) — the new encode-only `R2P_II_R` carries that
+  bare spelling (mask baked), the explicit `, 0xff` stays a bitwise alias; the masks print unsigned. Bit 91 illegal on
+  all three. 10 junk keys retired as aliases (`PLOP3.LUT_P_P_P_P_P_II_II` and its era alias, seven P2R shapes with `PR`
+  read as a register / label and 6–7-bit masks, `R2P_?_R_II`, `R2P_L_R_II`).
+- **`sm120.json` after the four batches and NEEDS 44: 26 442 rows, 9 537 with `_src` — 16 905 harvest rows left**
+  (18 841 of 26 598 at `c896e8f`). Where the rest is: LDG 7 019 + REDG 6 162 + STG 1 211 rows — the dotted `dARI` /
+  `ARURI` lattice keys with one group each (≈ 6 970 LDG keys, 6 146 REDG, 1 179 STG), the B300 lane's assignment.
+- The SM120 reference page regenerated at `e1e8598`.
 
 ## November 6, 2026 (session T-11): the IDP family on the four tables (coldface's D2 keys reviewed and completed), the SM120 audit's named exceptions 14 → 1
 
