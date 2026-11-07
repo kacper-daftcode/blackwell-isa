@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22600,
+   "rows_total": 22602,
    "rows_without_src": 15805,
    "sources": {
     "bug154-2026-08-25": {
@@ -422,6 +422,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_f2fp_unpack.py",
      "test": "tests/k31_f2fp_unpack.rs"
+    },
+    "k31-fhfma-bf16-flashmla-2026-11-07": {
+     "rows": 2,
+     "kind": "measured FFMA geometry + nvdisasm 13.3.73 target probes + production witnesses",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_fhfma.py",
+     "test": "tests/k31_fhfma.rs"
     }
    },
    "history": {
@@ -1699178,6 +1699185,332 @@
     "write_latency": 0
    },
    "_src": "k31-f2fp-unpack-flashmla-2026-11-07"
+  },
+  "FHFMA.BF16_R_R_R_R": {
+   "base_op": "FHFMA.BF16",
+   "ctrl_class": "alu_iadd3",
+   "mercury": [
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_r_0",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_r_1",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_ur_0",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_ur_r_0",
+     "sass_op": "FFMA"
+    }
+   ],
+   "operand_sig": "R_R_R_R",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 36,
+    "pipe_name": "FP_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000600000000000000000223",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 74,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x1c00000000000fffc00000fffffff000",
+     "_src": "k31-fhfma-bf16-flashmla-2026-11-07",
+     "_note": "FlashMLA 389 production words + SM103/SM100 nvdisasm 13.3.73 field probes: FHFMA.BF16 keeps FFMA's four-register and sign/reuse geometry; bits 81 and 82 select this exact mixed-precision mnemonic. Other rounding modes remain outside the row."
+    }
+   },
+   "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+  },
+  "FHFMA.BF16.H1_R_R_R_R": {
+   "base_op": "FHFMA.BF16",
+   "ctrl_class": "alu_iadd3",
+   "mercury": [
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_r_0",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_r_1",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_r_ur_0",
+     "sass_op": "FFMA"
+    },
+    {
+     "fuzzy": false,
+     "match_score": null,
+     "pattern": "MERCURY_fma_f32x2_srcs_ur_r_0",
+     "sass_op": "FFMA"
+    }
+   ],
+   "operand_sig": "R_R_R_R",
+   "scheduling": {
+    "confidence": "hw_measured",
+    "def_latency": 4,
+    "hw_def_latency": 4,
+    "is_variable_latency": false,
+    "latency_source": "hw_measured",
+    "opcode_id": null,
+    "pipe_class": 36,
+    "pipe_name": "FP_ARITH",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 2,
+    "write_latency": 0
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000600000000000000000223",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 75,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 74,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:H1",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:H1",
+       "shift": 84,
+       "token_idx": 3,
+       "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x1c00000000180fffc00000fffffff000",
+     "_src": "k31-fhfma-bf16-flashmla-2026-11-07",
+     "_note": "Measured `.H1` half selectors: bit 83 belongs to operand 2 and bit 84 to operand 3. The separate key prevents an operand modifier from becoming an invented mnemonic modifier."
+    }
+   },
+   "_src": "k31-fhfma-bf16-flashmla-2026-11-07"
   }
  },
  "operand_roles": {
