@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>4396 opcodes &middot; 14925 instruction forms &middot; 22439 encoding variants &middot; 14861 with scheduling data &middot; 6581 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-06 from <code>sm103a.json</code> (c896e8f 2026-11-06), SHA-256 944cc503f8d431c1&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>4396 opcodes &middot; 14926 instruction forms &middot; 22445 encoding variants &middot; 14862 with scheduling data &middot; 6587 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-07 from <code>sm103a.json</code> (8aa5f34 2026-11-07), SHA-256 23900bc5c77b9c02&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -302,7 +302,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 0 of 14,925 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 0 of 14,926 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -206169,9 +206169,10 @@ Collapsed by default — click to expand.
 <p class="desc">Multi-function unit. Evaluates transcendental approximations in ~8 cycles. Operations: <code>.RCP</code> (1/x), <code>.SQRT</code> (&radic;x), <code>.RSQ</code> (1/&radic;x), <code>.SIN</code>, <code>.COS</code>, <code>.EX2</code> (2<sup>x</sup>), <code>.LG2</code> (log<sub>2</sub>x), <code>.TANH</code>. Provides ~23 bits of accuracy (single-precision).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">MUFU_R_FI</td><td class="m">R_FI</td><td class="m">RCP64H</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">MUFU_R_FI_FI</td><td class="m">R_FI_FI</td><td class="m">BF16x2,EX2, EX2,F16x2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">MUFU_R_II</td><td class="m">R_II</td><td class="m">RCP64H, RSQ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">MUFU_R_R</td><td class="m">R_R</td><td class="m">COS, EX2, LG2, RCP, RCP64H, RSQ, RSQ64H, SIN, SQRT, TANH</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">MUFU_R_UR</td><td class="m">R_UR</td><td class="m">LG2, RCP, RCP64H, RSQ64H</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">MUFU_R_R</td><td class="m">R_R</td><td class="m">COS, EX2, LG2, RCP, RCP64H, RSQ, RSQ64H, SIN, SQRT, TANH, BF16x2,EX2, EX2,F16x2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">MUFU_R_UR</td><td class="m">R_UR</td><td class="m">LG2, RCP, RCP64H, RSQ64H, BF16x2,EX2, EX2,F16x2</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>MUFU_R_FI.RCP64H &mdash; 2 fields &middot; 642 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000018004005554400017908</code></div>
@@ -206179,6 +206180,28 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>f64hi</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_FI_FI.BF16x2,EX2 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000108000000000000000908</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.BF16x2 FI form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), imm_hi [63:48] (printed first) and imm_lo [47:32] as bf16 literals; the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:48]</td><td>16</td><td>t2</td><td><code>bf16</code></td></tr>
+<tr><td>[47:32]</td><td>16</td><td>t3</td><td><code>bf16</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_FI_FI.EX2,F16x2 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000000b000000000000000908</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.F16x2 FI form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), imm_hi [63:48] (printed first) and imm_lo [47:32] as f16 literals; the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:48]</td><td>16</td><td>t2</td><td><code>f16</code></td></tr>
+<tr><td>[47:32]</td><td>16</td><td>t3</td><td><code>f16</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>MUFU_R_II.RCP64H &mdash; 2 fields &middot; 28 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000018000000000000017908</code></div>
@@ -206272,6 +206295,30 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>MUFU_R_R.BF16x2,EX2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000108000000000000000308</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.BF16x2 R form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), Ra [39:32] (255 = RZ), |Ra| 62, -Ra 63; the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_R.EX2,F16x2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000000b000000000000000308</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.F16x2 R form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), Ra [39:32] (255 = RZ), |Ra| 62, -Ra 63; the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 <details><summary>MUFU_R_UR.LG2 &mdash; 2 fields &middot; 2 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000008000c000000000700007d08</code></div>
 <div class="ab">var_mask: <code>0x00000000000000000000000000020000</code></div>
@@ -206299,6 +206346,30 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.BF16x2,EX2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080108000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.BF16x2 UR form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), URa [39:32] (255 = URZ), |URa| 62, -URa 63, bit 91 = the uniform frame (required); the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>MUFU_R_UR.EX2,F16x2 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008000b000000000000000d08</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000c00000ff00fff000</code></div>
+<div class="ab">measured: <code>mufu-x2-sm103a-2026-11-07</code></div>
+<div class="ab">MUFU.EX2.F16x2 UR form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), URa [39:32] (255 = URZ), |URa| 62, -URa 63, bit 91 = the uniform frame (required); the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="NANOSLEEP" id="NANOSLEEP">
@@ -318784,8 +318855,8 @@ Collapsed by default — click to expand.
 </table>
 </div>
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-06 from sm103a.json (c896e8f 2026-11-06), SHA-256 944cc503f8d431c18c893e1759a23c2a590746ea451c4dc9ca6a6a1b5cb69960<br>
-14925 instruction forms &middot; 22439 encoding variants &middot; 6581 with a measurement tag &middot; 37 pipeline classes<br>
+SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-07 from sm103a.json (8aa5f34 2026-11-07), SHA-256 23900bc5c77b9c027bc0f5507f0f4a5b97e50d4012a93c69195691efa9dae937<br>
+14926 instruction forms &middot; 22445 encoding variants &middot; 6587 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

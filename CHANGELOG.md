@@ -1,3 +1,42 @@
+## November 7, 2026 (session T-14 / session G run 3, pushed by T-15): the 256-bit global load's descriptor address form measured whole on `sm120.json`; the sm103a MUFU packed-half lanes measured on `sm103a.json`; NEEDS 46 (the 64-bit ISETP compare on sm103a / sm100a) measured
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks
+the whole census witness set of every touched key against the vendor's text, gates and pushes. **`sm120.json`: 32 555 rows,
+17 690 with `_src` — 14 865 harvest rows left** (15 647 of 28 729 at `94ff281`, 18 841 of 26 598 at `c896e8f`).
+
+- **LDG.256 dARI measured whole** (`348535f`; cubit `tools/probes/re_sm120_ldg256.py --form dari`, 4 888 form + 81 lattice
+  words — the same text on the three targets for every form word (the L2 = 3 plane is `INVALID3` on SM103 / SM100,
+  `RML2.???` on SM120: lattice either way); provenance `ldg256-family-2026-11-07`; cubit `tests/sm120_ldg256_dari.rs`): the
+  256-bit global load (opcode 0x97e, frame bit 91) in its descriptor address form `desc[URb][Ra.64(+off)]`. The four plain
+  keys `LDG_R_R_dARI` / `_II` / `_P` / `_II_P` carry 1 152 measured groups each — 6 cache (EF / none / EL / LU / EU / NA,
+  [86:84]) × 3 L2 (EFL2 / ENL2 / ELL2, [82:81]) × 4 LTC ([74:73]) × the 16-value strength / scope / PRIVATE enum [80:77]
+  (4 607 groups added); **the 781 dotted one-group harvest keys of the form are `_meta.key_aliases`** of the plain key of
+  their operand signature, every one naming a group of its target (0 census witnesses; forms 15 583 → 14 805, variants
+  28 729 → 32 555, aliases 320 → 1 101). Law: guard [15:12], Rd1 [23:16], Ra [31:24] (RZ illegal → `claim_forbid`), URb
+  [39:32], the signed 17-bit 32-byte-unit offset [56:40] (`sub_imm2_shr5`), the trailing byte [63:57] + 72 elided at 0xff
+  (baked by the plain keys, carried by `_II` as `imm@57:7` + `imm_shr7@72:1`), Rd0 [71:64], bits 75 / 76 = base width +
+  descriptor form, the trailing predicate [90:87] (`pred_inv4`, PT elided: baked by the plain keys, carried by `_P`); bit 83
+  and [95:92] text-inert, fail-closed. Reviewed by T-14: the 4 969 words re-measured identical; the whole production LDG /
+  STG / LD census witness set (8 020 words) prints the vendor's text with the new table.
+- **The sm103a MUFU packed-half lanes measured** (`8aa5f34`, `sm103a.json`; cubit `tools/probes/re_sm103_mufu_x2.py`, run on
+  the B300 host with nvdisasm **13.3.73** on `-b SM103` — 13.0.85 and 13.1 text-identical on every word; provenance
+  `mufu-x2-sm103a-2026-11-07`, 6 rows; cubit `tests/sm103a_mufu_x2.rs`): `MUFU.EX2.BF16x2` / `MUFU.EX2.F16x2` in the register
+  (0x308), uniform (0xd08 + bit 91) and immediate (0x908) forms — `.BF16x2` = bit 80 with the half code 0, `.F16x2` = the half
+  code 3; EX2 ([77:74] = 2) is the only function the packed lanes admit (the others print `INVALIDn`); Rd [23:16], Ra / URa
+  [39:32] with `|x|` 62 / `-x` 63; the immediate form carries two halves (hi [63:48] printed first, lo [47:32]) as bf16 / f16
+  literals; bit 60 text-inert in the lanes; bit 80 with a half code and half 3 with bit 80 are illegal. On `-b SM120` /
+  `SM100` bit 80 is text-inert and half 3 illegal — the lanes exist on sm103a only (found by G's conversion batch, where 6
+  of the 3 059 SM120 sweep words differed on `-b SM103`). New groups `BF16x2,EX2` / `EX2,F16x2` on `MUFU_R_R` and `MUFU_R_UR`,
+  the new key `MUFU_R_FI_FI` (forms 14 925 → 14 926, variants 22 439 → 22 445). The scalar sm103a MUFU rows stay harvest rows
+  (the family proper, later). Silicon not measured (the B300 GPU was busy); no compiler word of the B300 corpora uses the lanes.
+- **NEEDS 46 measured — the 64-bit ISETP compare on sm103a / sm100a** (T-14 on the B300, nvdisasm 13.3.73 + 13.0.85): bit 80
+  is text-inert on `-b SM103` / `SM100` in every 13.x build (the `.S64` / `.U64` suffix is SM120-only; 0 of 2 136 sweep words
+  carry it there). The four `S64` / `U64` harvest groups of `ISETP_P_P_R_UR_P` on `sm103a.json` / `sm100a.json` (AND,GE,U64 /
+  AND,GT,U64 / AND,NE,S64 / NE,OR,S64) are text phantoms — their canonical words print `.U32` compares there (`.U64` on
+  SM120) or are illegal on every target — and no ISETP word of 2 145 corpus cubins (2.08 M ISETP words over sm_100 / sm_103 /
+  sm_120) sets bit 80. Not changed: whether the silicon compares 64 bits needs a probe on an idle B300 (listed in the README).
+- The SM120 and SM103A reference pages regenerated at `8aa5f34`.
+
 ## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP, the FP32 ALU, the uniform FP32 ALU, the conversions and FSET / FSEL / FCHK measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`,
