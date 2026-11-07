@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22623,
-   "rows_without_src": 15807,
+   "rows_without_src": 15803,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -478,6 +478,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_prmt.py",
      "test": "tests/k31_prmt.rs"
+    },
+    "k31-brxu-register-offset-2026-11-07": {
+     "rows": 1,
+     "kind": "brx-ret-family measured donor + FlashMLA production witnesses",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_brxu.py",
+     "test": "tests/k31_brxu.rs"
     }
    },
    "history": {
@@ -831,7 +838,8 @@
    "FSETP_P_P_II_II_P": "FSETP_P_P_R_FI_P",
    "FSETP_P_P_II_R_P": "FSETP_P_P_R_R_P",
    "FSETP_P_P_R_II_P": "FSETP_P_P_R_FI_P",
-   "USETMAXREG_U_UP_II": "USETMAXREG_UP_II"
+   "USETMAXREG_U_UP_II": "USETMAXREG_UP_II",
+   "BRXU_L": "BRXU_UR_II"
   }
  },
  "cost_model": {
@@ -396063,59 +396071,6 @@
     }
    },
    "operand_sig": "II",
-   "scheduling": {
-    "confidence": "synthetic",
-    "def_latency": 0,
-    "is_variable_latency": false,
-    "latency_source": "synthetic",
-    "opcode_id": null,
-    "pipe_class": 1,
-    "pipe_name": "CTRL_FLOW",
-    "ptxas_raw": null,
-    "read_latency": 0,
-    "stall_base": 5,
-    "throughput": 1,
-    "write_latency": 0
-   }
-  },
-  "BRXU_L": {
-   "base_op": "BRXU",
-   "ctrl_class": "ctrl_flow",
-   "mercury": [],
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000b8000000000000000007958",
-     "count": 8,
-     "fields": [
-      {
-       "bits": 8,
-       "extraction": "",
-       "shift": 16,
-       "token_idx": 0
-      },
-      {
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "bits": 48,
-       "extraction": "",
-       "shift": 34,
-       "token_idx": 0
-      },
-      {
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 1
-      }
-     ],
-     "variable_mask": "0x1c0000000003fffffffffffcffff0000"
-    }
-   },
-   "operand_sig": "L",
    "scheduling": {
     "confidence": "synthetic",
     "def_latency": 0,
@@ -1700914,6 +1700869,50 @@
     "throughput": 1
    },
    "_src": "k31-alu-tail-flashmla-2026-11-07"
+  },
+  "BRXU_UR_II": {
+   "base_op": "BRXU",
+   "operand_sig": "_UR_II",
+   "mod_groups": {
+    "": {
+     "and_base": "0x000000000b8000000000000000000958",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-brxu-register-offset-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "k31-brxu-register-offset-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm_shr2",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-brxu-register-offset-2026-11-07"
+      },
+      {
+       "bits": 48,
+       "extraction": "imm_shr10",
+       "shift": 34,
+       "token_idx": 2,
+       "_src": "k31-brxu-register-offset-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x000000000003fffffffffffcfffff000",
+     "_src": "k31-brxu-register-offset-2026-11-07",
+     "_note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
+    }
+   },
+   "_src": "k31-brxu-register-offset-2026-11-07"
   }
  },
  "operand_roles": {
