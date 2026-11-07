@@ -174,7 +174,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (16 612 of 26 341 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P and UFSETP so far) are
+  measurement in prose. Rows **without** `_src` (16 156 of 26 581 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP and the FP32 ALU so far) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06
@@ -273,7 +273,7 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   tiebreak decides). The census proves these rows on the words real kernels use, not on every value of
   every field. The dynamic nvdisasm cross-check (cubit `tools/audit_dynamic.py`, 88 388 probe words)
   **is at its end state: 0 rows with a finding (2026-11-06, replay at `39bafbb`; 1 row at the T-11 tables — the
-  `IMMA.SF.16832.U8.U8` hypothesis, since measured on silicon and renamed `QMMA.SF.16832.F32.UNIDENTIFIED.E8`, see
+  `IMMA.SF.16832.U8.U8` hypothesis, since measured on silicon and renamed `QMMA.SF.16832.F32.MXINT8.MXINT8.E8`, see
   below)** — from 1 977 on 2026-11-02, 418 on the T-7 tables, 230 (T-8), 215 (T-9), 14 (T-10), 1 (T-11). The 13 closed on
   2026-11-06 (T-11, each re-measured with nvdisasm 13.1 on the four targets, cubit `tests/sm120_audit_t11.rs`): the
   seven RZ-base 64-bit descriptor words print the vendor's `[???255.64+UR..]` glyph as the REDG / ATOMG `.EL` twins do
@@ -345,12 +345,13 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
 - Metadata under `_discovery` records provenance and confidence for unusual entries; users
   should inspect it before relying on those forms in production code.
 - The former `IMMA.SF.16832.U8.U8` entry (opcode 0x47e; a 2026-03-26 hypothesis without a numerical
-  oracle) is **`QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR` since 2026-11-06, measured on sm_120
-  silicon**: the word executes, writes fp32, honours the E8M0 block scales and matches neither documented
-  QMMA.SF input type on identical operands — an undocumented block-scaled MMA of the QMMA.SF family
-  selected by opcode bit 2, whose input element types are not yet identified (the mnemonic says so). nvdisasm
-  13.1 / 13.3 have no text for it. `_discovery` records the measurement and the withdrawn claims; the old key
-  is a `_meta.key_aliases` entry. Scheduling fields are copied from the E4M3.E4M3 donor row and marked so —
+  oracle) is **`QMMA.SF.16832.F32.MXINT8.MXINT8.E8_R_R_R_R_R_R_UR`, measured on sm_120 silicon** (2026-11-06:
+  executes, writes fp32, honours the E8M0 block scales, matches neither documented QMMA.SF input type;
+  2026-11-07: both input element types identified as OCP MXINT8 — two's-complement int8 with six fractional
+  bits under the E8M0 block scale, byte-value sweeps of A and B reproduced exactly on all 6 × 256 cases) —
+  an undocumented block-scaled MMA of the QMMA.SF family selected by opcode bit 2, the MX integer kind PTX
+  does not expose. nvdisasm 13.1 / 13.3 have no text for it. `_discovery` records the measurements and the withdrawn claims; the old key
+  and the interim `UNIDENTIFIED` key are `_meta.key_aliases` entries. Scheduling fields are copied from the E4M3.E4M3 donor row and marked so —
   not a measured latency.
 
 ## Related Work

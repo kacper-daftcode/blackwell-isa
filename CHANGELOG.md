@@ -1,8 +1,8 @@
-## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP measured whole on `sm120.json`
+## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP and the FP32 ALU measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`,
-gates and pushes. **`sm120.json`: 26 341 rows, 9 729 with `_src` — 16 612 harvest rows left** (18 841 of 26 598 at
-`c896e8f`).
+gates and pushes. **`sm120.json`: 26 581 rows, 10 425 with `_src` — 16 156 harvest rows left** (16 905 of 26 442 at
+`e1e8598`, 18 841 of 26 598 at `c896e8f`).
 
 - **UFSETP measured whole** (`63e5040`; cubit `tools/probes/re_sm120_ufsetp.py`, 394 form + 6 glyph + 66 lattice words;
   provenance `ufsetp-family-2026-11-06`, 192 rows; cubit `tests/sm120_ufsetp.rs`): the two keys
@@ -20,7 +20,42 @@ gates and pushes. **`sm120.json`: 26 341 rows, 9 729 with `_src` — 16 612 harv
   `.FTZ` 80; UPd0 [83:81]; UPd1 [86:84]; UPc [89:87] + `!` 90; [95:92] text-inert; no `.reuse` (nvdisasm rejects the
   reuse bits on the uniform opclass). Reviewed by T-13: the 466 words re-measured identical under the probe's control
   code, 464 of them illegal on the two other targets (the 2 vendor-rejected lattice words are rejected on all three).
-- The SM120 reference page regenerated at `63e5040`.
+- **FP32 ALU measured whole — FADD / FMUL / FFMA / FMNMX** (`dad8393`; cubit `tools/probes/re_sm120_fp32_alu.py`, 1 636
+  form + 30 glyph + 492 lattice + 16 neighbour words, the same text on the three targets; provenance
+  `fp32-alu-family-2026-11-07`, 696 rows; cubit `tests/sm120_fp32_alu.rs`): the 14 plain keys `FADD_R_R_{R,FI,UR}` (0x221 /
+  0x421 / 0xe21 + 91), `FMUL_R_R_{R,FI,UR}` (0x220 / 0x820 / 0xc20 + 91), `FFMA_R_R_R_R` / `_R_R_R_FI` / `_R_R_FI_R` /
+  `_R_R_UR_R` / `_R_R_R_UR` (0x223 / 0x423 / 0x823 / 0xc23 + 91 / 0xe23 + 91), `FMNMX_R_R_{R,FI,UR}_P` (0x209 / 0x809 /
+  0xc09 + 91) — 355 harvest rows rewritten in place (`FADD_R_R_R` baked a sample's guard, claimed the unused reuse bit
+  123 and lacked the `|Rb|` 62 field) and **341 missing groups added** (`FMUL_R_R_FI` / `_UR` had 3 of 168 groups,
+  `FADD_R_R_R` 5 of 16 — legal words nvdisasm names); 27 junk keys retired as `_meta.key_aliases` → the plain key of
+  their opcode (12 FADD, 5 FMUL, 5 FFMA, 5 FMNMX: the `_?` / `_L` / `_R_R_R_R` mis-tokenised harvest keys, dotted twins
+  with the modifier in the key — `FADD.RZ_R_R_R`'s row decoded the `.RM` word as `.RZ` —, and the integer-spelling
+  `*_II*` twins of the f32 forms, whose hexadecimal literals still assemble through the alias; the 185 production census
+  words of `FMUL_R_R_II` decode on `FMUL_R_R_FI` and print the vendor's text). Law: guard [15:12]; Rd [23:16]; Ra [31:24]
+  (`-` 72, `|` 73, `.reuse` 122); B [39:32] (Rb / URb, `|` 62, `-` 63) or f32 [63:32]; the C slot [71:64] (FFMA: Rc,
+  `|` 74, `-` 75; text-inert on FADD / FMUL / FMNMX). FADD `[.FTZ][.RM|.RP|.RZ][.SAT]` (FTZ 80, rounding [79:78], SAT 77);
+  FMUL `[.FTZ|.FMZ][.D8|.D4|.D2|.M2|.M4|.M8][.RND][.SAT]` (FMZ 76, both = `INVALID3`; scale [86:84] with 4 = unspelled, 0 =
+  `INVALID0`); FFMA the same without the scale; FMNMX `[.FTZ][.NAN][.XORSIGN]` (80 / 81 / 82) + Pc [89:87] / `!` 90.
+  `.reuse`: FADD Ra 122 / Rb 124, FMUL 122 / 123, FFMA 122 / 123 / 124 by slot, FMNMX 122 / 123; none on UR / f32 operands.
+  Measured and left unclaimed (candidates for later batches): bit 81 on the register / UR forms of FADD / FFMA = `FHADD` /
+  `FHFMA` (SM120 mixed precision; text-inert on the immediate forms), bit 65 on FMNMX = `FMNMX.IS_A Rd, Pd, Ra, Rb, Pc`
+  (Pd [68:66]; no key in any table). Reviewed by T-13: the 2 174 words re-measured identical on the three targets; 733
+  sampled census words of the 14 keys print nvdisasm's text on the new rows.
+- **NEEDS 44 closed on silicon (`dac48ad`): the QMMA.SF opcode-bit-2 variant (0x47e) is the block-scaled MMA over MXINT8 ×
+  MXINT8** — `QMMA.SF.16832.F32.MXINT8.MXINT8.E8_R_R_R_R_R_R_UR` (was `…UNIDENTIFIED.E8` since 2026-11-06; the hypothesis key
+  `IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR` and the interim key are `_meta.key_aliases`; provenance
+  `qmma-sf-mxint8-silicon-2026-11-07`, `nvdisasm_sm120: "no text"`). Measured by T-13 on the test host GPU 0 (RTX PRO 6000
+  Blackwell SE) with a cubit-assembled kernel that runs the five documented diagonal type pairs and the 0x47e word on
+  identical fragments: byte-value sweeps of A and of B against three references give 32 · (int8(a)/64) · (int8(b)/64)
+  exactly for all 6 × 256 cases — OCP MX INT8 elements (two's-complement int8 with six fractional bits, range
+  [−2, 1.984375], under the E8M0 block scale), fp32 output; one-hot bytes light one D row (A) / one D column (B) exactly
+  as the `E4M3.E4M3` row does (the m16n8k32 8-bit fragment layout); a byte is one element (0x04 → 0.0625, 0x44 → 1.0625);
+  D · 2^(s−127) for every E8M0 scale with NaN at 0xff. Fields unchanged (the family's). Side result of the same run: the
+  documented `E2M1` type code computes exactly the E2M3 map on bits [5:0] of the 8-bit container for every byte value
+  (PTX places `.e2m1` in bits [5:2] with zero padding; the silicon does not mask bits [1:0]) — the E2M1 / E2M3 rows are
+  correctly named and compute the same arithmetic on well-formed inputs. Not measured: the type-field lattice under
+  opcode bit 2. cubit `tests/fixtures/sm120_qmma_sf_mxint8_silicon.jsonl`, `tests/needs44_qmma_sf_bit2.rs`.
+- The SM120 reference page regenerated at `dac48ad`.
 
 ## November 6–7, 2026 (session T-12 / session G): the T1 production line — HSETP2 and ISETP / UISETP measured whole on `sm120.json`
 
