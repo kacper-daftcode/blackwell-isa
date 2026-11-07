@@ -1,3 +1,28 @@
+## November 7, 2026 (session T-15 / session G run 3 → 4): the 256-bit global load's 64-bit uniform-indexed address form measured whole on `sm120.json`
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks the
+whole census witness set of every touched key against the vendor's text, gates and pushes. **`sm120.json`: 34 079 rows,
+22 290 with `_src` — 11 789 harvest rows left** (14 865 of 32 555 at `8aa5f34`, 18 841 of 26 598 at `c896e8f`).
+
+- **LDG.256 ARURI64 measured whole** (`5cb10e5` = G's `af3329f`; cubit `tools/probes/re_sm120_ldg256.py --form ARURI64`, 4 952 form
+  + 17 lattice words — the same text on the three targets for every form word (the L2 = 3 lattice plane is `INVALID3` on
+  SM103 / SM100, `RML2.???` on SM120, as in batch 10); provenance `ldg256-family-2026-11-07`, the legend 4 608 → 9 216; cubit
+  `tests/sm120_ldg256_aruri64.rs`): the 256-bit global load (opcode 0x97e, frame bit 91) in its 64-bit uniform-indexed address
+  form `[Ra.64+URb(+off)]` (bit 75 = `.64`, bit 76 clear). The four new plain keys `LDG_R_R_ARURI64` / `_II` / `_P` / `_II_P` carry
+  1 152 measured groups each — 6 cache × 3 L2 × 4 LTC × the 16-value strength / scope / PRIVATE enum; **the 3 084 dotted
+  one-group harvest keys of the form are `_meta.key_aliases`** of the plain key of their operand signature, every one naming a
+  group of its target (8 of the retired rows carried `wave11-integration-2026-11-05` — reproduced, that legend 44 → 36; 0
+  census witnesses; forms 14 805 → 11 725, variants 32 555 → 34 079, aliases 1 101 → 4 185, claim_forbid rows 10 837 → 10 833 —
+  the four retired dotted rows that carried one; the measured `.64` rows have none: every base is legal, RZ elides). Law =
+  batch 10's with bit 76 clear: guard [15:12], Rd1 [23:16], Ra [31:24] (**RZ legal, elided — `[URb(+off)]`, the U32 twin's
+  text; cubit mints the `.64` word for the bare spelling, BUG-464**), URb [39:32] (255 = `URZ`, printed), the signed 17-bit
+  32-byte-unit offset [56:40], the trailing byte [63:57] + 72 elided at 0xff (carried by the `_II` keys), Rd0 [71:64], LTC
+  [74:73], the strength / scope / PRIVATE enum [80:77], L2 [82:81], cache [86:84], the trailing predicate [90:87] (`pred_inv4`,
+  the `_P` keys); bit 83 and [95:92] text-inert, fail-closed; bit 91 clear illegal; 75 = 0 with 76 = 1 illegal. Reviewed by
+  T-15: the 4 969 words re-measured identical; the whole production LDG / STG / LD / `ARURI` census witness set (13 keys, 18 346
+  words) prints the vendor's text with the new table.
+- The SM120 reference page regenerated at `5cb10e5`.
+
 ## November 7, 2026 (session T-14 / session G run 3, pushed by T-15): the 256-bit global load's descriptor address form measured whole on `sm120.json`; the sm103a MUFU packed-half lanes measured on `sm103a.json`; NEEDS 46 (the 64-bit ISETP compare on sm103a / sm100a) measured
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks
