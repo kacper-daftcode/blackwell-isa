@@ -477,6 +477,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_alu_rest.py",
      "test": "tests/k31_alu_rest.rs"
+    },
+    "k31-utchmma-descriptor-kinds-2026-11-07": {
+     "rows": 2,
+     "kind": "nvdisasm 13.3.73 dsel2/type selector + production witnesses",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_utchmma_words.py",
+     "test": "tests/k31_utchmma_words.rs"
     }
    },
    "history": {
@@ -504708,133 +504715,144 @@
      "count": 8,
      "fields": [
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 8,
        "extraction": "gdesc_ur",
        "shift": 24,
        "token_idx": 1
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 8,
        "extraction": "gdesc_ur",
        "shift": 32,
        "token_idx": 2
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 21,
        "extraction": "tmem_ur",
        "shift": 64,
        "token_idx": 3
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 8,
        "extraction": "tmem_ur",
        "shift": 40,
        "token_idx": 4
       },
       {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 6
-      },
-      {
-       "_src": "2c",
-       "bits": 17,
-       "extraction": "gdesc_off",
-       "shift": 68,
-       "token_idx": 1
-      },
-      {
-       "_src": "2c",
-       "bits": 9,
-       "extraction": "gdesc_off",
-       "shift": 15,
-       "token_idx": 2
-      },
-      {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "tmem_off",
-       "shift": 56,
-       "token_idx": 3
-      },
-      {
-       "_src": "2c",
-       "bits": 4,
-       "extraction": "tmem_off",
-       "shift": 92,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x00040000028000020000041e1e000000"
-    },
-    "WS": {
-     "and_base": "0x000000000808000000ff0000000011ea",
-     "count": 6,
-     "fields": [
-      {
-       "_src": "tc5-mk296",
-       "bits": 8,
-       "extraction": "gdesc_ur",
-       "shift": 24,
-       "token_idx": 1
-      },
-      {
-       "_src": "tc5-mk296",
-       "bits": 8,
-       "extraction": "gdesc_ur",
-       "shift": 32,
-       "token_idx": 2
-      },
-      {
-       "_src": "tc5-mk296",
-       "bits": 8,
-       "extraction": "tmem_ur",
-       "shift": 64,
-       "token_idx": 3
-      },
-      {
-       "_src": "tc5-mk296",
-       "bits": 8,
-       "extraction": "tmem_ur",
-       "shift": 40,
-       "token_idx": 4
-      },
-      {
-       "_src": "tc5-mk296",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
        "token_idx": 6
       },
       {
-       "_src": "tc5-mk296",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 17,
+       "extraction": "gdesc_off",
+       "shift": 68,
+       "token_idx": 1
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 9,
+       "extraction": "gdesc_off",
+       "shift": 15,
+       "token_idx": 2
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 8,
+       "extraction": "tmem_off",
+       "shift": 56,
+       "token_idx": 3
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 4,
+       "extraction": "tmem_off",
+       "shift": 92,
+       "token_idx": 4
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 6,
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00040000028000020000041e1e000000",
+     "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+     "_note_predicate_probe": "UP0/UPn and negated UPT production words: predicate value[89:87], negation bit[90]. The donor's packed 4-bit pred hid negation; split without changing the mask."
+    },
+    "WS": {
+     "and_base": "0x000000000808000000ff0000000011ea",
+     "count": 6,
+     "fields": [
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 8,
+       "extraction": "tdesc_ur",
+       "shift": 24,
+       "token_idx": 1
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 8,
+       "extraction": "gdesc_ur",
+       "shift": 32,
+       "token_idx": 2
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 8,
+       "extraction": "tmem_ur",
+       "shift": 64,
+       "token_idx": 3
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 8,
+       "extraction": "tmem_ur",
+       "shift": 40,
+       "token_idx": 4
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 6
+      },
+      {
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
        "token_idx": 6
       },
       {
-       "_src": "tc5-mk296",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
        "token_idx": 0
       },
       {
-       "_src": "f2-104",
+       "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
        "bits": 2,
        "extraction": "dsel2",
        "shift": 10,
        "token_idx": 1
       }
      ],
-     "variable_mask": "0x000e0e000780003f00007effff00ec00"
+     "variable_mask": "0x000e0e000780003f00007effff00ec00",
+     "_src": "k31-utchmma-descriptor-kinds-2026-11-07",
+     "_note_kind_probe": "SM103/SM100 nvdisasm dsel2: 0/3=hole or UTCQMMA; 1=gdesc; 2=tmem. WS token 1 is mixed-kind; naming it gdesc_ur erased tmem on both print and encode."
     }
    },
    "operand_sig": "II_II_II_II_II_UP",
