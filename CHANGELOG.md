@@ -22,6 +22,9 @@ gates and pushes. **`sm120.json`: 39 125 rows, 38 091 with `_src` — 1 034 harv
   `bug339` 9 → 0, `dsv41-sm120-2026-10-22` 529 → 516, `f2-181` 7 → 6, `sm120-native-capture-control-2026-10-22` 22 → 21,
   `ctrl-silicon-sm120-2026-11-04` 13 → 12 (identical in every table since; none of the T1 batches introduced it). No row changes.
 - The SM120 reference page regenerated at `3dde6e1`.
+- **`b214b0e` — the same legend hygiene on the other tables:** `sm103a.json` (`b3001-lea-rebuild-2026-11-05` 1 → 0, `b3004-lea-x-2026-11-05` 2 → 1,
+  `rows_total` 22 439 → 22 445 — the six MUFU packed-half rows of `8aa5f34` never updated it), `sm100a.json` (the two LEA legends), `sm121a.json`
+  (`bug226d-2026-08-28` 1 → 0). No row changes; cubit re-vendored (`124299b`).
 
 ## November 7, 2026 (session T-16 / session G run 4): the 256-bit global load's U32 uniform-indexed form, the 256-bit global store and the global reduction's uniform-indexed forms measured whole on `sm120.json`
 
