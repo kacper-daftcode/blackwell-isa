@@ -377,7 +377,7 @@
      "kind": "GB10 census: UIMNMX.U64 immediate form rebuilt from the SM120 U64 register-form layout"
     },
     "bug226d-2026-08-28": {
-     "rows": 1,
+     "rows": 0,
      "kind": "encoder fix wave (cubit BUG-226d) (tag carried by a row the fleet lane grafted into SM121A)",
      "date": "2026-08-28",
      "test": "tests/bug226_fsetp_iadd3_parity.rs"

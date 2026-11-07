@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22439,
+   "rows_total": 22445,
    "rows_without_src": 15858,
    "sources": {
     "bug154-2026-08-25": {
@@ -293,7 +293,7 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
      "test": "tests/b3001_lea_iadd3_shadowing.rs",
-     "rows": 1
+     "rows": 0
     },
     "b3002-ldg-desc-offset-2026-11-05": {
      "kind": "field restored from sibling measurement (sm103a mirror of the sm100a 1c037d0 fix; arch parity: nvdisasm-13.3 renders the witness word identically on both archs): the desc offset window of LDG_R_dARI STRONG forms (sub_imm2 24b SIGNED @ [40..64), BUG-388) was missing from the E,SM,STRONG,U16 group; zero sm103a witnesses, every sibling STRONG group carries the field",
@@ -314,7 +314,7 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
      "test": "tests/b3004_lea_x_family.rs",
-     "rows": 2
+     "rows": 1
     },
     "iadd3x-urform-carry-neg-2026-11-06": {
      "rows": 1,

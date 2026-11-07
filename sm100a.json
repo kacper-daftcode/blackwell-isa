@@ -299,7 +299,7 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py + b3001_rebuild_lea_row.py",
      "test": "tests/b3001_lea_iadd3_shadowing.rs",
-     "rows": 1
+     "rows": 0
     },
     "b3002-ldg-desc-offset-2026-11-05": {
      "kind": "field restored from sibling measurement: the desc offset window of LDG_R_dARI STRONG forms (sub_imm2 24b SIGNED @ [40..64), BUG-388) was missing from the E,SM,STRONG,U16 group; census: 13 680 words on sm100a re-encode with the offset zeroed (nvdisasm arbiter)",
@@ -327,7 +327,7 @@
      "date": "2026-11-05",
      "tool": "pubwave/wave11/b300/b3004_apply.py + b3001_fixture_and_sweep.py + b3001_lea_mode_probe.py",
      "test": "tests/b3004_lea_x_family.rs",
-     "rows": 2
+     "rows": 1
     },
     "iadd3x-urform-carry-neg-2026-11-06": {
      "rows": 1,
