@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22606,
+   "rows_total": 22612,
    "rows_without_src": 15804,
    "sources": {
     "bug154-2026-08-25": {
@@ -456,6 +456,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_uiadd64.py",
      "test": "tests/k31_uiadd64.rs"
+    },
+    "k31-memory256-flashmla-2026-11-07": {
+     "rows": 6,
+     "kind": "measured descriptor field transfer + nvdisasm 13.3.73 exact-form target probes",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_mem256.py",
+     "test": "tests/k31_memory256.rs"
     }
    },
    "history": {
@@ -1699824,6 +1699831,512 @@
     "write_latency": 0
    },
    "_src": "k31-uiadd64-flashmla-2026-11-07"
+  },
+  "LDG.E.NA.EFL2.LTC256B.256.CONSTANT_R_R_dARI": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 17b [56:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "LDG.E.NA.EFL2.LTC256B.256.CONSTANT",
+   "ctrl_class": "ldg",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000008509f00fe0000000000097e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 17,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff01fffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact LDG.E.NA.EFL2.LTC256B.256.CONSTANT form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "R_R_dARI",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
+   "_src475": "bug475-2026-09-17",
+   "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "LDG.E.NA.ENL2.LTC256B.256.CONSTANT_R_R_dARI": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 17b [56:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "LDG.E.NA.ENL2.LTC256B.256.CONSTANT",
+   "ctrl_class": "ldg",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000008529f00fe0000000000097e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 17,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff01fffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact LDG.E.NA.ENL2.LTC256B.256.CONSTANT form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "R_R_dARI",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
+   "_src475": "bug475-2026-09-17",
+   "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "LDG.E.NA.ENL2.LTC256B.256.CONSTANT_R_R_dARI_II": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 17b [56:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "LDG.E.NA.ENL2.LTC256B.256.CONSTANT",
+   "ctrl_class": "ldg",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000008529e00000000000000097e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 17,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 7,
+       "extraction": "imm",
+       "shift": 57,
+       "token_idx": 4,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "imm_shr7",
+       "shift": 72,
+       "token_idx": 4,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000001fffffffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact LDG.E.NA.ENL2.LTC256B.256.CONSTANT form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "R_R_dARI_II",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
+   "_src475": "bug475-2026-09-17",
+   "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "LDG.E.EF.ENL2.LTC256B.256.CONSTANT_R_R_dARI": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 17b [56:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "LDG.E.EF.ENL2.LTC256B.256.CONSTANT",
+   "ctrl_class": "ldg",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000008029f00fe0000000000097e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 17,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff01fffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact LDG.E.EF.ENL2.LTC256B.256.CONSTANT form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "R_R_dARI",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
+   "_src475": "bug475-2026-09-17",
+   "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "LDG.E.ENL2.LTC256B.256.CONSTANT_R_R_dARI": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 17b [56:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "LDG.E.ENL2.LTC256B.256.CONSTANT",
+   "ctrl_class": "ldg",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000008129f00fe0000000000097e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 17,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff01fffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact LDG.E.ENL2.LTC256B.256.CONSTANT form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "R_R_dARI",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 200,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 200,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
+   "_src475": "bug475-2026-09-17",
+   "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "STG.E.NA.EFL2.256_dARI_R_R": {
+   "_discovery": {
+    "date": "2026-08-22",
+    "evict_policy_bits": "[82:81]: 00=EFL2 01=ENL2 10=ELL2 11=RESERVED (LDG renders RML2.256.???1.???0 / STG INVALID3.256)",
+    "imm_window": "signed 19b [58:40] scale<<5",
+    "method": "iter35 gx4: nvcc -arch=sm_121a inline-PTX ld/st.global.L2::evict_*.v8 sweep (84 kernels) + nvdisasm -b SM121a per-bit raw probe",
+    "note": "sub_imm2_shr5 fail-closed signed window; GB10 unsigned-vs-signed: signed OK (compiled -0x800/-0x20 STG words verified)"
+   },
+   "base_op": "STG.E.NA.EFL2.256",
+   "mod_groups": {
+    "": {
+     "and_base": "0x000000000f501800f80000000000097f",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 64,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r1",
+       "shift": 24,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 19,
+       "extraction": "sub_imm2_shr5",
+       "shift": 40,
+       "token_idx": 1,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 3,
+       "_src": "k31-memory256-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff07fffffffffff000",
+     "_src": "k31-memory256-flashmla-2026-11-07",
+     "_note": "Production witnesses and independent SM103/SM100 guard/register/offset/policy probes for this exact STG.E.NA.EFL2.256 form. Signed scaled address offset and, where present, the trailing policy immediate are explicit."
+    }
+   },
+   "operand_sig": "dARI_R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 3,
+    "pipe_name": "MEMORY",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_note": "donor-clone sm121a (450): x3 EFL2.256 non-NA dARI coverage-gap (vendor x4 desc[URx][Ry.64] GENUINE, arb447 F; zero-intersection vs existing rows machine-proven [patch450 A2]; CLONE-ILLEG raRZ donor-symmetric = klasa 452; pol00/pol7f trailing-imm = 453-kand).",
+   "_src450": "bug450-2026-09-12",
+   "_src452": "bug452-2026-09-13",
+   "_src": "k31-memory256-flashmla-2026-11-07"
   }
  },
  "operand_roles": {
