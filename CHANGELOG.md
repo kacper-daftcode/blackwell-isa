@@ -1,3 +1,28 @@
+## November 7, 2026 (session T-16 / session G run 5): the tensor-core long tail (QMMA / HMMA / OMMA / DMMA / IMMA) verified row by row on `sm120.json`; 15 stale legends re-counted
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1, checks the whole production census before and after,
+gates and pushes. **`sm120.json`: 39 125 rows, 38 091 with `_src` — 1 034 harvest rows left** (1 376 of 39 203 at `3a94df3`, 18 841 of
+26 598 at `c896e8f`); forms 1 309 → 1 231, `_meta.key_aliases` 14 613 → 14 691.
+
+- **The tensor-core long tail verified row by row** (`1886972` = G's `b1b332b` re-applied on `3a94df3` by G's own `apply`; cubit
+  `tools/probes/re_sm120_rows.py --family tensor`, nvdisasm 13.1 `-b SM120`: per harvest row the canonical word and all 109 single-bit
+  flips of bits 0..104 / 122..125 — 37 620 words named, 14 554 form words): **264 rows measured** (`rows-tensor-2026-11-07`: QMMA 209,
+  HMMA 31, OMMA 16, DMMA 4, IMMA 4 — every declared field bit moves exactly its own operand token, no undeclared bit moves an operand of
+  the same form; `variable_mask` is now exactly the field bits, text-inert bits fail closed; 149 fields the vendor names were added —
+  `.reuse` on the B operand at 123, the guard, `-Ra` 72 / `-Rb` 63), **78 shadowed twin keys retired as `_meta.key_aliases`** (73
+  byte-identical `_P_` twins, 4 `_?` junk spellings, the dotted `HMMA.1684.F32.TF32_R_R_R_R`; 0 deletions, 0 census witnesses). Laws:
+  QMMA (0x27a) shape 75 / accumulator 77 / A type [79:78] + 83 / B type 79 + 85 / `.SP` 80 / the `UP` gate [89:87] (inverted) + `!` 90 /
+  `.reuse` on B only (123); HMMA (0x23c) shape 75 + 78 (`INVALID3`) / accumulator 76 / BF16 82 / TF32 83 / `.SP` 73; DMMA (0x23f)
+  rounding [79:78], `|Ra|` 73 / `-Ra` 72 / `|Rb|` 62 / `-Rb` 63 / `|Rc|` 74 / `-Rc` 75; IMMA `ROW` / `COL` glyph planes 73 / 74. The 25
+  `INVALIDn`-keyed rows verified as faithful glyph keys (keep vs fail closed: the owner's). Forms 1 309 → 1 231, variants 39 203 →
+  39 125, rows without `_src` 1 376 → 1 034. Reviewed by T-16: 28 288 fixture words re-measured identical; the census's 6 249 words on
+  the seven rewritten census-bearing keys unchanged in key, text and re-encoding.
+- **15 stale provenance legends re-counted to their live rows** (`3dde6e1`): `atoms-aruri-sm120-2026-10-29` 1 → 0, `bug165` 5 → 3,
+  `bug172` 3 → 2, `bug203` 56 → 55, `bug221` 14 → 13, `bug226b` 5 → 0, `bug226d` 36 → 28, `bug226e` 17 → 4, `bug229` 1 → 0, `bug230` 1 → 0,
+  `bug339` 9 → 0, `dsv41-sm120-2026-10-22` 529 → 516, `f2-181` 7 → 6, `sm120-native-capture-control-2026-10-22` 22 → 21,
+  `ctrl-silicon-sm120-2026-11-04` 13 → 12 (identical in every table since; none of the T1 batches introduced it). No row changes.
+- The SM120 reference page regenerated at `3dde6e1`.
+
 ## November 7, 2026 (session T-16 / session G run 4): the 256-bit global load's U32 uniform-indexed form, the 256-bit global store and the global reduction's uniform-indexed forms measured whole on `sm120.json`
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks the
