@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22625,
+   "rows_total": 22626,
    "rows_without_src": 15803,
    "sources": {
     "bug154-2026-08-25": {
@@ -505,6 +505,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_ldg_constants.py",
      "test": "tests/k31_ldg_constants.rs"
+    },
+    "k31-movm16-mt88-2026-11-07": {
+     "rows": 1,
+     "kind": "FlashKDA production witnesses + guard/register probes",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_movm.py",
+     "test": "tests/k31_movm.rs"
     }
    },
    "history": {
@@ -1701108,6 +1701115,59 @@
    "_note": "475 dARI modsub E*L2.256 graft (b76=1 desc-form): L1 [85:84] {0:EF,1:base,2:EL,3:LU} x L2 [82:81] {0:EFL2,1:ENL2,2:ELL2;3=era-split/glyph standing} x sem [80:77] per-op atlas (jak 465); clone donora EFL2.256_dARI: vm/fields verbatim, tylko piny [77:86)+base_op. vendor law arb475 x4: 512/512 rc=0 (div = LDG l2=3 split). REKANON R2: stare mgs ENL2 widthless-kluczy skasowane.",
    "_src475": "bug475-2026-09-17",
    "_src": "k31-ldg-small-constants-2026-11-07"
+  },
+  "MOVM.16.MT88_R_R": {
+   "base_op": "MOVM.16.MT88",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000000000000000000000023a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-movm16-mt88-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-movm16-mt88-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-movm16-mt88-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x000000000000000000000000fffff000",
+     "_src": "k31-movm16-mt88-2026-11-07",
+     "_note": "FlashKDA MOVM.16.MT88 with full guard and two 8-bit register fields, measured on both targets."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_src": "k31-movm16-mt88-2026-11-07"
   }
  },
  "operand_roles": {
