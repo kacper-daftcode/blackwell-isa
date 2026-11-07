@@ -1,3 +1,27 @@
+## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP measured whole on `sm120.json`
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`,
+gates and pushes. **`sm120.json`: 26 341 rows, 9 729 with `_src` — 16 612 harvest rows left** (18 841 of 26 598 at
+`c896e8f`).
+
+- **UFSETP measured whole** (`63e5040`; cubit `tools/probes/re_sm120_ufsetp.py`, 394 form + 6 glyph + 66 lattice words;
+  provenance `ufsetp-family-2026-11-06`, 192 rows; cubit `tests/sm120_ufsetp.rs`): the two keys
+  `UFSETP_UP_UP_UR_{UR,FI}_UP` (0x253 + 91 / 0x853 + 91; bit 91 clear is illegal) — the 2026-10-22 "mode grid" rows
+  (16 comparisons × 3 booleans × FTZ = 96 per key) confirmed field by field (masks and bases unchanged) and re-emitted
+  with provenance. **The family is SM120-only: on `-b SM103` / `SM100` nvdisasm 13.1 rejects every one of the 466 sweep
+  words** (the sm103a / sm100a tables carry no UFSETP key — consistent). Six keys retired as `_meta.key_aliases`
+  (0 census witnesses): `UFSETP_UP_UP_UR_II_UP` → `UFSETP_UP_UP_UR_FI_UP` (the encode-only integer-spelling twin; the
+  hexadecimal f32 literal still encodes through the alias), `UFSETP.GT.AND_UP_UP_UR_UR_UP`,
+  `UFSETP.NEU.{AND,OR}_UP_UP_UR_UR_UP` → `UFSETP_UP_UP_UR_UR_UP`, `UFSETP.NEU.AND_UP_UP_UR_{FI,II}_UP` →
+  `UFSETP_UP_UP_UR_FI_UP` (dotted encode-only harvest samples with a baked guard and predicates). Law = FSETP in the
+  uniform datapath: guard [15:12] (`@[!]UPn`); [23:16] text-inert; URa [31:24], `-URa` 72, `|URa|` 73; URb [39:32] with
+  `|URb|` 62, `-URb` 63 ([61:40] and [71:64] text-inert there) or the f32 immediate at [63:32]; the boolean [75:74]
+  (AND / OR / XOR; 3 = `INVALID3`); the comparison [79:76] (F LT EQ LE GT NE GE NUM NAN LTU EQU LEU GTU NEU GEU T);
+  `.FTZ` 80; UPd0 [83:81]; UPd1 [86:84]; UPc [89:87] + `!` 90; [95:92] text-inert; no `.reuse` (nvdisasm rejects the
+  reuse bits on the uniform opclass). Reviewed by T-13: the 466 words re-measured identical under the probe's control
+  code, 464 of them illegal on the two other targets (the 2 vendor-rejected lattice words are rejected on all three).
+- The SM120 reference page regenerated at `63e5040`.
+
 ## November 6–7, 2026 (session T-12 / session G): the T1 production line — HSETP2 and ISETP / UISETP measured whole on `sm120.json`
 
 The harvest rows of 2026-06..08 (rows without `_src`) are being replaced family by family: session G (rtx) and the B300
