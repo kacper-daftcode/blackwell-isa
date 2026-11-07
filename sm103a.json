@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22612,
-   "rows_without_src": 15804,
+   "rows_total": 22621,
+   "rows_without_src": 15810,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -450,6 +450,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_mem256.py",
      "test": "tests/k31_memory256.rs"
+    },
+    "k31-local-memory-flashmla-2026-11-07": {
+     "rows": 3,
+     "kind": "measured local-memory fields + nvdisasm 13.3.73 target probes",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_local_mem.py",
+     "test": "tests/k31_local_mem.rs"
     }
    },
    "history": {
@@ -496540,61 +496547,6 @@
     }
    },
    "operand_sig": "UR_AURI_UR",
-   "scheduling": {
-    "def_latency": 1,
-    "is_variable_latency": false,
-    "pipe_class": 0,
-    "pipe_name": "UNKNOWN",
-    "throughput": 1
-   }
-  },
-  "UBLKCP_AURI_AURI_UR": {
-   "base_op": "UBLKCP",
-   "mod_groups": {
-    "G,S": {
-     "and_base": "0x000000000800020000000000000003ba",
-     "count": 2,
-     "fields": [
-      {
-       "_src": "b9p11-2026-08-23",
-       "bits": 4,
-       "extraction": "guard",
-       "shift": 12,
-       "token_idx": 0
-      },
-      {
-       "_src": "b9p11-2026-08-23",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 32,
-       "token_idx": 1
-      },
-      {
-       "_src": "b9p11-2026-08-23",
-       "bits": 24,
-       "extraction": "sub_imm1",
-       "shift": 40,
-       "token_idx": 1
-      },
-      {
-       "_src": "b9p11-2026-08-23",
-       "bits": 8,
-       "extraction": "sub_ur0",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "b9p11-2026-08-23",
-       "bits": 8,
-       "extraction": "ureg",
-       "shift": 64,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x00000000000000ffffffffffff00f000"
-    }
-   },
-   "operand_sig": "AURI_AURI_UR",
    "scheduling": {
     "def_latency": 1,
     "is_variable_latency": false,
@@ -1700299,6 +1700251,407 @@
    "_src450": "bug450-2026-09-12",
    "_src452": "bug452-2026-09-13",
    "_src": "k31-memory256-flashmla-2026-11-07"
+  },
+  "LDL.U8_R_ARI": {
+   "_o2": "O2 2026-08-25: silicon fields from cubit vendored (krzem)",
+   "base_op": "LDL.U8",
+   "ctrl_class": "ldl",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000001000000000000000000983",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "_src": "k31-local-memory-flashmla-2026-11-07",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "k31-local-memory-flashmla-2026-11-07",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "k31-local-memory-flashmla-2026-11-07",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffff00fffff000",
+     "_src": "k31-local-memory-flashmla-2026-11-07",
+     "_note": "FlashMLA LDL.U8 production plus independent guard/register/offset target probes; exact type and UR geometry, no blanket reuse of a field-less donor."
+    },
+    "128": {
+     "and_base": "0x0000000000100c000000000000000983",
+     "count": 566,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "bug148-2026-08-25",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x01ffca0000000000fffff0003f3c7000"
+    },
+    "64": {
+     "and_base": "0x0000000000100a000000000000000983",
+     "count": 2838,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "bug148-2026-08-25",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "_src": "2aE",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x01fffe0000000000fffff8007ffef000"
+    },
+    "64,LU": {
+     "and_base": "0x0000000000300a000000000001007983",
+     "count": 1333,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x03fffe00000000000003f80000fe0000"
+    },
+    "LU": {
+     "and_base": "0x00000000003008000000000001007983",
+     "count": 1961,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x03fffe00000000000003fc0000ff0000"
+    },
+    "S16": {
+     "and_base": "0x00000000001006000000000001007983",
+     "count": 272,
+     "fields": [
+      {
+       "_src": "2aE",
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "_src": "2aE",
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      },
+      {
+       "_src": "2c",
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x01ffce00000000000000fc00007f0000"
+    },
+    "U16": {
+     "and_base": "0x00000000001004000000000000000983",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffff00fffff000",
+     "count": 1
+    },
+    "LU,S16": {
+     "and_base": "0x00000000003006000000000000000983",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_r0",
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "bits": 24,
+       "extraction": "sub_imm1",
+       "shift": 40,
+       "token_idx": 2
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffff00fffff000",
+     "count": 1
+    }
+   },
+   "operand_sig": "R_ARI",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 100,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 7,
+    "pipe_name": "MEMORY_LOCAL",
+    "ptxas_raw": null,
+    "read_latency": 100,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_src": "k31-local-memory-flashmla-2026-11-07"
+  },
+  "UBLKCP.G.S_AURI_AURI_UR": {
+   "base_op": "UBLKCP.G.S",
+   "operand_sig": "AURI_AURI_UR",
+   "ctrl_class": "alu_simple",
+   "scheduling": {
+    "def_latency": 0,
+    "is_variable_latency": true,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN"
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x000000000800040000000000000003ba",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff000000ffff00f000",
+     "_src": "k31-local-memory-flashmla-2026-11-07",
+     "_note": "FlashMLA UBLKCP.G.S production plus independent guard/register/offset target probes; exact type and UR geometry, no blanket reuse of a field-less donor."
+    }
+   },
+   "_src": "k31-local-memory-flashmla-2026-11-07"
+  },
+  "UBLKCP.S.G_AURI_AURI_UR": {
+   "base_op": "UBLKCP.S.G",
+   "ctrl_class": "ctrl_flow",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x000000000800020000000000000003ba",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "k31-local-memory-flashmla-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000ff000000ffff00f000",
+     "_src": "k31-local-memory-flashmla-2026-11-07",
+     "_note": "FlashMLA UBLKCP.S.G production plus independent guard/register/offset target probes; exact type and UR geometry, no blanket reuse of a field-less donor."
+    }
+   },
+   "operand_sig": "AURI_AURI_UR",
+   "scheduling": {
+    "_all_entries": [
+     {
+      "name": "UBLKCP",
+      "opcode_id": 173,
+      "pipe_name": "INT_ARITH",
+      "read_latency": 0,
+      "write_latency": 0
+     },
+     {
+      "name": "UBLKCP (synthetic)",
+      "opcode_id": null,
+      "pipe_name": "OMMA",
+      "read_latency": 5,
+      "write_latency": 0
+     }
+    ],
+    "confidence": "synthetic",
+    "def_latency": 5,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 35,
+    "pipe_name": "OMMA",
+    "ptxas_raw": null,
+    "read_latency": 5,
+    "stall_base": 1,
+    "throughput": 4,
+    "write_latency": 0
+   },
+   "_src": "k31-local-memory-flashmla-2026-11-07"
   }
  },
  "operand_roles": {
