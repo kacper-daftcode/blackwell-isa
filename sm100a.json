@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 22593,
-   "rows_without_src": 15811,
+   "rows_without_src": 15810,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -407,6 +407,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_packed_fp32.py",
      "test": "tests/k31_packed_fp32.rs"
+    },
+    "k31-utchmma-tmem-addr-2026-11-07": {
+     "rows": 1,
+     "kind": "nvdisasm witness + cubit UTCHMMA Addr/UR component round trip",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_utchmma.py",
+     "test": "tests/k31_utchmma.rs"
     }
    },
    "history": {
@@ -504529,84 +504536,85 @@
      "count": 45,
      "fields": [
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 8,
        "extraction": "tdesc_ur",
        "shift": 24,
        "token_idx": 1
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 2,
        "extraction": "dsel2",
        "shift": 10,
        "token_idx": 1
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 8,
        "extraction": "gdesc_ur",
        "shift": 32,
        "token_idx": 2
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 23,
        "extraction": "tmem_ur",
        "shift": 64,
        "token_idx": 3
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 8,
        "extraction": "tmem_ur",
        "shift": 40,
        "token_idx": 4
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
        "token_idx": 6
       },
       {
-       "_src": "2aE",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
        "token_idx": 6
       },
       {
-       "_src": "2c",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 17,
        "extraction": "tdesc_off",
        "shift": 70,
        "token_idx": 1
       },
       {
-       "_src": "2c",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 9,
        "extraction": "gdesc_off",
        "shift": 15,
        "token_idx": 2
       },
       {
-       "_src": "2c",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 8,
        "extraction": "tmem_off",
        "shift": 56,
        "token_idx": 3
       },
       {
-       "_src": "2c",
+       "_src": "k31-utchmma-tmem-addr-2026-11-07",
        "bits": 4,
        "extraction": "tmem_off",
        "shift": 92,
        "token_idx": 4
       }
      ],
-     "variable_mask": "0x000e0e000780003f00007e1e3f000c00"
+     "variable_mask": "0x000e0e000780003f00007e1e3f000c00",
+     "_src": "k31-utchmma-tmem-addr-2026-11-07"
     },
     "2CTA": {
      "and_base": "0x000000000920000900ff2000000075ea",
@@ -504749,7 +504757,8 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
+   },
+   "_src": "k31-utchmma-tmem-addr-2026-11-07"
   },
   "UTCHMMA_II_II_II_II_II_UR_UP": {
    "base_op": "UTCHMMA",
