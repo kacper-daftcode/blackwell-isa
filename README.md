@@ -174,7 +174,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (11 789 of 34 079 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK so far) are
+  measurement in prose. Rows **without** `_src` (1 376 of 39 203 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK, then the 256-bit global load and store and the global reduction's uniform-indexed address forms — LDG.256 `dARI` / `ARURI64` / `ARURI`, STG.256, REDG `ARURI` / `ARURI64`, 24 768 measured rows for 10 428 + 781 dotted harvest keys retired as `_meta.key_aliases` — so far) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06

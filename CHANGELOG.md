@@ -1,3 +1,45 @@
+## November 7, 2026 (session T-16 / session G run 4): the 256-bit global load's U32 uniform-indexed form, the 256-bit global store and the global reduction's uniform-indexed forms measured whole on `sm120.json`
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks the
+whole production census (249 929 distinct words) against the vendor's text before and after each batch, gates and pushes.
+**`sm120.json`: 39 203 rows, 37 827 with `_src` — 1 376 harvest rows left** (11 789 of 34 079 at `5cb10e5`, 18 841 of 26 598 at
+`c896e8f`); forms 11 725 → 1 309, `_meta.key_aliases` 4 185 → 14 613 (every retired dotted key names a group of its plain target).
+
+- **LDG.256 ARURI measured whole** (`10b1a6a` = G's `020ab68`; cubit `tools/probes/re_sm120_ldg256.py --form ARURI`, 4 952 form + 17
+  lattice words — the same text on the three targets for every form word, the L2 = 3 lattice plane `INVALID3` on SM103 / SM100):
+  the 256-bit global load (opcode 0x97e, frame bit 91) in its `[Ra.U32+URb(+off)]` form (bits 75 / 76 clear) — the four new plain
+  keys `LDG_R_R_ARURI` / `_II` / `_P` / `_II_P` with 1 152 measured groups each, provenance `ldg256-family-2026-11-07` (the legend
+  9 216 → 13 824: the whole opcode on its twelve plain keys); the 3 120 dotted one-group harvest keys of the form are
+  `_meta.key_aliases` (11 rows carried `wave11-integration-2026-11-05` — reproduced, 36 → 25; 5 carried a `claim_forbid`, 10 833 →
+  10 828 — RZ is a legal elided base). Law = batches 10–11's with 75 / 76 clear. Forms 11 725 → 8 609, variants 34 079 → 35 567,
+  rows without `_src` 11 789 → 8 680.
+- **STG.256 measured whole** (`3216477` = G's `722e69e`; cubit `tools/probes/re_sm120_stg256.py`, 2 140 form + 93 lattice words — the
+  same text on the three targets for every word): the 256-bit global store (opcode 0x97f, frame bit 91) in its three address
+  forms — the six new plain keys `STG_dARI_R_R`, `STG_ARURI_R_R`, `STG_ARURI64_R_R` and their `_II` twins with 288 measured groups
+  each (6 cache × 3 L2 × the store's 16-value enum), provenance `stg256-family-2026-11-07` (1 728 rows); the 1 164 dotted one-group
+  harvest keys of the opcode are `_meta.key_aliases` (4 wave11 rows reproduced, 25 → 21). Law: Rs1 [23:16], Ra [31:24] (RZ illegal
+  on the descriptor form → `claim_forbid`; elided on the uniform-indexed forms), Rs0 [39:32], a signed 19-bit 32-byte-unit offset
+  [58:40], the trailing byte split [63:59] + [90:88] (elided at 0xff), URb [71:64], 75 / 76 the address form, the store's enum
+  [80:77] (0 none, 1 CONSTANT.PRIVATE, 2 CONSTANT.CTA, 3 CONSTANT.CTA.PRIVATE, 4 STRONG.SM.PRIVATE, 5 STRONG.SM, 6
+  STRONG.GPU.PRIVATE, 7 STRONG.GPU, 8 MMIO.GPU, 9 CONSTANT.SM, 10 STRONG.SYS, 11 CONSTANT.SM.PRIVATE, 12 MMIO.SYS, 13 SYS.ORDERED,
+  14 STRONG.SYS.ORDERED, 15 MMIO.SYS.ORDERED), L2 [82:81], cache [86:84]; no LTC width, no trailing predicate — [74:72], 83, 87,
+  [95:92] text-inert, fail closed. Forms 8 609 → 7 451, variants 35 567 → 36 131, rows without `_src` 8 680 → 7 520, claim_forbid
+  rows 10 828 → 11 013 (the 576 measured descriptor rows carry the RZ exclusion).
+- **REDG uniform-indexed forms measured whole** (`3a94df3` = G's `13ff289`; cubit `tools/probes/re_sm120_redg.py`, 9 334 form + 58
+  lattice words — the same text on the three targets for every word): the global reduction (opcode 0x98e) in its `[Ra.U32+URb(+off)]`
+  (`REDG_ARURI_R`, 6 144 groups = 2 `.E` × 8 ops × 4 types × 6 cache × 16 scope — the no-`.E` plane of the U32 form is legal, 3 072
+  groups the harvest never saw) and `[Ra.64+URb(+off)]` forms (`REDG_ARURI64_R`, 3 072 groups — the `.64` base needs `.E`; without
+  it the vendor prints `REDG.???0.<op>`), provenance `redg-aruri-family-2026-11-07` (9 216 rows); the 6 144 dotted one-group
+  harvest keys are `_meta.key_aliases` (0 census witnesses). Law: [23:16] text-inert (the atomic's destination slot), Ra [31:24]
+  (RZ: `[RZ.U32+URb]` on U32, the `???255` glyph on `.64`), Rb [39:32], a signed 24-bit byte offset [63:40], URb [71:64], `.E` 72,
+  the type [75:73] (none / S32 / 64 / S64), the load's enum [80:77] with STRONG.SM.PRIVATE at 4, cache [86:84], the op [89:87]
+  (ADD MIN MAX INC DEC AND OR XOR), 90 = `.64`, 91 = the uniform-indexed form, 81 = the descriptor form (another key); 76, 82, 83,
+  [95:92] inert, fail closed. The descriptor form `REDG_dARI_R` (census-bearing) and `REDG_ARI_R` are untouched. Forms 7 451 →
+  1 309, variants 36 131 → 39 203, rows without `_src` 7 520 → 1 376.
+- Reviewed by T-16: the 16 594 fixture words re-measured identical; the whole production census (249 929 distinct words) decodes
+  to the same key, text and re-encoding before and after each batch, the memory family (19 387 words on 18 keys) printing the
+  vendor's text. The SM120 reference page regenerated at `3a94df3`.
+
 ## November 7, 2026 (session T-15 / session G run 3 → 4): the 256-bit global load's 64-bit uniform-indexed address form measured whole on `sm120.json`
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`, checks the
