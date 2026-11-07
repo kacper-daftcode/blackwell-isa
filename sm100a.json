@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22439,
+   "rows_total": 22445,
    "rows_without_src": 15858,
    "sources": {
     "bug154-2026-08-25": {
@@ -378,6 +378,13 @@
      "date": "2026-11-06",
      "tool": "T/t11/exc_apply.py (session scratch) + tools/probes/README.md",
      "test": "tests/sm120_audit_t11.rs"
+    },
+    "hidden-b300-movm-2026-11-07": {
+     "rows": 6,
+     "kind": "SM103/SM100 raw nvdisasm text; measured SM120 donor graft",
+     "date": "2026-11-07",
+     "tool": "pubwave/hidden-b300/tools/probe_movm.py + tools/probes/re_sm103_movm.py",
+     "test": "tests/hidden_b300_movm.rs"
     }
    },
    "history": {
@@ -1683363,6 +1683370,313 @@
     }
    },
    "_src": "idp-family-2026-11-06"
+  },
+  "MOVM.16.MT88_R_R": {
+   "base_op": "MOVM.16.MT88",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x23a",
+     "count": 155,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
+  },
+  "MOVM.U4TO8.MT88_R_R": {
+   "base_op": "MOVM.U4TO8.MT88",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x800000000000000023a",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
+  },
+  "MOVM.16.M832_R_R": {
+   "base_op": "MOVM.16.M832",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x4000000000000000023a",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
+  },
+  "MOVM.U4TO8.M832_R_R": {
+   "base_op": "MOVM.U4TO8.M832",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x4800000000000000023a",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
+  },
+  "MOVM.16.M864_R_R": {
+   "base_op": "MOVM.16.M864",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x8000000000000000023a",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
+  },
+  "MOVM.U4TO8.M864_R_R": {
+   "base_op": "MOVM.U4TO8.M864",
+   "ctrl_class": "alu_simple",
+   "mercury": [],
+   "mod_groups": {
+    "": {
+     "and_base": "0x8800000000000000023a",
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-movm-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-movm-2026-11-07"
+      }
+     ],
+     "variable_mask": "0xf7ff07fffffffffffffff000",
+     "_src": "hidden-b300-movm-2026-11-07",
+     "_note": "Six SM103/SM100 MOVM namespace lanes measured from full 128-bit words. Only guard/Rd/Ra are operand fields. The measured text-inert low-bit envelope and schedule/reuse split match the SM120 donor; invalid and unnamed namespaces stay unclaimed."
+    }
+   },
+   "operand_sig": "R_R",
+   "scheduling": {
+    "confidence": "synthetic",
+    "def_latency": 4,
+    "is_variable_latency": true,
+    "latency_source": "synthetic",
+    "opcode_id": null,
+    "pipe_class": 6,
+    "pipe_name": "MEMORY_SHARED",
+    "ptxas_raw": null,
+    "read_latency": 4,
+    "stall_base": 4,
+    "throughput": 4,
+    "write_latency": 0
+   }
   }
  },
  "operand_roles": {
