@@ -694,14 +694,6 @@
      "tool": "tools/probes/re_sm120_plop3_p2r_r2p.py",
      "test": "tests/sm120_plop3_p2r_r2p.rs"
     },
-    "qmma-sf-opcode-bit2-silicon-2026-11-06": {
-     "rows": 1,
-     "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
-     "date": "2026-11-06",
-     "nvdisasm_sm120": "no text",
-     "silicon": "RTX PRO 6000 Blackwell Server Edition (sm_120), test host GPU 0, 2026-11-06 22:3x-22:4xZ (session R): the 0x47e word executes on one warp without a fault and writes fp32 \u2014 an E8M0 scale of 0xff yields NaN on every element, doubling scale A doubles the result; on identical operands (A = 0x38, B = 0x40, scales 1.0) the documented QMMA.SF E4M3.E4M3 gives 64.0, E2M1.E2M1 0.0, this word 28.0 (A = B = 0x38: 32.0 / 512.0 / 24.5; A = 0x44, B = 0x3c: 144.0 / -96.0 / 31.875): a dense block-scaled MMA over some other input element type, unidentified. Replaces the 2026-03-26 hypothesis row IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR (no numerical oracle; its operand model disagreed with the family). Probe kernels and host driver: the coordination record of 2026-11-06 (R/immasf).",
-     "note": "The element types are the open question (one-hot inputs per position against the 4- and 6-bit candidates, ~1 h with the same harness)."
-    },
     "ufsetp-family-2026-11-06": {
      "rows": 192,
      "kind": "nvdisasm 13.1 field probe (-b SM120; the family is illegal on -b SM103 / SM100)",
@@ -715,6 +707,24 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_sm120_fp32_alu.py",
      "test": "tests/sm120_fp32_alu.rs"
+    },
+    "qmma-sf-mxint8-silicon-2026-11-07": {
+     "rows": 1,
+     "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
+     "date": "2026-11-07",
+     "nvdisasm_sm120": "no text",
+     "silicon": "RTX PRO 6000 Blackwell Server Edition (sm_120), test host GPU 0, 2026-11-07 09:50Z (session T-13): kernel needs44_types runs the five documented diagonal QMMA.SF.16832 type pairs and the 0x47e word on identical fragments (C = 0, scales 1.0). Byte-value sweeps of A (B = 0x0c / 0x40 / 0x38) and of B (A = the same): all 6 x 256 results of the 0x47e word equal 32 x (int8(v)/64) x (int8(w0)/64) exactly (0x7f -> 63.5 with B = 0x40, 0x80 -> -64.0, 0xff -> -0.5) \u2014 the OCP MXINT8 element map on both operands; the E4M3 / E5M2 / E3M2 / E2M3 / E2M1 / S8 / U8 maps do not fit. One-hot bytes light the 8 D elements of one row (A) / the 16 of one column (B) exactly as the E4M3.E4M3 row does (the m16n8k32 8-bit fragment layout); a byte is one element (0x04 -> 0.0625, 0x44 -> 1.0625). E8M0 scale sweep: D x 2^(s-127) for s = 0..254 (fp32 overflow to inf), NaN at 0xff. First measured 2026-11-06 (R): executes, fp32 output, scales honoured, arithmetic not E4M3 / E2M1 / integer. Replaces the 2026-03-26 hypothesis row IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR (no numerical oracle; operand model disagreed with the family). Harness: T/t13/needs44 (needs44_types.sass, needs44_run.py, out/needs44_results.json).",
+     "note": "Side result of the same run: the documented E2M1 type code computes exactly the E2M3 map on bits [5:0] of the 8-bit container for all 256 byte values (PTX places .e2m1 in bits [5:2] with zero padding \u2014 the silicon does not mask bits [1:0]); the E2M1 and E2M3 rows are therefore the same arithmetic on well-formed inputs.",
+     "supersedes": {
+      "qmma-sf-opcode-bit2-silicon-2026-11-06": {
+       "rows": 1,
+       "kind": "undocumented form, measured on silicon; nvdisasm has no text for it",
+       "date": "2026-11-06",
+       "nvdisasm_sm120": "no text",
+       "silicon": "RTX PRO 6000 Blackwell Server Edition (sm_120), test host GPU 0, 2026-11-06 22:3x-22:4xZ (session R): the 0x47e word executes on one warp without a fault and writes fp32 \u2014 an E8M0 scale of 0xff yields NaN on every element, doubling scale A doubles the result; on identical operands (A = 0x38, B = 0x40, scales 1.0) the documented QMMA.SF E4M3.E4M3 gives 64.0, E2M1.E2M1 0.0, this word 28.0 (A = B = 0x38: 32.0 / 512.0 / 24.5; A = 0x44, B = 0x3c: 144.0 / -96.0 / 31.875): a dense block-scaled MMA over some other input element type, unidentified. Replaces the 2026-03-26 hypothesis row IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR (no numerical oracle; its operand model disagreed with the family). Probe kernels and host driver: the coordination record of 2026-11-06 (R/immasf).",
+       "note": "The element types are the open question (one-hot inputs per position against the 4- and 6-bit candidates, ~1 h with the same harness)."
+      }
+     }
     }
    },
    "history": {
@@ -1245,7 +1255,7 @@
    "P2R_R_R_R_II_II_II_II_?": "P2R_R_II_R_II",
    "R2P_?_R_II": "R2P_II_R_II",
    "R2P_L_R_II": "R2P_II_R_II",
-   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR",
+   "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.MXINT8.MXINT8.E8_R_R_R_R_R_R_UR",
    "UFSETP.GT.AND_UP_UP_UR_UR_UP": "UFSETP_UP_UP_UR_UR_UP",
    "UFSETP.NEU.AND_UP_UP_UR_UR_UP": "UFSETP_UP_UP_UR_UR_UP",
    "UFSETP.NEU.OR_UP_UP_UR_UR_UP": "UFSETP_UP_UP_UR_UR_UP",
@@ -1278,7 +1288,8 @@
    "FMNMX.NAN_R_R_UR_UR_?": "FMNMX_R_R_UR_P",
    "FMNMX_R_R_II_P": "FMNMX_R_R_FI_P",
    "FMNMX_R_R_R_P_II_II_?": "FMNMX_R_R_R_P",
-   "FMNMX_R_R_R_R": "FMNMX_R_R_R_P"
+   "FMNMX_R_R_R_R": "FMNMX_R_R_R_P",
+   "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR": "QMMA.SF.16832.F32.MXINT8.MXINT8.E8_R_R_R_R_R_R_UR"
   }
  },
  "instructions": {
@@ -2057392,13 +2057403,13 @@
    },
    "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
-  "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR": {
-   "base_op": "QMMA.SF.16832.F32.UNIDENTIFIED.E8",
+  "QMMA.SF.16832.F32.MXINT8.MXINT8.E8_R_R_R_R_R_R_UR": {
+   "base_op": "QMMA.SF.16832.F32.MXINT8.MXINT8.E8",
    "operand_sig": "R_R_R_R_R_R_UR",
    "mod_groups": {
     "": {
-     "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06",
-     "_note": "opcode 0x47e = QMMA.SF (0x47a) with bit 2 set. Measured on sm_120 silicon 2026-11-06 (R; test host GPU 0, RTX PRO 6000 SE; cubit-assembled probe next to the documented E4M3.E4M3 / E2M1.E2M1 forms on identical fragments): executes, fp32 output, E8M0 block scales honoured (scale 0xff -> NaN, scale x2 -> result x2), the input element types match neither E4M3 nor E2M1 and are unidentified; the type field of this row is zero as on the E4M3.E4M3 donor. nvdisasm 13.1 / 13.3 have no text for the word. Fields = the QMMA.SF family's (Rd@16 Ra@24 Rb@32 Rc@64 sfA@40 sfB@52 UR@60+73); the 2026-03 hypothesis row read R6 at [55:48] and had no UR field.",
+     "_src": "qmma-sf-mxint8-silicon-2026-11-07",
+     "_note": "opcode 0x47e = QMMA.SF (0x47a) with bit 2 set: the block-scaled MMA over MXINT8 x MXINT8 inputs (OCP MX INT8 elements: two's-complement int8 with six fractional bits, value = int8 x 2^-6, range [-2, 1.984375]; E8M0 block scales), fp32 output, the m16n8k32 8-bit fragment layout. Measured on sm_120 silicon 2026-11-07 (T-13; test host GPU 0, RTX PRO 6000 Blackwell SE; cubit-assembled kernel with the five documented diagonal type pairs on identical fragments): byte-value sweeps of A and B against three references reproduce 32 x (int8(a)/64) x (int8(b)/64) exactly for all 256 x 6 cases, one-hot bytes light one row / one column as on E4M3.E4M3, a byte is one element, D x 2^(s-127) for every E8M0 scale s with NaN at 0xff. The type field is zero as on the E4M3.E4M3 donor; the type-field lattice under bit 2 is not measured. First measured 2026-11-06 (R): executes, fp32, scales honoured, not E4M3 / E2M1 / integer. nvdisasm 13.1 / 13.3 have no text for the word. Fields = the QMMA.SF family's (Rd@16 Ra@24 Rb@32 Rc@64 sfA@40 sfB@52 UR@60+73); the 2026-03 hypothesis row (IMMA.SF.16832.U8.U8) read R6 at [55:48] and had no UR field.",
      "and_base": "0x47e",
      "variable_mask": "0x0800000000003ffffff8fffffffff000",
      "fields": [
@@ -2057407,102 +2057418,105 @@
        "extraction": "guard",
        "shift": 12,
        "token_idx": 0,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
        "token_idx": 1,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
        "token_idx": 2,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 32,
        "token_idx": 3,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 64,
        "token_idx": 4,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 1,
        "extraction": "neg",
        "shift": 72,
        "token_idx": 2,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 1,
        "extraction": "neg",
        "shift": 63,
        "token_idx": 3,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "bits": 1,
        "extraction": "reuse",
        "shift": 123,
        "token_idx": 3,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "shift": 40,
        "bits": 8,
        "extraction": "reg",
        "token_idx": 5,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "shift": 52,
        "bits": 8,
        "extraction": "reg",
        "token_idx": 6,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "shift": 51,
        "bits": 1,
        "extraction": "reuse",
        "token_idx": 6,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "shift": 60,
        "bits": 3,
        "extraction": "ureg",
        "token_idx": 7,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       },
       {
        "shift": 73,
        "bits": 5,
        "extraction": "ureg_shr3",
        "token_idx": 7,
-       "_src": "qmma-sf-opcode-bit2-silicon-2026-11-06"
+       "_src": "qmma-sf-mxint8-silicon-2026-11-07"
       }
      ],
      "count": null
     }
    },
    "_discovery": {
-    "date": "2026-03-26 (opcode found), 2026-11-06 (measured on silicon)",
-    "identity": "undocumented block-scaled MMA with fp32 output in the QMMA.SF family, selected by opcode bit 2; input element types unidentified (not E4M3, not E2M1, not an integer MMA)",
-    "method": "2026-11-06: cubit-assembled probe kernels on sm_120 silicon next to the documented QMMA.SF forms on identical operands (R, test host GPU 0); the 2026-03 claim 'IMMA.SF / U8 inputs' had no numerical oracle and is withdrawn",
-    "status": "executes; element types unidentified (NEEDS_OWNER 44)",
-    "historical_key": "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR"
+    "date": "2026-03-26 (opcode found), 2026-11-06 (executes, fp32, not E4M3 / E2M1), 2026-11-07 (element types identified)",
+    "identity": "undocumented block-scaled MMA of the QMMA.SF family selected by opcode bit 2: A and B are OCP MXINT8 (int8 x 2^-6 with E8M0 block scales), fp32 output \u2014 the MX integer kind that PTX does not expose",
+    "method": "2026-11-07: byte-value sweeps of A and B (3 references each), one-hot fragment positions, nibble test and the E8M0 scale sweep on sm_120 silicon next to the documented QMMA.SF rows on identical fragments (T-13, test host GPU 0; T/t13/needs44); 2026-11-06: R's execute / fp32 / scale probe; the 2026-03 claim 'IMMA.SF / U8 inputs' had no numerical oracle and is withdrawn",
+    "status": "executes; element types identified (MXINT8 x MXINT8); the type-field lattice under bit 2 unmeasured",
+    "historical_keys": [
+     "IMMA.SF.16832.U8.U8_R_R_R_R_R_R_UR",
+     "QMMA.SF.16832.F32.UNIDENTIFIED.E8_R_R_R_R_R_R_UR"
+    ]
    },
    "scheduling": {
     "confidence": "copied_from_family_donor",
