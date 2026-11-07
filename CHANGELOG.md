@@ -1,7 +1,7 @@
-## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP and the FP32 ALU measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
+## November 7, 2026 (session T-13 / session G run 2): the T1 production line continues — UFSETP, the FP32 ALU, the uniform FP32 ALU and the conversions measured whole on `sm120.json`; the QMMA.SF opcode-bit-2 variant identified as MXINT8 × MXINT8
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1 on `-b SM120` / `SM103` / `SM100`,
-gates and pushes. **`sm120.json`: 26 581 rows, 10 425 with `_src` — 16 156 harvest rows left** (16 905 of 26 442 at
+gates and pushes. **`sm120.json`: 28 542 rows, 12 788 with `_src` — 15 754 harvest rows left** (16 905 of 26 442 at
 `e1e8598`, 18 841 of 26 598 at `c896e8f`).
 
 - **UFSETP measured whole** (`63e5040`; cubit `tools/probes/re_sm120_ufsetp.py`, 394 form + 6 glyph + 66 lattice words;
@@ -55,7 +55,52 @@ gates and pushes. **`sm120.json`: 26 581 rows, 10 425 with `_src` — 16 156 har
   (PTX places `.e2m1` in bits [5:2] with zero padding; the silicon does not mask bits [1:0]) — the E2M1 / E2M3 rows are
   correctly named and compute the same arithmetic on well-formed inputs. Not measured: the type-field lattice under
   opcode bit 2. cubit `tests/fixtures/sm120_qmma_sf_mxint8_silicon.jsonl`, `tests/needs44_qmma_sf_bit2.rs`.
-- The SM120 reference page regenerated at `dac48ad`.
+- **Uniform FP32 ALU measured whole — UFADD / UFMUL / UFFMA / UFSEL** (`51d2785` = G's `784183d` re-applied on `dac48ad`
+  by T, byte-identical to G's table plus the NEEDS 44 rename; cubit `tools/probes/re_sm120_ufp32_alu.py`, 1 025 form + 30
+  glyph + 278 lattice + 4 neighbour words; provenance `ufp32-alu-family-2026-11-07`, 441 rows + 3 dsv41 rows kept; cubit
+  `tests/sm120_ufp32_alu.rs`): the 9 plain keys, all with bit 91 — `UFADD_UR_UR_{UR,FI}` (0x254 / 0x454; **URb lives in the
+  C slot [71:64]**), `UFMUL_UR_UR_{UR,FI}` (0x256 / 0x856), `UFFMA_UR_UR_UR_UR` / `_UR_FI` / `_FI_UR` (0x255 / 0x455 /
+  0x855), `UFSEL_UR_UR_{UR,FI}_UP` (0x251 / 0x851) — 143 harvest rows rewritten (T-10's `UFMUL_UR_UR_UR` row had no sign
+  fields; the `audit-fix-2026-11-06-t10` legend follows its live count 25 → 24) and **298 missing groups added**
+  (`UFMUL_UR_UR_UR` had 1 of 168, `UFADD_UR_UR_UR` 1 of 16, `UFFMA_UR_UR_UR_UR` 1 of 24, `UFMUL_UR_UR_FI` 112 of 168); 9
+  junk keys retired as `_meta.key_aliases` → the f32 key of their opcode (`UFADD_UR_UR_II`, `UFMUL_UR_UR_II`,
+  `UFFMA_UR_UR_UR_II`, `UFFMA_UR_UR_UR_L`, `UFSEL_UR_UR_?_?`, `UFSEL_UR_UR_?_UP`, `UFSEL_UR_UR_II_?`, `UFSEL_UR_UR_II_UP`,
+  `UFSEL_UR_UR_L_UP`; the hexadecimal f32 literals still assemble through them). **The family is SM120-only: every one of
+  the 1 337 sweep words is illegal on `-b SM103` / `SM100`** (like UFSETP; the sm103a / sm100a tables carry none of the four
+  mnemonics). Law = the FP32 ALU law in the uniform datapath: guard [15:12] `@[!]UPn`; URd [23:16]; URa [31:24] (`-` 72,
+  `|` 73); B [39:32] (`|` 62, `-` 63) or f32 [63:32]; the C slot [71:64] (`|` 74, `-` 75); UFADD `[.FTZ][.RM|.RP|.RZ][.SAT]`,
+  UFMUL `[.FTZ|.FMZ][.D8…M8][.RND][.SAT]` (scale [86:84], 4 unspelled, 0 = `INVALID0`, FTZ + FMZ = `INVALID3`), UFFMA
+  `[.FTZ|.FMZ][.RND][.SAT]`, UFSEL `[.FTZ]` + UPc [89:87] / `!` 90 (`UPT` spelled); no `.reuse` (nvdisasm "undefined opex");
+  bit 81 on the register forms of UFADD / UFFMA = `UFHADD` / `UFHFMA` (neighbours, no key anywhere). Reviewed by T-13: the
+  1 337 words re-measured identical on SM120 and illegal on the two other targets; the 112 `UFMUL_UR_UR_FI` rows and the 3
+  kept rows byte-identical in bases / masks / fields.
+- **Conversions measured whole — F2I / I2F / FRND / MUFU** (`9d054e4` = G's `bfbcf85` re-applied on `51d2785` by T, byte-identical
+  to G's table plus the NEEDS 44 rename; cubit `tools/probes/re_sm120_conv.py`, 2 494 form + 18 glyph + 547 lattice words;
+  `-b SM100` identical, **`-b SM103` differs on 6 MUFU words — the B300 MUFU has packed-half lanes (bit 80 → `.BF16x2`,
+  half code 3 → `.F16x2`), text-inert / illegal on SM120 and SM100**; provenance `conv-family-2026-11-07`, 2 020 rows + 10
+  `mufu-ur-sm120-2026-11-04` rows kept; cubit `tests/sm120_conv.rs`): the 12 plain keys `F2I_R_{R,UR,FI}` (0x305 / 0x311 with
+  the UR frame 0xc00 + bit 91 and the immediate frame 0x800), `I2F_R_{R,UR,II}` (0x306 / 0x312), `FRND_R_{R,UR,FI}` (0x307 /
+  0x313), `MUFU_R_{R,UR,FI}` (0x308) — `F2I_R_FI`, `I2F_R_II`, `FRND_R_UR`, `FRND_R_FI` are new keys (legal forms the harvest never
+  saw); 130 harvest rows rewritten in place, **1 890 missing groups added** (the F2I lattice is 512 groups per form; the 16
+  `.F16` / `.BF16` MUFU UR rows gain the `.H1` selector); the measured-but-superseded rows of the 2026-09 bug waves retired
+  (the legends `bug380-2026-09-05`, `bug390-2026-09-06`, `bug403-2026-09-06` follow their live count 0; `audit-fix-2026-11-06-t10`
+  24 → 23); **213 junk keys retired as `_meta.key_aliases` — the 207 dotted F2I keys** (206 `_R_R` and
+  `F2I.FTZ.NTZ.TRUNC.U32_R_UR`; `F2I.FTZ.U32.TRUNC.NTZ_R_R` carried 190 production census words, which decode on `F2I_R_R` and
+  print the vendor's text), `I2F.RP_R_R`, `FRND.CEIL_R_R` / `.F16` / `.FLOOR` / `.TRUNC`, `MUFU_R_II` → `MUFU_R_FI`. Law: guard
+  [15:12]; Rd [23:16]; the source [39:32] (Ra / URa with `|` 62 / `-` 63 on F2I / FRND / MUFU, text-inert on I2F) or the
+  immediate at [63:32] (f32; the f16 / bf16 half at [47:32]; the f64 high dword; the integer by the group's type); no `.reuse`
+  (text-inert). F2I: dst width [76:75] (8 / 16 / 32 / 64) + signed 72 (S32 unspelled), src [86:84] (1 F16, 2 F32 unspelled, 3
+  F64, 4 BF16), NTZ 77, rounding [79:78], FTZ 80 → `F2I[.FTZ][.dst][.src][.rnd][.NTZ]`; the 64-bit dst and the F64 src on 0x311.
+  I2F: dst [77:75] (1 F16, 2 F32 unspelled, 3 F64 on 0x312, 4 BF16), src width [85:84] + signed 74, rounding; `.B1..B3` at
+  [61:60] / `.H1` at 60 on the 8- / 16-bit sources; the immediate form for 32- / 64-bit sources only, signed hex for S-types.
+  FRND: type [77:75] = [86:84] (F64 on 0x313), FTZ 80, rounding → `FRND[.FTZ][.type][.rnd]`. MUFU: fn [77:74] (COS SIN EX2 LG2 RCP
+  RSQ RCP64H RSQ64H SQRT TANH), half [73:72] (F16 / BF16). **The F16 / BF16 sources of F2I / FRND / MUFU take `.H1` at bit 60
+  too, composed inside the sign pipes (`-|R2.H1|`)**; the `???n` / `INVALIDn` states fail closed. **F2F is excluded** — its
+  type pair is order-significant (`F2F.F16.F32` ≠ `F2F.F32.F16`) and the sorted group-name scheme cannot carry it on a plain
+  key (the typed-key convention of the IMMA / IDP families is the way; cubit `G/NEEDS_OWNER.md` 3). Reviewed by T-13: the
+  3 059 words re-measured identical on SM120 (the 6 SM103 differences as recorded); 610 sampled census words of the touched
+  keys print nvdisasm's text on the new rows.
+- The SM120 reference page regenerated at `9d054e4`.
 
 ## November 6–7, 2026 (session T-12 / session G): the T1 production line — HSETP2 and ISETP / UISETP measured whole on `sm120.json`
 
