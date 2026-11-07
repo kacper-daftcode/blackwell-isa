@@ -365,6 +365,13 @@
      "date": "2026-11-06",
      "tool": "T/t11/exc_apply.py (session scratch) + tools/probes/README.md",
      "test": "tests/sm120_audit_t11.rs"
+    },
+    "mufu-x2-sm103a-2026-11-07": {
+     "rows": 6,
+     "kind": "nvdisasm 13.3.73 field probe (-b SM103; 13.0 / 13.1 text-identical)",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_sm103_mufu_x2.py",
+     "test": "tests/sm103a_mufu_x2.rs"
     }
    },
    "history": {
@@ -466128,6 +466135,94 @@
       }
      ],
      "variable_mask": "0x000fd600000000000000001f001ff000"
+    },
+    "BF16x2,EX2": {
+     "and_base": "0x00000000000108000000000000000308",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.BF16x2 R form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), Ra [39:32] (255 = RZ), |Ra| 62, -Ra 63; the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
+    },
+    "EX2,F16x2": {
+     "and_base": "0x0000000000000b000000000000000308",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.F16x2 R form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), Ra [39:32] (255 = RZ), |Ra| 62, -Ra 63; the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
     }
    },
    "operand_sig": "R_R",
@@ -466225,6 +466320,94 @@
       }
      ],
      "variable_mask": "0x01f1c0000000000000000003003e0000"
+    },
+    "BF16x2,EX2": {
+     "and_base": "0x00000000080108000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.BF16x2 UR form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), URa [39:32] (255 = URZ), |URa| 62, -URa 63, bit 91 = the uniform frame (required); the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
+    },
+    "EX2,F16x2": {
+     "and_base": "0x0000000008000b000000000000000d08",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "ureg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 62,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 63,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000c00000ff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.F16x2 UR form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), URa [39:32] (255 = URZ), |URa| 62, -URa 63, bit 91 = the uniform frame (required); the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
     }
    },
    "operand_sig": "R_UR",
@@ -1683325,6 +1683508,93 @@
     }
    },
    "_src": "idp-family-2026-11-06"
+  },
+  "MUFU_R_FI_FI": {
+   "base_op": "MUFU",
+   "operand_sig": "R_FI_FI",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "mod_groups": {
+    "BF16x2,EX2": {
+     "and_base": "0x00000000000108000000000000000908",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 16,
+       "extraction": "bf16",
+       "shift": 48,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 16,
+       "extraction": "bf16",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffffff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.BF16x2 FI form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), imm_hi [63:48] (printed first) and imm_lo [47:32] as bf16 literals; the lane = bit 80 with the half code [73:72] = 0 (bit 80 with a half code is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
+    },
+    "EX2,F16x2": {
+     "and_base": "0x0000000000000b000000000000000908",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 16,
+       "extraction": "f16",
+       "shift": 48,
+       "token_idx": 2,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      },
+      {
+       "bits": 16,
+       "extraction": "f16",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "mufu-x2-sm103a-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x0000000000000000ffffffff00fff000",
+     "_src": "mufu-x2-sm103a-2026-11-07",
+     "_note": "MUFU.EX2.F16x2 FI form measured with nvdisasm 13.3.73 on -b SM103 (B300 host, 2026-11-07, session T-14; 13.0 / 13.1 print the same text): guard [15:12], Rd [23:16] (255 = RZ), imm_hi [63:48] (printed first) and imm_lo [47:32] as f16 literals; the lane = the half code [73:72] = 3 (bit 80 on it is illegal); the function [77:74] admits EX2 only (the other values print INVALIDn, unclaimed). Bit 60 (.H1 of the scalar half lanes), 24-31, 40-61 (R / UR), 64-71, 78-79, 81-90, 92-104 are text-inert and outside the row (fail-closed). On -b SM120 / SM100 bit 80 is text-inert and the half code 3 illegal: these lanes exist on sm103a only."
+    }
+   }
   }
  },
  "operand_roles": {
