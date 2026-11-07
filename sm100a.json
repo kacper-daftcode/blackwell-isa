@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22626,
+   "rows_total": 22627,
    "rows_without_src": 15803,
    "sources": {
     "bug154-2026-08-25": {
@@ -512,6 +512,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_movm.py",
      "test": "tests/k31_movm.rs"
+    },
+    "k31-utma1d-flashkda-2026-11-07": {
+     "rows": 1,
+     "kind": "FlashKDA production witnesses + dimensional donor + field probes",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_utma1d.py",
+     "test": "tests/k31_utma1d.rs"
     }
    },
    "history": {
@@ -1699093,6 +1699100,43 @@
      "variable_mask": "0x00000000000000000000ffffff00f000",
      "_src": "k31-utma-flashmla-2026-11-07",
      "_note": "FlashMLA production witnesses and local SM103/SM100 probes: UR operands at 32/24 and the explicit third desc[UR] at 40; exact dimensional/GATHER4/2CTA fixed bits, existing variants retained."
+    },
+    "1D": {
+     "and_base": "0x000000000800100000000000000005b4",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-utma1d-flashkda-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 32,
+       "token_idx": 1,
+       "_src": "k31-utma1d-flashkda-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "sub_ur0",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "k31-utma1d-flashkda-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "desc_ur",
+       "shift": 40,
+       "token_idx": 3,
+       "_src": "k31-utma1d-flashkda-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000000000000000ffffff00f000",
+     "_src": "k31-utma1d-flashkda-2026-11-07",
+     "_note": "FlashKDA production UTMALDG.1D [UR],[UR],desc[UR] with measured guard and three 8-bit UR windows."
     }
    },
    "operand_sig": "AURI_AURI_II",
