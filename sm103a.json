@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22439,
+   "rows_total": 22441,
    "rows_without_src": 15858,
    "sources": {
     "bug154-2026-08-25": {
@@ -365,6 +365,14 @@
      "date": "2026-11-06",
      "tool": "T/t11/exc_apply.py (session scratch) + tools/probes/README.md",
      "test": "tests/sm120_audit_t11.rs"
+    },
+    "k31-f2fp-e2m1-sm103-sm100-2026-11-07": {
+     "rows": 2,
+     "kind": "nvdisasm 13.3.73 field probe on SM103/SM100 + production-witness census + B300 silicon (H)",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_f2fp_e2m1.py",
+     "test": "tests/k31_f2fp_e2m1.rs",
+     "silicon": "H, B300 GPU 7 with owner permission: exact E2M1*E8M0 -> BF16x2 for all 256 input bytes x 13 scales"
     }
    },
    "history": {
@@ -401806,6 +401814,324 @@
     "pipe_name": "UNKNOWN",
     "throughput": 1
    }
+  },
+  "F2FP.BF16.E2M1.UNPACK_B_R_R_R": {
+   "base_op": "F2FP.BF16.E2M1.UNPACK_B",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000002041200000000000000063e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 3,
+       "extraction": "e2m1_scale",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "e2m1_ra",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "e2m1_ra",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 3,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x18000000010001ff000000ff07fff000",
+     "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07",
+     "_note": "K3.1 MoE: MXFP4 nibble pair * E8M0 -> BF16x2.  nvdisasm 13.3.73 field probes on SM103/SM100; all 861 distinct (11,520-word) register-scale production witnesses supplied by H.  Bits 73/76/82/89 select BF16/E2M1/UNPACK_B; scale selector values 6/7 stay unclaimed.  H's B300 silicon sweep covers all 256 E2M1 bytes x 13 scale bytes, including subnormals/inf/NaN; see k31-work/f2fp-e2m1 and inbox-hgx02/2026-11-07-k31-prefill-gaps/silicon.",
+     "claim_forbid": [
+      {
+       "shift": 24,
+       "bits": 3,
+       "values": [
+        6,
+        7
+       ]
+      },
+      {
+       "shift": 96,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 97,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 98,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 99,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 100,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 101,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 102,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 103,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 104,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "operand_sig": "R_R_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+  },
+  "F2FP.BF16.E2M1.UNPACK_B_R_R_FI": {
+   "base_op": "F2FP.BF16.E2M1.UNPACK_B",
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000020412000000000000000e3e",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 3,
+       "extraction": "e2m1_scale",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "e2m1_ra",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "e2m1_ra",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
+      }
+     ],
+     "variable_mask": "0x00000000010001ffffffffff07fff000",
+     "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07",
+     "_note": "K3.1 MoE: MXFP4 nibble pair * E8M0 -> BF16x2.  nvdisasm 13.3.73 field probes on SM103/SM100; all 861 distinct (11,520-word) register-scale production witnesses supplied by H.  Bits 73/76/82/89 select BF16/E2M1/UNPACK_B; scale selector values 6/7 stay unclaimed.  H's B300 silicon sweep covers all 256 E2M1 bytes x 13 scale bytes, including subnormals/inf/NaN; see k31-work/f2fp-e2m1 and inbox-hgx02/2026-11-07-k31-prefill-gaps/silicon.",
+     "claim_forbid": [
+      {
+       "shift": 24,
+       "bits": 3,
+       "values": [
+        6,
+        7
+       ]
+      },
+      {
+       "shift": 96,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 97,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 98,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 99,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 100,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 101,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 102,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 103,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 104,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 123,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      },
+      {
+       "shift": 124,
+       "bits": 1,
+       "values": [
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "operand_sig": "R_R_FI",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "_src": "k31-f2fp-e2m1-sm103-sm100-2026-11-07"
   },
   "F2FP_R_R_R": {
    "base_op": "F2FP",
