@@ -513,6 +513,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_k31_alu_tail.py",
      "test": "tests/k31_alu_tail.rs"
+    },
+    "k31-f2fp-pack-ur-inert-rc-2026-11-07": {
+     "rows": 1,
+     "kind": "production RC residue + SM103/SM100 guard/register probes",
+     "date": "2026-11-07",
+     "tool": "tools/probes/re_k31_f2fp_ur_tail.py",
+     "test": "tests/k31_f2fp_ur_tail.rs"
     }
    },
    "history": {
@@ -1671344,32 +1671351,36 @@
      "_src": "wave11-integration-2026-11-05"
     },
     "BF16,F32,PACK_AB": {
-     "and_base": "0x80010000000000000000c3e",
-     "variable_mask": "0xf11000ff3ffffffffffff000",
+     "and_base": "0x00000000080010ff0000000000000c3e",
+     "variable_mask": "0x00000000f11000003ffffffffffff000",
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "k31-f2fp-pack-ur-inert-rc-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 16,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "k31-f2fp-pack-ur-inert-rc-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "reg",
        "shift": 24,
-       "token_idx": 2
+       "token_idx": 2,
+       "_src": "k31-f2fp-pack-ur-inert-rc-2026-11-07"
       },
       {
        "bits": 8,
        "extraction": "ureg",
        "shift": 32,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "k31-f2fp-pack-ur-inert-rc-2026-11-07"
       }
      ],
      "claim_forbid": [
@@ -1671410,8 +1671421,8 @@
       }
      ],
      "_src519": "bug519-2026-09-23",
-     "_note": "519: F2FP.{BF16,F16}.F32.PACK_AB enum0/b91-frame/sea 0xc3e (PAB0) HOLE x3 (vendor DRUKUJE 3-op R,R,UR; engine HOLE; korpus-0 census519). Greenfield F2FP_R_R_UR wg receptury 505d (iter356); prawo arb519_law (254 sondy x4; era vendor==x3 poza junk-enum) + arb519b_law (16: combo-mod kolejnosc SATFINITE.RELU) + arb519c_law (32: INERT {84,88,92,93,94,95} jak 505d, reszta [82:96) REFUSE). Ramka: sea 0xc3e|b91|fmt b76|RELU b75|SATFINITE b77; b81=0 (enum0). Sloty Rd@16 Ra@24 URc@32; pole [64:72) INERT-martwe. mg-decode = kolejnosc druku vendora; mg sorted encode_only = retention encode (BUG-090/092). cf ghost-zona {62,63,72,73,74} (B63PARITY). x2 NO-FIX: legacy harvest-wiersze z blednym drukiem = osobna krata ery (519-era). _src bug519-2026-09-23.",
-     "_src": "wave11-integration-2026-11-05"
+     "_note": "Measure FlashKDA RC=0xff at [71:64], matching the working SM120 donor. The third operand remains UR at [39:32]; the inert RC byte must survive lossless encoding. Existing claim_forbid rules retained.",
+     "_src": "k31-f2fp-pack-ur-inert-rc-2026-11-07"
     },
     "RELU,F16,F32,PACK_AB": {
      "and_base": "0x80008000000000000000c3e",
