@@ -17,7 +17,7 @@
      "test": "tests/sm120_arrives_ldgstsbar.rs"
     },
     "atoms-aruri-sm120-2026-10-29": {
-     "rows": 1,
+     "rows": 0,
      "kind": "nvdisasm 13.1 field probe",
      "date": "2026-10-29",
      "tool": "tools/probes/re_sm120_atoms_aruri.py",
@@ -42,7 +42,7 @@
      "test": "tests/bug152_ldcu_cauri_sm120.rs"
     },
     "bug165-2026-08-25": {
-     "rows": 5,
+     "rows": 3,
      "kind": "encoder fix wave (cubit BUG-165)",
      "date": "2026-08-25",
      "test": "tests/bug165_sm120_ldc_widths.rs"
@@ -60,13 +60,13 @@
      "test": "tests/bug169_sm120_uplop3_eco.rs"
     },
     "bug172-2026-08-26": {
-     "rows": 3,
+     "rows": 2,
      "kind": "encoder fix wave (cubit BUG-172)",
      "date": "2026-08-26",
      "test": "tests/bug172_ldc_s16_widths.rs"
     },
     "bug203": {
-     "rows": 56,
+     "rows": 55,
      "kind": "encoder fix wave (cubit BUG-203)",
      "test": "tests/bug203_atom_coverage.rs"
     },
@@ -99,7 +99,7 @@
      "test": "tests/bug215_atoms_exch64.rs"
     },
     "bug221-2026-08-27": {
-     "rows": 14,
+     "rows": 13,
      "kind": "encoder fix wave (cubit BUG-221)",
      "date": "2026-08-27",
      "test": "tests/bug221_syncs_arrive_sm120.rs"
@@ -117,25 +117,25 @@
      "test": "tests/bug226_fsetp_iadd3_parity.rs"
     },
     "bug226b-2026-08-27": {
-     "rows": 5,
+     "rows": 0,
      "kind": "encoder fix wave (cubit BUG-226b)",
      "date": "2026-08-27",
      "test": "tests/bug226_fsetp_iadd3_parity.rs"
     },
     "bug226d-2026-08-28": {
-     "rows": 36,
+     "rows": 28,
      "kind": "encoder fix wave (cubit BUG-226d)",
      "date": "2026-08-28",
      "test": "tests/bug226_fsetp_iadd3_parity.rs"
     },
     "bug226e-2026-08-28": {
-     "rows": 17,
+     "rows": 4,
      "kind": "encoder fix wave (cubit BUG-226e)",
      "date": "2026-08-28",
      "test": "tests/bug226_fsetp_iadd3_parity.rs"
     },
     "bug229-2026-08-27": {
-     "rows": 1,
+     "rows": 0,
      "kind": "encoder fix wave (cubit BUG-229)",
      "date": "2026-08-27",
      "test": "tests/bug229_lea_imm5_parity.rs"
@@ -147,7 +147,7 @@
      "test": "tests/bug229_lea_imm5_parity.rs"
     },
     "bug230-2026-08-28": {
-     "rows": 1,
+     "rows": 0,
      "kind": "encoder fix wave (cubit BUG-230)",
      "date": "2026-08-28",
      "test": "tests/bug230_lea_neg_parity.rs"
@@ -251,7 +251,7 @@
      "test": "tests/bug324_rform_suffix_window.rs"
     },
     "bug339-2026-09-02": {
-     "rows": 9,
+     "rows": 0,
      "kind": "encoder fix wave (cubit BUG-339)",
      "date": "2026-09-02",
      "test": "tests/bug339_f2i_era_closure.rs"
@@ -406,14 +406,14 @@
      "test": "tests/sm120_cs2ur_sysreg.rs"
     },
     "dsv41-sm120-2026-10-22": {
-     "rows": 529,
+     "rows": 516,
      "kind": "nvdisasm 13.1 field probe",
      "date": "2026-10-22",
      "tool": "tools/probes/re_sm120_dsv41.py",
      "test": "tests/dsv41_re_fields.rs"
     },
     "f2-181": {
-     "rows": 7,
+     "rows": 6,
      "kind": "fix wave (undated tag)"
     },
     "f2fp-e8-sm120-2026-10-28": {
@@ -456,7 +456,7 @@
      "test": "tests/sm120_ldsm8_mt1616.rs"
     },
     "sm120-native-capture-control-2026-10-22": {
-     "rows": 22,
+     "rows": 21,
      "kind": "native CUPTI capture",
      "date": "2026-10-22",
      "tool": "tools/probes/re_sm120_capture_control_fields.py"
@@ -541,7 +541,7 @@
      "test": "tests/wave11_idp_type_law.rs"
     },
     "ctrl-silicon-sm120-2026-11-04": {
-     "rows": 13,
+     "rows": 12,
      "kind": "silicon probe (RTX PRO 6000 Blackwell sm_120, driver 580.178.04) -- ctrl[109:105] 0..31 executes on IMAD/MOV.64/MUFU; nvdisasm 13.4 refuses 16,28..31",
      "date": "2026-11-04",
      "tool": "tools/probes/re_sm120_ctrl_silicon.py",
