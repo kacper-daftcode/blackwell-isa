@@ -1,3 +1,55 @@
+## November 8, 2026 (session T-19): the last 111 harvest rows of `sm120.json` closed — field-narrowing pass, renames to the vendor's spelling, 12 junk keys deleted, 6 design rows marked `modelled`; 7 documented rows left
+
+The decisions of T/NEEDS_OWNER.md 55 (R, 03:05Z), measured with cubit's `tools/probes/re_sm120_rows.py` (nvdisasm 13.1, -b SM120)
+over the whole 128-bit word; the prep script is blackwell-isa-internal `tools/t19_prep_sm120_20261108.py`. **`sm120.json`: 38 838 rows,
+38 831 with `_src` — 7 harvest rows left, every one a documented owner item** (111 at `7f12b68`); forms 1 015 → 979, `_meta.key_aliases`
+14 906 → 14 918.
+
+- **71 rows measured with their field lists corrected from the sweep** (the probe's `MANUAL_ROW_FIELDS`): the destination-predicate
+  windows of the IMAD P-forms and ULEA narrowed to 3 bits (a destination predicate has no `!` bit); `STS_ARURI_R` ×7 / `STL_AURI_R` ×3
+  `sub_ur` 9 → 8 bits (bit 72 is text-inert); IADD3's second carry-out predicate [86:84] declared (`IADD3_R_P_P_R_R_R`, 5 423 census
+  witnesses; the `.X` form's 66); `BSSY_B_II`'s target = `imm_shr2` at [63:34] (the harvest had an unnamed 30-bit field);
+  `CALL.REL.NOINC_II` on the measured branch-target layout; `WARPSYNC` `ALL` without its unprinted register field; the `.H1` merge
+  selector (bit 72, `opmod:H1`) on `F2FP_R_R_R_R` E4M3 / E5M2, `F2FP.F16.F32.MERGE_C_R_R_R`, `F2IP.S8.F32.NTZ` and UF2FP; `LD_R_dARI`
+  `E,STRONG,SYS` gains its offset field; `UIADD3` `64` its third UR source; the two ULOP3 LUT rows their LUT / UR / predicate operands;
+  UI2F / UI2FP register fields widened to 8 bits; `HFMA2_R_R_R_UR`'s `.reuse` bit 123 belongs to the third register.
+- **15 HADD2 / HFMA2 immediate-pair rows measured** (NEEDS 55b): bit 85 (`BF16_V2`) re-types both packed-half immediates together with
+  the modifier — the other group's word, a modifier bit (`PAIRED_TYPE_BITS`); the `SAT` / `FTZ` / `FTZ,SAT` rows' immediates typed f16.
+- **`F2FP_R_R_R_R`**: the three spellings of one group per E4M3 / E5M2 (the sorted-name row was `encode_only`, the unsorted twin
+  decoded) collapsed into the sorted name — 2 759 production words move group, text and re-encode unchanged.
+- **The four PT-elided `IMAD.HI` / `R2UR.FILL` rows** (G's NEEDS 11): the plain groups added (`IMAD_R_R_UR_R` `HI`, `IMAD_R_R_UR_R_P`
+  `HI,U32,X` / `HI,X`, `R2UR_UR_R` `FILL`; PT baked at [83:81], the ISETP precedent); the `_P_` rows measured too.
+- **17 mis-named harvest keys renamed to the vendor's spelling** (0 census witnesses each): `STL_P_ARI_R` → `STL_ARI_R` `EF,U8`;
+  `F2IP.S8.F32.NTZ_R_R_R_II` → `_R_R_R_R`; `HSET2_R_R_II_II_P` → `HSET2_R_R_FI_FI_P`; the two UF2FP `_UR_?_?_?` keys →
+  `UF2FP_UR_UR_UR_UR`; `UI2F.RP_UR_UR` → `UI2F_UR_UR` `RP`; `UI2FP.F32.S32_UR_UR` → `UI2FP_UR_UR` `F32,S32`; `VIADD.U8x4_R_R_R` →
+  `VIADD.32_R_R_R`; `UBLKCP.S.G_AUR_AUR_UR` → `UBLKCP_AURI_AURI_UR` `G,G`; the two `UBLKRED.G.S.ADD` keys → `UBLKRED_AURI_AURI_UR`
+  `ADD,G,S` / `ADD,G,S,S32` (bit 74 = the `.S` source code the harvest left clear — nvdisasm printed `INVALID0`);
+  `UIADD3.64_UR_UP_UP_UR_II_UR` → `UIADD3_UR_UP_UP_UR_II_UR` `64` (160 production words move key, text unchanged);
+  `UIMNMX_P_P_UR_UR_UR_P_P` `S64` → `UIMNMX_UP_UP_UR_UR_UR_UP_UP` `U32`; `CCTL.E.PF1_AR` / `CCTL.E.PML2_AR` → `CCTL_ARI` `PF1` / `PF2`;
+  `UCGABAR_ARV` / `UCGABAR_WAIT` group `_ARV` / `_WAIT` → `` (cubit printed the suffix twice).
+- **12 keys retired as `_meta.key_aliases`** (twins): the five `CALL.REL.NOINC_*` spellings → `CALL_II`; the five
+  `F2FP.*.PACK_AB_P_R_R_R` phantom-predicate keys → `F2FP_R_R_R` / the dotted PACK_AB keys; `IADD.X_R_P_R_R_R` → `IADD_R_P_R_R_P` (a
+  one-sample row, no test names it); `ULOP3.LUT_UP_UR_UR_II_UR_II_UP` → `ULOP3_UP_UR_UR_II_UR_II_UP` (the dotted twin of its measured
+  `LUT` group); `UI2FP.F32.S32_UR_UR` → `UI2FP_UR_UR` replaces the alias `UI2FP_UR_UR` it pointed at.
+- **4 dead rows deleted** (unreachable duplicates of measured rows: `WARPSYNC_R` `ALL`, `CS2R_R_R`, `CCTL.E.PF2_AR`,
+  `STSM.8.MT168.2_AR_R`) and **12 junk keys deleted whole** (R's class (d)): the six `IADD.64*` keys, `SEL.64_R_R_R_P`,
+  `BAR.RED.POPC.DEFER_BLOCKING_II_II_P` — every canonical word nvdisasm rejects; `BAR.SYNC.DEFER_BLOCKING_P_II` (its words are the
+  register form `BAR.SYNC Ra, Rb` no row models — a documented hole now), `MOV_P_R_II` (UMOV words), `VIMNMX.S32_R_R_UR_P` (VIMNMX.U32
+  immediate words the measured row fails closed on), `ATOMG.E.ADD.F64.RN.STRONG.GPU_P_R_AR_R` (count 0; an `ATOMG.ADD.EF.F16x2.RN` word).
+- **6 design rows marked `_src: "modelled"`** (R's decision; each note names the pinning cubit test): `IADD3.X_R_P_P_R_II_R_P_P` /
+  `IADD3_R_P_P_R_II_R` `X` (bug089 / bug012; the sweep's second carry-out predicate added to the decode row), `HFMA2_R_R_R_II_FI` `` (the
+  wave-built guard-capable twin key, bug274 / 279 / 285 / 330), `UBLKPF.L2_AUR_UR` (sm120_ublkpf_l2), the `encode_only` retention rows
+  `REDUX_UR_R` `AND` (bug193) and `UISETP_UP_UP_UR_UR_UP` `` (bug092). `_meta.provenance.sources.modelled` names the class.
+- `UI2F_UR_UR` `RP,U32` (bug241): the mask narrowed to its fields (bit 74 fail-closed) so the `RP` row can decode.
+
+**Whole production census (249 929 words): 249 929 decoded, 249 929 re-encoded bit-exact, 0 text changes** — the only key / group
+moves are the two deliberate renames above. The 7 rows left: `F2FP_R_R` ×2, `FLO_R_UR`, `WARPSYNC` `` / `COLLECTIVE`, `WARPSYNC_R`
+`COLLECTIVE` (the alias-able groups of mixed keys — a group-level alias is a schema item) and `WARPSYNC.COLLECTIVE_R_II` (the 50-bit
+immediate, NEEDS 55c). cubit side: the six `tests/sm120_rows_*.rs` regenerated, `tests/sm120_rows_common.inc` knows the `deleted` and
+`modelled` statuses, the printer prints branch targets as full signed values (`BSSY` / `CALL` backward targets printed `-0x…` like
+nvdisasm, not wrapped to 32 bits) and the `UF2FP` / `UBLKRED` modifier orders, the encoder maps `-Rn` onto the `inv` bit of the
+IADD3 / IADD `.X` forms (BUG-048 kept on the measured rows), 30 bug-wave tests re-pinned to the measured doctrine.
+
 ## November 8, 2026 (session T-18, the exceptions phase): 32 whole-key twins of the long-tail named exceptions retired as `_meta.key_aliases`; 111 harvest rows left
 
 The key-naming decisions of G's NEEDS 10–12, decided by the table's existing convention "aliases for twins": 32 harvest
