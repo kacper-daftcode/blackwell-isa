@@ -6,7 +6,7 @@
  "instruction_width": 128,
  "provenance": {
   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). Provenance is written once per level since 2026-11-08 (NEEDS 61): `instructions.<key>._src` is set when every row of the key carries the same tag (a row keeps its own `_src`; a row without one inherits the key's); the measurement note of a lattice family lives in `sources[<tag>].note` when every row of the tag shares it, on `instructions.<key>._note` when every row of the key shares it, and on the row only where the row's differs -- read a row's note as row `_note`, else key `_note`, else `sources[row's tag].note` (cubit `tools/tablefmt.py`: `row_src` / `row_note`). A field carries its own `_src` only when it was measured by another tag than its row. The file layout is tools/tablefmt.py's: compact JSON, one encoding row per line, indent=1 `_meta`.",
-  "rows_total": 35991,
+  "rows_total": 35992,
   "rows_without_src": 356,
   "sources": {
    "bug154-2026-08-25": {
@@ -631,6 +631,14 @@
     "tool": "pubwave/hidden-b300/ubmsk-production/prepare.py",
     "test": "tests/hidden_b300_ubmsk_production.rs",
     "note": "Measured production UBMSK UR_UR_UR and UR_UR_II on complete 128-bit words with nvdisasm 13.3 V13.3.73 SM103 and SM100. 66 distinct stored witnesses, all guards and 8-bit UR fields, immediate-byte/boundary and bounded reuse controls. Only independently printed fields are included. .W, adjacent opcodes and all INVALID/text-inert bits stay outside these rows. SM120 is hypothesis guidance only. This establishes vendor-text render/encode fidelity, not CUDA execution, hardware execution legality, UBMSK arithmetic, uniform side effects or performance."
+   },
+   "rows-ubrev-production-2026-11-08": {
+    "rows": 1,
+    "kind": "nvdisasm 13.3 complete-word production UBREV measurements",
+    "date": "2026-11-08",
+    "tool": "pubwave/hidden-b300/ubrev-production/prepare.py",
+    "test": "tests/hidden_b300_ubrev_production.rs",
+    "note": "Measured production UBREV UR,UR using complete 128-bit nvdisasm 13.3 V13.3.73 SM103 and SM100 records. Ten unique stored witnesses plus complete 8-bit UR fields including URZ and 4-bit uniform @UP guard. All three reuse alternatives are refused by the vendor, so no reuse is claimed. Invalid, text-inert, adjacent and control-plane alternatives remain outside the row. No execution, uniform semantics or timing is claimed. Scheduling is synthetic."
    }
   },
   "history": {
@@ -52463,6 +52471,9 @@
 }},
 "UBMSK_UR_UR_UR": {"_src":"rows-ubmsk-production-2026-11-08","base_op":"UBMSK","ctrl_class":"alu_simple","mercury":[],"operand_sig":"UR_UR_UR","scheduling":{"confidence":"synthetic","def_latency":0,"is_variable_latency":false,"latency_source":"synthetic","opcode_id":null,"pipe_class":1,"pipe_name":"INT_ARITH","ptxas_raw":null,"read_latency":0,"stall_base":4,"throughput":1,"write_latency":0},"mod_groups": {
 "": {"_src":"rows-ubmsk-production-2026-11-08","and_base":"0x0000000008000000000000000000029b","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"ureg_ff","shift":16,"token_idx":1},{"bits":8,"extraction":"ureg_ff","shift":24,"token_idx":2},{"bits":8,"extraction":"ureg_ff","shift":32,"token_idx":3}],"variable_mask":"0x0000000000000000000000fffffff000"}
+}},
+"UBREV_UR_UR": {"_src":"rows-ubrev-production-2026-11-08","base_op":"UBREV","ctrl_class":"alu_simple","mercury":[],"operand_sig":"UR_UR","scheduling":{"_all_entries":[{"name":"UBREV","opcode_id":178,"pipe_name":"MEMORY","read_latency":6,"write_latency":11},{"name":"UBREV (synthetic)","opcode_id":null,"pipe_name":"INT_ARITH","read_latency":8,"write_latency":0}],"confidence":"synthetic","def_latency":8,"is_variable_latency":false,"latency_source":"synthetic","opcode_id":null,"pipe_class":37,"pipe_name":"INT_ARITH","ptxas_raw":null,"read_latency":8,"stall_base":4,"throughput":2,"write_latency":0},"mod_groups": {
+"": {"_src":"rows-ubrev-production-2026-11-08","and_base":"0x000000000800000000000000000002be","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"ureg_ff","shift":16,"token_idx":1},{"bits":8,"extraction":"ureg_ff","shift":32,"token_idx":2}],"variable_mask":"0x0000000000000000000000ff00fff000","claim_forbid":[{"shift":122,"bits":1,"values":[1]},{"shift":123,"bits":1,"values":[1]},{"shift":124,"bits":1,"values":[1]}]}
 }}
 },
 "operand_roles": {
