@@ -710145,7 +710145,7 @@
     },
     "HI,U32": {
      "and_base": "0x00000000078000000000000000000827",
-     "variable_mask": "0x14000000000e09fffffffffffffff000",
+     "variable_mask": "0x14000000000e08fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -710209,23 +710209,16 @@
        "extraction": "pred",
        "token_idx": 2,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600605a5a5a5a30207827 = `IMAD.HI.U32 R32, P3, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600605a5a5a5a30207827 = `IMAD.HI.U32 R32, P3, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "HI": {
      "and_base": "0x00000000078002000000000000000827",
-     "variable_mask": "0x14000000000e09fffffffffffffff000",
+     "variable_mask": "0x14000000000e08fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -710289,19 +710282,12 @@
        "extraction": "pred",
        "token_idx": 2,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078602605a5a5a5a30207827 = `IMAD.HI R32, P3, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078602605a5a5a5a30207827 = `IMAD.HI R32, P3, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     }
    },
    "operand_sig": "R_P_R_II_R",
@@ -710483,7 +710469,7 @@
     },
     "HI,U32,X": {
      "and_base": "0x00000000000004000000000000000827",
-     "variable_mask": "0x14000000078e09fffffffffffffff000",
+     "variable_mask": "0x14000000078e08fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -710561,23 +710547,16 @@
        "extraction": "inv",
        "token_idx": 6,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604605a5a5a5a30207827 = `IMAD.HI.U32.X R32, P3, R48, 0x5a5a5a5a, R96, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604605a5a5a5a30207827 = `IMAD.HI.U32.X R32, P3, R48, 0x5a5a5a5a, R96, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "HI,X": {
      "and_base": "0x00000000000006000000000000000827",
-     "variable_mask": "0x14000000078e09fffffffffffffff000",
+     "variable_mask": "0x14000000078e08fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -710655,19 +710634,12 @@
        "extraction": "inv",
        "token_idx": 6,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018606605a5a5a5a30207827 = `IMAD.HI.X R32, P3, R48, 0x5a5a5a5a, R96, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018606605a5a5a5a30207827 = `IMAD.HI.X R32, P3, R48, 0x5a5a5a5a, R96, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     }
    },
    "operand_sig": "R_P_R_II_R_P",
@@ -711178,19 +711150,12 @@
        "extraction": "reuse",
        "token_idx": 5,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 3,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x14000000000e09ff000000fffffff000",
+     "variable_mask": "0x14000000000e08ff000000fffffff000",
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8600180000006040207c27 = `IMAD.HI.U32 R32, P3, R64, UR96, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 4, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8600180000006040207c27 = `IMAD.HI.U32 R32, P3, R64, UR96, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 4, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "U32,WIDE": {
      "and_base": "0x000000000f8000000000000000000c25",
@@ -711549,19 +711514,12 @@
        "extraction": "reuse",
        "token_idx": 4,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x14000000000009fffffffffffffff000",
+     "variable_mask": "0x14000000000008fffffffffffffff000",
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207827 = `IMAD.HI R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207827 = `IMAD.HI R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "HI,U32": {
      "and_base": "0x00000000078e00000000000000000827",
@@ -711622,19 +711580,12 @@
        "extraction": "reuse",
        "token_idx": 4,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x14000000000009fffffffffffffff000",
+     "variable_mask": "0x14000000000008fffffffffffffff000",
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00605a5a5a5a30207827 = `IMAD.HI.U32 R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00605a5a5a5a30207827 = `IMAD.HI.U32 R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "U32": {
      "and_base": "0x00000000078e00000000000000000824",
@@ -712109,7 +712060,7 @@
     },
     "HI,U32,X": {
      "and_base": "0x00000000000e04000000000000000827",
-     "variable_mask": "0x14000000078009fffffffffffffff000",
+     "variable_mask": "0x14000000078008fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -712180,23 +712131,16 @@
        "extraction": "inv",
        "token_idx": 5,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04605a5a5a5a30207827 = `IMAD.HI.U32.X R32, R48, 0x5a5a5a5a, R96, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04605a5a5a5a30207827 = `IMAD.HI.U32.X R32, R48, 0x5a5a5a5a, R96, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "HI,X": {
      "and_base": "0x00000000000e06000000000000000827",
-     "variable_mask": "0x14000000078009fffffffffffffff000",
+     "variable_mask": "0x14000000078008fffffffffffffff000",
      "fields": [
       {
        "shift": 12,
@@ -712267,19 +712211,12 @@
        "extraction": "inv",
        "token_idx": 5,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
      "count": 1,
      "_source": "re_sm120_tensor_fields.py: NVIDIA SM120 bit/field/mode probes 2026-10-22",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06605a5a5a5a30207827 = `IMAD.HI.X R32, R48, 0x5a5a5a5a, R96, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06605a5a5a5a30207827 = `IMAD.HI.X R32, R48, 0x5a5a5a5a, R96, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [8], illegal [0, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     }
    },
    "operand_sig": "R_R_II_R_P",
@@ -712830,18 +712767,11 @@
        "shift": 124,
        "token_idx": 4,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x1c000000000009ff000000fffffff000",
+     "variable_mask": "0x1c000000000008ff000000fffffff000",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00180000005030207227 = `IMAD.HI.U32 R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [4], illegal [3, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; reuse 124 tok 4; neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00180000005030207227 = `IMAD.HI.U32 R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [4], illegal [3, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; reuse 124 tok 4; neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "U32,WIDE": {
      "and_base": "0x00000000078e00000000000000000225",
@@ -713557,18 +713487,11 @@
        "shift": 123,
        "token_idx": 3,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x0c000000000001ff800000fffffff000",
+     "variable_mask": "0x0c000000000000ff800000fffffff000",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00300000004020107e27 = `IMAD.HI.U32 R16, R32, R48, UR64`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [0, 3, 4, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; neg 63 tok 4; reuse 122 tok 2; reuse 123 tok 3; neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00300000004020107e27 = `IMAD.HI.U32 R16, R32, R48, UR64`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [0, 3, 4, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; neg 63 tok 4; reuse 122 tok 2; reuse 123 tok 3; neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "U32": {
      "and_base": "0x000000000f8e00000000000000000e24",
@@ -714125,18 +714048,11 @@
        "shift": 124,
        "token_idx": 4,
        "_src": "rows-intalu-2026-11-07"
-      },
-      {
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 72,
-       "token_idx": 2,
-       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x14000000000009ff000000fffffff000",
+     "variable_mask": "0x14000000000008ff000000fffffff000",
      "_src": "rows-intalu-2026-11-07",
-     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00600000005030207c27 = `IMAD.HI.U32 R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; reuse 124 tok 4; neg 72 tok 2."
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00600000005030207c27 = `IMAD.HI.U32 R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups' words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; reuse 124 tok 4; neg 72 tok 2. T-17: the manual IMAD `-Ra` law at bit 72 (BUG-296) does not apply to the HI groups -- bit 72 is text-inert there for nvdisasm and not a negation (cubit's native_hi law, pinned by tests/sm120_oracle_semantics.rs); the field is removed, the bit fails closed."
     },
     "U32,WIDE": {
      "and_base": "0x000000000f8e00000000000000000c25",
