@@ -6,8 +6,8 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 33523,
-   "rows_without_src": 1285,
+   "rows_total": 33526,
+   "rows_without_src": 1280,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -413,6 +413,13 @@
      "date": "2026-11-08",
      "tool": "tools/probes/re_sm120_fsetp_dsetp.py",
      "test": "tests/sm103a_sm100a_fsetp_dsetp.rs"
+    },
+    "plop3-p2r-r2p-family-2026-11-06": {
+     "rows": 8,
+     "kind": "nvdisasm 13.1 field probe (-b SM120 / SM103 / SM100 / SM121)",
+     "date": "2026-11-08",
+     "tool": "tools/probes/re_sm120_plop3_p2r_r2p.py",
+     "test": "tests/sm103a_sm100a_plop3_p2r_r2p.rs"
     }
    },
    "history": {
@@ -610403,64 +610410,6 @@
   },
   "P2R_R_II_R_II": {
    "base_op": "P2R",
-   "mod_groups": {
-    "": {
-     "and_base": "0x000000000000000000000000ff007803",
-     "count": 3651,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      },
-      {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x03f03e00000000000000007f00ff0000"
-    },
-    "B1": {
-     "and_base": "0x00000000000010000000000f00007803",
-     "count": 63,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 16,
-       "token_idx": 1
-      },
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 3
-      },
-      {
-       "_src": "2c",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 4
-      }
-     ],
-     "variable_mask": "0x000026000000000000000000ffff0000"
-    }
-   },
    "operand_sig": "R_II_R_II",
    "scheduling": {
     "def_latency": 1,
@@ -610468,88 +610417,189 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
-  },
-  "PLOP3_P_P_P_P_P_II_II": {
-   "base_op": "PLOP3",
+   },
    "mod_groups": {
-    "LUT": {
-     "and_base": "0x0000000000700000000000000000081c",
-     "count": 1986,
+    "": {
+     "and_base": "0x00000000000000000000000000000803",
+     "count": null,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 1
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 87,
-       "token_idx": 3
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 77,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "neg",
-       "shift": 80,
-       "token_idx": 4
-      },
-      {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 68,
-       "token_idx": 5
-      },
-      {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm_shr3",
-       "shift": 72,
-       "token_idx": 6
-      },
-      {
-       "_src": "2aE",
        "bits": 32,
        "extraction": "imm",
-       "shift": 16,
-       "token_idx": 7
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aS",
-       "bits": 3,
-       "extraction": "imm",
-       "shift": 64,
-       "token_idx": 6
-      },
-      {
-       "_src": "2c",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 2,
-       "token_idx": 2
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x03f03e00038fff770000000000fff000"
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B1": {
+     "and_base": "0x00000000000010000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B2": {
+     "and_base": "0x00000000000020000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    },
+    "B3": {
+     "and_base": "0x00000000000030000000000000000803",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000000000fffffffffffff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
     }
    },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
+  },
+  "PLOP3_P_P_P_P_P_II_II": {
+   "base_op": "PLOP3",
    "operand_sig": "P_P_P_P_P_II_II",
    "scheduling": {
     "def_latency": 1,
@@ -610557,82 +610607,106 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
-  },
-  "PLOP3_P_P_P_P_UP_II_II": {
-   "base_op": "PLOP3",
+   },
    "mod_groups": {
     "LUT": {
-     "and_base": "0x000000000070e008000000000000781c",
-     "count": 1362,
+     "and_base": "0x0000000000000000000000000000081c",
+     "count": null,
      "fields": [
       {
-       "_src": "2aE",
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
        "bits": 3,
        "extraction": "pred",
        "shift": 81,
-       "token_idx": 1
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
        "bits": 3,
        "extraction": "pred",
        "shift": 87,
-       "token_idx": 3
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 4,
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 77,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 80,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
        "extraction": "pred",
        "shift": 68,
-       "token_idx": 5
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 5,
-       "extraction": "imm_shr3",
-       "shift": 72,
-       "token_idx": 6
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 71,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "imm_shr4",
-       "shift": 16,
-       "token_idx": 6
-      },
-      {
-       "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 16,
-       "token_idx": 7
-      },
-      {
-       "_src": "2aS",
        "bits": 3,
        "extraction": "imm",
        "shift": 64,
-       "token_idx": 6
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2e",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 12,
-       "token_idx": 2
+       "bits": 5,
+       "extraction": "imm_shr3",
+       "shift": 72,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       },
       {
-       "_src": "2e",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 12,
-       "token_idx": 4
+       "bits": 8,
+       "extraction": "imm",
+       "shift": 16,
+       "token_idx": 7,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
       }
      ],
-     "variable_mask": "0x00003e00038e1f770000000000ff0000"
+     "variable_mask": "0x0000000007fffff70000000000fff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
     }
    },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
+  },
+  "PLOP3_P_P_P_P_UP_II_II": {
+   "base_op": "PLOP3",
    "operand_sig": "P_P_P_P_UP_II_II",
    "scheduling": {
     "def_latency": 1,
@@ -610640,7 +610714,103 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
+   },
+   "mod_groups": {
+    "LUT": {
+     "and_base": "0x0000000000000008000000000000081c",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 81,
+       "token_idx": 1,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 77,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 80,
+       "token_idx": 4,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 68,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 71,
+       "token_idx": 5,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 3,
+       "extraction": "imm",
+       "shift": 64,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 5,
+       "extraction": "imm_shr3",
+       "shift": 72,
+       "token_idx": 6,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "imm",
+       "shift": 16,
+       "token_idx": 7,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0000000007fffff70000000000fff000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "PLOP3_P_P_R_R_R_II_II": {
    "base_op": "PLOP3",
@@ -611136,43 +611306,6 @@
   },
   "R2P_II_R_II": {
    "base_op": "R2P",
-   "mod_groups": {
-    "": {
-     "and_base": "0x00000000000000000000000000007804",
-     "count": 643,
-     "fields": [
-      {
-       "_src": "2aE",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 1,
-       "extraction": "reuse",
-       "shift": 122,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 2,
-       "extraction": "byte_sel",
-       "shift": 76,
-       "token_idx": 2
-      },
-      {
-       "_src": "2aE",
-       "bits": 32,
-       "extraction": "imm",
-       "shift": 32,
-       "token_idx": 3
-      }
-     ],
-     "variable_mask": "0x07f03e00000030000000007fff000000"
-    }
-   },
    "operand_sig": "II_R_II",
    "scheduling": {
     "def_latency": 1,
@@ -611180,7 +611313,54 @@
     "pipe_class": 0,
     "pipe_name": "UNKNOWN",
     "throughput": 1
-   }
+   },
+   "mod_groups": {
+    "": {
+     "and_base": "0x00000000000000000000000000000804",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "byte_sel",
+       "shift": 76,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 32,
+       "extraction": "imm",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x0400000000003000ffffffffff00f000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   },
   "R2UR_P_UR_R": {
    "base_op": "R2UR",
@@ -1988704,6 +1988884,58 @@
     }
    },
    "_src": "ldg256-family-2026-11-07"
+  },
+  "R2P_II_R": {
+   "base_op": "R2P",
+   "operand_sig": "II_R",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   },
+   "encode_only": true,
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000000000000000ff00000804",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 2,
+       "extraction": "byte_sel",
+       "shift": 76,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "plop3-p2r-r2p-family-2026-11-06"
+      }
+     ],
+     "variable_mask": "0x040000000000300000000000ff00f000",
+     "_src": "plop3-p2r-r2p-family-2026-11-06",
+     "_note": "PLOP3 / P2R / R2P measured with nvdisasm 13.1 (-b SM120 = SM103 = SM100), tools/probes/re_sm120_plop3_p2r_r2p.py (session G, 2026-11-06). PLOP3 (0x81c): guard [15:12], imm8 [23:16], LUT = [66:64] + [76:72], bit 67 = the third source predicate is uniform (UPc), Pc [70:68] + ! 71, Pb [79:77] + ! 80, Pd0 [83:81], Pd1 [86:84], Pa [89:87] + ! 90; [63:24] and [95:92] text-inert. P2R (0x803): Rd [23:16], Ra [31:24], imm32 [63:32] (the whole circumference moves the text; the 2026-10-22 row had 8 bits), byte selector [77:76] as the mnemonic suffix, .reuse Ra 122. R2P (0x804): Ra [31:24] with the byte selector [77:76] as the operand suffix, imm32 [63:32], .reuse Ra 122, [23:16] text-inert. Bit 91 illegal on all three; the rest of [95:64] text-inert and fail closed."
+    }
+   },
+   "_src": "plop3-p2r-r2p-family-2026-11-06"
   }
  },
  "operand_roles": {
