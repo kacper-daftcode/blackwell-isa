@@ -6,7 +6,7 @@
   "instruction_width": 128,
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
-   "rows_total": 22439,
+   "rows_total": 22444,
    "rows_without_src": 15858,
    "sources": {
     "bug154-2026-08-25": {
@@ -378,6 +378,13 @@
      "date": "2026-11-06",
      "tool": "T/t11/exc_apply.py (session scratch) + tools/probes/README.md",
      "test": "tests/sm120_audit_t11.rs"
+    },
+    "hidden-b300-fmul2-imm-2026-11-08": {
+     "rows": 5,
+     "kind": "SM103/SM100 raw production vendor text; scoped B300 -1 execution control",
+     "date": "2026-11-08",
+     "tool": "tools/probes/re_sm103_fmul2_imm.py",
+     "test": "tests/hidden_b300_fmul2_immediate.rs"
     }
    },
    "history": {
@@ -1683363,6 +1683370,624 @@
     }
    },
    "_src": "idp-family-2026-11-06"
+  },
+  "FMUL2_R_R_FI": {
+   "base_op": "FMUL2",
+   "mod_groups": {
+    "": {
+     "and_base": "0x0000000000000000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:LO_HI",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:NP",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 2,
+       "extraction": "",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "",
+       "shift": 77,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 3,
+       "extraction": "",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 92,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      }
+     ],
+     "variable_mask": "0x04000000f7fe2ffffffffffffffff000",
+     "_src": "hidden-b300-fmul2-imm-2026-11-08",
+     "_note": "Measured SM103/SM100 FMUL2 R,R,F32-immediate forms: paired F32x2.HI_LO/LO_HI with optional NP and scalar F32.NP, opcode 0x84a. Plain, FMZ, RM, RP and FTZ groups. Guard/Rd/Ra/FP32 imm, Ra neg/abs/reuse and bits82/81/83 are named fields. The measured text-inert ranges are neutral fields, zero on canonical encode. Scalar LO_HI (INVALID3), B91 and unrepresented windows fail closed. Silicon semantics: only paired -1."
+    },
+    "FMZ": {
+     "and_base": "0x0000000000001000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:LO_HI",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:NP",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 2,
+       "extraction": "",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "",
+       "shift": 77,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 3,
+       "extraction": "",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 92,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      }
+     ],
+     "variable_mask": "0x04000000f7fe2ffffffffffffffff000",
+     "_src": "hidden-b300-fmul2-imm-2026-11-08",
+     "_note": "Measured SM103/SM100 FMUL2 R,R,F32-immediate forms: paired F32x2.HI_LO/LO_HI with optional NP and scalar F32.NP, opcode 0x84a. Plain, FMZ, RM, RP and FTZ groups. Guard/Rd/Ra/FP32 imm, Ra neg/abs/reuse and bits82/81/83 are named fields. The measured text-inert ranges are neutral fields, zero on canonical encode. Scalar LO_HI (INVALID3), B91 and unrepresented windows fail closed. Silicon semantics: only paired -1."
+    },
+    "RM": {
+     "and_base": "0x0000000000004000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:LO_HI",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:NP",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 2,
+       "extraction": "",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "",
+       "shift": 77,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 3,
+       "extraction": "",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 92,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      }
+     ],
+     "variable_mask": "0x04000000f7fe2ffffffffffffffff000",
+     "_src": "hidden-b300-fmul2-imm-2026-11-08",
+     "_note": "Measured SM103/SM100 FMUL2 R,R,F32-immediate forms: paired F32x2.HI_LO/LO_HI with optional NP and scalar F32.NP, opcode 0x84a. Plain, FMZ, RM, RP and FTZ groups. Guard/Rd/Ra/FP32 imm, Ra neg/abs/reuse and bits82/81/83 are named fields. The measured text-inert ranges are neutral fields, zero on canonical encode. Scalar LO_HI (INVALID3), B91 and unrepresented windows fail closed. Silicon semantics: only paired -1."
+    },
+    "RP": {
+     "and_base": "0x0000000000008000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:LO_HI",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:NP",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 2,
+       "extraction": "",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "",
+       "shift": 77,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 3,
+       "extraction": "",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 92,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      }
+     ],
+     "variable_mask": "0x04000000f7fe2ffffffffffffffff000",
+     "_src": "hidden-b300-fmul2-imm-2026-11-08",
+     "_note": "Measured SM103/SM100 FMUL2 R,R,F32-immediate forms: paired F32x2.HI_LO/LO_HI with optional NP and scalar F32.NP, opcode 0x84a. Plain, FMZ, RM, RP and FTZ groups. Guard/Rd/Ra/FP32 imm, Ra neg/abs/reuse and bits82/81/83 are named fields. The measured text-inert ranges are neutral fields, zero on canonical encode. Scalar LO_HI (INVALID3), B91 and unrepresented windows fail closed. Silicon semantics: only paired -1."
+    },
+    "FTZ": {
+     "and_base": "0x0000000000010000000000000000084a",
+     "count": null,
+     "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 16,
+       "token_idx": 1,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 24,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 72,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "abs",
+       "shift": 73,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:F32",
+       "shift": 82,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:LO_HI",
+       "shift": 81,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "opmod:NP",
+       "shift": 83,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 8,
+       "extraction": "",
+       "shift": 64,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 2,
+       "extraction": "",
+       "shift": 74,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 1,
+       "extraction": "",
+       "shift": 77,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 84,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 3,
+       "extraction": "",
+       "shift": 88,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 4,
+       "extraction": "",
+       "shift": 92,
+       "token_idx": 2,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      },
+      {
+       "bits": 32,
+       "extraction": "f32",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "hidden-b300-fmul2-imm-2026-11-08"
+      }
+     ],
+     "variable_mask": "0x04000000f7fe2ffffffffffffffff000",
+     "_src": "hidden-b300-fmul2-imm-2026-11-08",
+     "_note": "Measured SM103/SM100 FMUL2 R,R,F32-immediate forms: paired F32x2.HI_LO/LO_HI with optional NP and scalar F32.NP, opcode 0x84a. Plain, FMZ, RM, RP and FTZ groups. Guard/Rd/Ra/FP32 imm, Ra neg/abs/reuse and bits82/81/83 are named fields. The measured text-inert ranges are neutral fields, zero on canonical encode. Scalar LO_HI (INVALID3), B91 and unrepresented windows fail closed. Silicon semantics: only paired -1."
+    }
+   },
+   "operand_sig": "R_R_FI",
+   "scheduling": {
+    "def_latency": 1,
+    "is_variable_latency": false,
+    "pipe_class": 0,
+    "pipe_name": "UNKNOWN",
+    "throughput": 1
+   }
   }
  },
  "operand_roles": {
