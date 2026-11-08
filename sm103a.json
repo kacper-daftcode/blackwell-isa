@@ -6,7 +6,7 @@
  "instruction_width": 128,
  "provenance": {
   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). Provenance is written once per level since 2026-11-08 (NEEDS 61): `instructions.<key>._src` is set when every row of the key carries the same tag (a row keeps its own `_src`; a row without one inherits the key's); the measurement note of a lattice family lives in `sources[<tag>].note` when every row of the tag shares it, on `instructions.<key>._note` when every row of the key shares it, and on the row only where the row's differs -- read a row's note as row `_note`, else key `_note`, else `sources[row's tag].note` (cubit `tools/tablefmt.py`: `row_src` / `row_note`). A field carries its own `_src` only when it was measured by another tag than its row. The file layout is tools/tablefmt.py's: compact JSON, one encoding row per line, indent=1 `_meta`.",
-  "rows_total": 35995,
+  "rows_total": 35997,
   "rows_without_src": 356,
   "sources": {
    "bug154-2026-08-25": {
@@ -617,6 +617,14 @@
     "tool": "pubwave/hidden-b300/bmsk-w/prepare.py",
     "test": "tests/hidden_b300_bmsk_w.rs",
     "note": "Measured controlled BMSK.W R_R_R with complete 128-bit nvdisasm 13.3 V13.3.73 SM103 and SM100 words. Independent result puts .W at bit75, not at the SM120 historical hypothesis bit51. All 256 values of each register field and all 16 guards are measured. Plain, text-inert lower bits, other mnemonics and zero-control reuse remain excluded. No SM120 row is transplanted. Scope is vendor-text render/encode only, not CUDA execution, numeric semantics or performance. Uniform and immediate BMSK.W forms were not adopted."
+   },
+   "rows-ubmsk-production-2026-11-08": {
+    "rows": 2,
+    "kind": "nvdisasm 13.3 V13.3.73 complete-word UBMSK production measurements",
+    "date": "2026-11-08",
+    "tool": "pubwave/hidden-b300/ubmsk-production/prepare.py",
+    "test": "tests/hidden_b300_ubmsk_production.rs",
+    "note": "Measured production UBMSK UR_UR_UR and UR_UR_II on complete 128-bit words with nvdisasm 13.3 V13.3.73 SM103 and SM100. 66 distinct stored witnesses, all guards and 8-bit UR fields, immediate-byte/boundary and bounded reuse controls. Only independently printed fields are included. .W, adjacent opcodes and all INVALID/text-inert bits stay outside these rows. SM120 is hypothesis guidance only. This establishes vendor-text render/encode fidelity, not CUDA execution, hardware execution legality, UBMSK arithmetic, uniform side effects or performance."
    }
   },
   "history": {
@@ -52510,6 +52518,12 @@
 }},
 "BMSK.W_R_R_R": {"_src":"rows-bmsk-w-register-2026-11-08","base_op":"BMSK.W","ctrl_class":"alu_simple","mercury":[],"operand_sig":"R_R_R","scheduling":{"confidence":"synthetic","def_latency":0,"is_variable_latency":false,"latency_source":"synthetic","opcode_id":null,"pipe_class":1,"pipe_name":"INT_ARITH","ptxas_raw":null,"read_latency":0,"stall_base":4,"throughput":1,"write_latency":0},"mod_groups": {
 "": {"_src":"rows-bmsk-w-register-2026-11-08","and_base":"0x0000000000000800000000000000021b","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"reg","shift":16,"token_idx":1},{"bits":8,"extraction":"reg","shift":24,"token_idx":2},{"bits":8,"extraction":"reg","shift":32,"token_idx":3}],"variable_mask":"0x0000000000000000000000fffffff000"}
+}},
+"UBMSK_UR_UR_II": {"_src":"rows-ubmsk-production-2026-11-08","base_op":"UBMSK","ctrl_class":"alu_simple","mercury":[],"operand_sig":"UR_UR_II","scheduling":{"confidence":"synthetic","def_latency":0,"is_variable_latency":false,"latency_source":"synthetic","opcode_id":null,"pipe_class":1,"pipe_name":"INT_ARITH","ptxas_raw":null,"read_latency":0,"stall_base":4,"throughput":1,"write_latency":0},"mod_groups": {
+"": {"_src":"rows-ubmsk-production-2026-11-08","and_base":"0x0000000008000000000000000000089b","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"ureg","shift":16,"token_idx":1},{"bits":8,"extraction":"ureg","shift":24,"token_idx":2},{"bits":32,"extraction":"imm","shift":32,"token_idx":3}],"variable_mask":"0x0000000000000000fffffffffffff000"}
+}},
+"UBMSK_UR_UR_UR": {"_src":"rows-ubmsk-production-2026-11-08","base_op":"UBMSK","ctrl_class":"alu_simple","mercury":[],"operand_sig":"UR_UR_UR","scheduling":{"confidence":"synthetic","def_latency":0,"is_variable_latency":false,"latency_source":"synthetic","opcode_id":null,"pipe_class":1,"pipe_name":"INT_ARITH","ptxas_raw":null,"read_latency":0,"stall_base":4,"throughput":1,"write_latency":0},"mod_groups": {
+"": {"_src":"rows-ubmsk-production-2026-11-08","and_base":"0x0000000008000000000000000000029b","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"ureg_ff","shift":16,"token_idx":1},{"bits":8,"extraction":"ureg_ff","shift":24,"token_idx":2},{"bits":8,"extraction":"ureg_ff","shift":32,"token_idx":3}],"variable_mask":"0x0000000000000000000000fffffff000"}
 }}
 },
 "operand_roles": {
