@@ -1,3 +1,26 @@
+## November 8, 2026 (session T-21, batch 6): `sm121a.json` / `sm103a.json` / `sm100a.json` — ISETP / UISETP, FSETP / DSETP (sm103a / sm100a) and PLOP3 / P2R / R2P rebuilt from measurement on `-b SM121` / `SM103` / `SM100`
+
+`sm121a.json` / `sm103a.json` / `sm100a.json` `991137d` + `0525e95`. cubit's `tools/probes/re_sm120_isetp.py` (G's batch 2 of
+2026-11-06) run with `--arch SM121 --witnesses <the GB10 census corpus>`: every one of the 1 944 form words prints the SM120 text —
+the 64-bit compare (`.S64` / `.U64`, bit 80) included —, the 192 lattice words behave the same, and all 3 155 ISETP / UISETP words
+of the GB10 corpus (579 of them 64-bit compares) obey the law word for word; the ten plain keys rewritten to the 96 measured groups
+each, the 224 `INVALID3`-boolean harvest groups (nvdisasm's invalid glyph, a lattice plane) retired, the 146 dotted one-group keys
+retired as `_meta.key_aliases` of the plain key of their form. With `--arch SM103` / `SM100`: the SM120 law holds for every word
+**except bit 80 — the 64-bit compare does not exist on these targets** (`T/NEEDS_OWNER.md` 46: every nvdisasm 13.x build agrees, no
+compiler word of 2 145 B300 cubins sets the bit); the ten keys rewritten to the 48 measured groups each with bit 80 outside the
+masks (text-inert, fail-closed) and the four phantom `.S64` / `.U64` harvest groups of `ISETP_P_P_R_UR_P` retired. `re_sm120_fsetp_dsetp.py
+--arch SM103` / `SM100` (NEEDS 58): the 1 022 form, 12 glyph and 223 lattice words obey the sm120 law of 2026-11-06 on both targets;
+the six keys carry the 432 measured rows — the 2026-08 donors' reading of the boolean bit 75 as `.OR` (the vendor prints `.XOR`) and
+the `|Rb|` baked into `DSETP_P_P_R_R_P` `LTU,OR` are gone. `re_sm120_plop3_p2r_r2p.py --arch SM103` / `SM100` / `SM121`: 202 form + 158
+lattice words obey the law; the four keys rewritten to the 8 measured rows, `R2P_II_R` created, sm121a's 9 junk keys aliased. **Found on
+the way: the sm103a / sm100a harvest `PLOP3_P_P_P_P_P_II_II` row carried a 4-bit "pred" field at bit 2 — inside the opcode nibble — and
+claimed every word of opcodes 0x80c..0x83c that fit its remaining bits** (a bit-80 ISETP immediate word decoded as `PLOP3.LUT P0, P3,
+PT, !P0, PT, 0x10, 0x30200`; its encoder wrote the fifth predicate into the opcode, so cubit's 2026-08 "PLOP3" word for `PLOP3.LUT P0,
+P1, P2, P3, P4, 0x80, 0x8` was `R2P PR, R0.B3, 0x0` for nvdisasm). sm121a rows 37 077 → 36 884, **rows without `_src` 11 160 → 10 000**,
+forms 9 488 → 9 334, aliases 14 406 → 14 561; sm103a 32 916 → 33 532 (**1 584 → 1 280**), sm100a 32 910 → 33 526 (**1 584 → 1 280**).
+Gates: the GB10 census 91 927 / 91 927 (287 ISETP corpus words moved to the plain keys, texts unchanged); the B300 corpus unchanged at
+85 704 / 85 792, 0 words with a changed text or key. The three HTML references regenerated.
+
 ## November 8, 2026 (session T-21, batch 5): `sm121a.json` — LDG.256 (three address forms), STG.256 and the REDG uniform-indexed forms rebuilt from measurement on `-b SM121`
 
 `sm121a.json` `f254702`. cubit's `tools/probes/re_sm120_ldg256.py --form dARI / ARURI64 / ARURI`, `re_sm120_stg256.py` and
