@@ -1,3 +1,29 @@
+## November 8, 2026 (sessions T-21 / T-22, batch 7 + NEEDS 59): `sm121a.json` / `sm103a.json` / `sm100a.json` — the float conversions (F2I / I2F / FRND / MUFU) and the FP32 ALU (FADD / FMUL / FFMA / FMNMX) rebuilt from measurement on `-b SM121` / `SM103` / `SM100`; VIMNMX3 measured on sm103a / sm100a; sm121a's junk key `MUFU_R_L` retired
+
+`sm121a.json` / `sm103a.json` / `sm100a.json` `3574c5f` (T-21, batch 7) + `15435a0` (T-22, NEEDS 59). cubit's `tools/probes/re_sm120_conv.py`
+and `re_sm120_fp32_alu.py` (G's batch 6 / 8 probes of 2026-11-07) run with `--arch SM121` / `SM103` / `SM100` (nvdisasm 13.1): every word
+obeys the sm120 law on the three targets — the conversions 2 494 form + 18 glyph + 547 lattice words, the FP32 ALU 1 636 form + 30 glyph
++ 492 lattice + 16 neighbour words, per target. The 12 conversion keys (`F2I_R_{R,UR,FI}` with 512 groups each — round × NTZ × FTZ ×
+destination type × source type, the immediate typed by the source lane —, `I2F_*`, `FRND_*`, `MUFU_R_{R,UR,FI}`) and the 14 FP32 ALU plain
+keys carry the measured lattices; the dotted and mis-tokenised harvest keys (sm121a: 213 F2I, 19 I2F, 8 FRND, 9 MUFU, the integer-spelling
+`*_II` twins, `F2I.TRUNC.NTZ_R_R_II_?`, `I2F.U32_R_R_R`, `MUFU.RCP_P_R_R`, …) are `_meta.key_aliases` of the plain key their `and_base`
+names; the rows of another measurement outside these lattices keep their tag (T-14's sm103a MUFU packed-half lanes). The sm103a
+`MUFU_R_FI` / `FMUL_R_R_FI` rows carry the immediate as an f32 field instead of the 2026-08 harvest's baked corpus constant
+(`MUFU.RSQ Rn, -QNAN`: the vendor glyph is the display print, the lossless `0xffc00000F` literal is what re-encodes — cubit
+KNOWN_ISSUES A8). **NEEDS 59, found by the new lattice tests:** (a) the sm103a / sm100a `VIMNMX3_R_R_R_R_P` ("" and `RELU`) and
+`VIMNMX3_R_R_UR_R_P` harvest rows declared the fifth operand's predicate as a 4-bit field at shift 1 — inside the opcode nibble —
+so the register form claimed FMNMX words (`FMNMX R4, R2, R3, PT` decoded as `VIMNMX3 R4, R2, R3, R1, P4`; the PLOP3 class of batch 6);
+the form is real (`@P0 VIMNMX3 R0, R0, R0, R0, PT` for nvdisasm, harvest count 1 139 / 944), so the three rows were measured with
+`re_sm120_rows.py --family intalu --arch SM103` / `SM100` (the predicate at [89:87] with its sign at 90 like IADD3's; bits 72 / 73 / 76 =
+`.U32` / `.S16x2` / `.RELU`, other groups' words — the type lattice of VIMNMX3 stays a hole; 0 B300 corpus witnesses). (b) sm121a's
+label-typed junk key `MUFU_R_L` (8 groups whose canonical words are the plain `MUFU.<fn> R0, R0` of the measured `MUFU_R_R`; its mask
+tolerated the half-type bits and claimed `MUFU.INVALID6.F16`) retired as an alias of `MUFU_R_R` (0 GB10 witnesses). sm121a rows 36 884 →
+39 119, **rows without `_src` 10 000 → 9 575**, forms 9 334 → 9 063, aliases 14 561 → 14 835; sm103a 33 532 → 35 875 (**1 280 → 898**),
+sm100a 33 526 → 35 869 (**1 280 → 898**). Gates: the B300 publish corpus **85 704 → 85 707 / 85 792** (the `I2F.U16[.RZ]` ×2 and
+`FMUL.RZ` ×1 holes closed), the GB10 census 91 927 / 91 927 with the strict residue **40 → 17** (the 23 `FFMA_R_R_R_II` words re-encode:
+the measured `FFMA_R_R_R_FI` row carries the `.reuse` field of the second register the harvest row lacked; the 17 left: the harvest
+`UIADD3` `64` group ×16, one BUG-037 refusal). The three HTML references regenerated.
+
 ## November 8, 2026 (session T-21, batch 6): `sm121a.json` / `sm103a.json` / `sm100a.json` — ISETP / UISETP, FSETP / DSETP (sm103a / sm100a) and PLOP3 / P2R / R2P rebuilt from measurement on `-b SM121` / `SM103` / `SM100`
 
 `sm121a.json` / `sm103a.json` / `sm100a.json` `991137d` + `0525e95`. cubit's `tools/probes/re_sm120_isetp.py` (G's batch 2 of
