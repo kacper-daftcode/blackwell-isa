@@ -1,3 +1,15 @@
+## November 8, 2026 (session T-18, the exceptions phase): 32 whole-key twins of the long-tail named exceptions retired as `_meta.key_aliases`; 111 harvest rows left
+
+The key-naming decisions of G's NEEDS 10–12, decided by the table's existing convention "aliases for twins": 32 harvest
+keys whose name does not spell the vendor text of their own canonical word, each a whole-key twin (the single group's
+canonical word decodes through an existing family key vendor-true and re-encodes bit for bit; 0 census witnesses),
+retired as `_meta.key_aliases`. **`sm120.json`: 38 866 rows, 38 755 with `_src` — 111 harvest rows left** (143 at
+`fd736a7`); forms 1 047 → 1 015, `_meta.key_aliases` 14 874 → 14 906. Kept as named exceptions (owner decision — the
+project models them deliberately): IADD.X_R_P_R_R_R, IADD3.X_R_P_P_R_II_R_P_P, UBLKPF.L2_AUR_UR; and the four mixed keys
+F2FP_R_R / FLO_R_UR / WARPSYNC / WARPSYNC_R. Whole production census (249 929 words) unchanged. The 111 left: 20 live
+census-bearing harvest rows (over-wide fields / undeclared bits — a field-narrowing probe), 15 HADD2/HFMA2 bit-85
+immediate pairs, and the remaining owner decisions (NEEDS_OWNER 55). cubit side: the five family tests regenerated.
+
 ## November 8, 2026 (session T-18): the 192 wave-pinned rows take their measured status on `sm120.json` — the 2026-08/09 bug-wave suites re-pinned to the measured doctrine; 143 harvest rows left
 
 Session G run 5 had verified 192 of the 304 remaining harvest rows field by field but left them harvest because 46 cubit test binaries
