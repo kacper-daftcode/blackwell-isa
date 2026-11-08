@@ -7,7 +7,7 @@
  "provenance": {
   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). Provenance is written once per level since 2026-11-08 (NEEDS 61): `instructions.<key>._src` is set when every row of the key carries the same tag (a row keeps its own `_src`; a row without one inherits the key's); the measurement note of a lattice family lives in `sources[<tag>].note` when every row of the tag shares it, on `instructions.<key>._note` when every row of the key shares it, and on the row only where the row's differs -- read a row's note as row `_note`, else key `_note`, else `sources[row's tag].note` (cubit `tools/tablefmt.py`: `row_src` / `row_note`). A field carries its own `_src` only when it was measured by another tag than its row. The file layout is tools/tablefmt.py's: compact JSON, one encoding row per line, indent=1 `_meta`.",
   "rows_total": 37406,
-  "rows_without_src": 339,
+  "rows_without_src": 338,
   "sources": {
    "bug154-2026-08-25": {
     "rows": 1,
@@ -809,6 +809,14 @@
     "date": "2026-11-08",
     "tool": "tools/probes/probe_sm103_ldsm_m816_counts.py + tools/probes/re_sm103_ldsm_m816_counts.py",
     "test": "tests/hidden_b300_ldsm_m816_counts.rs"
+   },
+   "rows-hidden-b300-usetmaxreg-try-alloc-2026-11-08": {
+    "rows": 1,
+    "kind": "SM103/SM100 raw nvdisasm operand and field lattice",
+    "date": "2026-11-08",
+    "tool": "tools/probes/re_sm103_usetmaxreg_try_alloc.py",
+    "test": "tests/hidden_b300_usetmaxreg_try_alloc.rs",
+    "note": "Measured on SM103/SM100 vendor text: guard4@12 (uniform), UP destination3@81, full unsigned immediate10@32. Other text-inert bits and alternative opcodes stay fail-closed. Text/encoding evidence only; no execution or regalloc semantic claim."
    }
   },
   "history": {
@@ -28740,8 +28748,8 @@
 "USETMAXREG_II": {"base_op":"USETMAXREG","operand_sig":"II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"mod_groups": {
 "CTAPOOL,DEALLOC": {"and_base":"0x00000000080e050000000000000079c8","count":7,"fields":[{"_src":"2aE","bits":32,"extraction":"imm","shift":32,"token_idx":1}],"variable_mask":"0x0001c000000000000000007800000000"}
 }},
-"USETMAXREG_UP_II": {"base_op":"USETMAXREG","operand_sig":"UP_II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"mod_groups": {
-"CTAPOOL,TRY_ALLOC": {"and_base":"0x0000000008000600000000c0000079c8","count":3,"fields":[{"_src":"2aE","bits":32,"extraction":"imm","shift":32,"token_idx":2},{"_src":"2c","bits":4,"extraction":"pred","shift":15,"token_idx":1}],"variable_mask":"0x00004000000000000000002800000000"}
+"USETMAXREG_UP_II": {"base_op":"USETMAXREG","operand_sig":"UP_II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_src":"rows-hidden-b300-usetmaxreg-try-alloc-2026-11-08","mod_groups": {
+"CTAPOOL,TRY_ALLOC": {"and_base":"0x0000000008000600000000c0000079c8","count":3,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":3,"extraction":"upred","shift":81,"token_idx":1},{"bits":10,"extraction":"imm","shift":32,"token_idx":2}],"variable_mask":"0x00000000000e0000000003ff0000f000","_src":"rows-hidden-b300-usetmaxreg-try-alloc-2026-11-08"}
 }},
 "USHF_UR_UR_II_UR": {"base_op":"USHF","operand_sig":"UR_UR_II_UR","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_src":"rows-uniform-2026-11-07","mod_groups": {
 "HI,L,S32": {"and_base":"0x00000000080104000000000000000899","count":1,"fields":[{"_src":"bug126-2026-08-24","bits":8,"extraction":"ureg","shift":16,"token_idx":1},{"_src":"bug126-2026-08-24","bits":8,"extraction":"ureg","shift":24,"token_idx":2},{"_src":"bug126-2026-08-24","bits":32,"extraction":"imm","shift":32,"token_idx":3},{"_src":"bug126-2026-08-24","bits":8,"extraction":"ureg","shift":64,"token_idx":4},{"bits":4,"extraction":"guard","shift":12,"token_idx":0}],"variable_mask":"0x00000000000000fffffffffffffff000","_src":"rows-uniform-2026-11-07","_note":"Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 00000000080104405a5a5a5a20107899 = `USHF.L.S32.HI UR16, UR32, 0x5a5a5a5a, UR64`; every field bit moves its own operand token; bits outside the fields: modifier bits [73, 74, 75, 76, 80] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 2, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [72, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0."},
