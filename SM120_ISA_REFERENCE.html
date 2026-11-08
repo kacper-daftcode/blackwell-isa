@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>512 opcodes &middot; 979 instruction forms &middot; 38838 encoding variants &middot; 876 with scheduling data &middot; 38831 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm120.json</code> (89dc967 2026-11-08), SHA-256 47748150a5465780&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>512 opcodes &middot; 979 instruction forms &middot; 38838 encoding variants &middot; 876 with scheduling data &middot; 38831 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm120.json</code> (27b1272 2026-11-08), SHA-256 a4ea25e88d75d326&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -154713,17 +154713,16 @@ Collapsed by default — click to expand.
 <tr><td class="m">IMAD_R_R_UR_R</td><td class="m">R_R_UR_R</td><td class="m">HI,U32, U32,WIDE, WIDE, U32, HI</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 <tr><td class="m">IMAD_R_R_UR_R_P</td><td class="m">R_R_UR_R_P</td><td class="m">U32,WIDE,X, HI,U32,X, HI,X</td><td>INT_ARITH</td><td><span class="lat-hw" title="Measured on RTX 5090">4 &#9733;</span></td></tr>
 </table>
-<details><summary>IMAD_R_P_R_II_R.U32,WIDE &mdash; 10 fields &middot; 136 samples</summary><div class="var">
+<details><summary>IMAD_R_P_R_II_R.U32,WIDE &mdash; 9 fields &middot; 136 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078000000000000000000825</code></div>
-<div class="ab">var_mask: <code>0x14000000000e09fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000e08fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600185a5a5a5a40207825 = `IMAD.WIDE.U32 R32, P3, R64, 0x5a5a5a5a, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 3, 4, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. Session T-19 (2026-11-08) closed the long tail: the field-narrowing pass of NEEDS 55 (R&#x27;s decisions of 03:05Z) measured, renamed, aliased or deleted the last harvest rows of the family.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600185a5a5a5a40207825 = `IMAD.WIDE.U32 R32, P3, R64, 0x5a5a5a5a, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 3, 4, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
@@ -154762,11 +154761,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_P_R_II_R_P.U32,WIDE,X &mdash; 12 fields &middot; 60 samples</summary><div class="var">
+<details><summary>IMAD_R_P_R_II_R_P.U32,WIDE,X &mdash; 11 fields &middot; 60 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000004000000000000000825</code></div>
-<div class="ab">var_mask: <code>0x14000000078e09fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000078e08fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604185a5a5a5a40207825 = `IMAD.WIDE.U32.X R32, P3, R64, 0x5a5a5a5a, R24, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: inv 75 tok 5; neg 72 tok 3.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604185a5a5a5a40207825 = `IMAD.WIDE.U32.X R32, P3, R64, 0x5a5a5a5a, R24, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 3, 4, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
@@ -154774,7 +154773,6 @@ Collapsed by default — click to expand.
 <tr><td>[89:87]</td><td>3</td><td>t6</td><td><code>pred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t5</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
@@ -154834,29 +154832,28 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_P_R_R_R.U32,WIDE &mdash; 11 fields &middot; 1,157 samples</summary><div class="var">
+<details><summary>IMAD_R_P_R_R_R.U32,WIDE &mdash; 10 fields &middot; 1,157 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078000000000000000000225</code></div>
-<div class="ab">var_mask: <code>0x1c000000000e09ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000000e08ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600280000006040207225 = `IMAD.WIDE.U32 R32, P3, R64, R96, R40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 2, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 3. Session T-19 (2026-11-08) closed the long tail: the field-narrowing pass of NEEDS 55 (R&#x27;s decisions of 03:05Z) measured, renamed, aliased or deleted the last harvest rows of the family.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078600280000006040207225 = `IMAD.WIDE.U32 R32, P3, R64, R96, R40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 2, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_P_R_R_R_P.U32,WIDE,X &mdash; 13 fields &middot; 639 samples</summary><div class="var">
+<details><summary>IMAD_R_P_R_R_R_P.U32,WIDE,X &mdash; 12 fields &middot; 639 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000004000000000000000225</code></div>
-<div class="ab">var_mask: <code>0x1c000000078e09ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000078e08ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604280000006040207225 = `IMAD.WIDE.U32.X R32, P3, R64, R96, R40, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: inv 75 tok 5; neg 72 tok 3.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000018604280000006040207225 = `IMAD.WIDE.U32.X R32, P3, R64, R96, R40, P3`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 2, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
@@ -154865,7 +154862,6 @@ Collapsed by default — click to expand.
 <tr><td>[89:87]</td><td>3</td><td>t6</td><td><code>pred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t5</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
@@ -154888,17 +154884,16 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_P_R_UR_R.U32,WIDE &mdash; 10 fields &middot; 4 samples</summary><div class="var">
+<details><summary>IMAD_R_P_R_UR_R.U32,WIDE &mdash; 9 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8000000000000000000c25</code></div>
-<div class="ab">var_mask: <code>0x14000000000e09ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000e08ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8600400000003020107c25 = `IMAD.WIDE.U32 R16, P3, R32, UR48, R64`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; neg 75 tok 5; reuse 122 tok 3; reuse 124 tok 5; neg 72 tok 3.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8600400000003020107c25 = `IMAD.WIDE.U32 R16, P3, R32, UR48, R64`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 4, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t5</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
@@ -154957,16 +154952,15 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R &mdash; 9 fields &middot; 17,781 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R &mdash; 8 fields &middot; 17,781 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e02000000000000000824</code></div>
-<div class="ab">var_mask: <code>0x14000000000009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207824 = `IMAD R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207824 = `IMAD R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155003,84 +154997,79 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R.U32 &mdash; 9 fields &middot; 3,833 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R.U32 &mdash; 8 fields &middot; 3,833 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e00000000000000000824</code></div>
-<div class="ab">var_mask: <code>0x14000000000009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00605a5a5a5a30207824 = `IMAD.U32 R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00605a5a5a5a30207824 = `IMAD.U32 R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 5, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R.U32,WIDE &mdash; 9 fields &middot; 21,108 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R.U32,WIDE &mdash; 8 fields &middot; 21,108 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e00000000000000000825</code></div>
-<div class="ab">var_mask: <code>0x14000000000009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00185a5a5a5a40307825 = `IMAD.WIDE.U32 R48, R64, 0x5a5a5a5a, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00185a5a5a5a40307825 = `IMAD.WIDE.U32 R48, R64, 0x5a5a5a5a, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 3, 4, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R.WIDE &mdash; 9 fields &middot; 14,731 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R.WIDE &mdash; 8 fields &middot; 14,731 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e02000000000000000825</code></div>
-<div class="ab">var_mask: <code>0x14000000000009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207825 = `IMAD.WIDE R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02605a5a5a5a30207825 = `IMAD.WIDE R32, R48, 0x5a5a5a5a, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 3, 4, 5, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R_P.U32,WIDE,X &mdash; 11 fields &middot; 147 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R_P.U32,WIDE,X &mdash; 10 fields &middot; 147 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000e04000000000000000825</code></div>
-<div class="ab">var_mask: <code>0x14000000078009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000078008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04405a5a5a5a20107825 = `IMAD.WIDE.U32.X R16, R32, 0x5a5a5a5a, R64, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; inv 75 tok 4; reuse 122 tok 2; reuse 124 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04405a5a5a5a20107825 = `IMAD.WIDE.U32.X R16, R32, 0x5a5a5a5a, R64, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 3, 4, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[90]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_II_R_P.X &mdash; 11 fields &middot; 20,701 samples</summary><div class="var">
+<details><summary>IMAD_R_R_II_R_P.X &mdash; 10 fields &middot; 20,701 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000e06000000000000000824</code></div>
-<div class="ab">var_mask: <code>0x14000000078009fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000078008fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06505a5a5a5a30207824 = `IMAD.X R32, R48, 0x5a5a5a5a, R80, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 90 tok 5; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06505a5a5a5a30207824 = `IMAD.X R32, R48, 0x5a5a5a5a, R80, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 5, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [1, 3, 4, 6, 7, 9, 10, 11, 91, 123], text-inert [72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[90]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t3</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155121,15 +155110,14 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_II &mdash; 8 fields &middot; 430 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_II &mdash; 7 fields &middot; 430 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e02000000000000000424</code></div>
-<div class="ab">var_mask: <code>0x0c000000000001fffffffffffffff000</code></div>
+<div class="ab">var_mask: <code>0x0c000000000000fffffffffffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02405a5a5a5a20107424 = `IMAD R16, R32, R64, 0x5a5a5a5a`; every field bit moves its own operand token; bits outside the fields: modifier bits [73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 91, 124], text-inert [75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02405a5a5a5a20107424 = `IMAD R16, R32, R64, 0x5a5a5a5a`; every field bit moves its own operand token; bits outside the fields: modifier bits [73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 91, 124], text-inert [72, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155160,17 +155148,16 @@ Collapsed by default — click to expand.
 <tr><td>[63:32]</td><td>32</td><td>t4</td><td><code>imm</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R &mdash; 10 fields &middot; 13,455 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_R &mdash; 9 fields &middot; 13,455 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e02000000000000000224</code></div>
-<div class="ab">var_mask: <code>0x1c000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02180000005030207224 = `IMAD R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [3, 6, 7, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02180000005030207224 = `IMAD R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [3, 6, 7, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155193,34 +155180,32 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R.U32,WIDE &mdash; 10 fields &middot; 13,077 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_R.U32,WIDE &mdash; 9 fields &middot; 13,077 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e00000000000000000225</code></div>
-<div class="ab">var_mask: <code>0x1c000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00180000005030207225 = `IMAD.WIDE.U32 R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e00180000005030207225 = `IMAD.WIDE.U32 R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 2, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R.WIDE &mdash; 10 fields &middot; 2,070 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_R.WIDE &mdash; 9 fields &middot; 2,070 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000078e02000000000000000225</code></div>
-<div class="ab">var_mask: <code>0x1c000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02180000005030207225 = `IMAD.WIDE R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000078e02180000005030207225 = `IMAD.WIDE R32, R48, R80, R24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 2, 4, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155243,11 +155228,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R_P.U32,WIDE,X &mdash; 12 fields &middot; 243 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_R_P.U32,WIDE,X &mdash; 11 fields &middot; 243 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000e04000000000000000225</code></div>
-<div class="ab">var_mask: <code>0x1c000000078009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000078008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04180000005030207225 = `IMAD.WIDE.U32.X R32, R48, R80, R24, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: inv 75 tok 4; neg 90 tok 5; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e04180000005030207225 = `IMAD.WIDE.U32.X R32, R48, R80, R24, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 2, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
@@ -155255,18 +155240,17 @@ Collapsed by default — click to expand.
 <tr><td>[90]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_R_P.X &mdash; 12 fields &middot; 11 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_R_P.X &mdash; 11 fields &middot; 11 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000e06000000000000000224</code></div>
-<div class="ab">var_mask: <code>0x1c000000078009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x1c000000078008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06500000004030207224 = `IMAD.X R32, R48, R64, R80, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 4, 8], illegal [3, 6, 7, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 90 tok 5; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 00000000038e06500000004030207224 = `IMAD.X R32, R48, R64, R80, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 4, 8], illegal [3, 6, 7, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
@@ -155274,22 +155258,20 @@ Collapsed by default — click to expand.
 <tr><td>[90]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_UR &mdash; 9 fields &middot; 2,682 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_UR &mdash; 8 fields &middot; 2,682 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e02000000000000000e24</code></div>
-<div class="ab">var_mask: <code>0x0c000000000001ff800000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x0c000000000000ff800000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02500000001830207e24 = `IMAD R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 3, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02500000001830207e24 = `IMAD R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 3, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 72, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -155327,15 +155309,14 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_UR.U32,WIDE &mdash; 9 fields &middot; 1,793 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_UR.U32,WIDE &mdash; 8 fields &middot; 1,793 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e00000000000000000e25</code></div>
-<div class="ab">var_mask: <code>0x0c000000000001ff800000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x0c000000000000ff800000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00500000001830207e25 = `IMAD.WIDE.U32 R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 63 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00500000001830207e25 = `IMAD.WIDE.U32 R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 72, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -155343,15 +155324,14 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_R_UR.WIDE &mdash; 9 fields &middot; 1,632 samples</summary><div class="var">
+<details><summary>IMAD_R_R_R_UR.WIDE &mdash; 8 fields &middot; 1,632 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e02000000000000000e25</code></div>
-<div class="ab">var_mask: <code>0x0c000000000001ff800000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x0c000000000000ff800000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02500000001830207e25 = `IMAD.WIDE R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 63 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02500000001830207e25 = `IMAD.WIDE R32, R48, R80, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [3, 4, 5, 6, 7, 8, 10, 11, 91, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 72, 75, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -155372,16 +155352,15 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_UR_R &mdash; 9 fields &middot; 15,813 samples</summary><div class="var">
+<details><summary>IMAD_R_R_UR_R &mdash; 8 fields &middot; 15,813 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e02000000000000000c24</code></div>
-<div class="ab">var_mask: <code>0x14000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02600000005030207c24 = `IMAD R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [3, 4, 6, 7, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02600000005030207c24 = `IMAD R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [2, 8], illegal [3, 4, 6, 7, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155403,32 +155382,30 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_UR_R.U32,WIDE &mdash; 9 fields &middot; 23,790 samples</summary><div class="var">
+<details><summary>IMAD_R_R_UR_R.U32,WIDE &mdash; 8 fields &middot; 23,790 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e00000000000000000c25</code></div>
-<div class="ab">var_mask: <code>0x14000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00600000005030207c25 = `IMAD.WIDE.U32 R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e00600000005030207c25 = `IMAD.WIDE.U32 R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_UR_R.WIDE &mdash; 9 fields &middot; 3,130 samples</summary><div class="var">
+<details><summary>IMAD_R_R_UR_R.WIDE &mdash; 8 fields &middot; 3,130 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f8e02000000000000000c25</code></div>
-<div class="ab">var_mask: <code>0x14000000000009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000000008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02600000005030207c25 = `IMAD.WIDE R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: neg 75 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000f8e02600000005030207c25 = `IMAD.WIDE R32, R48, UR80, R96`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 4, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -155465,18 +155442,17 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>IMAD_R_R_UR_R_P.U32,WIDE,X &mdash; 11 fields &middot; 4 samples</summary><div class="var">
+<details><summary>IMAD_R_R_UR_R_P.U32,WIDE,X &mdash; 10 fields &middot; 4 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080e04000000000000000c25</code></div>
-<div class="ab">var_mask: <code>0x14000000078009ff000000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x14000000078008ff000000fffffff000</code></div>
 <div class="ab">measured: <code>rows-intalu-2026-11-07</code></div>
-<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000b8e04400000003020107c25 = `IMAD.WIDE.U32.X R16, R32, UR48, R64, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 73] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0; inv 75 tok 4; neg 90 tok 5; reuse 122 tok 2; reuse 124 tok 4; neg 72 tok 2.</div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000b8e04400000003020107c25 = `IMAD.WIDE.U32.X R16, R32, UR48, R64, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 1, 4, 73, 74] (other groups&#x27; words), neighbouring-form bits [81, 82, 83], vendor-invalid glyph planes [], illegal [2, 3, 5, 6, 7, 8, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 72, 76, 77, 78, 79, 80, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Session T-20 (2026-11-08) retired the `neg@72` field this row carried as cubit&#x27;s own law (BUG-296, class cubit_law of the T-19 fixture): bit 72 prints nothing on any IMAD form for nvdisasm 13.1 on SM120 / SM121 / SM103 / SM100 and is compute-inert on sm_120 silicon (NEEDS 53, pt-needs53 2026-11-08: plain IMAD and the bit-72 word both compute a*b+c; the -Rc control at bit 75 computes a*b-c), so it fails closed like every text-inert bit; 0 production census words carry it.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[90]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t5</td><td><code>pred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -539569,7 +539545,7 @@ Collapsed by default — click to expand.
 </table></div></details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm120.json (89dc967 2026-11-08), SHA-256 47748150a5465780370be1bd5d16d2731194261d205d0f5bfe046c8ea75d66e5<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm120.json (27b1272 2026-11-08), SHA-256 a4ea25e88d75d3264e923dae0f841969b43ecd612d13cde4040e30fad72f2442<br>
 979 instruction forms &middot; 38838 encoding variants &middot; 38831 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>

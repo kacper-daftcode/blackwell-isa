@@ -1,3 +1,23 @@
+## November 8, 2026 (session T-20): the IMAD `neg@72` field retired — bit 72 is compute-inert on sm_120 silicon (NEEDS 53)
+
+`sm120.json` `27b1272`. The 24 measured non-HI IMAD rows (`IMAD_R_R_R_R` ×3, `_R_R_R_UR` ×3, `_R_R_UR_R` ×3, `_R_R_II_R` ×4,
+`_R_R_R_II`, `_R_R_R_R_P` ×2, `_R_R_II_R_P` ×2, `_R_R_UR_R_P`, `IMAD_R_P_R_R_R` / `_R_P_R_II_R` / `_R_P_R_UR_R` `U32,WIDE`,
+`_R_P_R_R_R_P` / `_R_P_R_II_R_P` `U32,WIDE,X`) carried a `neg@72` field on the Ra register as cubit's own law (BUG-296: `-Ra`
+at bit 72; the T-19 fixture's class `cubit_law` — nvdisasm prints nothing for the bit). **Measured on sm_120 silicon by
+session T-19 (test host GPU 0, `pt-needs53`, 2026-11-08 05:19Z, a cubit-assembled 1-thread kernel with a = 0x70000007,
+b = 5, c = 3): plain `IMAD` and the same word with bit 72 set both compute a·b+c (0x30000026); the `-Rc` control (bit 75)
+computes a·b−c (0x30000020); `IMAD.U32` and its bit-72 word agree.** nvdisasm 13.1 prints nothing for bit 72 on any IMAD
+form on `-b SM120` / `SM121` / `SM103` / `SM100` (bits 62 / 63 text-inert as well; 73 = `.U32`, 74 = `.X`, 75 = `-Rc`). The
+field goes: `variable_mask` narrows by bit 72 on the 24 rows, `and_base` unchanged, the `_note` of each row names the
+measurement; the family re-probed on the applied table (cubit `tools/probes/re_sm120_rows.py --family intalu`, whose
+`MANUAL_FIELDS` entry for the law is retired with the field — `RETIRED_FIELDS` is the inverse mechanism): 183 / 183 rows
+measured, bit 72 in the text-inert class of every IMAD row. Rows 38 838, rows without `_src` 7, aliases 14 918, `_meta`
+unchanged. The whole production census (249 929 distinct words) decodes and re-encodes bit-exact before and after with 0
+text changes (0 census words carry bit 72 on IMAD). cubit (same hour): the encoder refuses `-Ra` / `|Ra|` / `-Rb` / `|Rb|`
+on IMAD on SM120 instead of minting the inert bit (`-Rc` / `-URc` stay as the measured fields), the decoder fails closed
+on the bit-62 / 63 / 72 words (until now the bit-63 neighbour decoded through the T-3 `U32` twin as
+`IMAD.U32 R32, |R48|, -R80, R24`), bug296's IMAD control re-pinned. The SM120 HTML reference regenerated at `27b1272`.
+
 ## November 8, 2026 (session T-19): the last 111 harvest rows of `sm120.json` closed — field-narrowing pass, renames to the vendor's spelling, 12 junk keys deleted, 6 design rows marked `modelled`; 7 documented rows left
 
 The decisions of T/NEEDS_OWNER.md 55 (R, 03:05Z), measured with cubit's `tools/probes/re_sm120_rows.py` (nvdisasm 13.1, -b SM120)
