@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>208 opcodes &middot; 516 instruction forms &middot; 35875 encoding variants &middot; 497 with scheduling data &middot; 34977 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm103a.json</code> (15435a0 2026-11-08), SHA-256 dfdfb24f868478d8&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>208 opcodes &middot; 516 instruction forms &middot; 35876 encoding variants &middot; 497 with scheduling data &middot; 34981 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm103a.json</code> (fddd1b3 2026-11-08), SHA-256 8cca184ef4673a8a&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -477112,17 +477112,35 @@ Collapsed by default — click to expand.
 <h3>UIADD3</h3>
 <p class="desc">Uniform 3-input integer add.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR</td><td class="m">UR_UP_UP_UR_II_UR</td><td class="m">&amp;mdash;</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR</td><td class="m">UR_UP_UP_UR_II_UR</td><td class="m">64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_II_UR_UP_UP</td><td class="m">UR_UP_UP_UR_II_UR_UP_UP</td><td class="m">X</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_UR_UR</td><td class="m">UR_UP_UP_UR_UR_UR</td><td class="m">64</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_UR_UR_UP_UP</td><td class="m">UR_UP_UP_UR_UR_UR_UP_UP</td><td class="m">X</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>UIADD3_UR_UP_UP_UR_II_UR &mdash; 9 fields &middot; 10,481 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000f91e0000000000000000890</code></div>
-<div class="ab">var_mask: <code>0x03f03e00006e09ffffffffff7ffff000</code></div>
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000890</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09fffffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0285a5a5a5a50207890 = `UIADD3 UR32, UPT, UPT, UR80, 0x5a5a5a5a, UR40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
+<tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>UIADD3_UR_UP_UP_UR_II_UR.64 &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000897</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09fffffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0285a5a5a5a50207897 = `UIADD3.64 UR32, UPT, UPT, UR80, 0x5a5a5a5a, UR40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 4] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Renamed by session T-19 (2026-11-08) from the harvest key `UIADD3.64_UR_UP_UP_UR_II_UR (dotted twin of the plain measured key; the URZ third source at [71:64] was baked, now the `ureg` field of the sibling row)`: the old name did not spell the vendor text of the row&#x27;s own word (R&#x27;s key-naming rule: rename to the vendor&#x27;s spelling; 0 census witnesses). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
 <tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
@@ -477148,7 +477166,9 @@ Collapsed by default — click to expand.
 </table></div></details>
 <details><summary>UIADD3_UR_UP_UP_UR_UR_UR &mdash; 10 fields &middot; 5,962 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f81e0000000000000000290</code></div>
-<div class="ab">var_mask: <code>0x03f03e00007e09ff800000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09ff800000fffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0380000001850207290 = `UIADD3 UR32, UPT, UPT, UR80, UR24, UR56`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
@@ -477161,16 +477181,22 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UIADD3_UR_UP_UP_UR_UR_UR.64 &mdash; 6 fields &middot; 2 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000fffe0ff000000040a008297</code></div>
-<div class="ab">var_mask: <code>0x00200e000000000000000000000c0000</code></div>
+<details><summary>UIADD3_UR_UP_UP_UR_UR_UR.64 &mdash; 10 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000297</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09ff800000fffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0180000006050207297 = `UIADD3.64 UR32, UPT, UPT, UR80, UR96, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [4] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[84:77]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
-<tr><td>[72:69]</td><td>4</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[72:69]</td><td>4</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t5</td><td><code>ureg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
-<tr><td>[13:6]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>UIADD3_UR_UP_UP_UR_UR_UR_UP_UP.X &mdash; 13 fields &middot; 2,523 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000081004000000000000000290</code></div>
@@ -482270,8 +482296,8 @@ Collapsed by default — click to expand.
 </table>
 </div>
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm103a.json (15435a0 2026-11-08), SHA-256 dfdfb24f868478d8c5846edd6326758605f5cd49e3b48875d8e848461fc6e7ec<br>
-516 instruction forms &middot; 35875 encoding variants &middot; 34977 with a measurement tag &middot; 37 pipeline classes<br>
+SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm103a.json (fddd1b3 2026-11-08), SHA-256 8cca184ef4673a8ae969e286f6c540e548c81cb4ec58df80d438f18ea4e5114e<br>
+516 instruction forms &middot; 35876 encoding variants &middot; 34981 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

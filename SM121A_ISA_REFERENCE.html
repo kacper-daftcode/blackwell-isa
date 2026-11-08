@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM121A Instruction Set Architecture</h1>
-<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 2153 encoding keys &middot; 50447 encoding variants &middot; 2080 with scheduling data &middot; 47784 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm121a.json</code> (ce51005 2026-11-08), SHA-256 e32071c72e81d272&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 2150 encoding keys &middot; 50444 encoding variants &middot; 2077 with scheduling data &middot; 47788 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm121a.json</code> (fddd1b3 2026-11-08), SHA-256 2aad599ce4a9ea81&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -273,7 +273,7 @@ matching and encoders overwrite it with the authored or scheduled control.</p>
 <tr><td>34</td><td class="m"><strong>QMMA</strong></td><td>0</td><td></td></tr>
 <tr><td>35</td><td class="m"><strong>OMMA</strong></td><td>134</td><td>UBLKCP.G.S, UBLKCP.S.G, UBLKCP.S.S, UBLKPF.L2, UBLKRED.G.S.ADD, UBLKRED.G.S.ADD.U64, UBLKRED.G.S.AND, UBLKRED.G.S.AND.U64</td></tr>
 <tr><td>36</td><td class="m"><strong>FP_ARITH</strong></td><td>272</td><td>DADD, DFMA, DMUL, DSETP, F2F, F2F.BF16.F32, F2F.F16.F32, F2F.F32.F64</td></tr>
-<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>545</td><td>BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2, CCTL.IVALL</td></tr>
+<tr><td>37</td><td class="m"><strong>INT_ARITH</strong></td><td>542</td><td>BMSK, BMSK.W, BREV, CCTL, CCTL.E.PF1, CCTL.E.PF2, CCTL.E.PML2, CCTL.IVALL</td></tr>
 </table>
 <h2 id="barrier-scoreboard-system">7. Barrier and Scoreboard System</h2>
 <p>SM121A uses a scoreboard-based dependency tracking system with 6 barriers (B0&ndash;B5).
@@ -346,7 +346,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 229 of 2,153 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 229 of 2,150 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -680656,9 +680656,6 @@ Collapsed by default — click to expand.
 <h3>UIADD3</h3>
 <p class="desc">Uniform 3-input integer add.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">UIADD3.64_UR_UP_UP_UR_II_II</td><td class="m">UR_UP_UP_UR_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">UIADD3.64_UR_UP_UP_UR_II_UR</td><td class="m">UR_UP_UP_UR_II_UR</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">UIADD3.64_UR_UP_UP_UR_UR_UR</td><td class="m">UR_UP_UP_UR_UR_UR</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UP0_UR_UP_UP_UR_II_UR</td><td class="m">UP0_UR_UP_UP_UR_II_UR</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_P_P_UR_UR_UR_UP_UP</td><td class="m">UR_P_P_UR_UR_UR_UP_UP</td><td class="m">X</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 <tr><td class="m">UIADD3_UR_UP_UP_UR_II_II</td><td class="m">UR_UP_UP_UR_II_II</td><td class="m">&amp;mdash;</td><td>INT_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
@@ -680688,39 +680685,6 @@ Collapsed by default — click to expand.
 <tr><td>[20:16]</td><td>5</td><td>t1</td><td><code>ureg</code></td></tr>
 </table></div></details>
 </details>
-<details><summary>UIADD3.64_UR_UP_UP_UR_II_II &mdash; 5 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xf81e0ff0000000000007897</code></div>
-<div class="ab">var_mask: <code>0x7e00000000003f023e0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
-<tr><td>[37:32]</td><td>6</td><td>t5</td><td><code>imm</code></td></tr>
-<tr><td>[25]</td><td>1</td><td>t4</td><td><code>ureg</code></td></tr>
-<tr><td>[21:17]</td><td>5</td><td>t1</td><td><code>ureg</code></td></tr>
-</table></div></details>
-<details><summary>UIADD3.64_UR_UP_UP_UR_II_UR &mdash; 7 fields</summary><div class="var">
-<div class="ab">and_base: <code>0xf81e0ff0000000000007897</code></div>
-<div class="ab">var_mask: <code>0x1c000000007e0100ffffffffffff0000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
-<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
-<tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
-<tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
-<tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
-<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
-</table></div></details>
-<details><summary>UIADD3.64_UR_UP_UP_UR_UR_UR &mdash; 6 fields &middot; 32 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xf81e0ff0000000000000297</code></div>
-<div class="ab">var_mask: <code>0x7e00000000001e1e3e7000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
-<tr><td>[36:33]</td><td>4</td><td>t5</td><td><code>ureg</code></td></tr>
-<tr><td>[28:25]</td><td>4</td><td>t4</td><td><code>ureg</code></td></tr>
-<tr><td>[21:17]</td><td>5</td><td>t1</td><td><code>ureg</code></td></tr>
-<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
-</table></div></details>
 <details><summary>UIADD3_UP0_UR_UP_UP_UR_II_UR &mdash; 8 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f81e0ff0000000000000890</code></div>
 <div class="ab">var_mask: <code>0x1c000000007e0900fffffffffffff000</code></div>
@@ -680766,9 +680730,11 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UIADD3_UR_UP_UP_UR_II_UR &mdash; 9 fields &middot; 85 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xf81e0ff0000000000007890</code></div>
-<div class="ab">var_mask: <code>0x1c00000007ffe9ffffffffffffff0000</code></div>
+<details><summary>UIADD3_UR_UP_UP_UR_II_UR &mdash; 10 fields &middot; 85 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000890</code></div>
+<div class="ab">var_mask: <code>0x04000000007e09fffffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0285a5a5a5a20107890 = `UIADD3 UR16, UPT, UPT, UR32, 0x5a5a5a5a, UR40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Fields the harvest never declared, added from the sweep: guard 12 tok 0. T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[122]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
@@ -680779,17 +680745,23 @@ Collapsed by default — click to expand.
 <tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UIADD3_UR_UP_UP_UR_II_UR.64 &mdash; 6 fields &middot; 73 samples</summary><div class="var">
-<div class="ab">and_base: <code>0xf81e0ff0000000000007897</code></div>
-<div class="ab">var_mask: <code>0x1c000000007e0000ffffffffffff0000</code></div>
+<details><summary>UIADD3_UR_UP_UP_UR_II_UR.64 &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000897</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09fffffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0285a5a5a5a50207897 = `UIADD3.64 UR32, UPT, UPT, UR80, 0x5a5a5a5a, UR40`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 4] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). Renamed by session T-19 (2026-11-08) from the harvest key `UIADD3.64_UR_UP_UP_UR_II_UR (dotted twin of the plain measured key; the URZ third source at [71:64] was baked, now the `ureg` field of the sibling row)`: the old name did not spell the vendor text of the row&#x27;s own word (R&#x27;s key-naming rule: rename to the vendor&#x27;s spelling; 0 census witnesses). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[122]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
 <tr><td>[63:32]</td><td>32</td><td>t5</td><td><code>imm</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 <details><summary>UIADD3_UR_UP_UP_UR_II_UR_UP_UP.X &mdash; 13 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080004000000000000000890</code></div>
@@ -680830,7 +680802,9 @@ Collapsed by default — click to expand.
 </table></div></details>
 <details><summary>UIADD3_UR_UP_UP_UR_UR_UR &mdash; 10 fields &middot; 18 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000f81e0000000000000000290</code></div>
-<div class="ab">var_mask: <code>0x03f03e00007e09ff800000fffffff000</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09ff800000fffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0380000001850207290 = `UIADD3 UR32, UPT, UPT, UR80, UR24, UR56`; every field bit moves its own operand token; bits outside the fields: modifier bits [0, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
@@ -680843,15 +680817,17 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>UIADD3_UR_UP_UP_UR_UR_UR.64 &mdash; 10 fields &middot; 28 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x000000000f81e0ff0000000000000297</code></div>
-<div class="ab">var_mask: <code>0x0</code></div>
+<details><summary>UIADD3_UR_UP_UP_UR_UR_UR.64 &mdash; 10 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000f81e0000000000000000297</code></div>
+<div class="ab">var_mask: <code>0x00000000007e09ff800000fffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000fffe0180000006050207297 = `UIADD3.64 UR32, UPT, UPT, UR80, UR96, UR24`; every field bit moves its own operand token; bits outside the fields: modifier bits [4] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [1, 2, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 77, 78, 79, 80, 87, 88, 89, 90, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .64 groups (UR form opcode 0x297, immediate form 0x897) are sm120&#x27;s measured rows re-measured on this target with the corpus words as witnesses -- the B300 publish corpus&#x27; UIADD3.64 holes / the GB10 residue</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[123]</td><td>1</td><td>t5</td><td><code>reuse</code></td></tr>
-<tr><td>[122]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[75]</td><td>1</td><td>t6</td><td><code>neg</code></td></tr>
 <tr><td>[72]</td><td>1</td><td>t4</td><td><code>neg</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
 <tr><td>[63]</td><td>1</td><td>t5</td><td><code>neg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t5</td><td><code>ureg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t4</td><td><code>ureg</code></td></tr>
@@ -691524,8 +691500,8 @@ unknowns are listed in the instruction table as <code>?</code>-marked partial fo
 </ul>
 
 <div class="foot">
-SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm121a.json (ce51005 2026-11-08), SHA-256 e32071c72e81d2728da31fb356425176709fb5297e6299ddd8b6d2f80c48646b<br>
-2153 encoding keys &middot; 50447 encoding variants &middot; 47784 with a measurement tag &middot; 37 pipeline classes<br>
+SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm121a.json (fddd1b3 2026-11-08), SHA-256 2aad599ce4a9ea8174202423453671fd1df6b6e4242d709d60f6891062bfc44a<br>
+2150 encoding keys &middot; 50444 encoding variants &middot; 47788 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

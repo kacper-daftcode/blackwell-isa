@@ -1,3 +1,25 @@
+## November 8, 2026 (session T-22, batch 9): `sm103a.json` / `sm100a.json` / `sm121a.json` — the UIADD3 `.64` groups measured on `-b SM103` / `SM100` / `SM121` (the B300 corpus' last `UIADD3.64` holes, the GB10 census' 16-word residue)
+
+`sm103a.json` / `sm100a.json` / `sm121a.json` `fddd1b3`. The `64` groups of the 64-bit uniform add's UR form (opcode 0x297) and
+immediate form (0x897) are sm120's measured rows (`UIADD3.64_UR_UP_UP_UR_UR_UR` dsv41-sm120-2026-10-22, the `64` group of
+`UIADD3_UR_UP_UP_UR_II_UR` rows-uniform-2026-11-07: guard, URd, the two carry-out UPs at [83:81] / [86:84], URa with `-URa` 72, URb
+with `-URb` 63 — the immediate form: imm32 [63:32] —, URc with `-URc` 75) placed as the `64` groups of the plain keys of the three
+tables and re-measured there with cubit's `tools/probes/re_sm120_rows.py --family uniform --arch SM103` / `SM100` / `SM121`
+(nvdisasm 13.1, the whole 128-bit circumference of every row, the corpus words as witnesses — sm103a 6 + 3, sm100a 3, sm121a 19 + 16);
+the plain `""` rows of the two keys were measured on the way (4 rows per table). Before: sm103a / sm100a carried a junk `64` row on
+the UR form (fields at shifts 6 / 69 / 77, a two-bit mask — it decoded nothing) and no `64` group on the immediate form, so the
+publish corpus' 9 + 3 `UIADD3.64` words were holes; sm121a's `64` group of the immediate form was mis-declared (no sign fields, a
+reuse bit) and its 16 GB10 words re-encoded to other registers. sm121a's three dotted `UIADD3.64_*` harvest keys — whole-key twins
+(the `_II_II` one was the harvest's mis-tokenised URZ) — retired as `_meta.key_aliases`. Corpora: the B300 publish corpus **85 707 →
+85 721 / 85 792 words, 288 → 296 / 328 cubins strict-exact** (sm103a 3 959 / 3 962 decoded, sm100a every word); the GB10 census
+91 927 / 91 927 decode, **91 926 / 91 927 re-encode** (the one left is cubit's BUG-037 alignment refusal of a cuBLASLt `HMMA.1688.F32`
+word). sm103a / sm100a 898 → 895 rows without `_src`, sm121a 2 663 → 2 656. Found on the way by the lattice sweep (cubit's test
+counts them; the uniform family's next items on these tables): the harvest `UIADD3 .X` rows print `UP15, !UPT` for the vendor's
+`!UPT, !UPT` on sm103a / sm100a (a 4-bit carry-in window where the vendor has 3 bits + a sign) and claim the plain form's text-inert
+words on sm121a; sm103a / sm100a's harvest `ULOP3_UP_UR_UR_II_UR_II_UP` `LUT` row renders the ULOP3 immediate word vendor-false
+(a 6-bit `pred` and a 9-bit LUT where sm120's measured row has 3 + 8 bits and the `.PAND` modifier). The three HTML references
+regenerated.
+
 ## November 8, 2026 (session T-22, batch 8): `sm121a.json` — ATOM / ATOMG in the plain uniform-indexed address form rebuilt from measurement on `-b SM121`
 
 `sm121a.json` `ce51005`. cubit's new `tools/probes/re_sm120_atom_aruri.py` (modelled on G's `re_sm120_redg.py` and on T-6's
