@@ -1,3 +1,18 @@
+## November 8, 2026 (session T-18): the 192 wave-pinned rows take their measured status on `sm120.json` — the 2026-08/09 bug-wave suites re-pinned to the measured doctrine; 143 harvest rows left
+
+Session G run 5 had verified 192 of the 304 remaining harvest rows field by field but left them harvest because 46 cubit test binaries
+(67 tests) of the 2026-08/09 bug waves pinned their harvest structure or the tolerant decode of a text-inert bit. T-18 lifts the pin and
+re-pins those suites to the measured doctrine (a measured row's mask is its fields, fail closed on the text-inert bits — the convention
+since 2026-11-06). **`sm120.json`: 38 898 rows, 38 755 with `_src` — 143 harvest rows left** (304 at `37d030f`); forms 1 083 → 1 047,
+`_meta.key_aliases` 14 839 → 14 874. Of the 192: **93 measured** (`rows-half` 43 → 51, `rows-intalu` 164 → 167, `rows-memory` 199 → 270,
+`rows-atomic` 57 → 68), **65 aliased** (the HFMA2 integer-immediate spellings `*_R_R_II_II_R*` → `*_R_R_FI_FI_R*`, the HADD2.F32 dotted
+twins, `F2F.F64.F32_R_R_R` → `F2F.F64.F32_R_R`, the LDC junk, `ATOMS_R_ARI` → `ATOMS_R_ARURI`), **3 deleted** (unreachable;
+`F2IP.U8.F32.NTZ_P_R_R_R_R` is an HMMA.1688.F16 word under a conversion key), **31 stay harvest** (their field-by-field probe finds a real
+problem — the HADD2 / HFMA2 bit-85 immediate-pair rows, the STS / STL over-wide `sub_ur`, F2FP's `.H1` — and they fold into the named
+exceptions). The 143 left = those 31 + the 112 named exceptions (NEEDS_OWNER). **Whole production census (249 929 words) before → after:
+0 text / re-encode / key-group changes** — the measurement only narrows masks on words with no census witness. cubit side: the four
+`tests/sm120_rows_{half,intalu,memory,atomic}.rs` + the 46 re-pinned bug-wave binaries (`24cdfcc`).
+
 ## November 7, 2026 (session T-17 / session G run 5, batch 16): the long tail verified row by row on `sm120.json` — half-precision, integer ALU, uniform datapath, control, memory, atomics; 304 harvest rows left (192 of them verified, awaiting cubit's test re-pins)
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1, checks the whole production census before and after,
