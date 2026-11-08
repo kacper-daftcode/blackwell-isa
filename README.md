@@ -63,7 +63,7 @@ for control-word behavior, which is documented per class.
 What can be reproduced today, with the command that produces the number (all on the host that
 builds [`cubit`](https://github.com/kacper-daftcode/cubit); nvdisasm 13.1 is the decode oracle):
 
-- **SM120 strict re-encode census — gated on every table revision pushed since 2026-11-02, last run 2026-11-06 at this revision (cubit `main`):
+- **SM120 strict re-encode census — gated on every table revision pushed since 2026-11-02, last run 2026-11-07 at this revision (cubit `main`):
   1 811 600 / 1 811 600 instructions over 169 cubins** — every word decodes, prints, re-parses and
   re-encodes to the identical 128 bits (`cubit roundtrip-strict`). The corpus is the production
   kernel set of the vLLM-Moet DeepSeek-V4.1 / GLM-5.3 SM120 deployment: FlashInfer 0.7.2
@@ -71,7 +71,7 @@ builds [`cubit`](https://github.com/kacper-daftcode/cubit); nvdisasm 13.1 is the
   FlashInfer CAKE DSV4.1 mixed-cache kernels (599 048), b12x MoE kernels (52 024), DeepGEMM
   SM120 FP4/FP8 kernels (56 248). Before this revision the same census stood at
   1 797 483 / 1 811 600 (99.2 %) with five forms missing (see CHANGELOG 2026-11-02).
-- **Whole-cubin reassembly (gated on every push; last run 2026-11-06 at this revision):** `cubit disassemble
+- **Whole-cubin reassembly (gated on every push; last run 2026-11-07 at this revision):** `cubit disassemble
   --frozen` → `cubit asm -T` reproduces all 157 census cubins that contain code byte for byte
   (`cubit tools/asm_roundtrip.py`); the census above is identical per cubin at this revision.
 - **Per-form measurements:** every row with a `_src` tag of the form `<form>-sm120-<date>` has an
@@ -174,7 +174,7 @@ read or write each operand field (`token_idx` is the operand position, 0 = the g
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (1 034 of 39 125 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK, then the 256-bit global load and store and the global reduction's uniform-indexed address forms — LDG.256 `dARI` / `ARURI64` / `ARURI`, STG.256, REDG `ARURI` / `ARURI64`, 24 768 measured rows, 14 293 dotted harvest keys retired as `_meta.key_aliases` — so far) are
+  measurement in prose. Rows **without** `_src` (304 of 38 966 SM120 variants at this revision — 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK, then the 256-bit global load and store and the global reduction's uniform-indexed address forms — LDG.256 `dARI` / `ARURI64` / `ARURI`, STG.256, REDG `ARURI` / `ARURI64`, then the whole long tail row by row (the tensor cores, then half-precision / integer ALU / uniform datapath / control / memory / atomics — batches 15–16), 31 033 measured rows, 14 839 harvest keys retired as `_meta.key_aliases` — so far) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06

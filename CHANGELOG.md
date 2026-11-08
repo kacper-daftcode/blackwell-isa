@@ -1,3 +1,32 @@
+## November 7, 2026 (session T-17 / session G run 5, batch 16): the long tail verified row by row on `sm120.json` — half-precision, integer ALU, uniform datapath, control, memory, atomics; 304 harvest rows left (192 of them verified, awaiting cubit's test re-pins)
+
+Session G measures, session T re-measures every fixture word with nvdisasm 13.1, checks the whole production census before and after,
+gates and pushes. **`sm120.json`: 38 966 rows, 38 662 with `_src` — 304 harvest rows left** (1 034 of 39 125 at `3dde6e1`, 18 841 of
+26 598 at `c896e8f`); forms 1 231 → 1 083, `_meta.key_aliases` 14 691 → 14 839.
+
+- **The long tail verified row by row** (`6b41208` = G's `2f56ae5` re-applied on `b214b0e` by G's own `apply`; cubit
+  `tools/probes/re_sm120_rows.py --family {half,intalu,uniform,control,memory,atomic}`, nvdisasm 13.1 `-b SM120`: the 1 034 remaining
+  harvest rows of 85 mnemonics on their canonical word and every single-bit flip of bits 0..104 / 122..125 — ~113 700 words named, 512
+  census witnesses): **571 rows measured** (`rows-half-2026-11-07` 43, `rows-intalu-2026-11-07` 164, `rows-uniform-2026-11-07` 95,
+  `rows-control-2026-11-07` 13, `rows-memory-2026-11-07` 199, `rows-atomic-2026-11-07` 57 — every declared field bit moves exactly its
+  own operand token, no undeclared bit moves an operand of the same form; `variable_mask` is now exactly the field bits, text-inert
+  bits fail closed; 237 fields added or retyped: undeclared guard / sign / abs / invert / `.reuse` bits, f16 / bf16 immediates the
+  harvest spelled as integers, 4-bit predicate windows split into predicate + negation), **148 shadowed twin keys retired as
+  `_meta.key_aliases`** (dotted twins, integer spellings of float-immediate forms, `?` / phantom-token junk, byte-identical rows; 0
+  census witnesses except the 272 `S2R_R_II` words, which the target `S2R_R_L` prints identically), **11 unreachable rows deleted**
+  (dead rows of staying keys — the six `F2FP_R_R_R_R` junk groups, three IADD3 spellings, one IMAD, one WARPSYNC; 0 census witnesses).
+  Laws recorded in the fixtures per row; print orders found: `FHADD.BF16.RM.SAT`, `I2FP.F32.U32.RZ`, `LDGMC.E.ADD.F32.RN.STRONG.SYS`.
+  Forms 1 231 → 1 083, variants 39 125 → 38 966, rows without `_src` 1 034 → 304. **The 304 rows left:** 192 verify field by field
+  (their records are in the fixtures) but stay harvest until cubit's 2026-08/09 bug-wave suites, which pin the tolerant decode of their
+  text-inert bits, are re-pinned to the measured doctrine (session T's next batch); the other 112 are named exceptions (the
+  `EXCEPTIONS` of cubit's `tests/sm120_rows_<family>.rs`): 82 keys whose name does not spell the vendor text of their own word, 17
+  over-wide harvest fields, 15 HADD2 / HFMA2 immediate-pair rows (bit 85 re-types both immediates), 12 undeclared operand bits, 8 keys
+  whose every canonical word nvdisasm rejects, the PT-elided `IMAD.HI` / `R2UR.FILL` spellings, `WARPSYNC.COLLECTIVE`'s 50-bit
+  immediate — key-naming and convention decisions, listed for the owner. Reviewed by T-17: 101 393 fixture words re-measured
+  identical; the census's 249 929 words unchanged in text and re-encoding.
+- The SM120 reference page regenerated at `6b41208`; the SM103A / SM100A / SM121A pages regenerated at `b214b0e` (their tables'
+  legend re-count of the previous push; the pages' content is unchanged but for the header's revision and table SHA-256).
+
 ## November 7, 2026 (session T-16 / session G run 5): the tensor-core long tail (QMMA / HMMA / OMMA / DMMA / IMMA) verified row by row on `sm120.json`; 15 stale legends re-counted
 
 Session G measures, session T re-measures every fixture word with nvdisasm 13.1, checks the whole production census before and after,
