@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 35870,
-   "rows_without_src": 895,
+   "rows_without_src": 893,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -443,7 +443,7 @@
      "test": "tests/sm103a_sm100a_vimnmx3.rs"
     },
     "rows-uniform-2026-11-07": {
-     "rows": 4,
+     "rows": 6,
      "kind": "nvdisasm 13.1 per-row field verification over the whole word (-b SM100)",
      "date": "2026-11-08",
      "tool": "tools/probes/re_sm120_rows.py --family uniform --arch SM100",
@@ -722973,15 +722973,36 @@
    "base_op": "UIADD3",
    "mod_groups": {
     "X": {
-     "and_base": "0x00000000087e04000000000000007890",
+     "and_base": "0x00000000080004000000000000000890",
      "count": 915,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "rows-uniform-2026-11-07"
+      },
       {
        "_src": "2aE",
        "bits": 8,
        "extraction": "ureg",
        "shift": 16,
        "token_idx": 1
+      },
+      {
+       "_src": "2e",
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 81,
+       "token_idx": 2
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
+       "shift": 84,
+       "token_idx": 3,
+       "_src": "rows-uniform-2026-11-07"
       },
       {
        "_src": "2aE",
@@ -723012,42 +723033,44 @@
        "token_idx": 6
       },
       {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 75,
+       "token_idx": 6,
+       "_src": "rows-uniform-2026-11-07"
+      },
+      {
+       "bits": 3,
+       "extraction": "upred",
        "shift": 87,
-       "token_idx": 7
+       "token_idx": 7,
+       "_src": "rows-uniform-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "rows-uniform-2026-11-07"
       },
       {
        "_src": "2aE",
        "bits": 3,
-       "extraction": "pred",
+       "extraction": "upred",
        "shift": 77,
        "token_idx": 8
       },
       {
        "_src": "2aE",
        "bits": 1,
-       "extraction": "neg",
+       "extraction": "inv",
        "shift": 80,
        "token_idx": 8
-      },
-      {
-       "_src": "2e",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 2
-      },
-      {
-       "_src": "2e",
-       "bits": 3,
-       "extraction": "pred",
-       "shift": 81,
-       "token_idx": 3
       }
      ],
-     "variable_mask": "0x00303e000381e1ffffffffffff3f0000"
+     "variable_mask": "0x0000000007ffe9fffffffffffffff000",
+     "_src": "rows-uniform-2026-11-07",
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000bfee4285a5a5a5a50207890 = `UIADD3.X UR32, UPT, UPT, UR80, 0x5a5a5a5a, UR40, UPT, UPT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 74] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .X rows take sm120's measured field lists (carry-in predicates [79:77] + inv 80 and [89:87] + inv 90) -- the harvest's 4-bit pred@87 / pred-neg names claimed the plain form's text-inert words (bug459a's x3 overprint)"
     }
    },
    "operand_sig": "UR_UP_UP_UR_II_UR_UP_UP",
@@ -723234,14 +723257,15 @@
    "base_op": "UIADD3",
    "mod_groups": {
     "X": {
-     "and_base": "0x00000000081004000000000000000290",
+     "and_base": "0x00000000080004000000000000000290",
      "count": 2523,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "rows-uniform-2026-11-07"
       },
       {
        "_src": "2aE",
@@ -723253,14 +723277,14 @@
       {
        "_src": "2aE",
        "bits": 3,
-       "extraction": "pred",
+       "extraction": "upred",
        "shift": 81,
        "token_idx": 2
       },
       {
        "_src": "2aE",
        "bits": 3,
-       "extraction": "pred",
+       "extraction": "upred",
        "shift": 84,
        "token_idx": 3
       },
@@ -723307,28 +723331,37 @@
        "token_idx": 6
       },
       {
-       "_src": "2aE",
-       "bits": 4,
-       "extraction": "pred",
+       "bits": 3,
+       "extraction": "upred",
        "shift": 87,
-       "token_idx": 7
+       "token_idx": 7,
+       "_src": "rows-uniform-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "inv",
+       "shift": 90,
+       "token_idx": 7,
+       "_src": "rows-uniform-2026-11-07"
       },
       {
        "_src": "2aE",
        "bits": 3,
-       "extraction": "pred",
+       "extraction": "upred",
        "shift": 77,
        "token_idx": 8
       },
       {
        "_src": "2aE",
        "bits": 1,
-       "extraction": "neg",
+       "extraction": "inv",
        "shift": 80,
        "token_idx": 8
       }
      ],
-     "variable_mask": "0x03f03e0003efe9ff800000ffff7ff000"
+     "variable_mask": "0x0000000007ffe9ff800000fffffff000",
+     "_src": "rows-uniform-2026-11-07",
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000bfee4380000001850207290 = `UIADD3.X UR32, UPT, UPT, UR80, UR24, UR56, UPT, UPT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 74] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .X rows take sm120's measured field lists (carry-in predicates [79:77] + inv 80 and [89:87] + inv 90) -- the harvest's 4-bit pred@87 / pred-neg names claimed the plain form's text-inert words (bug459a's x3 overprint)"
     }
    },
    "operand_sig": "UR_UP_UP_UR_UR_UR_UP_UP",
