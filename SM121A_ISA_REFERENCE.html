@@ -51,7 +51,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM121A Instruction Set Architecture</h1>
-<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 2150 encoding keys &middot; 50444 encoding variants &middot; 2077 with scheduling data &middot; 47788 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm121a.json</code> (fddd1b3 2026-11-08), SHA-256 2aad599ce4a9ea81&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 2150 encoding keys &middot; 50444 encoding variants &middot; 2077 with scheduling data &middot; 47790 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm121a.json</code> (3fb3b82 2026-11-08), SHA-256 9d5e9961b0a955c2&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -680766,13 +680766,15 @@ Collapsed by default — click to expand.
 <details><summary>UIADD3_UR_UP_UP_UR_II_UR_UP_UP.X &mdash; 13 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080004000000000000000890</code></div>
 <div class="ab">var_mask: <code>0x0000000007ffe9fffffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000bfee4285a5a5a5a50207890 = `UIADD3.X UR32, UPT, UPT, UR80, 0x5a5a5a5a, UR40, UPT, UPT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [73, 76, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .X rows take sm120&#x27;s measured field lists (carry-in predicates [79:77] + inv 80 and [89:87] + inv 90) -- the harvest&#x27;s 4-bit pred@87 / pred-neg names claimed the plain form&#x27;s text-inert words (bug459a&#x27;s x3 overprint)</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90]</td><td>1</td><td>t7</td><td><code>neg</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t7</td><td><code>pred</code></td></tr>
+<tr><td>[90]</td><td>1</td><td>t7</td><td><code>inv</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t7</td><td><code>upred</code></td></tr>
 <tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
 <tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
-<tr><td>[80]</td><td>1</td><td>t8</td><td><code>neg</code></td></tr>
-<tr><td>[79:77]</td><td>3</td><td>t8</td><td><code>pred</code></td></tr>
+<tr><td>[80]</td><td>1</td><td>t8</td><td><code>inv</code></td></tr>
+<tr><td>[79:77]</td><td>3</td><td>t8</td><td><code>upred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t6</td><td><code>inv</code></td></tr>
 <tr><td>[72]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
@@ -680836,14 +680838,16 @@ Collapsed by default — click to expand.
 </table></div></details>
 <details><summary>UIADD3_UR_UP_UP_UR_UR_UR_UP_UP.X &mdash; 14 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000080004000000000000000290</code></div>
-<div class="ab">var_mask: <code>0x03f03e0003efe9ff800000ffff7ff000</code></div>
+<div class="ab">var_mask: <code>0x0000000007ffe9ff800000fffffff000</code></div>
+<div class="ab">measured: <code>rows-uniform-2026-11-07</code></div>
+<div class="ab">Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family uniform): canonical word 000000000bfee4380000001850207290 = `UIADD3.X UR32, UPT, UPT, UR80, UR24, UR56, UPT, UPT`; every field bit moves its own operand token; bits outside the fields: modifier bits [1, 74] (other groups&#x27; words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 91, 122, 123, 124], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 73, 76, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08: the .X rows take sm120&#x27;s measured field lists (carry-in predicates [79:77] + inv 80 and [89:87] + inv 90) -- the harvest&#x27;s 4-bit pred@87 / pred-neg names claimed the plain form&#x27;s text-inert words (bug459a&#x27;s x3 overprint)</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[90]</td><td>1</td><td>t7</td><td><code>neg</code></td></tr>
-<tr><td>[89:87]</td><td>3</td><td>t7</td><td><code>pred</code></td></tr>
-<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
-<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[80]</td><td>1</td><td>t8</td><td><code>neg</code></td></tr>
-<tr><td>[79:77]</td><td>3</td><td>t8</td><td><code>pred</code></td></tr>
+<tr><td>[90]</td><td>1</td><td>t7</td><td><code>inv</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t7</td><td><code>upred</code></td></tr>
+<tr><td>[86:84]</td><td>3</td><td>t3</td><td><code>upred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[80]</td><td>1</td><td>t8</td><td><code>inv</code></td></tr>
+<tr><td>[79:77]</td><td>3</td><td>t8</td><td><code>upred</code></td></tr>
 <tr><td>[75]</td><td>1</td><td>t6</td><td><code>inv</code></td></tr>
 <tr><td>[72]</td><td>1</td><td>t4</td><td><code>inv</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t6</td><td><code>ureg</code></td></tr>
@@ -691500,8 +691504,8 @@ unknowns are listed in the instruction table as <code>?</code>-marked partial fo
 </ul>
 
 <div class="foot">
-SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm121a.json (fddd1b3 2026-11-08), SHA-256 2aad599ce4a9ea8174202423453671fd1df6b6e4242d709d60f6891062bfc44a<br>
-2150 encoding keys &middot; 50444 encoding variants &middot; 47788 with a measurement tag &middot; 37 pipeline classes<br>
+SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm121a.json (3fb3b82 2026-11-08), SHA-256 9d5e9961b0a955c2fe948ca4b9f7b35de3fa90b9304cac1db9e0f8fdf1bd00fa<br>
+2150 encoding keys &middot; 50444 encoding variants &middot; 47790 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

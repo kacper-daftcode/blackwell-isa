@@ -1,6 +1,6 @@
-## November 8, 2026 (session T-22, batch 9): `sm103a.json` / `sm100a.json` / `sm121a.json` — the UIADD3 `.64` groups measured on `-b SM103` / `SM100` / `SM121` (the B300 corpus' last `UIADD3.64` holes, the GB10 census' 16-word residue)
+## November 8, 2026 (session T-22, batch 9): `sm103a.json` / `sm100a.json` / `sm121a.json` — the UIADD3 `.64` groups and `.X` rows measured on `-b SM103` / `SM100` / `SM121` (the B300 corpus' last `UIADD3.64` holes, the GB10 census' 16-word residue, bug459a's overprint)
 
-`sm103a.json` / `sm100a.json` / `sm121a.json` `fddd1b3`. The `64` groups of the 64-bit uniform add's UR form (opcode 0x297) and
+`sm103a.json` / `sm100a.json` / `sm121a.json` `fddd1b3` + `3fb3b82`. The `64` groups of the 64-bit uniform add's UR form (opcode 0x297) and
 immediate form (0x897) are sm120's measured rows (`UIADD3.64_UR_UP_UP_UR_UR_UR` dsv41-sm120-2026-10-22, the `64` group of
 `UIADD3_UR_UP_UP_UR_II_UR` rows-uniform-2026-11-07: guard, URd, the two carry-out UPs at [83:81] / [86:84], URa with `-URa` 72, URb
 with `-URb` 63 — the immediate form: imm32 [63:32] —, URc with `-URc` 75) placed as the `64` groups of the plain keys of the three
@@ -13,12 +13,16 @@ reuse bit) and its 16 GB10 words re-encoded to other registers. sm121a's three d
 (the `_II_II` one was the harvest's mis-tokenised URZ) — retired as `_meta.key_aliases`. Corpora: the B300 publish corpus **85 707 →
 85 721 / 85 792 words, 288 → 296 / 328 cubins strict-exact** (sm103a 3 959 / 3 962 decoded, sm100a every word); the GB10 census
 91 927 / 91 927 decode, **91 926 / 91 927 re-encode** (the one left is cubit's BUG-037 alignment refusal of a cuBLASLt `HMMA.1688.F32`
-word). sm103a / sm100a 898 → 895 rows without `_src`, sm121a 2 663 → 2 656. Found on the way by the lattice sweep (cubit's test
-counts them; the uniform family's next items on these tables): the harvest `UIADD3 .X` rows print `UP15, !UPT` for the vendor's
-`!UPT, !UPT` on sm103a / sm100a (a 4-bit carry-in window where the vendor has 3 bits + a sign) and claim the plain form's text-inert
-words on sm121a; sm103a / sm100a's harvest `ULOP3_UP_UR_UR_II_UR_II_UP` `LUT` row renders the ULOP3 immediate word vendor-false
-(a 6-bit `pred` and a 9-bit LUT where sm120's measured row has 3 + 8 bits and the `.PAND` modifier). The three HTML references
-regenerated.
+word). sm103a / sm100a 898 → 895 rows without `_src`, sm121a 2 663 → 2 656. **`3fb3b82`: the `.X` rows measured too** — once the plain rows
+fail closed on their dead bits [90:77] (the measured convention), the harvest `UIADD3_…_UP_UP` `.X` rows were found claiming those
+words through the sign-tolerant fallback: `UP15, !UPT` for the vendor's `!UPT, !UPT` on sm103a / sm100a (a 4-bit carry-in window
+where the vendor has 3 bits + a sign), `!UPT, !UP6` on sm121a — cubit's bug459a had pinned the overprint as "standing" in 2026-09;
+the two keys measured on the three targets with sm120's field lists (the carry-in predicates [79:77] + inv 80 and [89:87] + inv 90),
+the overprint ends on the four tables; sm103a / sm100a 895 → **893**, sm121a 2 656 → **2 654**. Left for the uniform family's next
+pass (counted by cubit's test): the sm121a junk key `UIADD3_UR_UP_UP_UR_UR_R_II_P` (it claims the UR form's words with bits in the
+unused immediate window), sm103a / sm100a's harvest `ULOP3_UP_UR_UR_II_UR_II_UP` `LUT` row (a 6-bit `pred` and a 9-bit LUT where
+sm120's measured row has 3 + 8 bits and the `.PAND` modifier: the ULOP3 immediate word renders vendor-false). The three HTML
+references regenerated.
 
 ## November 8, 2026 (session T-22, batch 8): `sm121a.json` — ATOM / ATOMG in the plain uniform-indexed address form rebuilt from measurement on `-b SM121`
 
