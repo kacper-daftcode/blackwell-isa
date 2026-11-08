@@ -1,3 +1,21 @@
+## November 8, 2026 (session T-21, batch 5): `sm121a.json` — LDG.256 (three address forms), STG.256 and the REDG uniform-indexed forms rebuilt from measurement on `-b SM121`
+
+`sm121a.json` `f254702`. cubit's `tools/probes/re_sm120_ldg256.py --form dARI / ARURI64 / ARURI`, `re_sm120_stg256.py` and
+`re_sm120_redg.py` (G's batches 10–14 of 2026-11-07) run with `--arch SM121 --witnesses <the GB10 census corpus>` (nvdisasm
+13.1): all five runs passed — every form word prints the same text as on `-b SM120` (LDG 4 888 + 81, 4 952 + 17, 4 952 + 17;
+STG 2 140 + 93; REDG 9 334 + 58 form + lattice words), and every LDG.256 (99) and STG.256 (68) word of the GB10 census corpus
+(gx4, 91 927 distinct words, their own control codes) obeys the law word for word (the corpus' 12 REDG words are the
+descriptor form, outside the two uniform-indexed forms). The plain keys `LDG_R_R_{dARI,ARURI64,ARURI}[_II][_P]` (1 152 groups
+each), `STG_{dARI,ARURI,ARURI64}_R_R[_II]` (288 each) and `REDG_ARURI_R` / `REDG_ARURI64_R` (6 144 / 3 072) are created — this
+table had none of them, only the dotted one-group keys of 2026-08/09 (6 985 LDG, 1 157 STG, 6 144 REDG: the GB10 line's own
+BUG-446..476 "rides") — and the 14 286 dotted keys are retired as `_meta.key_aliases` of the plain key of their operand
+signature (an alias, not a deletion: 167 corpus words lived on them and moved to the plain keys with their texts unchanged).
+The 19 `wave11-integration-2026-11-05` rows of the lane's dotted `LDG.E.NA.ELL2.256.*` keys are groups of the measured plain
+keys now (legend 41 → 22), as on the other three tables. Rows 26 595 → 37 077; **rows without `_src` 25 427 → 11 160**; forms
+23 754 → 9 488; `key_aliases` 120 → 14 406; `claim_forbid` rows 1 244 → 5 253 (the measured dARI rows carry the RZ-base
+`claim_forbid`). Gate: the GB10 census 91 927 / 91 927 decode, text parity 91 926 (the `LEPC` residue), strict re-encode
+91 887 (the same 40 words outside these families). The SM121a HTML reference regenerated.
+
 ## November 8, 2026 (sessions T-20 / T-21, batch 4): `sm103a.json` / `sm100a.json` — LDG.256 (three address forms) and STG.256 rebuilt from measurement on `-b SM103` / `SM100`
 
 `sm103a.json` / `sm100a.json` `39d0372`. cubit's `tools/probes/re_sm120_ldg256.py --form dARI / ARURI64 / ARURI` and
