@@ -4,7 +4,7 @@ Session G measures, session T re-measures every fixture word with nvdisasm 13.1,
 gates and pushes. **`sm120.json`: 38 966 rows, 38 662 with `_src` — 304 harvest rows left** (1 034 of 39 125 at `3dde6e1`, 18 841 of
 26 598 at `c896e8f`); forms 1 231 → 1 083, `_meta.key_aliases` 14 691 → 14 839.
 
-- **The long tail verified row by row** (`6b41208` = G's `2f56ae5` re-applied on `b214b0e` by G's own `apply`; cubit
+- **The long tail verified row by row** (`37d030f` = G's `2f56ae5` re-applied on `b214b0e` by G's own `apply`; cubit
   `tools/probes/re_sm120_rows.py --family {half,intalu,uniform,control,memory,atomic}`, nvdisasm 13.1 `-b SM120`: the 1 034 remaining
   harvest rows of 85 mnemonics on their canonical word and every single-bit flip of bits 0..104 / 122..125 — ~113 700 words named, 512
   census witnesses): **571 rows measured** (`rows-half-2026-11-07` 43, `rows-intalu-2026-11-07` 164, `rows-uniform-2026-11-07` 95,
@@ -24,7 +24,11 @@ gates and pushes. **`sm120.json`: 38 966 rows, 38 662 with `_src` — 304 harves
   whose every canonical word nvdisasm rejects, the PT-elided `IMAD.HI` / `R2UR.FILL` spellings, `WARPSYNC.COLLECTIVE`'s 50-bit
   immediate — key-naming and convention decisions, listed for the owner. Reviewed by T-17: 101 393 fixture words re-measured
   identical; the census's 249 929 words unchanged in text and re-encoding.
-- The SM120 reference page regenerated at `6b41208`; the SM103A / SM100A / SM121A pages regenerated at `b214b0e` (their tables'
+- **The IMAD HI groups keep bit 72 text-inert** (`37d030f`): the row probe's manual `-Ra` law at bit 72 (BUG-296, kept by cubit on the
+  non-HI IMAD forms although nvdisasm prints no sign for it — session G's NEEDS 13 for the owner's silicon confirmation) was applied to
+  all 34 measured IMAD rows; on the 12 HI rows the bit is not a negation (cubit's `native_hi` law, `tests/sm120_oracle_semantics.rs`), so
+  the field is withdrawn and the bit fails closed; the rows stay measured.
+- The SM120 reference page regenerated at `37d030f`; the SM103A / SM100A / SM121A pages regenerated at `b214b0e` (their tables'
   legend re-count of the previous push; the pages' content is unchanged but for the header's revision and table SHA-256).
 
 ## November 7, 2026 (session T-16 / session G run 5): the tensor-core long tail (QMMA / HMMA / OMMA / DMMA / IMMA) verified row by row on `sm120.json`; 15 stale legends re-counted
