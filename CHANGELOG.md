@@ -1,3 +1,20 @@
+## November 8, 2026 (session T-20, batch 2): `sm121a.json` — FSETP / DSETP rebuilt from measurement on `-b SM121`, the first batch of the GB10 line; a GB10 census regression closed
+
+`sm121a.json` `75e9d20`. cubit's `tools/probes/re_sm120_fsetp_dsetp.py --arch SM121` (nvdisasm 13.1): the sm120 law of
+2026-11-06 holds word for word on SM121 — every one of the 1 022 form, 12 glyph and 223 lattice words of the sweep, and all
+2 688 FSETP / DSETP words of the GB10 census corpus (gx4, `/root/sparklab/results/q1/corpus`, with their own control codes).
+The six keys `FSETP_P_P_R_{R,UR,FI}_P` / `DSETP_P_P_R_{R,UR,FI}_P` carry the 432 measured rows. On this table the harvest had
+the plain keys with a third of the groups (33 / 32 / 32 of 96, 25 / 16 / 14 of 48), no `FSETP_P_P_R_UR_P` and 105 dotted
+one-group keys `FSETP.<cmp>[.FTZ].<bool>_P_P_R_{R,FI,II}_P` carrying the census words: the missing key created, 312 groups
+added, the 105 dotted keys and the same 7 junk keys as on sm120 (`FSETP.*_P_P_R_R_R` ×2, `_P_P_R_R_?`, `_P_P_R_R_P_?` ×2,
+`FSETP_P_P_II_R_P`, the integer-spelling twin `FSETP_P_P_R_II_P`) retired as `_meta.key_aliases` of the plain key of their
+operand signature (an alias, not a deletion, where the key carried harvest counts). Rows 26 421 → 26 595, rows without
+`_src` 25 685 → 25 427, aliases 13 → 120. **Closed with it: since 2026-11-06 the GB10 census had 564 words without a decode**
+— every signed FSETP word of the corpus — because the cubit decoder arm of G's batch 3 (FSETP off the sign-tolerant match)
+applied to every table while this table's harvest rows declared no sign fields; 91 927 / 91 927 words decode again, text
+parity 91 926 / 91 927 (the `LEPC` residue), strict re-encode 91 887 / 91 927 (the 40 words outside the family as before).
+The inventories of the three remaining tables are in the README ("Known issues"). The SM121a HTML reference regenerated.
+
 ## November 8, 2026 (session T-20): the IMAD `neg@72` field retired — bit 72 is compute-inert on sm_120 silicon (NEEDS 53)
 
 `sm120.json` `27b1272`. The 24 measured non-HI IMAD rows (`IMAD_R_R_R_R` ×3, `_R_R_R_UR` ×3, `_R_R_UR_R` ×3, `_R_R_II_R` ×4,

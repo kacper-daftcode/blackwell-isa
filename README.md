@@ -113,6 +113,15 @@ re-run from the build host — they are **not** re-verified at this revision):
   the one residue being `LEPC` (a PC-relative target the isolated-word census renders at address 0 —
   byte-identical to the vendor in a full disassembly). Decode coverage stays 100 % (0 failures over
   91 927 words). See cubit `docs/KNOWN_ISSUES.md` V3 for the re-run at this revision.
+  **Regression found and closed 2026-11-08 (session T-20, `75e9d20`):** the census re-run locally on the
+  91 927 unique words (nvdisasm 13.0 texts; cubit's `audit_words`) at the 2026-11-06..08 tables showed
+  **564 words without a decode** — every signed FSETP word of the corpus (`FSETP.GT.AND P0, PT, R9, -R4, PT`,
+  `FSETP.GEU.AND P1, PT, |R5|, …`): the cubit decoder arm of 2026-11-06 (FSETP off the sign-tolerant match,
+  every table) had left this table's harvest FSETP rows — no sign fields — without a route for them. Closed by
+  measurement, not by a tolerance: FSETP / DSETP rebuilt on `-b SM121` (see "Known issues"); 91 927 / 91 927
+  decode again, text parity 91 926 / 91 927 (the `LEPC` residue), and the strict re-encode of the corpus words is
+  91 887 / 91 927 (the 40 words outside the family — `FFMA_R_R_R_II`, `UIADD3` `64`, `HMMA.1688` — are the
+  next GB10 batches' items).
 
 Encoding evidence is not semantic evidence: a row that round-trips tells you how nvdisasm names a
 word, not what the hardware does with it or how long it takes.
@@ -261,7 +270,7 @@ Everything below is known and listed rather than hidden; the detailed list with 
 each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-daftcode/cubit/blob/main/docs/KNOWN_ISSUES.md).
 
 - **SM120 at `27b1272` (2026-11-08, sessions T-19 / T-20): 7 of 38 838 encoding variants carry no `_src`, and every one of the 7 is a documented owner item** — the alias-able groups of the four mixed keys `F2FP_R_R` (2), `FLO_R_UR`, `WARPSYNC` (2) and `WARPSYNC_R` (1), which a group-level alias would retire once the schema has one, and `WARPSYNC.COLLECTIVE_R_II`, whose 50-bit immediate needs an extraction the schema lacks (cubit's `docs/KNOWN_ISSUES.md` T1 and `T/NEEDS_OWNER.md` 55). Six design rows carry `_src: "modelled"` (the IADD3.X encode / decode pair, `HFMA2_R_R_R_II_FI`'s plain group, `UBLKPF.L2_AUR_UR`, the `encode_only` retention rows `REDUX_UR_R` `AND` and `UISETP_UP_UP_UR_UR_UP` ``; each note names the cubit test that pins it). The other three tables are still harvest (sm103a 15,864 / 22,445 without `_src`, sm100a 15,864 / 22,439, sm121a 25,696 / 26,421). The history of the SM120 line: 18,845 of 26,580 SM120 encoding variants carried no `_src` on 2026-11-02 (sm103a 15,864 / 22,420,
-  sm100a 15,864 / 22,420, sm121a 25,696 / 26,406): these are the harvest rows of 2026-06..08
+  sm100a 15,864 / 22,420, sm121a 25,427 / 26,595 — the FSETP / DSETP rows of sm121a measured on 2026-11-08, see below): these are the harvest rows of 2026-06..08
   (fields learned from compiler output, validated by the round-trip census, not by per-field probes). Every
   row added since carries a tag — the 5 736 / 5 748 / 5 744 / 44 wave-11 rows were stamped on 2026-11-06
   (`wave11-atom-lattice-2026-11-05`: the BUG-509 ATOM/ATOMG [63:60] lattice with its silicon-confirmed
@@ -316,6 +325,7 @@ each item needs is cubit's [`docs/KNOWN_ISSUES.md`](https://github.com/kacper-da
   without an SM120 row (95 cuBLASLt words), a wrong `MUFU` UR-form function field, the F2F type-pair
   rows and the IMAD alias groups — fixed in `15caf70`; the remaining SM121a text-parity families
   (`R2P`, `BAR`, `IMNMX`, `SEL`, IMMA `.ROW/.COL`, …, 61 words) are listed in cubit's V3.
+- **The other three tables at `75e9d20` (2026-11-08, session T-20): sm121a 25 427 of 26 595 rows without `_src`, sm103a 15 858 of 22 445, sm100a 15 858 of 22 439** — the inventories (`cubit tools/audit_table.py --summary`): on sm121a the lattices LDG 7 216 / REDG 6 407 / ATOMG 3 523 / ATOM 3 465 / STG 1 222 (85 %), then ISETP 635, UISETP 512, QMMA 269, F2I 266, … and 254 `?` partial keys; on sm103a / sm100a LDG 7 030 / REDG 6 173 / STG 1 215 (91 %), then F2I 306, ISETP 129, …. **First batch, sm121a: FSETP / DSETP measured on `-b SM121`** (cubit `tools/probes/re_sm120_fsetp_dsetp.py --arch SM121`: the sm120 law of 2026-11-06 holds word for word — 1 022 form + 12 glyph + 223 lattice words and all 2 688 FSETP / DSETP words of the GB10 census corpus; 432 measured rows on the six plain keys, `FSETP_P_P_R_UR_P` created, 312 groups added, 105 dotted harvest keys + 7 junk keys retired as `_meta.key_aliases`; 25 685 → 25 427). The production line of sm120 (one probe per family, the table's own strict corpus as the gate — the GB10 census for sm121a, the B300 publish corpus for sm103a / sm100a) continues table by table; the sm120 lattice probes apply to sm103a / sm100a directly (G recorded 0 text differences on `-b SM103` / `SM100` for STG.256 / REDG and the `INVALID3` L2 plane for LDG.256).
 - `sm121a.json` still carries 15 keys with a glued predicate token whose plain rows do not provably
   cover them (`HMMA.1688.F16_P0_…`, `HMMA.SP.16816.*_P0_…`, `LEA_P0_R_R_R_II`, `MOV_P0_R_II`,
   `PLOP3.LUT_P1_…`, `STS.64_P0_AR_R`, …); they need a GB10-side probe batch.
