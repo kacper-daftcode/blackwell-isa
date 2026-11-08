@@ -158,7 +158,7 @@ sm120.json
                              #   sm103a.json: v2 (B300, 2026-08-22); sm120.json: v4 (RTX PRO 6000, 2026-11-03/05)
 ```
 
-A typical encoding entry:
+A typical encoding entry (one line in the file; shown indented here):
 
 ```json
 {
@@ -169,8 +169,7 @@ A typical encoding entry:
     { "shift": 16, "bits": 8, "token_idx": 1, "extraction": "reg" }
   ],
   "count": null,
-  "_src": "prmt-ur-sm120-2026-11-02",
-  "_note": "nvdisasm 13.1 sweeps: guard[15:12], Rd[23:16], ... (what was measured, what stays outside the row)"
+  "_src": "prmt-ur-sm120-2026-11-02"
 }
 ```
 
@@ -178,12 +177,29 @@ A typical encoding entry:
 identifies operand-dependent bits. `fields` tells an assembler/disassembler where to
 read or write each operand field (`token_idx` is the operand position, 0 = the guard).
 
+**File layout (since 2026-11-08).** The tables are compact JSON with **one encoding row per line**:
+`instructions.<key>` opens with the key's own attributes (`base_op`, `operand_sig`, `scheduling`, `_src`,
+`_note`, …) and ends with `mod_groups`, whose every row is one line; `_meta` and the small sections
+(`sched_only`, `pipeline_config`, `operand_roles`, `stallfix`, `cost_model`) are indented. A diff of a
+table therefore reads row by row. The layout is produced and checked by cubit's `tools/tablefmt.py`
+(`--check` / `--rewrite`; `tools/sync_table.py --validate-only` refuses any other layout). Before
+2026-11-08 the files were `json.dumps(indent=1)` with the measurement note repeated on every row of a
+lattice: `sm121a.json` had reached 87 MiB (GitHub refuses files over 100 MiB); the rewrite took the
+four tables to 28.0 / 23.7 / 23.6 / 32.8 MiB (sm120 / sm103a / sm100a / sm121a) without changing a row.
+
 ### Provenance
 
 - `_src` on a row names the measurement that produced or last repaired it; `_meta.provenance.sources`
   lists every tag of the table with its kind (nvdisasm field probe, encoder fix wave, native capture),
   date, and — where they exist — the cubit tool and test that hold the evidence. `_note` is the
-  measurement in prose. Rows **without** `_src` (7 of 38 838 SM120 variants at this revision — the documented owner items of cubit's KNOWN_ISSUES T1; 111 of 38 866 at `7f12b68`, 143 of 38 898 at `fd736a7`, 304 of 38 966 at `37d030f`, 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK, then the 256-bit global load and store and the global reduction's uniform-indexed address forms — LDG.256 `dARI` / `ARURI64` / `ARURI`, STG.256, REDG `ARURI` / `ARURI64`, then the whole long tail row by row (the tensor cores, then half-precision / integer ALU / uniform datapath / control / memory / atomics — batches 15–16, then T-18's re-pin of the 2026-08/09 bug-wave suites to the measured doctrine, then T-19's field-narrowing pass over the last 111 rows), 31 213 measured rows + 6 design rows marked `modelled`, 14 918 harvest keys retired as `_meta.key_aliases`) are
+  measurement in prose. **Provenance is written once per level (2026-11-08):** `instructions.<key>._src`
+  is set when every row of the key carries the same tag (the rows keep their own `_src`; a row without
+  one inherits the key's); a lattice family's law is written once in `_meta.provenance.sources[<tag>].note`
+  when every row of the tag shares it, on `instructions.<key>._note` when every row of the key shares
+  it, and on the row only where the row's own note differs — read a row's note as *row `_note`, else
+  key `_note`, else `sources[tag].note`* (cubit `tools/tablefmt.py`: `row_src()` / `row_note()`; the
+  HTML references render the key's tag and note once above its rows). A field carries its own `_src`
+  only when it was measured by another tag than its row. Rows **without** `_src` (7 of 38 838 SM120 variants at this revision — the documented owner items of cubit's KNOWN_ISSUES T1; 111 of 38 866 at `7f12b68`, 143 of 38 898 at `fd736a7`, 304 of 38 966 at `37d030f`, 18 841 of 26 598 at `c896e8f`; the T1 production line of 2026-11-06/07 measures them family by family: HSETP2, ISETP / UISETP, FSETP / DSETP, PLOP3 / P2R / R2P, UFSETP, the FP32 ALU and its uniform twin, the F2I / I2F / FRND / MUFU conversions, FSET / FSEL / FCHK, then the 256-bit global load and store and the global reduction's uniform-indexed address forms — LDG.256 `dARI` / `ARURI64` / `ARURI`, STG.256, REDG `ARURI` / `ARURI64`, then the whole long tail row by row (the tensor cores, then half-precision / integer ALU / uniform datapath / control / memory / atomics — batches 15–16, then T-18's re-pin of the 2026-08/09 bug-wave suites to the measured doctrine, then T-19's field-narrowing pass over the last 111 rows), 31 213 measured rows + 6 design rows marked `modelled`, 14 918 harvest keys retired as `_meta.key_aliases`) are
   the 2026-06..08 *harvest* — fields learned from compiler output and validated by the round-trip
   census, not by per-field probes. The **wave-11 lattice rows** (the lane merge `e9b0808` of 2026-11-05 — the modifier
   lattices of `ATOM_P_R_dARI_R` / `ATOMG_P_R_dARI_R`, 46 → 2 886 groups each) carry their tags since 2026-11-06

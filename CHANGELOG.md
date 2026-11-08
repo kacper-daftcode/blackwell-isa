@@ -1,3 +1,22 @@
+## November 8, 2026 (session T-23): the four tables rewritten in the compact one-row-per-line layout with the provenance written once per level — `sm121a.json` 87.0 → 32.8 MiB, `sm120.json` 73.6 → 28.0, `sm103a.json` / `sm100a.json` 67.8 → 23.7 / 23.6 (no row changed)
+
+All four tables. **Why:** `sm121a.json` had reached 87 MiB after the ATOM / ATOMG lattice of T-22 (GitHub refuses files over 100 MiB;
+the next sm121a lattices — the `.64` twins, the CAS forms, the descriptor-form lattices — would not have fit). Measured composition
+at `3fb3b82`: the measurement note repeated on every row of a lattice (`_note`, 24.0 MiB on sm121a), the per-field `_src` tag equal
+to the row's (6.6 MiB), the `indent=1` whitespace (24 MiB). **What changed (R's decision on cubit's NEEDS 61, options (a) + (b)):**
+(a) provenance is written once per level — a lattice family's law lives in `_meta.provenance.sources[<tag>].note` when every row of
+the tag shares it (26 / 16 / 16 / 13 tags on sm120 / sm103a / sm100a / sm121a), on `instructions.<key>._note` when every row of the key
+shares it, and on the row only where the row's own note differs; `instructions.<key>._src` is set on every key whose rows all carry the
+same tag (906 / 183 / 184 / 325 keys; the rows keep their own `_src`); a field carries `_src` only when measured by another tag than its
+row (4 647 / 5 278 / 5 306 / 5 366 fields keep one). (b) the file layout: compact JSON, **one encoding row per line** (a diff of the
+table reads row by row), `_meta` and the small sections indented. **Nothing else changed**: for every one of the 38 838 / 35 876 /
+35 870 / 50 444 rows the encoding record (`and_base`, `variable_mask`, `fields`, `count`, `claim_forbid`, …) and the resolved provenance
+(tag, note, per-field tag) are identical before and after (cubit `T/t23/probe/fmt/equiv_check.py`: 0 differences, the pass idempotent);
+rows without `_src` unchanged at 7 / 893 / 893 / 2 654. The legend (`_meta.provenance.legend`) states the resolution order (row →
+key → tag); cubit's `tools/tablefmt.py` is the canonical reader / writer (`load_table` / `save_table` / `row_src` / `row_note`), the
+probes' `apply` write through it, and cubit's `tools/sync_table.py --validate-only` refuses a table in any other layout or with
+un-hoisted provenance. The HTML references render the key's tag and the family's note once per key.
+
 ## November 8, 2026 (session T-22, batch 9): `sm103a.json` / `sm100a.json` / `sm121a.json` — the UIADD3 `.64` groups and `.X` rows measured on `-b SM103` / `SM100` / `SM121` (the B300 corpus' last `UIADD3.64` holes, the GB10 census' 16-word residue, bug459a's overprint)
 
 `sm103a.json` / `sm100a.json` / `sm121a.json` `fddd1b3` + `3fb3b82`. The `64` groups of the 64-bit uniform add's UR form (opcode 0x297) and
