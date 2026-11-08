@@ -457,7 +457,7 @@
     "test": "tests/sm120_ldsm8_mt1616.rs"
    },
    "sm120-native-capture-control-2026-10-22": {
-    "rows": 21,
+    "rows": 20,
     "kind": "native CUPTI capture",
     "date": "2026-10-22",
     "tool": "tools/probes/re_sm120_capture_control_fields.py"
@@ -640,7 +640,7 @@
     "note": "BRX / BRXU / RET family (0x949 / 0x958 + bit 91 / 0x950, bit 91 = the UR form) measured with nvdisasm 13.1 -b SM120, tools/probes/re_sm120_brx_ret.py (session T-10, 2026-11-06): register [31:24], offset = a signed 56-bit dword [23:16] + [81:34] printed as `Rn off*4` (BRX/BRXU, 0 elided; RET.ABS) or `Rn PC+16+off*4` (RET.REL); predicate operand [89:87] + 90 before the register; BRX/BRXU 85 INC, 86 DEC, BRXU mode [33:32] U/DIV/CONV; RET 85 ABS (else REL), 86 NODEC; bits 82-84, 92-95 text-inert and outside the row."
    },
    "audit-fix-2026-11-06-t10": {
-    "rows": 21,
+    "rows": 20,
     "kind": "nvdisasm 13.1 field repair of harvest rows (-b SM120), census-witness-checked retirements",
     "date": "2026-11-06",
     "tool": "blackwell-isa-internal tools/audit_fix_20261106_t10.py + _t10b.py + _t10c.py + _t10d.py + _t10e.py",
@@ -868,6 +868,13 @@
     "date": "2026-11-08",
     "tool": "tools/probes/re_sm120_vote.py",
     "test": "tests/sm120_vote.rs"
+   },
+   "usetmaxreg-sm120-2026-11-08": {
+    "rows": 2,
+    "kind": "nvdisasm 13.1 field probe (-b SM120): the warpgroup register reallocation, both operations",
+    "date": "2026-11-08",
+    "tool": "tools/probes/re_sm120_usetmaxreg.py",
+    "test": "tests/sm120_usetmaxreg.rs"
    }
   },
   "history": {
@@ -29847,11 +29854,11 @@
 "ASYNC,S,VIEW": {"and_base":"0x000000000000000000000000000003c6","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0}],"variable_mask":"0x0000000000000000000000000000f000","_src":"fence-view-async-sm120-2026-11-08"},
 "ASYNC,G,VIEW": {"and_base":"0x000000000000010000000000000003c6","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0}],"variable_mask":"0x0000000000000000000000000000f000","_src":"fence-view-async-sm120-2026-11-08"}
 }},
-"USETMAXREG_II": {"base_op":"USETMAXREG","operand_sig":"II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_bug226e":{"date":"2026-08-28","canonical-note":"key added from donor (BUG-226e)"},"_src":"audit-fix-2026-11-06-t10","_note":"T-10 audit: the register count is 10 bits [41:32] (nvdisasm prints 0x3ff for 0xffffffff, 0x0 for 0x80000000); bits above are text-inert, fail-closed","mod_groups": {
-"CTAPOOL,DEALLOC": {"and_base":"0x00000000080e050000000000000079c8","count":7,"fields":[{"bits":10,"extraction":"imm","shift":32,"token_idx":1}],"variable_mask":"0x0000000000000000000003ff00000000","_src":"audit-fix-2026-11-06-t10","_evidence":"pop226e census (pop226d harvest, 2,406-file battery, nvdisasm 13.3.73, true-ctrl (word96,ctrl) pairing): I2F 5,415 + F2F 4,201 + FENCE 8 + USETMAXREG 15 DIFF words; donor sm100a==sm103a decode == vendor (modulo print order cured by printer arm bug226e); grafts arb226e_b/arb226e_c x{100a,103a,120a} print-identical."}
+"USETMAXREG_II": {"base_op":"USETMAXREG","operand_sig":"II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_src":"usetmaxreg-sm120-2026-11-08","_note":"Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_usetmaxreg.py): USETMAXREG.DEALLOC.CTAPOOL = operation code 1 in [73:72] (1 DEALLOC, 2 TRY_ALLOC; 0 and 3 illegal) with the pool bit 74 set (clear = the vendor glyph `.???0`, unclaimed). Fields: uniform predicate guard [15:12], register count imm [41:32] (ten bits, printed in hex; the count itself -- ptxas emits multiples of 8 in 24..256, the field admits 0..1023: a silicon question, not an encoding one); the predicate slot [83:81] is text-inert on DEALLOC and nvcc writes 7 there -- baked, fail closed. Bit 75 text-inert, bit 91 required, bits 16-31, 42-71, 84-90, 92-104 text-inert (outside the row); the reuse bits 122-124 are illegal on this opcode (nvdisasm: undefined value for the opex table) -- a control-word law, no reuse flag may be set on it. PTX setmaxnreg.dec.sync.aligned.u32.","mod_groups": {
+"CTAPOOL,DEALLOC": {"and_base":"0x00000000080e050000000000000009c8","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":10,"extraction":"imm","shift":32,"token_idx":1}],"variable_mask":"0x0000000000000000000003ff0000f000","_src":"usetmaxreg-sm120-2026-11-08"}
 }},
-"USETMAXREG_UP_II": {"base_op":"USETMAXREG","operand_sig":"UP_II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_bug226e":{"date":"2026-08-28","canonical-note":"key added from donor (BUG-226e)"},"_src":"sm120-native-capture-control-2026-10-22","_note":"NVIDIA13.1 USETMAXREG.TRY_ALLOC.CTAPOOL uniform resultpredicate81 (not guard15), immediate10bits@32; isolated bit32..47 walk shows only32..41 contribute to the count. Uniform executionguard12 is independently measured.","mod_groups": {
-"CTAPOOL,TRY_ALLOC": {"and_base":"0x000000000800060000000000000009c8","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":3,"extraction":"upred","shift":81,"token_idx":1},{"shift":32,"bits":10,"extraction":"imm","token_idx":2}],"variable_mask":"0x00000000000e0000000003ff0000f000","_src":"sm120-native-capture-control-2026-10-22"}
+"USETMAXREG_UP_II": {"base_op":"USETMAXREG","operand_sig":"UP_II","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_src":"usetmaxreg-sm120-2026-11-08","_note":"Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_usetmaxreg.py): USETMAXREG.TRY_ALLOC.CTAPOOL = operation code 2 in [73:72] (1 DEALLOC, 2 TRY_ALLOC; 0 and 3 illegal) with the pool bit 74 set (clear = the vendor glyph `.???0`, unclaimed). Fields: uniform predicate guard [15:12], predicate destination UP [83:81], register count imm [41:32] (ten bits, printed in hex; the count itself -- ptxas emits multiples of 8 in 24..256, the field admits 0..1023: a silicon question, not an encoding one). Bit 75 text-inert, bit 91 required, bits 16-31, 42-71, 84-90, 92-104 text-inert (outside the row); the reuse bits 122-124 are illegal on this opcode (nvdisasm: undefined value for the opex table) -- a control-word law, no reuse flag may be set on it. PTX setmaxnreg.inc.sync.aligned.u32.","mod_groups": {
+"CTAPOOL,TRY_ALLOC": {"and_base":"0x000000000800060000000000000009c8","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":3,"extraction":"upred","shift":81,"token_idx":1},{"bits":10,"extraction":"imm","shift":32,"token_idx":2}],"variable_mask":"0x00000000000e0000000003ff0000f000","_src":"usetmaxreg-sm120-2026-11-08"}
 }},
 "F2F_R_UR": {"base_op":"F2F","operand_sig":"R_UR","scheduling":{"def_latency":1,"is_variable_latency":false,"pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"_bug226e":{"date":"2026-08-28","canonical-note":"key added from donor (BUG-226e)"},"_src":"bug226e-2026-08-28","mod_groups": {
 "F32,F64": {"and_base":"0x00000000083010000000000000007d10","count":12,"fields":[{"_src":"2aE","bits":8,"extraction":"reg","shift":16,"token_idx":1},{"_src":"2aE","bits":8,"extraction":"ureg","shift":32,"token_idx":2}],"variable_mask":"0x00f08600000000000000000e003f0000","_src":"bug226e-2026-08-28","_evidence":"pop226e census (pop226d harvest, 2,406-file battery, nvdisasm 13.3.73, true-ctrl (word96,ctrl) pairing): I2F 5,415 + F2F 4,201 + FENCE 8 + USETMAXREG 15 DIFF words; donor sm100a==sm103a decode == vendor (modulo print order cured by printer arm bug226e); grafts arb226e_b/arb226e_c x{100a,103a,120a} print-identical."},
