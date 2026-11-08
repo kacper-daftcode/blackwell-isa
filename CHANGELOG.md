@@ -1,3 +1,22 @@
+## November 8, 2026 (sessions T-20 / T-21, batch 4): `sm103a.json` / `sm100a.json` — LDG.256 (three address forms) and STG.256 rebuilt from measurement on `-b SM103` / `SM100`
+
+`sm103a.json` / `sm100a.json` `39d0372`. cubit's `tools/probes/re_sm120_ldg256.py --form dARI / ARURI64 / ARURI` and
+`tools/probes/re_sm120_stg256.py` (G's batches 10–13 of 2026-11-07) run with `--arch SM103` and `--arch SM100` (nvdisasm 13.1):
+all eight runs passed — every form word prints the same text as on `-b SM120` on both targets (LDG dARI 4 888 + 81, ARURI64
+4 952 + 17, ARURI 4 952 + 17 and STG 2 140 + 93 form + lattice words per target; the L2 = 3 plane is `INVALID3` on every
+target, as G recorded), asserted word by word by the probes. On each table the plain keys `LDG_R_R_{dARI,ARURI64,ARURI}[_II][_P]`
+(1 152 groups each) and `STG_{dARI,ARURI,ARURI64}_R_R[_II]` (288 each) are created with the 13 824 + 1 728 measured rows, and
+the 7 782 + 1 164 dotted one-group keys of 2026-09 (`LDG.E.<cache>.<L2>[.LTC].256.<scope>_R_R_<form>[_II][_P]`,
+`STG.E.….256.<scope>_<form>_R_R[_II]`, the BUG-446..476 "ride" grafts) are retired as `_meta.key_aliases` of the plain key of
+their operand signature; the 23 `wave11-integration-2026-11-05` rows (the lane's dotted `LDG.E.NA.ELL2.256.*` keys) are groups
+of the measured plain keys now, as on sm120 since G's batches 10–12 (legend 51 → 28 entries per table). sm103a 8 784 forms /
+25 517 rows → 650 / 32 916, sm100a 8 783 / 25 511 → 649 / 32 910; **rows without `_src` 9 714 → 1 584 on both**; `claim_forbid`
+rows 6 978 → 10 977 / 6 979 → 10 978 (the measured dARI rows carry the RZ-base `claim_forbid`: `desc[UR][RZ.64]` is illegal).
+Gate: the B300 publish corpus strict round trip unchanged at 85 704 / 85 792 words, 288 / 328 cubins (0 witnesses of the retired
+keys); cubit's 2026-09 EFL2.256 wave tests re-pinned to the measured doctrine on their sm103a / sm100a legs (the NA.EFL2
+descriptor spellings are legal words the vendor names on the three targets — the 2026-09 "dead spelling" pins stood on the
+harvest's silence). The SM103a / SM100a HTML references regenerated.
+
 ## November 8, 2026 (session T-20, batch 3): `sm103a.json` / `sm100a.json` — the REDG uniform-indexed forms rebuilt from measurement on `-b SM103` / `SM100`, the first batch of the B300 line
 
 `sm103a.json` / `sm100a.json` `6a468a2`. cubit's `tools/probes/re_sm120_redg.py` (G's batch 14 of 2026-11-07) run with
