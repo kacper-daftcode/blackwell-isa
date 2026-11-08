@@ -1,3 +1,27 @@
+## November 8, 2026 (session T-22, batch 8): `sm121a.json` — ATOM / ATOMG in the plain uniform-indexed address form rebuilt from measurement on `-b SM121`
+
+`sm121a.json` `ce51005`. cubit's new `tools/probes/re_sm120_atom_aruri.py` (modelled on G's `re_sm120_redg.py` and on T-6's
+`re_sm120_atomg_el_aruri.py`, which measured the operand layout of this form on sm120) run with `--arch SM121 --witnesses <the GB10
+census corpus>` (nvdisasm 13.1): all 18 398 form words print the text the law predicts and the 55 lattice words are illegal, a
+vendor `INVALIDn` glyph, an inert-bit twin or another form's word (`-b SM120` / `SM103` / `SM100` print the same text for the
+canonical words). The law: guard [15:12], Rd [23:16], Ra [31:24], Rb [39:32], the signed 23-bit byte offset [62:40], URb [71:64],
+`.E` 72, the type [75:73] (U32 / S32 / 64 / S64 / **128**; 5..7 `INVALIDn`), the 16-value strength / scope / PRIVATE enum [80:77],
+Pd [83:81], cache [86:84] (EF / none / EL / LU / EU / NA; 6 / 7 `INVALIDn`), the op [90:87] (ADD, MIN, MAX, INC, DEC, AND, OR, XOR,
+EXCH; **SAFEADD on ATOMG only** — `INVALID9` on ATOM —; 10..15 `INVALIDn`), the uniform-indexed form 91; [95:92] text-inert and
+fail-closed; bit 63 (the `.64` base) and bit 76 (the descriptor form) are other keys and `claim_forbid`. `ATOM_P_R_ARURI_R` /
+`ATOMG_P_R_ARURI_R` created with 8 640 + 9 600 measured groups (2 (`.E`) × 9 / 10 ops × 5 types × 6 cache × 16 scope); the 3 456 +
+3 456 dotted one-group keys of the GB10 line's 2026-08/09 rides (the `.E` plane of 9 ops × 4 types only — no no-`.E` words, no
+`.128`, no SAFEADD) retired as `_meta.key_aliases` of the plain key of their opcode (every retired key's tokens name a group of
+the target). The 15 ATOMG words of the GB10 census corpus are the descriptor form, outside this form: 0 witnesses; the census is
+unchanged (91 927 / 91 927 decode, 1 `LEPC` mismatch, 91 910 re-encode). Rows 39 119 → 50 447, **rows without `_src` 9 575 →
+2 663**, forms 9 063 → 2 153, aliases 14 835 → 21 747. **The rows carry a one-line `_note` pointing at the family's note in
+`_meta.provenance.sources` and no per-field `_src`: `sm121a.json` is 87 MiB with this lattice, within 13 MiB of GitHub's 100 MiB
+file limit — the one-row-per-group schema needs the owner's decision before the next lattice (cubit `T/NEEDS_OWNER.md` 61).**
+cubit side: the printer prints the atomics' U32 uniform-indexed form with the width taken from the key (bit 90 is the top bit of
+the 4-bit op field — the generic width rule printed a false `.64` on every EXCH / SAFEADD word, and the dotted `ATOM.E.*` keys of
+this table printed the descriptor world's `desc[UR][R.64]` for a `[R.U32+UR]` word) and `SAFEADD` in the op slot of the modifier
+order. The SM121a HTML reference regenerated (71 MiB).
+
 ## November 8, 2026 (sessions T-21 / T-22, batch 7 + NEEDS 59): `sm121a.json` / `sm103a.json` / `sm100a.json` — the float conversions (F2I / I2F / FRND / MUFU) and the FP32 ALU (FADD / FMUL / FFMA / FMNMX) rebuilt from measurement on `-b SM121` / `SM103` / `SM100`; VIMNMX3 measured on sm103a / sm100a; sm121a's junk key `MUFU_R_L` retired
 
 `sm121a.json` / `sm103a.json` / `sm100a.json` `3574c5f` (T-21, batch 7) + `15435a0` (T-22, NEEDS 59). cubit's `tools/probes/re_sm120_conv.py`
