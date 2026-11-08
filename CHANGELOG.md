@@ -1,3 +1,16 @@
+## November 8, 2026 (session T-20, batch 3): `sm103a.json` / `sm100a.json` — the REDG uniform-indexed forms rebuilt from measurement on `-b SM103` / `SM100`, the first batch of the B300 line
+
+`sm103a.json` / `sm100a.json` `6a468a2`. cubit's `tools/probes/re_sm120_redg.py` (G's batch 14 of 2026-11-07) run with
+`--arch SM103` and `--arch SM100` (nvdisasm 13.1): every one of the 9 334 form words of the sweep prints the same text as on
+`-b SM120` and the 58 lattice words (bit 91 clear, the text-inert bits, the INVALID type / cache planes, the descriptor bit,
+the `.64` base without `.E`) behave the same — asserted word by word by the probe. On each table the two plain keys
+`REDG_ARURI_R` (6 144 groups) / `REDG_ARURI64_R` (3 072) are created with the measured rows — the harvest had none, only
+the 6 144 dotted one-group keys `REDG.E.<op>[.cache][.type].<scope>_{ARURI,ARURI64}_R` of 2026-08/09 — and the 6 144 dotted
+keys of each table are retired as `_meta.key_aliases` of the plain key of their operand signature (0 witnesses in the B300
+publish corpus; its strict round trip is unchanged at 85 704 / 85 792 words, 288 / 328 cubins). sm103a 14 926 forms /
+22 445 rows → 8 784 / 25 517, sm100a 14 925 / 22 439 → 8 783 / 25 511; **rows without `_src` 15 858 → 9 714 on both**;
+`claim_forbid` rows unchanged. The SM103a / SM100a HTML references regenerated.
+
 ## November 8, 2026 (session T-20, batch 2): `sm121a.json` — FSETP / DSETP rebuilt from measurement on `-b SM121`, the first batch of the GB10 line; a GB10 census regression closed
 
 `sm121a.json` `75e9d20`. cubit's `tools/probes/re_sm120_fsetp_dsetp.py --arch SM121` (nvdisasm 13.1): the sm120 law of
