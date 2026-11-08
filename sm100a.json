@@ -7,7 +7,7 @@
   "provenance": {
    "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a).",
    "rows_total": 35869,
-   "rows_without_src": 901,
+   "rows_without_src": 898,
    "sources": {
     "bug154-2026-08-25": {
      "rows": 1,
@@ -434,6 +434,13 @@
      "date": "2026-11-07",
      "tool": "tools/probes/re_sm120_fp32_alu.py",
      "test": "tests/sm120_fp32_alu.rs"
+    },
+    "rows-intalu-2026-11-07": {
+     "rows": 3,
+     "kind": "nvdisasm 13.1 per-row field verification over the whole word (-b SM100)",
+     "date": "2026-11-08",
+     "tool": "tools/probes/re_sm120_rows.py --family intalu --arch SM100",
+     "test": "tests/sm103a_sm100a_vimnmx3.rs"
     }
    },
    "history": {
@@ -743524,14 +743531,15 @@
    "base_op": "VIMNMX3",
    "mod_groups": {
     "": {
-     "and_base": "0x0000000003800100000000000000020f",
+     "and_base": "0x0000000000000100000000000000020f",
      "count": 1139,
      "fields": [
       {
        "bits": 4,
        "extraction": "guard",
        "shift": 12,
-       "token_idx": 0
+       "token_idx": 0,
+       "_src": "rows-intalu-2026-11-07"
       },
       {
        "_src": "2aE",
@@ -743583,46 +743591,34 @@
        "token_idx": 4
       },
       {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
        "_src": "2aE",
        "bits": 1,
        "extraction": "neg",
        "shift": 90,
        "token_idx": 5
-      },
-      {
-       "_src": "2c",
-       "bits": 4,
-       "extraction": "pred",
-       "shift": 1,
-       "token_idx": 5
       }
      ],
-     "variable_mask": "0x1ff02e000400007f0000007f7ffff000"
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "rows-intalu-2026-11-07",
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 0000000003800118000000503020720f = `VIMNMX3 R32, R48, R80, R24, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [2, 4, 72, 73, 76] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 1, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 74, 75, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08 (NEEDS 59a): the harvest's 4-bit pred field at shift 1 (inside the opcode nibble) retired; the predicate is at [89:87] with its sign at 90"
     },
     "RELU": {
-     "and_base": "0x0000000007801108000000202120720f",
+     "and_base": "0x0000000000001100000000000000020f",
      "count": 1,
      "fields": [
       {
        "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 24,
-       "token_idx": 2
-      },
-      {
-       "_src": "2c",
-       "bits": 8,
-       "extraction": "reg",
-       "shift": 34,
-       "token_idx": 4
-      },
-      {
-       "_src": "2c",
        "bits": 4,
-       "extraction": "pred",
+       "extraction": "guard",
        "shift": 12,
-       "token_idx": 5
+       "token_idx": 0
       },
       {
        "_src": "2e",
@@ -743632,14 +743628,65 @@
        "token_idx": 1
       },
       {
-       "_src": "2e",
+       "_src": "2c",
        "bits": 8,
        "extraction": "reg",
-       "shift": 16,
-       "token_idx": 3
+       "shift": 24,
+       "token_idx": 2
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 122,
+       "token_idx": 2,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 32,
+       "token_idx": 3,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 123,
+       "token_idx": 3,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 8,
+       "extraction": "reg",
+       "shift": 64,
+       "token_idx": 4,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 3,
+       "extraction": "pred",
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x00000000000000000000000000000000"
+     "variable_mask": "0x1c000000078000ff000000fffffff000",
+     "_src": "rows-intalu-2026-11-07",
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 0000000003801118000000503020720f = `VIMNMX3.RELU R32, R48, R80, R24, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [2, 3, 4, 72, 73, 76] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 1, 5, 6, 7, 8, 9, 10, 11, 91], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 74, 75, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08 (NEEDS 59a): the harvest's 4-bit pred field at shift 1 (inside the opcode nibble) retired; the predicate is at [89:87] with its sign at 90"
     }
    },
    "operand_sig": "R_R_R_R_P",
@@ -743655,9 +743702,16 @@
    "base_op": "VIMNMX3",
    "mod_groups": {
     "": {
-     "and_base": "0x000000000b8001000000000000007c0f",
+     "and_base": "0x00000000080001000000000000000c0f",
      "count": 944,
      "fields": [
+      {
+       "bits": 4,
+       "extraction": "guard",
+       "shift": 12,
+       "token_idx": 0,
+       "_src": "rows-intalu-2026-11-07"
+      },
       {
        "_src": "2aE",
        "bits": 8,
@@ -743694,14 +743748,30 @@
        "token_idx": 4
       },
       {
-       "_src": "2c",
-       "bits": 4,
+       "bits": 1,
+       "extraction": "reuse",
+       "shift": 124,
+       "token_idx": 4,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 3,
        "extraction": "pred",
-       "shift": 1,
-       "token_idx": 5
+       "shift": 87,
+       "token_idx": 5,
+       "_src": "rows-intalu-2026-11-07"
+      },
+      {
+       "bits": 1,
+       "extraction": "neg",
+       "shift": 90,
+       "token_idx": 5,
+       "_src": "rows-intalu-2026-11-07"
       }
      ],
-     "variable_mask": "0x05f03e00000000ff0000001fffff0000"
+     "variable_mask": "0x14000000078000ff000000fffffff000",
+     "_src": "rows-intalu-2026-11-07",
+     "_note": "Row verified field by field with nvdisasm 13.1 (-b SM120; session G run 5, 2026-11-07, tools/probes/re_sm120_rows.py --family intalu): canonical word 000000000b8001600000005030207c0f = `VIMNMX3 R32, R48, UR80, R96, PT`; every field bit moves its own operand token; bits outside the fields: modifier bits [2, 72, 73, 76] (other groups' words), neighbouring-form bits [], vendor-invalid glyph planes [], illegal [0, 1, 5, 6, 7, 8, 9, 10, 11, 91, 123], text-inert [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 74, 75, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 125] (fail closed: the mask is the fields). T-22 2026-11-08 (NEEDS 59a): the harvest's 4-bit pred field at shift 1 (inside the opcode nibble) retired; the predicate is at [89:87] with its sign at 90"
     }
    },
    "operand_sig": "R_R_UR_R_P",
