@@ -1,3 +1,33 @@
+## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
+
+`sm121a.json` `6428595` + `ad7804a` + `64db08b` + `daac080`, `sm103a.json` `ddac54d` + `64db08b` + `04bcb53`, `sm100a.json` `21fc69a` + `64db08b` +
+`04bcb53` (`sm120.json` unchanged). **The per-row passes (T-23):** cubit's `tools/probes/re_sm120_rows.py --arch SM121 / SM103 / SM100` — the
+canonical word of every harvest row and every single-bit flip of the 128-bit word named by nvdisasm 13.1, diffed token by token, cubit's
+decode / print / re-encode of every word, the table's own corpus words as witnesses (the GB10 census for sm121a, the B300 publish corpus for
+sm103a / sm100a) — over the eight families memory / atomic / tensor / half / intalu / uniform / misc / control: sm121a 1 185 rows measured,
+511 shadowed harvest keys retired as `_meta.key_aliases` clones, 52 unreachable rows deleted (2 654 → 877); sm103a / sm100a 529 rows measured
+each, 3 shadowed keys aliased, 1 dead row deleted (893 → 358). A measured row has its fields for its mask and fails closed on every other bit;
+the rows left are named in cubit's fixtures (`tests/{sm121a,sm103a,sm100a}_rows_<family>.rs`). **T-24's correction** (`ad7804a`): the
+`HFMA2_R_R_II_II_R` and `F2FP.BF16.F32.PACK_AB_P_R_R_R` alias retirements reverted — the targets could not decode the retired keys' words (the
+II-encoded immediates fell to a field-less dotted row and printed `0x0, 0x0` for `1, 1`). **T-25's fixes, each with its measurement in the
+commit:** on sm121a six junk harvest keys deleted whose rows printed vendor-nonexistent text for the measured rows' text-inert neighbours
+(`LDS.128_R_AR` — `LDS.128 R91, ?AR` for nvdisasm's `LDS.U8 R91, [R10]` —, `UIADD3_UR_UP_UP_UR_UR_R_II_P`, `HADD2_R_R_II_II_II_II_?`, `MOV_P0_R_II`
+(a UMOV word), `QMMA.16816.F16.E4M3.E4M3_P_R_R_R_R` (a MOVM word), `HFMA2_R_R_FI_FI_R` (31 rows at the illegal opcode 0x11, claiming the LEA
+lattice's illegal words); 0 GB10 witnesses each); **the LEA family rebuilt from measurement on `-b SM121`** (cubit `tools/probes/re_sm120_lea.py
+--arch SM121`: 615 form + 209 lattice words, every text identical to the SM120 fixture's — 24 keys / 36 rows for 23 harvest keys / 58 rows,
+among them the era `LEA_P0_R_R_R_II` whose words nvdisasm prints `LEA R22, R18, -R19, 0x1`); the `LDG_P_R_ARI_P` / `LDG_R_ARI_P` `.64` rows
+measured with the `_P_R_` claim exclusion ([83:81] = 7 belongs to the plain key — without it they printed `LDG.E.EL.64 PT, …`). On sm103a /
+sm100a: the plain `LDG_R_ARURI` row's **UR field 6 → 8 bits** (nvdisasm `0x40 → UR64`, `0x80 → UR128`; cubit printed `UR0` for `UR64` and the
+word decoded through the `E,LTC128B` sibling) and the row measured; the `LDG_P_R_dARI` rows re-measured on the table's own target (they printed
+a phantom `PT,` for a measured neighbour); **`IMAD_R_R_R_R` `U32` added** (the plain `IMAD.U32 Rd, Ra, Rb, Rc` had no row on either table — cubit
+minted bit 73 on the measured plain row and its decoder, fail-closed there, rejected the word); `REDG_P_dARI_R` restored as the key-level
+`encode_only` retention key (cubit BUG-128), its 13 rows `_src: "modelled"` (sm121a 909 → 811, sm103a / sm100a 358 → 357). The GB10 census
+(91 927 unique words) and the B300 publish corpus (85 721 / 85 792 words, 296 / 328 cubins strict-exact) are unchanged on the new tables;
+cubit's whole production census (249 929 words) identical. Known, for the next pass: the row notes T-23 wrote on the three tables read
+`-b SM120; session G run 5` where the measurement was `-b SM121` / `SM103` / `SM100` (the probe's note writer, fixed for T-25's rows); the forms
+the measured tables lack that cubit's battery pins as holes (`STG.E.U8 [R.64+UR]` on the three tables, the predicated `.U32` ARURI loads on
+sm121a); the 17 / 17 / 113 harvest siblings on sm103a / sm100a / sm121a that still print their own modifier for a measured neighbour's inert bit.
+
 ## November 8, 2026 (session T-23): the four tables rewritten in the compact one-row-per-line layout with the provenance written once per level — `sm121a.json` 87.0 → 32.8 MiB, `sm120.json` 73.6 → 28.0, `sm103a.json` / `sm100a.json` 67.8 → 23.7 / 23.6 (no row changed)
 
 All four tables. **Why:** `sm121a.json` had reached 87 MiB after the ATOM / ATOMG lattice of T-22 (GitHub refuses files over 100 MiB;

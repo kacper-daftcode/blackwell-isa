@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>512 opcodes &middot; 979 instruction forms &middot; 38838 encoding variants &middot; 876 with scheduling data &middot; 38831 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-08 from <code>sm120.json</code> (4f72245 2026-11-08), SHA-256 b7cdbbb4df76cc27&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>514 opcodes &middot; 983 instruction forms &middot; 38848 encoding variants &middot; 880 with scheduling data &middot; 38841 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-09 from <code>sm120.json</code> (c374bad 2026-11-08), SHA-256 e644bb3efdf4e595&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -326,7 +326,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 1 of 979 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 1 of 983 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -775,6 +775,8 @@ Collapsed by default — click to expand.
 <a href="#STSM">STSM</a><br>
 <a href="#SYNCS">SYNCS</a><br>
 <a href="#UBLKCP">UBLKCP</a><br>
+<a href="#UBLKCP.G.S">UBLKCP.G.S</a><br>
+<a href="#UBLKCP.S.S">UBLKCP.S.S</a><br>
 <a href="#UBLKPF">UBLKPF</a><br>
 <a href="#UBLKPF.L2">UBLKPF.L2</a><br>
 <a href="#UBLKRED">UBLKRED</a><br>
@@ -97804,9 +97806,21 @@ Collapsed by default — click to expand.
 <h3>FENCE</h3>
 <p class="desc">Memory fence instruction. SM120 variant implements <code>fence.proxy.alias</code> for async proxy ordering. Encoded as <code>FENCE.VIEW.ASYNC.S</code>.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">FENCE</td><td class="m"></td><td class="m">ASYNC,S,VIEW, ASYNC,T,VIEW</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">FENCE</td><td class="m"></td><td class="m">ASYNC,S,VIEW, ASYNC,G,VIEW</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<div class="ab keyprov">measured: <code>bug226e-2026-08-28</code> (every variant of FENCE)</div>
+<div class="ab keyprov">measured: <code>fence-view-async-sm120-2026-11-08</code> (every variant of FENCE) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_fence_view_async.py): opcode 0x3c6, the predicate guard [15:12] live, bit 72 = the scope (clear `.S` = PTX fence.proxy.async.shared::cta, also nvcc&#x27;s lowering of the generic fence.proxy.async behind MEMBAR.ALL.GPU; set `.G` = fence.proxy.async.global). Bit 73 (`.T`, the sm_100 / sm_103 tensor-memory scope of the donor row) is ILLEGAL on SM120, bit 91 illegal, every other bit of the word text-inert (outside the row, fail-closed). Control law: a read barrier on this word ([115:113] != 7) makes it illegal -- FENCE carries a write barrier at most (nvcc: wrtbar, stall 4).</div>
+<details><summary>FENCE.ASYNC,S,VIEW &mdash; 1 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000000000000000000003c6</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>FENCE.ASYNC,G,VIEW &mdash; 1 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000010000000000000003c6</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000000000000f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 </div>
 <div class="ib" data-op="FFMA" id="FFMA">
 <h3>FFMA</h3>
@@ -460550,6 +460564,64 @@ Collapsed by default — click to expand.
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
+<div class="ib" data-op="UBLKCP.G.S" id="UBLKCP.G.S">
+<h3>UBLKCP.G.S</h3>
+<p class="desc">Uniform bulk copy. SM120 implementation of <code>cp.async.bulk</code>. <code>.S.G</code> copies shared memory to global.</p>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">UBLKCP.G.S_AURI_AURI_UR</td><td class="m">AURI_AURI_UR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">0 &dagger;</span></td></tr>
+<tr><td class="m">UBLKCP.G.S_AURI_AURI_UR_II</td><td class="m">AURI_AURI_UR_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">0 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>ublkcp-dir-sm120-2026-11-08</code> (every variant of UBLKCP.G.S_AURI_AURI_UR) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_ublkcp_dir.py): direction code [74:73] = 2 prints `UBLKCP.G.S` (shared -&gt; global, the TMA bulk store (PTX cp.async.bulk.global.shared::cta.bulk_group); 0 = .G.G, 1 = .S.G are the plain key&#x27;s groups). Fields: uniform guard [15:12], destination address UR [39:32], source address UR [31:24], size UR [71:64] (255 = URZ). Outside the row: bit 75 `.MULTICAST`, 81 `.LTC64B`, 82 `.LTC128B`, 83 `.SEQUENCED`, 84 `.DST_G_BYTE_MASK` (unclaimed modifier groups), bits 72, 85-90, 16-23, 48-63, 92-104 text-inert, 77-80 illegal, bit 91 required. The two letters are an ordered pair (destination, source): the sorted mod-group name cannot tell .G.S from .S.G, hence the dotted key; the encoder refuses to serve this text from the plain key&#x27;s `G,S` group (the load).</div>
+<details><summary>UBLKCP.G.S_AURI_AURI_UR &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800040000000000000003ba</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff000000ffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<div class="ab keyprov">measured: <code>ublkcp-dir-sm120-2026-11-08</code> (every variant of UBLKCP.G.S_AURI_AURI_UR_II) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_ublkcp_dir.py): direction code [74:73] = 2 prints `UBLKCP.G.S` (shared -&gt; global, the TMA bulk store (PTX cp.async.bulk.global.shared::cta.bulk_group); 0 = .G.G, 1 = .S.G are the plain key&#x27;s groups). Fields: uniform guard [15:12], destination address UR [39:32], source address UR [31:24], size UR [71:64], descriptor UR [47:40] with the descriptor-present bit 76 fixed (255 = URZ). Outside the row: bit 75 `.MULTICAST`, 81 `.LTC64B`, 82 `.LTC128B`, 83 `.SEQUENCED`, 84 `.DST_G_BYTE_MASK` (unclaimed modifier groups), bits 72, 85-90, 16-23, 48-63, 92-104 text-inert, 77-80 illegal, bit 91 required. The two letters are an ordered pair (destination, source): the sorted mod-group name cannot tell .G.S from .S.G, hence the dotted key; the encoder refuses to serve this text from the plain key&#x27;s `G,S` group (the load).</div>
+<details><summary>UBLKCP.G.S_AURI_AURI_UR_II &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800140000000000000003ba</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff0000ffffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="UBLKCP.S.S" id="UBLKCP.S.S">
+<h3>UBLKCP.S.S</h3>
+<p class="desc">Uniform bulk copy. SM120 implementation of <code>cp.async.bulk</code>. <code>.S.G</code> copies shared memory to global.</p>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">UBLKCP.S.S_AURI_AURI_UR</td><td class="m">AURI_AURI_UR</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">0 &dagger;</span></td></tr>
+<tr><td class="m">UBLKCP.S.S_AURI_AURI_UR_II</td><td class="m">AURI_AURI_UR_II</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">0 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>ublkcp-dir-sm120-2026-11-08</code> (every variant of UBLKCP.S.S_AURI_AURI_UR) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_ublkcp_dir.py): direction code [74:73] = 3 prints `UBLKCP.S.S` (shared -&gt; shared; 0 = .G.G, 1 = .S.G are the plain key&#x27;s groups). Fields: uniform guard [15:12], destination address UR [39:32], source address UR [31:24], size UR [71:64] (255 = URZ). Outside the row: bit 75 `.MULTICAST`, 81 `.LTC64B`, 82 `.LTC128B`, 83 `.SEQUENCED`, 84 `.DST_G_BYTE_MASK` (unclaimed modifier groups), bits 72, 85-90, 16-23, 48-63, 92-104 text-inert, 77-80 illegal, bit 91 required. The two letters are an ordered pair (destination, source): the sorted mod-group name cannot tell .G.S from .S.G, hence the dotted key; the encoder refuses to serve this text from the plain key&#x27;s `G,S` group (the load).</div>
+<details><summary>UBLKCP.S.S_AURI_AURI_UR &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800060000000000000003ba</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff000000ffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<div class="ab keyprov">measured: <code>ublkcp-dir-sm120-2026-11-08</code> (every variant of UBLKCP.S.S_AURI_AURI_UR_II) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_ublkcp_dir.py): direction code [74:73] = 3 prints `UBLKCP.S.S` (shared -&gt; shared; 0 = .G.G, 1 = .S.G are the plain key&#x27;s groups). Fields: uniform guard [15:12], destination address UR [39:32], source address UR [31:24], size UR [71:64], descriptor UR [47:40] with the descriptor-present bit 76 fixed (255 = URZ). Outside the row: bit 75 `.MULTICAST`, 81 `.LTC64B`, 82 `.LTC128B`, 83 `.SEQUENCED`, 84 `.DST_G_BYTE_MASK` (unclaimed modifier groups), bits 72, 85-90, 16-23, 48-63, 92-104 text-inert, 77-80 illegal, bit 91 required. The two letters are an ordered pair (destination, source): the sorted mod-group name cannot tell .G.S from .S.G, hence the dotted key; the encoder refuses to serve this text from the plain key&#x27;s `G,S` group (the load).</div>
+<details><summary>UBLKCP.S.S_AURI_AURI_UR_II &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800160000000000000003ba</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ff0000ffffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>ureg</code></td></tr>
+<tr><td>[47:40]</td><td>8</td><td>t4</td><td><code>desc_ur</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t1</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
 <div class="ib" data-op="UBLKPF" id="UBLKPF">
 <h3>UBLKPF</h3>
 <p class="desc">Uniform bulk prefetch to L2 cache. Implements <code>cp.async.bulk.prefetch.L2.global</code>.</p>
@@ -477666,66 +477738,146 @@ Collapsed by default — click to expand.
 <h3>VOTE</h3>
 <p class="desc">Warp vote. Computes ALL, ANY, or BALLOT across warp threads.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">VOTE_P_P</td><td class="m">P_P</td><td class="m">ALL, ANY</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">VOTE_R_P_P</td><td class="m">R_P_P</td><td class="m">ANY</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
+<tr><td class="m">VOTE_P_P</td><td class="m">P_P</td><td class="m">ALL, ANY, EQ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">VOTE_R_P_P</td><td class="m">R_P_P</td><td class="m">ALL, ANY, EQ</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 </table>
-<div class="ab keyprov">measured: <code>bug226d-2026-08-28</code> (every variant of VOTE_P_P)</div>
-<details><summary>VOTE_P_P.ALL &mdash; 3 fields &middot; 94 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000ff7806</code></div>
-<div class="ab">var_mask: <code>0x00003e00078e00000000000000000000</code></div>
+<div class="ab keyprov">measured: <code>vote-sm120-2026-11-08</code> (every variant of VOTE_P_P)</div>
+<details><summary>VOTE_P_P.ALL &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000000000000000000ff0806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.ALL = mode code 0 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (RZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[86:81]</td><td>6</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<details><summary>VOTE_P_P.ANY &mdash; 3 fields &middot; 59 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000001000000000000ff7806</code></div>
-<div class="ab">var_mask: <code>0x00003800078e00000000000000000000</code></div>
+<details><summary>VOTE_P_P.ANY &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000001000000000000ff0806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.ANY = mode code 1 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (RZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[86:81]</td><td>6</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<div class="ab keyprov">measured: <code>audit-fix-2026-11-06-t10</code> (every variant of VOTE_R_P_P) &mdash; T-10 audit: the pred@12 field sat on the guard bits; removed (the vote predicate of token 2 is PT, baked)</div>
-<details><summary>VOTE_R_P_P.ANY &mdash; 3 fields &middot; 1,079 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000e01000000000000007806</code></div>
-<div class="ab">var_mask: <code>0x00000000078000000000000000ff0000</code></div>
+<details><summary>VOTE_P_P.EQ &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000002000000000000ff0806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.EQ = mode code 2 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (RZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<div class="ab keyprov">measured: <code>vote-sm120-2026-11-08</code> (every variant of VOTE_R_P_P)</div>
+<details><summary>VOTE_R_P_P.ALL &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000000000000000000000806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.ALL = mode code 0 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination R [23:16], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VOTE_R_P_P.ANY &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000001000000000000000806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.ANY = mode code 1 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination R [23:16], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VOTE_R_P_P.EQ &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000002000000000000000806</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTE.EQ = mode code 2 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination R [23:16], predicate destination P [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="VOTEU" id="VOTEU">
 <h3>VOTEU</h3>
 <p class="desc">Uniform warp vote.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">VOTEU_UP_P</td><td class="m">UP_P</td><td class="m">ALL, ANY</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
-<tr><td class="m">VOTEU_UR_UP_P</td><td class="m">UR_UP_P</td><td class="m">ANY</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
+<tr><td class="m">VOTEU_UP_P</td><td class="m">UP_P</td><td class="m">ALL, ANY, EQ</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
+<tr><td class="m">VOTEU_UR_UP_P</td><td class="m">UR_UP_P</td><td class="m">ALL, ANY, EQ</td><td>WARP_SYNC</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">5 ~</span></td></tr>
 </table>
-<div class="ab keyprov">measured: <code>bug226d-2026-08-28</code> (every variant of VOTEU_UP_P)</div>
-<details><summary>VOTEU_UP_P.ALL &mdash; 2 fields &middot; 224 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000000000000000000ff7886</code></div>
-<div class="ab">var_mask: <code>0x00202e00038e00000000000000000000</code></div>
+<div class="ab keyprov">measured: <code>vote-sm120-2026-11-08</code> (every variant of VOTEU_UP_P)</div>
+<details><summary>VOTEU_UP_P.ALL &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000000000000000000ff0886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.ALL = mode code 0 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (URZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
 <tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[86:81]</td><td>6</td><td>t1</td><td><code>pred</code></td></tr>
-</table></div></details>
-<details><summary>VOTEU_UP_P.ANY &mdash; 3 fields &middot; 541 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000000001000000000000ff0886</code></div>
-<div class="ab">var_mask: <code>0x03f03e00038e0000000000000000f000</code></div>
-<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
-<tr><td>[86:81]</td><td>6</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>upred</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<div class="ab keyprov">measured: <code>audit-fix-2026-11-06-t10</code> (every variant of VOTEU_UR_UP_P) &mdash; T-10 audit: the duplicate pred@81 field of token 3 removed (token 3 is PT, baked at [89:87])</div>
-<details><summary>VOTEU_UR_UP_P.ANY &mdash; 2 fields &middot; 397 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000038001000000000000007886</code></div>
-<div class="ab">var_mask: <code>0x00000000001e00000000000000ff0000</code></div>
+<details><summary>VOTEU_UP_P.ANY &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000001000000000000ff0886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.ANY = mode code 1 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (URZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[84:81]</td><td>4</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>upred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VOTEU_UP_P.EQ &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000002000000000000ff0886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e0000000000000000f000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.EQ = mode code 2 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90; the destination byte [23:16] is 255 (URZ), which nvdisasm elides -- the two-operand spelling. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t2</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>upred</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<div class="ab keyprov">measured: <code>vote-sm120-2026-11-08</code> (every variant of VOTEU_UR_UP_P)</div>
+<details><summary>VOTEU_UR_UP_P.ALL &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000000000000000000000886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.ALL = mode code 0 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination UR [23:16], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VOTEU_UR_UP_P.ANY &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000001000000000000000886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.ANY = mode code 1 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination UR [23:16], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>VOTEU_UR_UP_P.EQ &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000002000000000000000886</code></div>
+<div class="ab">var_mask: <code>0x00000000078e00000000000000fff000</code></div>
+<div class="ab">Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_vote.py): VOTEU.EQ = mode code 2 in [73:72] (0 ALL, 1 ANY, 2 EQ, 3 INVALID3 -- unclaimed). Fields: predicate guard [15:12], ballot destination UR [23:16], predicate destination UP [83:81], source predicate P [89:87] with its negation bit 90. Bit 91 illegal; bits 24-71, 74-80, 84-86, 92-104 text-inert (outside the row, fail closed). Replaces the harvest rows (bug226d / audit-fix-2026-11-06-t10) that baked a predicate at PT and carried no .ALL / .EQ.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[90]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[89:87]</td><td>3</td><td>t3</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t2</td><td><code>upred</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>ureg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="WARPSYNC" id="WARPSYNC">
@@ -477841,8 +477993,8 @@ Collapsed by default — click to expand.
 </table></div></details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-08 from sm120.json (4f72245 2026-11-08), SHA-256 b7cdbbb4df76cc27b3fe2b92bd2869ebd687e6243a7855dfdf3f4d06a1528ba5<br>
-979 instruction forms &middot; 38838 encoding variants &middot; 38831 with a measurement tag &middot; 37 pipeline classes<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-09 from sm120.json (c374bad 2026-11-08), SHA-256 e644bb3efdf4e595c9c8b9955c9f8ebd71216b7e224e0b659ef24554083bd435<br>
+983 instruction forms &middot; 38848 encoding variants &middot; 38841 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
