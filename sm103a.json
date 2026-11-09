@@ -6,7 +6,7 @@
  "instruction_width": 128,
  "provenance": {
   "legend": "Rows (instructions.<key>.mod_groups.<group>) may carry `_src`: a tag naming the measurement that produced or last repaired the row; `sources` below lists every tag in this table with its kind, date and, where it exists, the cubit tool and test that hold the evidence. `_note` on a row is the measurement in prose (bit positions, nvdisasm behaviour, what stays outside the row). Rows without `_src` are the 2026-06..08 harvest: fields learned from compiler output and validated by the round-trip census, not by per-field probes; their audit state is tracked in cubit's docs/KNOWN_ISSUES.md (tools/audit_table.py, tools/audit_dynamic.py). `history` keeps the fix-wave notes that used to be loose `_meta.bugNNN` keys, verbatim; `errata` keeps the former top-level `_errata_*` notes (sm121a). Provenance is written once per level since 2026-11-08 (NEEDS 61): `instructions.<key>._src` is set when every row of the key carries the same tag (a row keeps its own `_src`; a row without one inherits the key's); the measurement note of a lattice family lives in `sources[<tag>].note` when every row of the tag shares it, on `instructions.<key>._note` when every row of the key shares it, and on the row only where the row's differs -- read a row's note as row `_note`, else key `_note`, else `sources[row's tag].note` (cubit `tools/tablefmt.py`: `row_src` / `row_note`). A field carries its own `_src` only when it was measured by another tag than its row. The file layout is tools/tablefmt.py's: compact JSON, one encoding row per line, indent=1 `_meta`.",
-  "rows_total": 35875,
+  "rows_total": 35876,
   "rows_without_src": 357,
   "sources": {
    "bug154-2026-08-25": {
@@ -506,6 +506,14 @@
     "tool": "tools/probes/re_sm120_rows.py (MODELLED)",
     "test": "tests/sm120_rows_<family>.rs",
     "note": "Kept by the project's design (session T-25, 2026-11-09, the T-19 convention for `encode_only` retention rows): an `encode_only` key (BUG-128) -- the harvest-era text `REDG.E.ADD.STRONG.GPU PT, desc[UR4][R54.64], R40` spells a sink `PT` the vendor never prints; the 13 groups are `REDG_dARI_R`'s rows with the operand tokens shifted by one so that text still encodes byte-exact to the vendor word; the decoder skips the key (BUG-090). T-23's per-row pass had retired the key as a phantom-token alias of `REDG_dARI_R` (the twin rule), which cannot carry the four-token text. Pinned by tests/bug128_redg_pt_alias.rs."
+   },
+   "rows-atoms-max-production-2026-11-09": {
+    "rows": 1,
+    "kind": "nvdisasm 13.3 complete-word production ATOMS.MAX measurements",
+    "date": "2026-11-09",
+    "tool": "pubwave/hidden-b300/atoms-max-production/prepare.py",
+    "test": "tests/hidden_b300_atoms_max_production.rs",
+    "note": "Production FMHA ATOMS.MAX [R+UR+imm] words (195 stored observations, 182 word/target pairs, 125 unique words), measured by complete 128-bit nvdisasm 13.3 SM103/SM100 probes on preserved production schedules. This row covers only plain MAX with guard[15:12], destination reg[23:16], address base sub_r0[31:24], data reg[39:32], signed immediate sub_imm1[63:40] and address sub_ur1[71:64]. Full byte sweeps, immediate boundaries, guards and crosses are retained; neighbouring operations/types, [UR+imm], inert bits and illegal operand values remain closed. Control/reuse measurements are separate and no reuse field is adopted. Scheduling is synthetic and unmeasured. No execution, atomic, address or timing semantics is claimed."
    }
   },
   "history": {
@@ -52261,6 +52269,9 @@
 "E,GPU,MIN,S32,STRONG": {"and_base":"0x000000000c92e300000000000000098e","count":1,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_ur0","shift":64,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_r1","shift":24,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"reg","shift":32,"token_idx":3},{"_src":"161-2026-08-25","bits":24,"extraction":"sub_imm2","shift":40,"token_idx":2}],"variable_mask":"0x03fe06000000000e0000003f1e00f000","_src":"modelled"},
 "E,GPU,MIN,STRONG": {"and_base":"0x000000000c92e100000000000000798e","count":1,"fields":[{"_src":"bug128-2026-08-24","bits":4,"extraction":"guard","shift":12,"token_idx":0},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_ur0","shift":64,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_r1","shift":24,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"reg","shift":32,"token_idx":3},{"_src":"bug128-2026-08-24","bits":24,"extraction":"sub_imm2","shift":40,"token_idx":2}],"variable_mask":"0x00000000000000ffffffffffff00f000","_src":"modelled"},
 "E,GPU,OR,STRONG": {"and_base":"0x000000000f12e100000000010000098e","count":1,"fields":[{"_src":"bug128-2026-08-24","bits":4,"extraction":"guard","shift":12,"token_idx":0},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_ur0","shift":64,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"sub_r1","shift":24,"token_idx":2},{"_src":"bug128-2026-08-24","bits":8,"extraction":"reg","shift":32,"token_idx":3},{"_src":"161-2026-08-25","bits":24,"extraction":"sub_imm2","shift":40,"token_idx":2}],"variable_mask":"0x006200000000000e0000001e1e00f000","_src":"modelled"}
+}},
+"ATOMS_R_ARURI_R": {"_src":"rows-atoms-max-production-2026-11-09","base_op":"ATOMS","mercury":[],"operand_sig":"R_ARURI_R","scheduling":{"def_latency":1,"is_variable_latency":false,"latency_source":"synthetic","pipe_class":0,"pipe_name":"UNKNOWN","throughput":1},"mod_groups": {
+"MAX": {"_src":"rows-atoms-max-production-2026-11-09","and_base":"0x0000000009000000000000000000098c","count":null,"fields":[{"bits":4,"extraction":"guard","shift":12,"token_idx":0},{"bits":8,"extraction":"reg","shift":16,"token_idx":1},{"bits":8,"extraction":"sub_r0","shift":24,"token_idx":2},{"bits":8,"extraction":"reg","shift":32,"token_idx":3},{"bits":24,"extraction":"sub_imm1","shift":40,"token_idx":2},{"bits":8,"extraction":"sub_ur1","shift":64,"token_idx":2}],"variable_mask":"0x00000000000000fffffffffffffff000","claim_forbid":[{"bits":8,"shift":24,"values":[255]}]}
 }}
 },
 "operand_roles": {
