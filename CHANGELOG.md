@@ -1,4 +1,4 @@
-## November 10, 2026 (sessions T-26 / T-27): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 6 of the B300 lane's candidate forms (55 review refs: 1 655 measured rows added per table, 21 harvest rows re-measured — rows without `_src` 357 → 336); the scaled F2FP unpack (opcode 0x63e) on all four tables; `FHADD` in the operand roles
+## November 10, 2026 (sessions T-26 / T-27): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 7 of the B300 lane's candidate forms (57 review refs: 1 663 measured rows added per table, 21 harvest rows re-measured — rows without `_src` 357 → 336); the scaled F2FP unpack (opcode 0x63e) on all four tables; `FHADD` in the operand roles
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -167,6 +167,27 @@ words derived from the six rows per table (the constant word, each field at all 
 the 1 497 without a reuse flag print nvdisasm 13.1's text and re-assemble to themselves, the 3 031 with a reuse flag do so once the
 control word is a production one (nvdisasm refuses a reuse flag in an otherwise empty control word). `SM103A_ISA_REFERENCE.html` and
 `SM100A_ISA_REFERENCE.html` regenerated at `1fb517a`.
+
+`sm103a.json` / `sm100a.json` `0c7f73f`, `714fca5`, `6bb25fa` (session T-27; the rows of `sm120.json` / `sm121a.json` untouched): **batch 7 — the
+uniform-source forms of `VIMNMX3` and one more scaled-F2FP form.** sm103a 37 530 → 37 538 rows, sm100a 37 524 → 37 532 (forms 549 / 548
+unchanged); rows without `_src` unchanged (336). **`VIMNMX3[.U32|.U16x2|.S16x2][.RELU] Rd, Ra, URb, Rc, Pd`** (opcode 0xc0f; seven new
+groups on `VIMNMX3_R_R_UR_R_P`: `U32`, `U16x2`, `S16x2`, `RELU` and the three typed `RELU` forms; `714fca5` ← vimnmx3): the integer /
+packed type at 72 / 73, `RELU` at bit 76, the predicate at [89:87] with its negation at 90, reuse on `Ra` (122) and `Rc` (124). **The
+plain row of the key is the one measured on 2026-11-07 (`rows-intalu-2026-11-07`), with the same `and_base`, mask and fields as the
+candidate's; it keeps its tag and gains the candidate's one addition (`0c7f73f`): `claim_forbid` on bit 123, the reuse flag of the
+uniform operand** — the control code is not part of a row's match, so the row decoded a word with that bit to the plain text, a word
+nvdisasm 13.1 refuses on `-b SM103` and `-b SM100` with an empty and with a production control word ("Opclass 'vimnmx3__RUR_RUR',
+undefined value … TABLES_opex"); bits 122 / 124 print `.reuse`. The candidate's tag counts its seven new rows (it declares eight).
+**`F2FP.SATFINITE.E4M3.F16.UNPACK_B_MERGE_C Rd, Rs, Rc[.H1]`** (opcode 0x23e; one new group on `F2FP_R_R_R`; `6bb25fa` ←
+f2fp-e4m3-f16-unpack-merge-c, the lane's 69th review ref, published on 2026-11-10): 194 production observations / 189 distinct words
+of the vendor's code; guard, `Rd` [23:16], the source [39:32], the merge operand [71:64] with `.H1` at 72 (`RZ` and `RZ.H1` included);
+the three reuse flags are refused (`claim_forbid` 122 – 124: the vendor refuses all seven masks). Vendor text and CPU round trips of
+complete words (nvdisasm 13.3 on the lane's host), no execution claim. **The gatekeeper's checks:** the three fixtures named again with
+nvdisasm 13.1 on `-b SM103` / `-b SM100` — VIMNMX3 1 444 word / target pairs: 1 362 texts identical, 82 without text on both, none
+different; the F2FP fixtures: 6 616 pairs, 4 430 identical, 2 184 without text on both, and one neighbour word (opcode 0x22c) on both targets that nvdisasm 13.3 names `CLMAD.HI` and 13.1 does not —, and for the `VIMNMX3` rows 4 872 words derived from the rows (constant word, each field at all
+ones, random fillings, the sign-window combinations): the 1 338 without a reuse flag print nvdisasm 13.1's text and re-assemble to
+themselves, the 3 534 with one do so once the control word is a production one. `SM103A_ISA_REFERENCE.html` and
+`SM100A_ISA_REFERENCE.html` regenerated at `6bb25fa`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
