@@ -57360,6 +57360,13 @@
     "note": "FFMA dest-first 3-src ALU (im_ff, silicon-run 2026-08-20)"
    }
   },
+  "FHADD": {
+   "class": "alu",
+   "evidence": {
+    "kind": "class",
+    "note": "2026-11-10 (session T-26, asked for by session BQ-1): FHADD[.BF16] Rd, Ra[.H1], Rb -- the mixed-precision accumulate ptxas emits for bf16 -> f32 sums: dest-first ALU, two register sources (operand order as nvdisasm renders the measured row FHADD_R_R_R, rows-intalu-2026-11-07). Production witness: the Triton top-k-sum kernel of the MoE (20 of its 176 instructions); the same text assembled by cubit gives the reference bits on sm_120 silicon (BQ-1, 2026-11-10). Without the entry `cubit sched --mode list`, `ra` and `stallfix` stopped on the instruction (unknown operand roles)."
+   }
+  },
   "FLO": {
    "class": "alu",
    "evidence": {
