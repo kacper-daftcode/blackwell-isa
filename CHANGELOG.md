@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batch 1 of the B300 lane's candidate forms (19 measured rows per table)
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 and 2 of the B300 lane's candidate forms (33 review refs: 1 471 measured rows added per table, 18 harvest rows re-measured — rows without `_src` 357 → 339)
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -30,6 +30,31 @@ named again with nvdisasm 13.1 on a second host (`-b SM103` / `-b SM100`) — ev
 suite, the B300 publish corpus and the whole-census parity are in cubit's CHANGELOG. `SM103A_ISA_REFERENCE.html` / `SM100A_ISA_REFERENCE.html`
 regenerated at `0f20ae6`. The `tool` named by these tags (`pubwave/hidden-b300/<name>/prepare.py`) is the lane's probe on its own host, not a
 file of cubit: the fixtures in cubit are the reproducible evidence.
+
+`sm103a.json` / `sm100a.json` `c089847` … `c3b2d5e` (23 commits; `sm120.json` / `sm121a.json` untouched): **batch 2 — the 23 review candidates
+without engine changes on the bases of 8–9 November**, taken the same way (each candidate's row delta onto the tip; its author, date and
+message kept). sm103a 517 → 533 forms, 35 894 → 37 346 rows; sm100a 516 → 532, 35 888 → 37 340; **rows without `_src` 357 → 339 on both** —
+eighteen harvest rows per table are replaced by measured ones, the rows on which the per-row pass of 2026-11-08 had named a defect
+(an operand bit outside the fields, a field at the wrong position or width): `F2F_R_R` `F16,F32` (`c37c6c3`: guard, the source's sign) and
+`F16,F32,RM` / `F16,F32,RP` (`d542cb1`: sign and abs), `FCHK_P_R_UR` (`7a6e238`: the predicate at [83:81] — the harvest row read it at
+[4:1] —, guard, sign / abs on both sources), nine groups of `HSETP2_P_P_R_R_P`, one of `HSETP2_P_P_R_UR_P` (`bbccf98`) and two of
+`HSETP2_P_P_R_FI_FI_P` (`568e409`: the half selectors, sign / abs, reuse, the second immediate), `SYNCS_R_AURI_R`
+`A0TR,ARRIVE,RED,TRANS64` (`c089847`: the uniform register is eight bits, not nine), `UFLO_UR_UR` `U32` (`f8c316d`: guard, the source's
+inversion). New rows: `F2F.BF16.F16` / `F2F.F16.BF16 Rd, Rs` (two keys, `e5468d9`); `F2F.F16.F32` `.RZ` and the four `.FTZ` groups
+(`d542cb1`, `8c91f94`); **`FSET.BF Rd, Ra, Rb|FIMM|URb, Pc`** — 96 groups on each of the three new keys `FSET_R_R_R_P` (`9dc0802`),
+`FSET_R_R_FI_P` (`c83cf59`), `FSET_R_R_UR_P` (`2b9dc4d`); `BMSK Rd, Ra, Rb|URb` (`6ad4677`), `BMSK.W` (`bad0935`), `UBMSK` with a uniform or
+an immediate width (`f8c4448`), `UBREV` (`3655401`), `UFLO` `SH` / `SH,U32` / plain (`f8c316d`); `FMNMX3.NAN` (`0661738`); **`HSETP2`
+complete — 384 groups on each of the register, uniform and dual-immediate forms** (`bbccf98`, `568e409`; the register and uniform groups
+are, row for row, the ones `sm120.json` carries from its own measurement of 2026-11-06 apart from this lane's fail-closed list on the
+unused reuse bits: two lanes, two nvdisasm versions, the same rows); `I2IP.S8.S32.SAT` (`62ce487`), `I2I.S8.S32.SAT` (`e6dbf27`),
+`I2FP.F32.U32.RZ` (`df481bd`); `R2UR.OR Pd, URd, Rs` (`dec6768`); plain `VHMNMX` (`05119d3`); `SHF.L` / `SHF.R Rd, Ra, Rb, URc`
+(`c3b2d5e`). **A consequence worth knowing: on sm103a / sm100a a bare `HSETP2` register operand (selector 0) and `.H0_H0` (selector 2)
+are two words with two vendor texts**; the harvest rows had baked selector 2 and cubit printed `.H0_H0` as a default notation — compiler
+output always carries the suffix, so no corpus word changes its text. Two rows carry an empty `claim_forbid` list (`F2F.BF16.F16`,
+`F2F.F16.BF16`): the same as no list. The keys the lane adds carry its `ctrl_class` / synthetic `scheduling` block (`alu_simple`; the
+lane's choice for its own tables). **Gatekeeper check:** all 65 676 words of the 46 fixtures named again with nvdisasm 13.1 on a second
+host — 64 426 texts identical, 1 250 without text on both, none different. `SM103A_ISA_REFERENCE.html` / `SM100A_ISA_REFERENCE.html`
+regenerated at `c3b2d5e`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
