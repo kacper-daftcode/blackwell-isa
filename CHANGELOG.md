@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 3 of the B300 lane's candidate forms (35 review refs: 1 491 measured rows added per table, 18 harvest rows re-measured — rows without `_src` 357 → 339); the scaled F2FP unpack (opcode 0x63e) on all four tables
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 4 of the B300 lane's candidate forms (42 review refs: 1 543 measured rows added per table, 19 harvest rows re-measured — rows without `_src` 357 → 338); the scaled F2FP unpack (opcode 0x63e) on all four tables
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -80,6 +80,32 @@ nothing was executed on GB10. cubit needs two extractions for these rows
 (`f2fp_scale_sel`, `f2fp_ra_b1` / `f2fp_ra_b2`); tests `tests/hidden_b300_f2fp_unpackb.rs`, `tests/hidden_b300_f2fp_e4m3_source_h1.rs`,
 `tests/sm120_f2fp_unpackb_scaled.rs`. The immediate-scale form `… Rd, Rs, FIMM.<sel>` (opcode 0xe3e) has no row yet on any table. The four
 reference pages regenerated at `05068b6`.
+
+`sm103a.json` / `sm100a.json` `e7c1421` … `5629154` (eight commits; `sm120.json` / `sm121a.json` untouched): **batch 4 — seven review
+candidates of the lane's first days (7–8 November) that change no engine code**, each taken as its row delta onto the tip (the candidate's
+author, date and message kept). sm103a 533 → 534 forms, 37 366 → 37 418 rows; sm100a 532 → 533, 37 360 → 37 412; **rows without `_src`
+339 → 338** (`USETMAXREG.TRY_ALLOC` re-measured). New rows: **the compressed-matrix loads `LDSM.U4x16P64TO8` / `LDSM.U6x16P32TO8`** on the
+three address forms `LDSM_R_ARI` / `LDSM_R_ARURI` / `LDSM_R_AURI` — the `M816` shape ×1 / ×2 / ×4 on both datatypes, `MT1616` on U4 and, on
+the uniform-only address form, on U6 (22 rows: `e7c1421` ← ldsm-unpack, 8 rows; `144faad` ← ldsm-m816-counts, 14 rows — four more
+rows of that candidate were the first one's, field for field, and stay under its tag); **`F2FP.<E2M1|E3M2|S2_6>.F32.PACK_AB_MERGE_C Rd, Ra,
+Rb, Rc`** with `SATFINITE`, `RELU` and `RS` (24 rows on `F2FP_R_R_R_R`: `5dea4a1` ← f2fp-e2m1-pack-merge, `7e8257b` ←
+f2fp-e3m2-pack-merge, `9b95f3b` ← f2fp-s2-6-pack-merge; the two E2M1 forms `sm120.json` carries from its own measurement of 2026-10-22
+have the same constant bits and fields); **`STSM.8.MT168`** ×1 / ×2 / ×4 on `STSM_ARI_R` and the new key `STSM_ARURI_R` (6 rows,
+`8a27b15` ← stsm8-mt168); **`USETMAXREG.TRY_ALLOC.CTAPOOL UPd, count`** re-measured (`765129e` ← usetmaxreg-try-alloc: guard, UPd
+[83:81], the ten-bit count). **Brought to the form every other measured row has (`5629154`, the gatekeeper's, no change of the
+measurement):** the 24 pack-merge rows carried the whole control code [127:105] in `variable_mask` next to their fields — the mask is now the
+fields (the three reuse flags stay; decoding is unchanged, the control code is stripped before a word is matched); the `USETMAXREG` row
+carried the native word's guard and count bits in `and_base` under its own fields — cleared, and the row is then, field for field, the row
+`sm120.json` carries from its own measurement of 2026-11-08: two lanes, two nvdisasm versions, the same row. **Known and left:** each
+pack-merge form is in the table under two group names with identical bits, the sorted one and the vendor's modifier order
+(`SATFINITE,E2M1,F32,PACK_AB_MERGE_C`) — on these two tables cubit decodes and encodes through the vendor-order name, as for the two harvest
+pairs of E4M3 / E5M2 already there; `sm120.json` has the sorted name alone since 2026-11-08; one pass over the key removes all fourteen
+pairs. **Not taken: `hidden-b300/movm`** — its six rows leave the bits outside their fields open in the mask (the candidate adopts 534
+text-inert words whose text assembles to a different word), where a measured row of these tables fails closed; returned to the lane.
+**Gatekeeper check:** the ten fixtures of the seven candidates named again with nvdisasm 13.1 on a second host (`-b SM103` and `-b SM100`
+for every word): 35 100 word / target pairs — 30 808 texts identical, 4 290 without text on both, and one word (two pairs) that 13.1 names
+`F2FP.SATFINITE.E0M3.F32.PACK_AB_MERGE_C` where 13.3 prints no line (unclaimed either way). `SM103A_ISA_REFERENCE.html` /
+`SM100A_ISA_REFERENCE.html` regenerated at `5629154`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 

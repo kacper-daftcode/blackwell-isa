@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>219 opcodes &middot; 533 instruction forms &middot; 37366 encoding variants &middot; 514 with scheduling data &middot; 37027 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm103a.json</code> (1419878 2026-11-07), SHA-256 b1e59065e5a2b450&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>219 opcodes &middot; 534 instruction forms &middot; 37418 encoding variants &middot; 515 with scheduling data &middot; 37080 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm103a.json</code> (5629154 2026-11-10), SHA-256 f402ffb672fc0eb8&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -303,7 +303,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 0 of 533 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 0 of 534 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -80373,7 +80373,7 @@ Collapsed by default — click to expand.
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">F2FP_R_R</td><td class="m">R_R</td><td class="m">E4M3,F16,UNPACK_B, E5M2,F16,UNPACK_B, F32,PACK_B,TF32, F16,E4M3,UNPACK_B, F16,E5M2,UNPACK_B, TF32,F32,PACK_B, BF16,E8,UNPACK_B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">F2FP_R_R_R</td><td class="m">R_R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,PACK_AB, F16,F32,PACK_AB,RZ, BF16,E2M1,RELU,SATFINITE,UNPACK_B, BF16,E2M1,RELU,UNPACK_B, BF16,E2M1,SATFINITE,UNPACK_B, BF16,E2M1,UNPACK_B, BF16,E2M3,RELU,SATFINITE,UNPACK_B, BF16,E2M3,RELU,UNPACK_B, BF16,E2M3,SATFINITE,UNPACK_B, BF16,E2M3,UNPACK_B, BF16,E3M2,RELU,SATFINITE,UNPACK_B, BF16,E3M2,RELU,UNPACK_B, BF16,E3M2,SATFINITE,UNPACK_B, BF16,E3M2,UNPACK_B, BF16,E4M3,RELU,SATFINITE,UNPACK_B, BF16,E4M3,RELU,UNPACK_B, BF16,E4M3,SATFINITE,UNPACK_B, BF16,E4M3,UNPACK_B, BF16,E5M2,RELU,SATFINITE,UNPACK_B, BF16,E5M2,RELU,UNPACK_B, BF16,E5M2,SATFINITE,UNPACK_B, BF16,E5M2,UNPACK_B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">F2FP_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">E4M3,F32,PACK_AB_MERGE_C,SATFINITE, E5M2,F32,PACK_AB_MERGE_C,SATFINITE, SATFINITE,E4M3,F32,PACK_AB_MERGE_C, SATFINITE,E5M2,F32,PACK_AB_MERGE_C</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">F2FP_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">E4M3,F32,PACK_AB_MERGE_C,SATFINITE, E5M2,F32,PACK_AB_MERGE_C,SATFINITE, SATFINITE,E4M3,F32,PACK_AB_MERGE_C, SATFINITE,E5M2,F32,PACK_AB_MERGE_C, E2M1,F32,PACK_AB_MERGE_C,RELU,RS,SATFINITE, E2M1,F32,PACK_AB_MERGE_C,RELU,SATFINITE, E2M1,F32,PACK_AB_MERGE_C,RS,SATFINITE, E2M1,F32,PACK_AB_MERGE_C,SATFINITE, SATFINITE,E2M1,F32,PACK_AB_MERGE_C, SATFINITE,E2M1,F32,PACK_AB_MERGE_C,RS, SATFINITE,RELU,E2M1,F32,PACK_AB_MERGE_C, SATFINITE,RELU,E2M1,F32,PACK_AB_MERGE_C,RS, E3M2,F32,PACK_AB_MERGE_C,RELU,RS,SATFINITE, E3M2,F32,PACK_AB_MERGE_C,RELU,SATFINITE, E3M2,F32,PACK_AB_MERGE_C,RS,SATFINITE, E3M2,F32,PACK_AB_MERGE_C,SATFINITE, SATFINITE,E3M2,F32,PACK_AB_MERGE_C, SATFINITE,E3M2,F32,PACK_AB_MERGE_C,RS, SATFINITE,RELU,E3M2,F32,PACK_AB_MERGE_C, SATFINITE,RELU,E3M2,F32,PACK_AB_MERGE_C,RS, F32,PACK_AB_MERGE_C,RELU,S2_6, F32,PACK_AB_MERGE_C,RELU,S2_6,SATFINITE, F32,PACK_AB_MERGE_C,S2_6, F32,PACK_AB_MERGE_C,S2_6,SATFINITE, RELU,S2_6,F32,PACK_AB_MERGE_C, S2_6,F32,PACK_AB_MERGE_C, SATFINITE,RELU,S2_6,F32,PACK_AB_MERGE_C, SATFINITE,S2_6,F32,PACK_AB_MERGE_C</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">F2FP_R_R_UR</td><td class="m">R_R_UR</td><td class="m">F16,F32,PACK_AB, BF16,F32,PACK_AB, RELU,F16,F32,PACK_AB, F16,F32,PACK_AB,RELU, RELU,BF16,F32,PACK_AB, BF16,F32,PACK_AB,RELU, SATFINITE,F16,F32,PACK_AB, F16,F32,PACK_AB,SATFINITE, SATFINITE,BF16,F32,PACK_AB, BF16,F32,PACK_AB,SATFINITE, SATFINITE,RELU,F16,F32,PACK_AB, F16,F32,PACK_AB,RELU,SATFINITE, SATFINITE,RELU,BF16,F32,PACK_AB, BF16,F32,PACK_AB,RELU,SATFINITE, F16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RZ, RELU,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RELU,RZ, RELU,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RELU,RZ, SATFINITE,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RZ,SATFINITE, SATFINITE,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RZ,SATFINITE, SATFINITE,RELU,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RELU,RZ,SATFINITE, SATFINITE,RELU,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RELU,RZ,SATFINITE</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>F2FP_R_R.E4M3,F16,UNPACK_B &mdash; 3 fields &middot; 155 samples</summary><div class="var">
@@ -80797,6 +80797,366 @@ Collapsed by default — click to expand.
 <div class="ab">and_base: <code>0x0000000004806000000000000000023e</code></div>
 <div class="ab">var_mask: <code>0x00002e00000000ff0000ffffff3f7000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E2M1,F32,PACK_AB_MERGE_C,RELU,RS,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004227800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E2M1,F32,PACK_AB_MERGE_C,RELU,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004207800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E2M1,F32,PACK_AB_MERGE_C,RS,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004227000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E2M1,F32,PACK_AB_MERGE_C,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004207000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,E2M1,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004207000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,E2M1,F32,PACK_AB_MERGE_C,RS &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004227000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,RELU,E2M1,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004207800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,RELU,E2M1,F32,PACK_AB_MERGE_C,RS &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004227800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e2m1-pack-merge-2026-11-08</code></div>
+<div class="ab">E2M1 production form; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E3M2/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E3M2,F32,PACK_AB_MERGE_C,RELU,RS,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004627800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E3M2,F32,PACK_AB_MERGE_C,RELU,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004607800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E3M2,F32,PACK_AB_MERGE_C,RS,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004627000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.E3M2,F32,PACK_AB_MERGE_C,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004607000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,E3M2,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004607000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,E3M2,F32,PACK_AB_MERGE_C,RS &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004627000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,RELU,E3M2,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004607800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,RELU,E3M2,F32,PACK_AB_MERGE_C,RS &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004627800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-e3m2-pack-merge-2026-11-08</code></div>
+<div class="ab">E3M2 reached by production-E2M1 type bit 86; RELU bit 75, RS bit 81 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; E2M1/S2_6/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.F32,PACK_AB_MERGE_C,RELU,S2_6 &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a07800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.F32,PACK_AB_MERGE_C,RELU,S2_6,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a05800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.F32,PACK_AB_MERGE_C,S2_6 &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a07000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.F32,PACK_AB_MERGE_C,S2_6,SATFINITE &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a05000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.RELU,S2_6,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a07800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.S2_6,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a07000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,RELU,S2_6,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a05800000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R_R.SATFINITE,S2_6,F32,PACK_AB_MERGE_C &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000004a05000000000000000023e</code></div>
+<div class="ab">var_mask: <code>0x1c000000000000ff000000fffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-f2fp-s2_6-pack-merge-2026-11-08</code></div>
+<div class="ab">S2_6 reached by controlled type[87:83]=6-&gt;20; RELU bit 75, SATFINITE enabled by zero at bit 77 and all three reuse fields independently measured on both SM103 and SM100. Only these four groups are claimed; RS81, E2M1/E3M2/text-inert and refused neighbours stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t4</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
 <tr><td>[71:64]</td><td>8</td><td>t4</td><td><code>reg</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
@@ -326389,9 +326749,9 @@ Collapsed by default — click to expand.
 <h3>LDSM</h3>
 <p class="desc">Load from shared memory in matrix layout (ldmatrix). Loads a matrix tile from shared memory into tensor core register layout. Used before HMMA/IMMA as an efficient alternative to individual LDS instructions.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">LDSM_R_ARI</td><td class="m">R_ARI</td><td class="m">16,2,M88, 16,4,M88, 16,M88, 16,MT88, 16,2,MT88, 16,4,MT88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,2,M832, 16,4,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">LDSM_R_ARURI</td><td class="m">R_ARURI</td><td class="m">16,4,M88, 16,4,MT88, 16,M88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616, 16,2,M88, 16,MT88, 16,2,MT88, 16,2,M832, 16,4,M832</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">LDSM_R_AURI</td><td class="m">R_AURI</td><td class="m">16,M88, 16,2,M88, 16,4,M88, 16,MT88, 16,2,MT88, 16,4,MT88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616, 16,2,M832, 16,4,M832</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDSM_R_ARI</td><td class="m">R_ARI</td><td class="m">16,2,M88, 16,4,M88, 16,M88, 16,MT88, 16,2,MT88, 16,4,MT88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,2,M832, 16,4,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616, 2,M816,U4x16P64TO8, MT1616,U4x16P64TO8, 2,M816,U6x16P32TO8, 4,M816,U4x16P64TO8, 4,M816,U6x16P32TO8, M816,U4x16P64TO8, M816,U6x16P32TO8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDSM_R_ARURI</td><td class="m">R_ARURI</td><td class="m">16,4,M88, 16,4,MT88, 16,M88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616, 16,2,M88, 16,MT88, 16,2,MT88, 16,2,M832, 16,4,M832, 2,M816,U4x16P64TO8, MT1616,U4x16P64TO8, 2,M816,U6x16P32TO8, 4,M816,U4x16P64TO8, 4,M816,U6x16P32TO8, M816,U4x16P64TO8, M816,U6x16P32TO8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">LDSM_R_AURI</td><td class="m">R_AURI</td><td class="m">16,M88, 16,2,M88, 16,4,M88, 16,MT88, 16,2,MT88, 16,4,MT88, 16,M816, 16,2,M816, 16,4,M816, 16,M832, 16,MT1616, 16,2,MT1616, 16,4,MT1616, 16,2,M832, 16,4,M832, 2,M816,U4x16P64TO8, 2,M816,U6x16P32TO8, MT1616,U4x16P64TO8, MT1616,U6x16P32TO8, 4,M816,U4x16P64TO8, 4,M816,U6x16P32TO8, M816,U4x16P64TO8, M816,U6x16P32TO8</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>LDSM_R_ARI.16,2,M88 &mdash; 4 fields &middot; 48 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x0000000000000100000000000000083b</code></div>
@@ -326552,6 +326912,83 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0xfce000000000000f80000bffc0000</code></div>
 <div class="ab">measured: <code>bug429-2026-09-09</code></div>
 <div class="ab">BUG-429: LDSM plain-ARI enum x count closure (arb429 63 probes, nvdisasm 13.3.73 raw -b x4 AGREE EVERY/DIVERGENT=0; ride = arb426 rA/rB 48-probe census re-probed with machine parity). Donor = frame-own 16,M88 verbatim (fields deep-copied), and_base |= measured enum [80:78) + count bits (.2=b72/.4=b73), vm verbatim, count=None. INVALID3/5/6/7 loud families stay UNTOUCHED.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.2,M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000a900000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.MT1616,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000012800000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.2,M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000b100000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.4,M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000aa00000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.4,M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000b200000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000a800000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARI.M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000000b000000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffff00fffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
@@ -326738,6 +327175,90 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
+<details><summary>LDSM_R_ARURI.2,M816,U4x16P64TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800a900000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.MT1616,U4x16P64TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008012800000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.2,M816,U6x16P32TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b100000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.4,M816,U4x16P64TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800aa00000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.4,M816,U6x16P32TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b200000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.M816,U4x16P64TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800a800000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_ARURI.M816,U6x16P32TO8 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b000000000000000083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000fffffffffffff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>sub_r0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
 <details><summary>LDSM_R_AURI.16,M88 &mdash; 4 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x800000000000000ff00083b</code></div>
 <div class="ab">var_mask: <code>0x1fffe00000000000000000000000000</code></div>
@@ -326897,6 +327418,94 @@ Collapsed by default — click to expand.
 <div class="ab">var_mask: <code>0x1fffe00000000000000000000000000</code></div>
 <div class="ab">measured: <code>bug426-2026-09-09</code></div>
 <div class="ab">BUG-426: LDSM M832 count closure (.2=b72/.4=b73) on the shared-bracket frames (arb426 66 probes + arb424 parity xchk, nvdisasm 13.3.73 raw -b x4 AGREE EVERY/DIVERGENT=0). Donor = frame-own 16,M832 verbatim (fields deep-copied), and_base |= measured count delta, vm verbatim, count=None. INVALID3/INVALID5/6/7 loud glyphs stay unclaimed; 429 ARI enum/count census NOT grafted (registration only); 423-era singles UNTOUCHED.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.2,M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800a90000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.2,M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b10000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.MT1616,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801280000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.MT1616,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000801300000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>hidden-b300-ldsm-unpack-2026-11-07</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. Compressed-matrix LDSM type/shape byte and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.4,M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800aa0000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.4,M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b20000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.M816,U4x16P64TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800a80000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>LDSM_R_AURI.M816,U6x16P32TO8 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800b00000000000ff00083b</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffff00fff000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-ldsm-m816-counts-2026-11-08</code></div>
+<div class="ab">SM103/SM100 full-word nvdisasm lattice. LDSM M816 type/count bits 72..80 and three measured addressing classes only. Guard, destination, R/UR and immediate fields are independent arithmetic operands, not matrix-layout semantics. Opcode siblings, invalid/unnamed type bytes and unmeasured fixed bits remain outside these mod_groups. Schedule/reuse probes are kept separate. No execution or silicon semantic claim.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t2</td><td><code>sub_imm1</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>sub_ur0</code></td></tr>
@@ -446325,7 +446934,8 @@ Collapsed by default — click to expand.
 <h3>STSM</h3>
 <p class="desc">Store to matrix-shared targets (structured shared-memory store family).</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
-<tr><td class="m">STSM_ARI_R</td><td class="m">ARI_R</td><td class="m">16,4,M88, 16,M88, 16,2,M88, 16,MT88, 16,MT168, 16,2,MT88, 16,2,MT168, 16,4,MT88, 16,4,MT168</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">STSM_ARI_R</td><td class="m">ARI_R</td><td class="m">16,4,M88, 16,M88, 16,2,M88, 16,MT88, 16,MT168, 16,2,MT88, 16,2,MT168, 16,4,MT88, 16,4,MT168, 2,8,MT168, 4,8,MT168, 8,MT168</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">STSM_ARURI_R</td><td class="m">ARURI_R</td><td class="m">8,MT168, 2,8,MT168, 4,8,MT168</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
 <details><summary>STSM_ARI_R.16,4,M88 &mdash; 4 fields &middot; 1 samples</summary><div class="var">
 <div class="ab">and_base: <code>0x00000000000002000000000000000844</code></div>
@@ -446422,6 +447032,70 @@ Collapsed by default — click to expand.
 <div class="ab">BUG-438 G1/G2: STSM.16 MT88/MT168 closure + b80 alias relax. Vendor law arb438 27p + arb433 C-set x4: MT88(e1)/MT168(e2) counts plain/.2/.4 legal x4; b80 alias e4/e5/e6 == e0/e1/e2 x4; INVALID3 e3/e7 + count .6 loud HOLE doctrine (standing). Donor own M88 rows; ab |= 1&lt;&lt;78 (MT88)/1&lt;&lt;79 (MT168); vm |= 1&lt;&lt;80 on all 9 mgs; count=None.</div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>STSM_ARI_R.2,8,MT168 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000089000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffffff00f000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-stsm8-mt168-2026-11-08</code></div>
+<div class="ab">nvdisasm 13.3 V13.3.73 raw SM103/SM100: guard[15:12], base R[31:24], signed offset[63:40], source R[39:32], bit75=.8, shape[79:78]=MT168; count[73:72]=plain/.2/.4. INVALID3 count, other width/shape codes and unmeasured/inert neighbor bits stay outside the row. This is vendor-text and exact encoding evidence, not silicon execution or stmatrix semantics. The UR window stays fixed at the no-index value.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>STSM_ARI_R.4,8,MT168 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000000008a000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffffff00f000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-stsm8-mt168-2026-11-08</code></div>
+<div class="ab">nvdisasm 13.3 V13.3.73 raw SM103/SM100: guard[15:12], base R[31:24], signed offset[63:40], source R[39:32], bit75=.8, shape[79:78]=MT168; count[73:72]=plain/.2/.4. INVALID3 count, other width/shape codes and unmeasured/inert neighbor bits stay outside the row. This is vendor-text and exact encoding evidence, not silicon execution or stmatrix semantics. The UR window stays fixed at the no-index value.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>STSM_ARI_R.8,MT168 &mdash; 4 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000000088000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000ffffffffff00f000</code></div>
+<div class="ab">measured: <code>rows-hidden-b300-stsm8-mt168-2026-11-08</code></div>
+<div class="ab">nvdisasm 13.3 V13.3.73 raw SM103/SM100: guard[15:12], base R[31:24], signed offset[63:40], source R[39:32], bit75=.8, shape[79:78]=MT168; count[73:72]=plain/.2/.4. INVALID3 count, other width/shape codes and unmeasured/inert neighbor bits stay outside the row. This is vendor-text and exact encoding evidence, not silicon execution or stmatrix semantics. The UR window stays fixed at the no-index value.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm1</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<div class="ab keyprov">measured: <code>rows-hidden-b300-stsm8-mt168-2026-11-08</code> (every variant of STSM_ARURI_R) &mdash; nvdisasm 13.3 V13.3.73 raw SM103/SM100: guard[15:12], base R[31:24], signed offset[63:40], source R[39:32], bit75=.8, shape[79:78]=MT168; count[73:72]=plain/.2/.4. INVALID3 count, other width/shape codes and unmeasured/inert neighbor bits stay outside the row. This is vendor-text and exact encoding evidence, not silicon execution or stmatrix semantics. Explicit UR index[71:64] in [R+UR(+imm)].</div>
+<details><summary>STSM_ARURI_R.8,MT168 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080088000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>STSM_ARURI_R.2,8,MT168 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080089000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>STSM_ARURI_R.4,8,MT168 &mdash; 5 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000008008a000000000000000844</code></div>
+<div class="ab">var_mask: <code>0x00000000000000ffffffffffff00f000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[71:64]</td><td>8</td><td>t1</td><td><code>sub_ur1</code></td></tr>
+<tr><td>[63:40]</td><td>24</td><td>t1</td><td><code>sub_imm2</code></td></tr>
 <tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t1</td><td><code>sub_r0</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
@@ -450953,12 +451627,14 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[63:32]</td><td>32</td><td>t1</td><td><code>imm</code></td></tr>
 </table></div></details>
-<details><summary>USETMAXREG_UP_II.CTAPOOL,TRY_ALLOC &mdash; 2 fields &middot; 3 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x0000000008000600000000c0000079c8</code></div>
-<div class="ab">var_mask: <code>0x00004000000000000000002800000000</code></div>
+<div class="ab keyprov">measured: <code>rows-hidden-b300-usetmaxreg-try-alloc-2026-11-08</code> (every variant of USETMAXREG_UP_II) &mdash; Measured on SM103/SM100 vendor text: guard4@12 (uniform), UP destination3@81, full unsigned immediate10@32. Other text-inert bits and alternative opcodes stay fail-closed. Text/encoding evidence only; no execution or regalloc semantic claim.</div>
+<details><summary>USETMAXREG_UP_II.CTAPOOL,TRY_ALLOC &mdash; 3 fields &middot; 3 samples</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000800060000000000000009c8</code></div>
+<div class="ab">var_mask: <code>0x00000000000e0000000003ff0000f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
-<tr><td>[63:32]</td><td>32</td><td>t2</td><td><code>imm</code></td></tr>
-<tr><td>[18:15]</td><td>4</td><td>t1</td><td><code>pred</code></td></tr>
+<tr><td>[83:81]</td><td>3</td><td>t1</td><td><code>upred</code></td></tr>
+<tr><td>[41:32]</td><td>10</td><td>t2</td><td><code>imm</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
 </div>
 <div class="ib" data-op="USHF" id="USHF">
@@ -452773,8 +453449,8 @@ Collapsed by default — click to expand.
 </table></div></details>
 </div>
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm103a.json (1419878 2026-11-07), SHA-256 b1e59065e5a2b450b0f413dbee5e7acc4ae68fecc2e1383415986955676111ff<br>
-533 instruction forms &middot; 37366 encoding variants &middot; 37027 with a measurement tag &middot; 37 pipeline classes<br>
+SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm103a.json (5629154 2026-11-10), SHA-256 f402ffb672fc0eb8cc1648b99c3825bdd052476f9c7e75f7d57c208472d020f3<br>
+534 instruction forms &middot; 37418 encoding variants &middot; 37080 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
