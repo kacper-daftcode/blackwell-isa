@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 4 of the B300 lane's candidate forms (42 review refs: 1 543 measured rows added per table, 19 harvest rows re-measured — rows without `_src` 357 → 338); the scaled F2FP unpack (opcode 0x63e) on all four tables
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 5 of the B300 lane's candidate forms (53 review refs: 1 649 measured rows added per table, 21 harvest rows re-measured — rows without `_src` 357 → 336); the scaled F2FP unpack (opcode 0x63e) on all four tables; `FHADD` in the operand roles
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -106,6 +106,46 @@ text-inert words whose text assembles to a different word), where a measured row
 for every word): 35 100 word / target pairs — 30 808 texts identical, 4 290 without text on both, and one word (two pairs) that 13.1 names
 `F2FP.SATFINITE.E0M3.F32.PACK_AB_MERGE_C` where 13.3 prints no line (unclaimed either way). `SM103A_ISA_REFERENCE.html` /
 `SM100A_ISA_REFERENCE.html` regenerated at `5629154`.
+
+`sm103a.json` / `sm100a.json` `bb1bc1f` … `3a30f62` (twelve commits; the rows of `sm120.json` / `sm121a.json` untouched): **batch 5 — eleven
+review candidates whose cubit side changes one or two lines of the engine** (a modifier rank, an unsigned immediate, a bank token, one
+decoder arm), each taken as its row delta onto the tip (the candidate's author, date and message kept). sm103a 534 → 545 forms, 37 418 →
+37 524 rows; sm100a 533 → 544, 37 412 → 37 518; **rows without `_src` 338 → 336** (the plain `STAS [Ra.64+imm], Rs` row and
+`VIMNMX.S16x2 Rd, Pd, Pe, Ra, Rb, Pc` re-measured). New rows (106 per table): **`FHFMA.BF16[.RM|.RP|.RZ][.SAT] Rd, Ra, Rb, Rc`** — the
+mixed bf16 / f32 fused multiply-add, with `.H1` on the two bf16 sources and sign / abs on all three (8 rows, new key `FHFMA_R_R_R_R`;
+`bb1bc1f` ← fhfma-bf16); **`HMNMX2[.BF16_V2][.FTZ][.NAN][.XORSIGN]`** in the register form `Rd, Ra, Rb, Pc` and the two-immediate form
+`Rd, Ra, fimm, fimm, Pc` (16 + 16 rows, two new keys; `2e3ab9c` ← hmnmx2); **`STAS`, `STAS.64`, `STAS.128`** on `[Ra.64+imm24]` and on
+the new uniform-indexed key `STAS_ARURI_R` `[Ra.64+URb+imm24]` (5 rows + the plain one rewritten; `ef453b7` ← stas64 — its tag counts
+six rows, the candidate declared five); **the `SYNCS.ARRIVE.TRANS64.RED[.OPTOUT]` A-selectors `A0T1` / `A0TR` / `A0TX` / `ART0`** on
+`SYNCS_R_ARURI_R` and `SYNCS_R_AURI_R` (15 rows; `fd83c83` ← syncs-aenum); **`FMNMX[.FTZ][.NAN][.XORSIGN].IS_A Rd, Pd, Ra, {Rb | URb |
+fimm}, Pc`** — the float min / max with its predicate output (24 rows, three new keys; `1cb0a0d` ← fmnmx-is-a-schedule, which supersedes
+the candidate fmnmx-is-a: the same 24 rows without that candidate's `claim_forbid` lists on the scheduler's bits [103:96], which rejected
+real scheduled words; every word of the earlier fixture is in the later one); **`LDGMC.E.{ADD.F32 | ADD.F32x2 | ADD.F32x4 | HPADD.F16x2 |
+HPADD.F16x8 | HPADD.BF16x2 | HPADD.BF16x4 | HPADD.BF16x8}.RN.STRONG.SYS Rd, [Ra.64+URb+imm]`** (8 rows, new key `LDGMC_R_ARURI`;
+`6805715` ← ldgmc-production); **`VIMNMX.{S16x2 | U16x2}[.RELU]`** on the register and the uniform form (7 rows + one re-measured;
+`7592109` ← vimnmx-packed16); **`USGXT URd, URa, imm32`** and **`SGXT.U32 Rd, Ra, URb`** (one row each, two new keys; `20d6184` ←
+usgxt-production, `2ac5b5d` ← sgxt-u32-production); **`VHMNMX[.BF16_V2][.NAN]`** with the half selectors `.H0_H0` / `.H1_H1` on each
+of the three sources (3 rows; the plain row of batch 2 gets the three selector fields; `3d19364` ← the second commit of
+vhmnmx-bf16-adoption, a candidate stacked on batch 2's vhmnmx-plain); **`UP2UR.B3 URd, UPR, URs, imm32`** and **`UR2UP UPR, URs.B3`**
+(2 rows, new key `UR2UP_II_UR`; `ee6234a` ← up2ur-ur2up-production). **Brought to the form every other measured row has (`3a30f62`, the
+gatekeeper's; what the rows claim gets narrower, no measurement changes):** the 8 `FHFMA` rows and the 32 `HMNMX2` rows carried every
+text-inert bit of their lattice as a one-bit field without an extraction (34 bits per `FHFMA` row, 37 per register-form and 17 per
+immediate-form `HMNMX2` row) — the bit was in the mask, a word with it set decoded to the text of the word without it, and that text
+assembles to the other word. Those fields are gone and the mask is the remaining fields: the rows fail closed on a text-inert bit, as
+every measured row of these tables does (none of the 389 + 629 production witnesses of the two fixtures has such a bit set; 472 and 180
+probe words per fixture are refused now). The `USGXT` row's `and_base` carried the native word's guard under the guard field — cleared.
+**Gatekeeper checks:** the twenty fixtures of the eleven candidates named again with nvdisasm 13.1 on a second host (`-b SM103` and
+`-b SM100` for every word): 121 498 word / target pairs — 118 244 texts identical, 3 254 without text on both, none different. On the 109
+rows added or changed per table the mask is the fields' bits, the constant bits are clear under it and carry no control bit; `claim_forbid`
+entries outside the mask are of the two kinds the tables carry since 2026-11-05 — a singleton on a fixed bit (218) and the refusal of a
+reuse flag the form does not have (77).
+
+`sm120.json` / `sm103a.json` / `sm100a.json` `018a927`: **`operand_roles.base_ops.FHADD` — class `alu`** (dest first, two register
+sources). `FHADD[.BF16] Rd, Ra[.H1], Rb`, the mixed-precision accumulate ptxas emits for bf16 → f32 sums, had its measured row
+(`FHADD_R_R_R`, 2026-11-07) but no role entry, so the passes that read operand directions (cubit's list scheduler, register allocator,
+`stallfix`, register liveness) stopped on it. Reported from the production Triton top-k-sum kernel of the MoE (20 of its 176
+instructions; session BQ-1). No row changes; `sm121a.json` carries no `operand_roles` section. `SM120_ISA_REFERENCE.html`,
+`SM103A_ISA_REFERENCE.html` and `SM100A_ISA_REFERENCE.html` regenerated at `018a927`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
