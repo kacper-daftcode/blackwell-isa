@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batch 1 of the B300 lane's candidate forms (19 measured rows per table)
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -11,6 +11,25 @@ register reallocation): the uniform predicate guard [15:12], the register count 
 byte for byte). The `DEALLOC` row had no guard field and the `TRY_ALLOC` row was a native-capture row whose mask claimed the text-inert bit 63;
 tag `usetmaxreg-sm120-2026-11-08`, cubit test `tests/sm120_usetmaxreg.rs`. Rows unchanged at 38 848; rows without `_src` unchanged (7).
 `SM120_ISA_REFERENCE.html` regenerated at `5043aee`.
+
+`sm103a.json` / `sm100a.json` `ad00511` … `0f20ae6` (nine commits; `sm120.json` / `sm121a.json` untouched): **the first ten review candidates of
+the B300 measurement lane** (`refs/heads/hidden-b300/*`, published for review on 2026-11-09 — one-commit pairs with cubit, each measuring one
+production form of sm_103a / sm_100a with nvdisasm 13.3 as complete 128-bit words: production witnesses from the lane's corpus surveys, guard /
+byte / immediate sweeps, field crosses, negatives and adjacent forms). Taken by the gatekeeper as each candidate's row delta onto the tip
+(sm103a 514 → 517 forms, 35 875 → 35 894 rows; sm100a 513 → 516, 35 869 → 35 888; rows without `_src` unchanged at 357 / 357):
+`ATOMS.MAX Rd, [Ra+URb+imm], Rc` (new key `ATOMS_R_ARURI_R`, `ad00511`); `ATOMS.MIN Rd, [URa+imm], Rb` (`ATOMS_R_AURI_R`, `6327e79`);
+`UMEMSETS.64 [URa+imm], URZ, URb` (new key `UMEMSETS_AURI_UR_UR`, `7e98f67` — the middle operand is the constant `URZ`: its field reads bits the
+row fixes at 0xff); `F2F.BF16.F32 Rd, URs` with the four rounding modes × `FTZ` and the source's sign forms (eight groups of `F2F_R_UR`,
+`86c0c7d` — the row was proposed twice from the same base; the later one, with the fail-closed list over the text-inert bits, is the table's);
+`F2FP.BF16.E8.UNPACK_B Rd, Rs` (`F2FP_R_R`, `5c67615`); `UBLKRED.G.S.ADD.{F16,BF16,F32,F64}.RN [URa], [URb], URc` (new key
+`UBLKRED_AURI_AURI_UR`, `88f5a15`); `STL.U16` / `STL.U8 [Ra+imm], Rb` (`STL_ARI_R`, `23e7a41` / `34b5a9b`); `LDG.E.S16 Rd, desc[URa][Rb.64+imm]`
+(`LDG_R_dARI`, `0f20ae6`). Each row carries its own tag (`rows-<form>-production-2026-11-09`, `rows-f2f-bf16-f32-ur-round-ftz-2026-11-09`) and
+names cubit's test `tests/hidden_b300_<name>.rs`; the masks are written with the `0x` prefix like every other row. The lane's evidence is
+nvdisasm text and CPU round trips: no execution claim is made for these forms. **Gatekeeper check:** all 49 098 words of the twenty fixtures
+named again with nvdisasm 13.1 on a second host (`-b SM103` / `-b SM100`) — every text identical, every negative without text on both; cubit's
+suite, the B300 publish corpus and the whole-census parity are in cubit's CHANGELOG. `SM103A_ISA_REFERENCE.html` / `SM100A_ISA_REFERENCE.html`
+regenerated at `0f20ae6`. The `tool` named by these tags (`pubwave/hidden-b300/<name>/prepare.py`) is the lane's probe on its own host, not a
+file of cubit: the fixtures in cubit are the reproducible evidence.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
