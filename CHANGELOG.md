@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 and 2 of the B300 lane's candidate forms (33 review refs: 1 471 measured rows added per table, 18 harvest rows re-measured — rows without `_src` 357 → 339)
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 3 of the B300 lane's candidate forms (35 review refs: 1 491 measured rows added per table, 18 harvest rows re-measured — rows without `_src` 357 → 339); the scaled F2FP unpack (opcode 0x63e) on all four tables
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -55,6 +55,31 @@ output always carries the suffix, so no corpus word changes its text. Two rows c
 lane's choice for its own tables). **Gatekeeper check:** all 65 676 words of the 46 fixtures named again with nvdisasm 13.1 on a second
 host — 64 426 texts identical, 1 250 without text on both, none different. `SM103A_ISA_REFERENCE.html` / `SM100A_ISA_REFERENCE.html`
 regenerated at `c3b2d5e`.
+
+`sm103a.json` / `sm100a.json` `1419878`, `sm120.json` / `sm121a.json` `05068b6`: **the scaled F2FP unpack — `F2FP.BF16.<E2M1|E2M3|E3M2|E4M3|E5M2>
+[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.<sel>` at opcode 0x63e, twenty rows on `F2FP_R_R_R` of each table** (the unpack of a low-precision
+pair to bf16 with an E8M0 block scale taken from a register; the two-operand unpack is 0x23e). Fields: guard [15:12], `Rd` [23:16], `Rs`
+[39:32], `Rscale` [71:64], the scale selector [26:24] printed on `Rscale` (`.H0`, `.H1`, `.B0`..`.B3`; 6 / 7 print `INVALID6` / `INVALID7` and
+are excluded by `claim_forbid`), the source half at bit 88 printed as `Rs.H1` — for E2M1 the source byte in bits 88 / 72, printed as `Rs.B1` /
+`.B2` / `.B3` —, RELU bit 75, SATFINITE bit 77, reuse 123 / 124. **Batch 3 of the review candidates (sm103a / sm100a, `1419878`):**
+`hidden-b300/f2fp-unpackb` — five source types × plain / RELU / SATFINITE / both, measured by the B300 lane with nvdisasm 13.3 as 2 396
+complete words per target (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte
+selectors, the whole type window), tag `f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07`; `hidden-b300/f2fp-e4m3-source-h1` measured the plain
+E4M3 row a second time to the same fields — the table keeps the row once, under the first tag, and cubit keeps the second fixture as a
+witness. sm103a 37 346 → 37 366 rows, sm100a 37 340 → 37 360; rows without `_src` unchanged (339). **The same rows on `sm120.json` /
+`sm121a.json` (`05068b6`), measured, not copied:** the 2 406 distinct words of the lane's two lattices named again with nvdisasm 13.1 on
+`-b SM120` and `-b SM121`, one word per call — identical on the two targets and identical to `-b SM103` / `-b SM100`: 328 named (212 the
+rows' own words, 84 text-inert or unclaimed-type neighbours, 32 control-word probes), 914 printed with a vendor glyph, 1 164 rejected;
+against the lane's nvdisasm 13.3 records every text and every rejection agrees, except 128 glyph words of the type window on which 13.3
+exits 0 without an instruction line. Tags `f2fp-unpackb-scaled-sm120-2026-11-10` / `f2fp-unpackb-scaled-sm121-2026-11-10` (the law once in
+the tag's note); sm120 38 848 → 38 868 rows (7 without `_src`, unchanged), sm121a 49 824 → 49 844 (811). **Execution:** on sm_120 silicon
+`F2FP.BF16.E4M3.UNPACK_B Rd, Rs, Rscale.B0` / `.H0` and the E2M1 twin equal the five-instruction dequantisation on all 65 536 byte pairs ×
+256 scale bytes, both halves (the scheduler session's probe of 2026-11-10); the candidate cites a B300 silicon campaign that found the conversion
+bit-exact for its types, selectors and modifiers (not re-run here); the other types and selectors on sm_120 are text-measured only, and
+nothing was executed on GB10. cubit needs two extractions for these rows
+(`f2fp_scale_sel`, `f2fp_ra_b1` / `f2fp_ra_b2`); tests `tests/hidden_b300_f2fp_unpackb.rs`, `tests/hidden_b300_f2fp_e4m3_source_h1.rs`,
+`tests/sm120_f2fp_unpackb_scaled.rs`. The immediate-scale form `… Rd, Rs, FIMM.<sel>` (opcode 0xe3e) has no row yet on any table. The four
+reference pages regenerated at `05068b6`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 

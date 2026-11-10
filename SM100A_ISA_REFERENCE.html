@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM100a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B200) &mdash; Unofficial Reference<br>219 opcodes &middot; 532 instruction forms &middot; 37340 encoding variants &middot; 513 with scheduling data &middot; 37001 variants with a measurement tag<br><span style="font-size:0.88em">Sources: canonical SM103a encoding layer (byte-identical on all 119 shared tcgen05 probe pairs), offline decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus; no B200 re-validation &mdash; scheduling and pipeline sections are inherited from SM103a and unvalidated for B200 timing</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm100a.json</code> (c3b2d5e 2026-11-09), SHA-256 b43041fd3324d2d1&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B200) &mdash; Unofficial Reference<br>219 opcodes &middot; 532 instruction forms &middot; 37360 encoding variants &middot; 513 with scheduling data &middot; 37021 variants with a measurement tag<br><span style="font-size:0.88em">Sources: canonical SM103a encoding layer (byte-identical on all 119 shared tcgen05 probe pairs), offline decoder/encoder replay on an archived 20.0M-instruction sm_100 corpus; no B200 re-validation &mdash; scheduling and pipeline sections are inherited from SM103a and unvalidated for B200 timing</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm100a.json</code> (1419878 2026-11-07), SHA-256 1910458efaf0b051&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -80377,7 +80377,7 @@ Collapsed by default — click to expand.
 <p class="desc">Float-to-float precision conversion with packing. Converts FP32 inputs to FP16, BF16, or FP8 (E4M3/E5M2) format. <code>.PACK_AB</code> packs two FP32 values into one FP16 register pair. <code>.MERGE_C</code> blends with an existing packed value. Used in quantization pipelines before QMMA.</p>
 <table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
 <tr><td class="m">F2FP_R_R</td><td class="m">R_R</td><td class="m">E4M3,F16,UNPACK_B, E5M2,F16,UNPACK_B, F32,PACK_B,TF32, F16,E4M3,UNPACK_B, F16,E5M2,UNPACK_B, TF32,F32,PACK_B, BF16,E8,UNPACK_B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
-<tr><td class="m">F2FP_R_R_R</td><td class="m">R_R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,PACK_AB, F16,F32,PACK_AB,RZ</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
+<tr><td class="m">F2FP_R_R_R</td><td class="m">R_R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,PACK_AB, F16,F32,PACK_AB,RZ, BF16,E2M1,RELU,SATFINITE,UNPACK_B, BF16,E2M1,RELU,UNPACK_B, BF16,E2M1,SATFINITE,UNPACK_B, BF16,E2M1,UNPACK_B, BF16,E2M3,RELU,SATFINITE,UNPACK_B, BF16,E2M3,RELU,UNPACK_B, BF16,E2M3,SATFINITE,UNPACK_B, BF16,E2M3,UNPACK_B, BF16,E3M2,RELU,SATFINITE,UNPACK_B, BF16,E3M2,RELU,UNPACK_B, BF16,E3M2,SATFINITE,UNPACK_B, BF16,E3M2,UNPACK_B, BF16,E4M3,RELU,SATFINITE,UNPACK_B, BF16,E4M3,RELU,UNPACK_B, BF16,E4M3,SATFINITE,UNPACK_B, BF16,E4M3,UNPACK_B, BF16,E5M2,RELU,SATFINITE,UNPACK_B, BF16,E5M2,RELU,UNPACK_B, BF16,E5M2,SATFINITE,UNPACK_B, BF16,E5M2,UNPACK_B</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">F2FP_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">E4M3,F32,PACK_AB_MERGE_C,SATFINITE, E5M2,F32,PACK_AB_MERGE_C,SATFINITE, SATFINITE,E4M3,F32,PACK_AB_MERGE_C, SATFINITE,E5M2,F32,PACK_AB_MERGE_C</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">F2FP_R_R_UR</td><td class="m">R_R_UR</td><td class="m">F16,F32,PACK_AB, BF16,F32,PACK_AB, RELU,F16,F32,PACK_AB, F16,F32,PACK_AB,RELU, RELU,BF16,F32,PACK_AB, BF16,F32,PACK_AB,RELU, SATFINITE,F16,F32,PACK_AB, F16,F32,PACK_AB,SATFINITE, SATFINITE,BF16,F32,PACK_AB, BF16,F32,PACK_AB,SATFINITE, SATFINITE,RELU,F16,F32,PACK_AB, F16,F32,PACK_AB,RELU,SATFINITE, SATFINITE,RELU,BF16,F32,PACK_AB, BF16,F32,PACK_AB,RELU,SATFINITE, F16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RZ, RELU,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RELU,RZ, RELU,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RELU,RZ, SATFINITE,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RZ,SATFINITE, SATFINITE,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RZ,SATFINITE, SATFINITE,RELU,F16,F32,PACK_AB,RZ, F16,F32,PACK_AB,RELU,RZ,SATFINITE, SATFINITE,RELU,BF16,F32,PACK_AB,RZ, BF16,F32,PACK_AB,RELU,RZ,SATFINITE</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
@@ -80459,6 +80459,310 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,RELU,SATFINITE,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043a00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,RELU,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041a00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,SATFINITE,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043200000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041200000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-mxfp6-mxfp8-silicon-2026-11-07</code></div>
+<div class="ab">0x63e scaled UNPACK_B: vendor text plus H B300 bit-exact E8M0 dequant semantics. Full types and source selectors measured SM103/SM100; selector INVALID6/7 and every other type/destination are unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -452362,8 +452666,8 @@ The table is derived, and validated offline, as follows:</p>
 per-class deltas against the 2026-08-20 baseline are enumerated in the O2 validation report.</p>
 
 <div class="foot">
-SM100a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm100a.json (c3b2d5e 2026-11-09), SHA-256 b43041fd3324d2d1e79ac364fd833269a8a57cc5061ddaa0dc2e116231f18ad7<br>
-532 instruction forms &middot; 37340 encoding variants &middot; 37001 with a measurement tag &middot; 37 pipeline classes<br>
+SM100a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm100a.json (1419878 2026-11-07), SHA-256 1910458efaf0b0518f9b69ba7f2a672a29768fb6e0483c926fb329dbd94ebb6b<br>
+532 instruction forms &middot; 37360 encoding variants &middot; 37021 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

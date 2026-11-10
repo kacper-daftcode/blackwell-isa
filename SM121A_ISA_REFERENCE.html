@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM121A Instruction Set Architecture</h1>
-<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 1624 encoding keys &middot; 49824 encoding variants &middot; 1554 with scheduling data &middot; 49013 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-09 from <code>sm121a.json</code> (daac080 2026-11-09), SHA-256 1458164e46fd6405&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA GB10 &mdash; Grace-Blackwell superchip (DGX Spark, unified memory) &mdash; Unofficial Reference<br>154 opcodes &middot; 1624 encoding keys &middot; 49844 encoding variants &middot; 1554 with scheduling data &middot; 49033 variants with a measurement tag<br><span style="font-size:0.88em">Sources: 1.3M-instruction synthetic/produced corpus (nvcc 13.0.88, -arch=sm_121a), paired differential decoding vs SM120 (648,992 raw instructions, 0 differences), hardware validation on DGX Spark (GB10, driver 580.142)</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm121a.json</code> (05068b6 2026-11-10), SHA-256 5532ac211b7b89ea&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -225051,7 +225051,7 @@ Collapsed by default — click to expand.
 <tr><td class="m">F2FP.SATFINITE.F16.F32.PACK_AB_R_R_R</td><td class="m">AB_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP.SATFINITE.RELU.F16.F32.PACK_AB_R_R_R</td><td class="m">AB_R_R_R</td><td class="m">&amp;mdash;</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP_R_R</td><td class="m">R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,PACK_AB, F32,PACK_B,TF32, TF32,F32,PACK_B</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
-<tr><td class="m">F2FP_R_R_R</td><td class="m">R_R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,MERGE_C, F16,F32,PACK_AB, F16,F32,PACK_AB,RZ</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
+<tr><td class="m">F2FP_R_R_R</td><td class="m">R_R_R</td><td class="m">BF16,F32,PACK_AB, F16,F32,MERGE_C, F16,F32,PACK_AB, F16,F32,PACK_AB,RZ, BF16,E2M1,RELU,SATFINITE,UNPACK_B, BF16,E2M1,RELU,UNPACK_B, BF16,E2M1,SATFINITE,UNPACK_B, BF16,E2M1,UNPACK_B, BF16,E2M3,RELU,SATFINITE,UNPACK_B, BF16,E2M3,RELU,UNPACK_B, BF16,E2M3,SATFINITE,UNPACK_B, BF16,E2M3,UNPACK_B, BF16,E3M2,RELU,SATFINITE,UNPACK_B, BF16,E3M2,RELU,UNPACK_B, BF16,E3M2,SATFINITE,UNPACK_B, BF16,E3M2,UNPACK_B, BF16,E4M3,RELU,SATFINITE,UNPACK_B, BF16,E4M3,RELU,UNPACK_B, BF16,E4M3,SATFINITE,UNPACK_B, BF16,E4M3,UNPACK_B, BF16,E5M2,RELU,SATFINITE,UNPACK_B, BF16,E5M2,RELU,UNPACK_B, BF16,E5M2,SATFINITE,UNPACK_B, BF16,E5M2,UNPACK_B</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP_R_R_R_R</td><td class="m">R_R_R_R</td><td class="m">BF16,F32,PACK_AB, E4M3,F16,UNPACK_B, E4M3,F32,MERGE_C,PACK_AB,SATFINITE, E4M3,F32,PACK_AB_MERGE_C,SATFINITE, E5M2,F16,UNPACK_B, E5M2,F32,MERGE_C,PACK_AB,SATFINITE, E5M2,F32,PACK_AB_MERGE_C,SATFINITE, F16,F32,PACK_AB, F16,E4M3,UNPACK_B, F16,E5M2,UNPACK_B, SATFINITE,E4M3,F32,PACK_AB_MERGE_C, SATFINITE,E5M2,F32,PACK_AB_MERGE_C</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 <tr><td class="m">F2FP_R_R_UR</td><td class="m">R_R_UR</td><td class="m">BF16,F32,PACK_AB, F16,F32,PACK_AB</td><td>FP_ARITH</td><td><span class="lat-syn" title="Synthetic estimate — well-reasoned, not measured">4 ~</span></td></tr>
 </table>
@@ -225211,6 +225211,310 @@ Collapsed by default — click to expand.
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
 <tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,RELU,SATFINITE,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043a00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,RELU,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041a00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,SATFINITE,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043200000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M1,UNPACK_B &mdash; 9 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041200000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010001ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b2</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>f2fp_ra_b1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E2M3,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002043600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E3M2,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002041600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001e00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E4M3,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001600000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,RELU,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,RELU,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001c00000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,SATFINITE,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002003400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>F2FP_R_R_R.BF16,E5M2,UNPACK_B &mdash; 8 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x0000000002001400000000000000063e</code></div>
+<div class="ab">var_mask: <code>0x18000000010000ff000000ff07fff000</code></div>
+<div class="ab">measured: <code>f2fp-unpackb-scaled-sm121-2026-11-10</code></div>
+<div class="ab">F2FP.BF16.&lt;E2M1|E2M3|E3M2|E4M3|E5M2&gt;[.RELU][.SATFINITE].UNPACK_B Rd, Rs, Rscale.&lt;sel&gt; at opcode 0x63e (the unpack with an E8M0 block scale in a register; the 2-operand unpack is 0x23e): guard [15:12], Rd [23:16], Rs [39:32], Rscale [71:64], the scale selector [26:24] printed on Rscale (0..5 = H0, H1, B0, B1, B2, B3; 6 / 7 print INVALID6 / INVALID7 and are excluded), the source half [88] printed as Rs.H1 -- for E2M1 the source byte (bit 88, bit 72) printed as Rs.B1 / .B2 / .B3 --, RELU bit 75, SATFINITE bit 77, the source type in the window [89:72] as fixed bits of each row, reuse of Rs / Rscale 123 / 124. Measured with nvdisasm 13.1 (-b SM121): the 2 406 distinct complete words of the B300 measurement lane&#x27;s two lattices for these rows (the type / modifier / selector cross, single-bit flips, guard and register sweeps, the E2M1 source-byte selectors, the whole type window) are named identically on -b SM120, -b SM121, -b SM103 and -b SM100: 328 named -- 212 of them the rows&#x27; own words, 84 text-inert or unclaimed-type neighbours (E0M3, S2_6, the immediate-scale form at 0xe3e), 32 control-word probes --, 914 printed with a vendor glyph, 1 164 rejected; the rows claim the 212 and fail closed on the rest. Against the lane&#x27;s nvdisasm 13.3 records every text and every rejection is the same, except 128 glyph words of the type window on which 13.3 exits 0 without an instruction line. The rows are the lane&#x27;s sm103a rows, field for field. Execution: on sm_120 silicon F2FP.BF16.E4M3.UNPACK_B with the selectors B0 and H0, and its E2M1 twin, equal the five-instruction dequantisation on all 65 536 byte pairs x 256 scale bytes, both halves (the scheduler session&#x27;s probe of 2026-11-10); the other types and selectors are text-measured only, and nothing was executed on this target.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[123]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[88]</td><td>1</td><td>t2</td><td><code>opmod:H1</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[26:24]</td><td>3</td><td>t3</td><td><code>f2fp_scale_sel</code></td></tr>
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 <tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
@@ -592487,8 +592791,8 @@ unknowns are listed in the instruction table as <code>?</code>-marked partial fo
 </ul>
 
 <div class="foot">
-SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-09 from sm121a.json (daac080 2026-11-09), SHA-256 1458164e46fd6405c6582d4de75fc28b0b395ba6972e5cda76659a92235dfd8b<br>
-1624 encoding keys &middot; 49824 encoding variants &middot; 49013 with a measurement tag &middot; 37 pipeline classes<br>
+SM121A Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm121a.json (05068b6 2026-11-10), SHA-256 5532ac211b7b89eaf389af5006385bd39ad2cd7267841a982038a72441c377e0<br>
+1624 encoding keys &middot; 49844 encoding variants &middot; 49033 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>
