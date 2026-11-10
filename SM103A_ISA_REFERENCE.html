@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM103a Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>225 opcodes &middot; 545 instruction forms &middot; 37524 encoding variants &middot; 526 with scheduling data &middot; 37188 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm103a.json</code> (018a927 2026-11-10), SHA-256 5c93e44db366e67b&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell datacenter (B300 SXM6) &mdash; Unofficial Reference<br>229 opcodes &middot; 549 instruction forms &middot; 37530 encoding variants &middot; 530 with scheduling data &middot; 37194 variants with a measurement tag<br><span style="font-size:0.88em">Sources: nvdisasm pairing on a 31.8M-instruction vendor corpus, tcgen05 PTX probe corpus (CPU-exact encoding pairs), hardware validation on B300</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm103a.json</code> (1fb517a 2026-11-07), SHA-256 d45f1c65b5bb61d8&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -303,7 +303,7 @@ LDC   Rd, c[bank][Ra + imm]       # Constant: bank select + GPR base + immediate
 <span class="lat-syn">N ~</span> = synthetic estimate (well-sourced but not measured) &nbsp;&middot;&nbsp;
 <span class="lat-ptx">N †</span> = ptxas internal scheduler weight (not a hardware cycle count) &nbsp;&middot;&nbsp;
 &mdash; = unknown<br>
-<strong>Partial forms:</strong> 0 of 545 InsKeys have <code>?</code> in their name,
+<strong>Partial forms:</strong> 0 of 549 InsKeys have <code>?</code> in their name,
 meaning some operand types were not fully determined during bit-probing.
 They have valid encodings but the SASS operand syntax is not fully known.
 Collapsed by default — click to expand.
@@ -440,6 +440,10 @@ Collapsed by default — click to expand.
 <a href="#POPC">POPC</a><br>
 <a href="#PREEXIT">PREEXIT</a><br>
 <a href="#PRMT">PRMT</a><br>
+<a href="#QADD4.E4M3x4.E2M1x4">QADD4.E4M3x4.E2M1x4</a><br>
+<a href="#QADD4.E4M3x4.E2M1x4.SATFINITE">QADD4.E4M3x4.E2M1x4.SATFINITE</a><br>
+<a href="#QMUL4.E4M3x4.E2M1x4.E4M3x4">QMUL4.E4M3x4.E2M1x4.E4M3x4</a><br>
+<a href="#QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE">QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE</a><br>
 <a href="#QSPC">QSPC</a><br>
 <a href="#R2P">R2P</a><br>
 <a href="#R2UR">R2UR</a><br>
@@ -332045,6 +332049,140 @@ Collapsed by default — click to expand.
 <tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
 </table></div></details>
 </div>
+<div class="ib" data-op="QADD4.E4M3x4.E2M1x4" id="QADD4.E4M3x4.E2M1x4">
+<h3>QADD4.E4M3x4.E2M1x4</h3>
+<table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">QADD4.E4M3x4.E2M1x4_R_R_R</td><td class="m">R_R_R</td><td class="m">SATFINITE</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">4 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>hidden-b300-qadd4-sm103-sm100-2026-11-07</code> (every variant of QADD4.E4M3x4.E2M1x4_R_R_R)</div>
+<details><summary>QADD4.E4M3x4.E2M1x4_R_R_R &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000100a000000000000000027d</code></div>
+<div class="ab">var_mask: <code>0x1400000000f81fff00000000fffff000</code></div>
+<div class="ab">QADD4 controlled vendor-text form: full field map measured on SM103 and SM100.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[87:85]</td><td>3</td><td>t3</td><td><code>qadd4_rc_sel</code></td></tr>
+<tr><td>[84]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[83]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qadd4_ra_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>QADD4.E4M3x4.E2M1x4_R_R_R.SATFINITE &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000500a000000000000000027d</code></div>
+<div class="ab">var_mask: <code>0x1400000000f81fff00000000fffff000</code></div>
+<div class="ab">SATFINITE is bit 90; other types, Rc INVALID5..7 and text-inert bits stay unclaimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[87:85]</td><td>3</td><td>t3</td><td><code>qadd4_rc_sel</code></td></tr>
+<tr><td>[84]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[83]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qadd4_ra_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="QADD4.E4M3x4.E2M1x4.SATFINITE" id="QADD4.E4M3x4.E2M1x4.SATFINITE">
+<h3>QADD4.E4M3x4.E2M1x4.SATFINITE</h3>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">QADD4.E4M3x4.E2M1x4.SATFINITE_R_R_R</td><td class="m">R_R_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">4 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>hidden-b300-qadd4-sm103-sm100-2026-11-07</code> (every variant of QADD4.E4M3x4.E2M1x4.SATFINITE_R_R_R) &mdash; SATFINITE is bit 90; other types, Rc INVALID5..7 and text-inert bits stay unclaimed.</div>
+<details><summary>QADD4.E4M3x4.E2M1x4.SATFINITE_R_R_R &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000500a000000000000000027d</code></div>
+<div class="ab">var_mask: <code>0x1400000000f81fff00000000fffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[124]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[87:85]</td><td>3</td><td>t3</td><td><code>qadd4_rc_sel</code></td></tr>
+<tr><td>[84]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[83]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qadd4_ra_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[71:64]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="QMUL4.E4M3x4.E2M1x4.E4M3x4" id="QMUL4.E4M3x4.E2M1x4.E4M3x4">
+<h3>QMUL4.E4M3x4.E2M1x4.E4M3x4</h3>
+<table><tr><th>InsKey</th><th>Operands</th><th>Modifiers</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">QMUL4.E4M3x4.E2M1x4.E4M3x4_R_R_R</td><td class="m">R_R_R</td><td class="m">SATFINITE</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">4 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>hidden-b300-qmul4-sm103-sm100-2026-11-07</code> (every variant of QMUL4.E4M3x4.E2M1x4.E4M3x4_R_R_R)</div>
+<details><summary>QMUL4.E4M3x4.E2M1x4.E4M3x4_R_R_R &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000101a000000000000000027c</code></div>
+<div class="ab">var_mask: <code>0x0c00000000001f00f80000fffffff000</code></div>
+<div class="ab">QMUL4 production form: full selector and field map measured on SM103 and SM100.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[61:59]</td><td>3</td><td>t3</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+<details><summary>QMUL4.E4M3x4.E2M1x4.E4M3x4_R_R_R.SATFINITE &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000501a000000000000000027c</code></div>
+<div class="ab">var_mask: <code>0x0c00000000001f00f80000fffffff000</code></div>
+<div class="ab">SATFINITE is bit 90; neighbour type codes and QADD4 are deliberately not claimed.</div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[61:59]</td><td>3</td><td>t3</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
+<div class="ib" data-op="QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE" id="QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE">
+<h3>QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE</h3>
+<table><tr><th>InsKey</th><th>Operands</th><th>Pipeline</th><th>Latency</th></tr>
+<tr><td class="m">QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE_R_R_R</td><td class="m">R_R_R</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">4 &dagger;</span></td></tr>
+</table>
+<div class="ab keyprov">measured: <code>hidden-b300-qmul4-sm103-sm100-2026-11-07</code> (every variant of QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE_R_R_R) &mdash; SATFINITE is bit 90; neighbour type codes and QADD4 are deliberately not claimed.</div>
+<details><summary>QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE_R_R_R &mdash; 12 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x000000000501a000000000000000027c</code></div>
+<div class="ab">var_mask: <code>0x0c00000000001f00f80000fffffff000</code></div>
+<table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
+<tr><td>[123]</td><td>1</td><td>t3</td><td><code>reuse</code></td></tr>
+<tr><td>[122]</td><td>1</td><td>t2</td><td><code>reuse</code></td></tr>
+<tr><td>[76:74]</td><td>3</td><td>t2</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[73]</td><td>1</td><td>t2</td><td><code>neg</code></td></tr>
+<tr><td>[72]</td><td>1</td><td>t2</td><td><code>abs</code></td></tr>
+<tr><td>[63]</td><td>1</td><td>t3</td><td><code>neg</code></td></tr>
+<tr><td>[62]</td><td>1</td><td>t3</td><td><code>abs</code></td></tr>
+<tr><td>[61:59]</td><td>3</td><td>t3</td><td><code>qmul4_sel</code></td></tr>
+<tr><td>[39:32]</td><td>8</td><td>t3</td><td><code>reg</code></td></tr>
+<tr><td>[31:24]</td><td>8</td><td>t2</td><td><code>reg</code></td></tr>
+<tr><td>[23:16]</td><td>8</td><td>t1</td><td><code>reg</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
+</table></div></details>
+</div>
 <div class="ib" data-op="QSPC" id="QSPC">
 <h3>QSPC</h3>
 <p class="desc">Queue/spin-class primitive appearing in vendor CAS-emulation sequences on Blackwell.</p>
@@ -455185,8 +455323,8 @@ Collapsed by default — click to expand.
 </table></div></details>
 </div>
 <div class="foot">
-SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm103a.json (018a927 2026-11-10), SHA-256 5c93e44db366e67b4d605ecb2dcea9bd71e883cfb2cde245e6cc3c57b6129082<br>
-545 instruction forms &middot; 37524 encoding variants &middot; 37188 with a measurement tag &middot; 37 pipeline classes<br>
+SM103a Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm103a.json (1fb517a 2026-11-07), SHA-256 d45f1c65b5bb61d8cec7a4badd3348fb96f4bb0396e488b45fab24e9b5f6b23f<br>
+549 instruction forms &middot; 37530 encoding variants &middot; 37194 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>
 </div>

@@ -1,4 +1,4 @@
-## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 5 of the B300 lane's candidate forms (53 review refs: 1 649 measured rows added per table, 21 harvest rows re-measured — rows without `_src` 357 → 336); the scaled F2FP unpack (opcode 0x63e) on all four tables; `FHADD` in the operand roles
+## November 10, 2026 (sessions T-26 / T-27): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field; `sm103a.json` / `sm100a.json` — batches 1 to 6 of the B300 lane's candidate forms (55 review refs: 1 655 measured rows added per table, 21 harvest rows re-measured — rows without `_src` 357 → 336); the scaled F2FP unpack (opcode 0x63e) on all four tables; `FHADD` in the operand roles
 
 `sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
 `sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
@@ -146,6 +146,27 @@ sources). `FHADD[.BF16] Rd, Ra[.H1], Rb`, the mixed-precision accumulate ptxas e
 `stallfix`, register liveness) stopped on it. Reported from the production Triton top-k-sum kernel of the MoE (20 of its 176
 instructions; session BQ-1). No row changes; `sm121a.json` carries no `operand_roles` section. `SM120_ISA_REFERENCE.html`,
 `SM103A_ISA_REFERENCE.html` and `SM100A_ISA_REFERENCE.html` regenerated at `018a927`.
+
+`sm103a.json` / `sm100a.json` `7b0138a`, `1fb517a` (session T-27; the rows of `sm120.json` / `sm121a.json` untouched): **batch 6 — two review
+candidates with operand selectors of their own**, each taken as its row delta onto the tip (the candidate's author, date and message
+kept). sm103a 545 → 549 forms, 37 524 → 37 530 rows; sm100a 544 → 548, 37 518 → 37 524; rows without `_src` unchanged (336). New rows
+(6 per table): **`QMUL4.E4M3x4.E2M1x4.E4M3x4[.SATFINITE] Rd, Ra.<sel>, Rb.<sel>`** (opcode 0x27c; the packed FP4 × FP8 multiply of the
+vendor's production code, three production witnesses; two groups on the new key `QMUL4.E4M3x4.E2M1x4.E4M3x4_R_R_R` and the encode-only
+twin key `QMUL4.E4M3x4.E2M1x4.E4M3x4.SATFINITE_R_R_R` for the spelling with the modifier in the mnemonic; `7b0138a` ← qmul4): a
+selector is mandatory on each source — `.B3210`, `.B3`, `.B2`, `.B1`, `.B0`, `.N7654`, `.N3210`, `.N6420`, three bits at [76:74] (`Ra`)
+and [61:59] (`Rb`), the new extraction `qmul4_sel` —, sign / abs at 73 / 72 and 63 / 62, reuse at 122 / 123, `SATFINITE` = bit 90.
+**`QADD4.E4M3x4.E2M1x4[.SATFINITE] Rd, Ra.<sel>, Rc.<sel>`** (0x27d; a controlled vendor-text form — the lane has no production
+witness of it; two groups + the encode-only twin; `1fb517a` ← qadd4): the same eight selectors on `Ra` at [76:74] (`qadd4_ra_sel`),
+`.B3210` / `.B3` … `.B0` on `Rc` at [87:85] (`qadd4_rc_sel`; the values 5 – 7, which nvdisasm prints as `.INVALID5` … `.INVALID7`, are
+excluded by `claim_forbid`), sign / abs at 73 / 72 and 84 / 83, reuse at 122 / 124. The other type codes and every text-inert bit stay
+unclaimed. **A source's `rows` counts every row that resolves to its tag: 3 per tag, the twin key included (the candidates declared
+2).** Vendor text and CPU round trips of complete words (nvdisasm 13.3 on the lane's host), no execution claim (`_semantic_re`).
+**The gatekeeper's checks:** both fixtures named again with nvdisasm 13.1 on `-b SM103` and on `-b SM100` (the fixtures record SM103;
+the rows are on both tables): 3 170 word / target pairs — 2 624 texts identical, 546 without text on both, none different; and 4 528
+words derived from the six rows per table (the constant word, each field at all ones, random fillings, the sign-window combinations):
+the 1 497 without a reuse flag print nvdisasm 13.1's text and re-assemble to themselves, the 3 031 with a reuse flag do so once the
+control word is a production one (nvdisasm refuses a reuse flag in an otherwise empty control word). `SM103A_ISA_REFERENCE.html` and
+`SM100A_ISA_REFERENCE.html` regenerated at `1fb517a`.
 
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
