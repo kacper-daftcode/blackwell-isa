@@ -52,7 +52,7 @@ details[open].partials>summary::before{content:"▼"}
 details.partials>summary:hover{color:#555}
 </style></head><body>
 <h1>SM120 Instruction Set Architecture</h1>
-<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>514 opcodes &middot; 983 instruction forms &middot; 38848 encoding variants &middot; 880 with scheduling data &middot; 38841 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-09 from <code>sm120.json</code> (c374bad 2026-11-08), SHA-256 e644bb3efdf4e595&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
+<p class="sub">NVIDIA Blackwell (RTX 5090) &mdash; Unofficial Reference<br>514 opcodes &middot; 983 instruction forms &middot; 38848 encoding variants &middot; 880 with scheduling data &middot; 38841 variants with a measurement tag<br><span style="font-size:0.88em">Sources: empirical bit probing via nvdisasm, reverse engineering of NVIDIA's assembler, hardware validation on RTX 5090</span><br><span style="font-size:0.88em">Generated 2026-11-10 from <code>sm120.json</code> (5043aee 2026-11-08), SHA-256 35c2cc8a12dfc976&hellip; &mdash; see the <a href="https://github.com/kacper-daftcode/blackwell-isa/blob/main/CHANGELOG.md">CHANGELOG</a> and <code>_meta.provenance</code> in the JSON for what was measured and how.</span></p>
 <h2 id="contents">Contents</h2>
 <ol style="font-size:0.9em;margin:4px 0 16px 20px">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
@@ -475541,14 +475541,15 @@ Collapsed by default — click to expand.
 <tr><td class="m">USETMAXREG_II</td><td class="m">II</td><td class="m">CTAPOOL,DEALLOC</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 <tr><td class="m">USETMAXREG_UP_II</td><td class="m">UP_II</td><td class="m">CTAPOOL,TRY_ALLOC</td><td>UNKNOWN</td><td><span class="lat-ptx" title="ptxas internal scheduler weight — NOT a hardware cycle count">1 &dagger;</span></td></tr>
 </table>
-<div class="ab keyprov">measured: <code>audit-fix-2026-11-06-t10</code> (every variant of USETMAXREG_II) &mdash; T-10 audit: the register count is 10 bits [41:32] (nvdisasm prints 0x3ff for 0xffffffff, 0x0 for 0x80000000); bits above are text-inert, fail-closed</div>
-<details><summary>USETMAXREG_II.CTAPOOL,DEALLOC &mdash; 1 fields &middot; 7 samples</summary><div class="var">
-<div class="ab">and_base: <code>0x00000000080e050000000000000079c8</code></div>
-<div class="ab">var_mask: <code>0x0000000000000000000003ff00000000</code></div>
+<div class="ab keyprov">measured: <code>usetmaxreg-sm120-2026-11-08</code> (every variant of USETMAXREG_II) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_usetmaxreg.py): USETMAXREG.DEALLOC.CTAPOOL = operation code 1 in [73:72] (1 DEALLOC, 2 TRY_ALLOC; 0 and 3 illegal) with the pool bit 74 set (clear = the vendor glyph `.???0`, unclaimed). Fields: uniform predicate guard [15:12], register count imm [41:32] (ten bits, printed in hex; the count itself -- ptxas emits multiples of 8 in 24..256, the field admits 0..1023: a silicon question, not an encoding one); the predicate slot [83:81] is text-inert on DEALLOC and nvcc writes 7 there -- baked, fail closed. Bit 75 text-inert, bit 91 required, bits 16-31, 42-71, 84-90, 92-104 text-inert (outside the row); the reuse bits 122-124 are illegal on this opcode (nvdisasm: undefined value for the opex table) -- a control-word law, no reuse flag may be set on it. PTX setmaxnreg.dec.sync.aligned.u32.</div>
+<details><summary>USETMAXREG_II.CTAPOOL,DEALLOC &mdash; 2 fields</summary><div class="var">
+<div class="ab">and_base: <code>0x00000000080e050000000000000009c8</code></div>
+<div class="ab">var_mask: <code>0x0000000000000000000003ff0000f000</code></div>
 <table class="ft"><tr><th>Bits</th><th>W</th><th>Tok</th><th>Extraction</th></tr>
 <tr><td>[41:32]</td><td>10</td><td>t1</td><td><code>imm</code></td></tr>
+<tr><td>[15:12]</td><td>4</td><td>t0</td><td><code>guard</code></td></tr>
 </table></div></details>
-<div class="ab keyprov">measured: <code>sm120-native-capture-control-2026-10-22</code> (every variant of USETMAXREG_UP_II) &mdash; NVIDIA13.1 USETMAXREG.TRY_ALLOC.CTAPOOL uniform resultpredicate81 (not guard15), immediate10bits@32; isolated bit32..47 walk shows only32..41 contribute to the count. Uniform executionguard12 is independently measured.</div>
+<div class="ab keyprov">measured: <code>usetmaxreg-sm120-2026-11-08</code> (every variant of USETMAXREG_UP_II) &mdash; Measured with nvdisasm 13.1 (-b SM120; tools/probes/re_sm120_usetmaxreg.py): USETMAXREG.TRY_ALLOC.CTAPOOL = operation code 2 in [73:72] (1 DEALLOC, 2 TRY_ALLOC; 0 and 3 illegal) with the pool bit 74 set (clear = the vendor glyph `.???0`, unclaimed). Fields: uniform predicate guard [15:12], predicate destination UP [83:81], register count imm [41:32] (ten bits, printed in hex; the count itself -- ptxas emits multiples of 8 in 24..256, the field admits 0..1023: a silicon question, not an encoding one). Bit 75 text-inert, bit 91 required, bits 16-31, 42-71, 84-90, 92-104 text-inert (outside the row); the reuse bits 122-124 are illegal on this opcode (nvdisasm: undefined value for the opex table) -- a control-word law, no reuse flag may be set on it. PTX setmaxnreg.inc.sync.aligned.u32.</div>
 <details><summary>USETMAXREG_UP_II.CTAPOOL,TRY_ALLOC &mdash; 3 fields</summary><div class="var">
 <div class="ab">and_base: <code>0x000000000800060000000000000009c8</code></div>
 <div class="ab">var_mask: <code>0x00000000000e0000000003ff0000f000</code></div>
@@ -477993,7 +477994,7 @@ Collapsed by default — click to expand.
 </table></div></details>
 </div>
 <div class="foot">
-SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-09 from sm120.json (c374bad 2026-11-08), SHA-256 e644bb3efdf4e595c9c8b9955c9f8ebd71216b7e224e0b659ef24554083bd435<br>
+SM120 Instruction Set Architecture Reference &mdash; generated 2026-11-10 from sm120.json (5043aee 2026-11-08), SHA-256 35c2cc8a12dfc97691a1380be32cc9093470a20a076509659fe0e3c534d7a661<br>
 983 instruction forms &middot; 38848 encoding variants &middot; 38841 with a measurement tag &middot; 37 pipeline classes<br>
 Reverse-engineered for interoperability under EU Directive 2009/24/EC Art. 6 and US DMCA &sect;1201(f)<br>
 <a href="https://github.com/kacper-daftcode/blackwell-isa">github.com/kacper-daftcode/blackwell-isa</a>

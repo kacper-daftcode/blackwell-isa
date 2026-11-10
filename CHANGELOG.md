@@ -1,3 +1,17 @@
+## November 10, 2026 (session T-26): `sm120.json` — `USETMAXREG.DEALLOC` / `.TRY_ALLOC` measured per field
+
+`sm120.json` `5043aee` (the commit `940fb83` of 2026-11-08, written on a branch while the main line was busy, taken onto the tip unchanged;
+`sm121a.json` / `sm103a.json` / `sm100a.json` untouched). **`USETMAXREG`** (0x9c8; PTX `setmaxnreg.{dec,inc}.sync.aligned.u32`, the warpgroup
+register reallocation): the uniform predicate guard [15:12], the register count [41:32] — ten bits, the count itself (ptxas emits multiples of
+8 in 24..256; the field admits 0..1023, what the hardware does with the rest is a silicon question) —, the operation [73:72] (1 `DEALLOC`,
+2 `TRY_ALLOC`; 0 and 3 illegal), the pool bit 74 (set = `.CTAPOOL`; clear prints the vendor glyph `.???0`, unclaimed), the predicate destination
+[83:81] on `TRY_ALLOC` (text-inert on `DEALLOC`, where nvcc writes 7: baked, fail closed), bit 91 required, bit 75 text-inert; the reuse bits
+122–124 are illegal on the opcode (nvdisasm refuses the opex-table value) — a control-word law recorded in the notes. Measured with nvdisasm
+13.1 (`-b SM120`) by cubit's `tools/probes/re_sm120_usetmaxreg.py` (73 form + 148 lattice words; re-run on 2026-11-10, the fixture reproduces
+byte for byte). The `DEALLOC` row had no guard field and the `TRY_ALLOC` row was a native-capture row whose mask claimed the text-inert bit 63;
+tag `usetmaxreg-sm120-2026-11-08`, cubit test `tests/sm120_usetmaxreg.rs`. Rows unchanged at 38 848; rows without `_src` unchanged (7).
+`SM120_ISA_REFERENCE.html` regenerated at `5043aee`.
+
 ## November 9, 2026 (sessions T-23 / T-24 / T-25): `sm121a.json` / `sm103a.json` / `sm100a.json` — the long tails verified row by row on `-b SM121` / `SM103` / `SM100`; rows without `_src` sm121a 2 654 → 811, sm103a / sm100a 893 → 357; the junk keys that printed vendor-nonexistent text deleted, the sm121a LEA family rebuilt, the sm103a / sm100a LDG UR field widened
 
 `sm121a.json` `6428595` + `ad7804a` + `64db08b` + `daac080`, `sm103a.json` `ddac54d` + `64db08b` + `04bcb53`, `sm100a.json` `21fc69a` + `64db08b` +
